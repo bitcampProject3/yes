@@ -1,3 +1,6 @@
+-- create DATABASE mydb;
+-- USE mydb;
+
 
 /*사업자 넘버 추가*/
 

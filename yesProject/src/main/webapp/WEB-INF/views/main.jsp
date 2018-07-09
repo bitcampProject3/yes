@@ -1,321 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+         pageEncoding="EUC-KR"%>
+<!Doctype html>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
         <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/selectDesign.css">
-        <link rel="stylesheet" href="css/mapStyle.css">
+        <link rel="stylesheet" href="/css/selectDesign.css">
+        <link rel="stylesheet" href="/css/mapStyle.css">
+        <link rel="stylesheet" href="/css/mainStyle.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        
-        <style>
-            *{
-                font-family: 'Nanum Gothic', sans-serif;
-                
-            }
-            nav a{
-                font-family: 'Jua', sans-serif;
-            }
-            .searchText{
-                font-family: 'Do Hyeon', sans-serif;
-                font-size: 30px;
-            }
-            
-            .navbar-default{
-                height: 80px;
-            }
-            #searchIcon1 {
-              -moz-transition: transform 1s;
-              -webkit-transition: transform 1s;
-              transition: transform 1s;
-            }
-            #footerImg {
-                          -moz-transition: transform 1s;
-                          -webkit-transition: transform 1s;
-                          transition: transform 1s;
-            }
 
-            .flip {
-              transform: rotate(-180deg);
-            }
-            html,body {height:100%; margin:0; padding:0;
-            overflow-y: hidden; overflow-x: hidden;}
-            
-            .searchRe{
-                font-size: 16px;
-                font-weight: bold;
-            }
-            
-            @media (min-width: 1111px) {
-                .container-fluid{
-                    background-color: #e04f5f; 
-                    height: 120px;
-                }
-                .navbar-collapse{
-                    padding-top: 40px; 
-                    padding-left: 360px; 
-                    font-size: 20px;
-                }
-                li > a{
-                    color: white;
-                    margin-right: 50px; 
-                    font-size: 30px;
-                }
-                .menuBtnToggle{
-                    color: white;
-                    font-size: 30px;
-                }
-                .navbar-right>li>a{
-                    font-size: 20px;
-                    margin-right: 0px;
-                    color: white;
-                }
-                #bs-example-navbar-collapse-1 a{
-                    text-decoration: none;
-                    text-decoration-color: white;
-                    color: white;
-                }
-                #dropdown a{
-                    color: black;
-                    font-size: 16px;
-                }
-                .dropdown-toggle{
-                    color: black;
-                    background-color: #e04f5f;
-                }
-                .navbar-default .navbar-nav>.open>a {
-                    background-image: linear-gradient(to bottom,#e04f5f 0,#e04f5f 100%);
-                }
-            }
-            @media (max-width: 1110px) {
-                li > a{
-                    font-size: 20px;
-                }
-              .navbar-header {
-                  float: none;
-              }
-              .navbar-left,.navbar-right {
-                  float: none !important;
-              }
-              .navbar-toggle {
-                  display: block;
-              }
-              .navbar-collapse {
-                  border-top: 1px solid transparent;
-                  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-                  margin-top: 70px;
-                  float: left;
-              }
-              .navbar-fixed-top {
-                  top: 0;
-                  border-width: 0 0 1px;
-              }
-              .navbar-collapse.collapse {
-                  display: none!important;
-              }
-              .navbar-nav {
-                  float: none!important;
-                  margin-top: 7.5px;
-              }
-              .navbar-nav>li {
-                  float: none;
-                  background-color: white;
-              }
-              .navbar-nav>li>a {
-                  padding-top: 10px;
-                  padding-bottom: 10px;
-              }
-              .collapse.in{
-                  display:block !important;
-              }
-                .container-fluid{
-                    background-color: #e04f5f; 
-                    height: 120px;
-                }
-                .navbar-collapse a{
-                    text-decoration: none;
-                    color: black;
-                }
-                #dropdown a{
-                    font-size: 15px;
-                }
-                #bs-example-navbar-collapse-1{
-                    width: 100%;
-                }
-                #bs-example-navbar-collapse-1 a{
-                    display: block;
-                    clear: both;
-                }
-                #bs-example-navbar-collapse-1>ul>li{
-                    display: block;
-                    clear: both;
-                }
-                .navbar-default .navbar-nav>.open>a{
-                    background-image: none;
-                }
-                
-                /*축소화시 메뉴 수정*/
-/*
-                .navbar-collapse{
-                    width: 200px;
-                    padding-right: 0px;
-                }
-                .navbar-nav{
-                    background-color: black;    
-                }
-*/
-            }
-        </style>
-        <script>
-            
-        $(document).ready(function(){
-            $(".dropdownSelect img.flag").addClass("flagvisibility");
-
-            $(".dropdownSelect dt a").click(function() {
-              $(".dropdownSelect dd ul").toggle();
-            });
-
-            $(".dropdownSelect dd ul li a").click(function() {
-              var text = $(this).html();
-              $(".dropdownSelect dt a span").html(text);
-              $(".dropdownSelect dd ul").hide();
-              /* $("#result").html("Selected value is: " + getSelectedValue("sample"));*/
-            });  
-            $(".dropdownSelect2 img.flag").addClass("flagvisibility");
-
-            $(".dropdownSelect2 dt a").click(function() {
-              $(".dropdownSelect2 dd ul").toggle();
-            });
-
-            $(".dropdownSelect2 dd ul li a").click(function() {
-              var text = $(this).html();
-              $(".dropdownSelect2 dt a span").html(text);
-              $(".dropdownSelect2 dd ul").hide();
-              /* $("#result").html("Selected value is: " + getSelectedValue("sample"));*/
-            });  
-            $(".dropdownSelect3 img.flag").addClass("flagvisibility");
-
-            $(".dropdownSelect3 dt a").click(function() {
-              $(".dropdownSelect3 dd ul").toggle();
-            });
-
-            $(".dropdownSelect3 dd ul li a").click(function() {
-              var text = $(this).html();
-              $(".dropdownSelect3 dt a span").html(text);
-              $(".dropdownSelect3 dd ul").hide();
-              /* $("#result").html("Selected value is: " + getSelectedValue("sample"));*/
-            });   
-            $(".dropdownSelect4 img.flag").addClass("flagvisibility");
-
-            $(".dropdownSelect4 dt a").click(function() {
-              $(".dropdownSelect4 dd ul").toggle();
-            });
-
-            $(".dropdownSelect4 dd ul li a").click(function() {
-              var text = $(this).html();
-              $(".dropdownSelect4 dt a span").html(text);
-              $(".dropdownSelect4 dd ul").hide();
-              /* $("#result").html("Selected value is: " + getSelectedValue("sample"));*/
-            }); 
-            $(".dropdownSelect5 img.flag").addClass("flagvisibility");
-
-            $(".dropdownSelect5 dt a").click(function() {
-              $(".dropdownSelect5 dd ul").toggle();
-            });
-
-            $(".dropdownSelect5 dd ul li a").click(function() {
-              var text = $(this).html();
-              $(".dropdownSelect5 dt a span").html(text);
-              $(".dropdownSelect5 dd ul").hide();
-              /* $("#result").html("Selected value is: " + getSelectedValue("sample"));*/
-            });          
-        });
-
-
-        function getSelectedValue(id) {
-          return $("#" + id).find("dt a span.value").html();
-        }
-
-        $(document).bind('click', function(e) {
-          var $clicked = $(e.target);
-          if (!$clicked.parents().hasClass("dropdownSelect"))
-            $(".dropdownSelect dd ul").hide();
-        });
-
-        $(".dropdownSelect img.flag").toggleClass("flagvisibility");
-        </script>
-
-        <script type="text/javascript">
-        $(document).ready(function(){
-            $('#searchIcon1').click(function() {
-                console.log('실행됨');
-                $('#searchIcon1').toggleClass('flip');
-                $('#searchBox').slideToggle('slow', function() {
-                  // 객체가 다 펼치지거나 접히고 나면 여기에 든 내용이 실행된다.
-                });
-            }); 
-            
-            var state = true;
-            $('#footerImg').click(function() {
-                console.log('실행됨');
-                $('#footerImg').toggleClass('flip');
-                if(state){              $('#footerDivOpen').animate({height:'60px'},'slow');
-                state = false;    
-                }else{
-                    $('#footerDivOpen').animate({height:'120px'},'slow');
-                    state = true;
-                }
-            });
-            
-//            $('li.dropdown').css("background-color","#e04f5f");
-        });
-          
-        </script>
     </head>
     <body>
-        <div>
-            <nav class="navbar navbar-default">
-              <div class="container-fluid" style="border: 1px #ebebeb solid;">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" style="padding-top: 10px;" href="#"><img src="./imgs/logo_top3.png"/></a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav">
-                    <li><a href="#" class="menuBtn">예약<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">사용자 리뷰</a></li>
-                    <li class="dropdown" id="openCsBtn">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
-                      <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">공지사항</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">고객 상담</a></li>
-                        <li><a href="#">사업자 상담</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                  <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.bit">로그인</a></li>
-                    <li><a href="join.bit">회원가입</a></li>
-                  </ul>
-                </div><!-- /.navbar-collapse -->
-              </div><!-- /.container-fluid -->
-            </nav>
-        </div>
+       <jsp:include page="header.jsp"></jsp:include>
         
-        <div class="page" id="page" style="width:100%; height: 100%;">
+        <div class="page" id="page">
             <script type="text/javascript">
             function mapResize() {
                 var mapResize = document.getElementById('page');
@@ -327,18 +29,17 @@
 
                 // 브라우저 크기가 변할 시 동적으로 사이즈를 조절해야 하는경우
                 window.addEventListener('resize', mapResize);
-            }
-                
+            }                
             </script>
-            <div><img src="./imgs/icon.png"  id="searchIcon1" style="position: absolute; z-index: 3; width: 40px; height: 40px; margin-left: 85px; margin-top: 35px;"></div>
-            <div id="searchBox" style="position: absolute; z-index: 2; width: 85%; height: 20%; background-color: white; margin:60px 7.5%; border: 3px #e04f5f dashed; opacity: 0.85;">
-            <table style="width: 100%; height: 100%; text-align: center;">
+            <div><img src="/imgs/icon.png" id="searchIcon1"></div>
+            <div id="searchBox">
+            <table class="searchTable">
                 <tr>
-                    <td style="width: 10%; line-height: 50px; padding: 0px;"><span class="searchText">지역별</span></td>
-                    <td style="width: 18%;">
+                    <td class="searchLocal"><span class="searchText">지역별</span></td>
+                    <td class="searchSel">
                     <div class="selectbox">
                       <dl class="dropdownSelect">
-                        <dt><a href="#" style="padding-top:4px;"><span>서울시</span></a></dt>
+                        <dt><a class="searchSelLink" href="#"><span>서울시</span></a></dt>
                         <dd>
                           <ul class="dropdown2">
                             <li><a href="#">신상품순</a></li>
@@ -350,10 +51,10 @@
                       </dl>
                     </div>
                     </td>
-                    <td style="width: 18%;">
+                    <td class="searchSel">
                     <div class="selectbox">
                       <dl class="dropdownSelect2">
-                        <dt><a href="#" style="padding-top:4px;"><span>마포구</span></a></dt>
+                        <dt><a class="searchSelLink" href="#"><span>마포구</span></a></dt>
                         <dd>
                           <ul class="dropdown2">
                             <li><a href="#">신상품순</a></li>
@@ -365,10 +66,10 @@
                       </dl>
                     </div>
                     </td>
-                    <td style="width: 18%;">
+                    <td class="searchSel">
                     <div class="selectbox">
                       <dl class="dropdownSelect3">
-                        <dt><a href="#" style="padding-top:4px;"><span>신수동</span></a></dt>
+                        <dt><a class="searchSelLink" href="#"><span>신수동</span></a></dt>
                         <dd>
                           <ul class="dropdown2">
                             <li><a href="#">신상품순</a></li>
@@ -380,10 +81,10 @@
                       </dl>
                     </div>
                     </td>
-                    <td style="width: 18%;">
+                    <td class="searchSel">
                     <div class="selectbox">
                       <dl class="dropdownSelect4">
-                        <dt><a href="#" style="padding-top:4px;"><span>선택</span></a></dt>
+                        <dt><a class="searchSelLink" href="#"><span>선택</span></a></dt>
                         <dd>
                           <ul class="dropdown2">
                             <li><a href="#">신상품순</a></li>
@@ -395,14 +96,14 @@
                       </dl>
                     </div>
                     </td>
-                    <td style="width: 18%;"></td>
+                    <td class="searchSel"></td>
                 </tr>    
                 <tr>
-                    <td style="width: 10%;"><span class="searchText">메뉴별</span></td>
-                    <td style="width: 18%;">
+                    <td class="searchMenu"><span class="searchText">메뉴별</span></td>
+                    <td class="searchSel">
                     <div class="selectbox">
                       <dl class="dropdownSelect5">
-                        <dt><a href="#" style="padding-top:4px;"><span>한식</span></a></dt>
+                        <dt><a class="searchSelLink" href="#"><span>한식</span></a></dt>
                         <dd>
                           <ul class="dropdown2">
                             <li><a href="#">신상품순</a></li>
@@ -414,22 +115,21 @@
                       </dl>
                     </div>
                     </td>
-                    <td style="width: 18%; line-height: 10px;">
+                    <td class="localText">
                         <span class="searchRe">[서울시 마포구 신수동]</span>의 
                     </td>
-                    <td style="width: 18%; line-height: 10px; text-align: left;">
-                        <span class="searchRe">[한식]</span><span class="searchText" style="float: right;">검  색</span>
+                    <td class="menuText">
+                        <span class="searchRe">[한식]</span><span class="searchText">검  색</span>
                     </td>
-                    <td style="width: 18%; text-align: center; padding: 10px;"><input type="text" style="width: 90%" class="form-control" id="searchName"></td>
-                    <td style="width: 18%; text-align: left;"><button type="button" class="btn btn-default">Search</button></td>
+                    <td class="tdInput"><input type="text" class="form-control" id="searchName"></td>
+                    <td class="tdBtn"><button type="button" class="btn btn-default">Search</button></td>
                 </tr>    
             </table>
-            
             </div>
             
-            <div id="map" style="width:100%;height:100%;margin-top: 0px; z-index: 1; position: relative;"></div>
+            <div id="map"></div>
             
-            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=630e98d8425188c04dae0728c65822bb"></script>
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=630e98d8425188c04dae0728c65822bb&libraries=clusterer"></script>
             <script>
                 var container = document.getElementById('map');
                 var options = {
@@ -450,42 +150,137 @@
                 var zoomControl = new daum.maps.ZoomControl();
                 map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
                 
-                var imageSrc = 'foodIcon2.png', // 마커이미지의 주소입니다    
+                var positionTest = [37.552651,126.937765,37.553660,126.937316];
+                var selectedMarker = null;
+                var array = ['store0','store1'];
+               // 마커 클러스터러를 생성 
+                var clusterer = new daum.maps.MarkerClusterer({
+                    map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+                    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+                    minLevel: 5, // 클러스터 할 최소 지도 레벨 
+                    styles: [{
+                        width : '53px', height : '52px',
+                        background: 'url("/imgs/clusterer.png") no-repeat',
+                        color: '#fff',
+                        textAlign: 'center',
+                        lineHeight: '50px',
+                    }]
+                });    
+                //-------------------------------------------------------------------------
+                for(var i=0; i<2; i++){
+                    var imageSrc = '/imgs/markerIcon/foodIcon'+i+'.png', // 마커이미지의 주소입니다
                     imageSize = new daum.maps.Size(55, 55), // 마커이미지의 크기입니다
                     imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                    
+                    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+                    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
+                        markerPosition = new daum.maps.LatLng(positionTest[i+i],positionTest[i+i+1]); // 마커가 표시될 위치입니다
+                    addMarker(markerPosition, markerImage, i);
 
-                // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-                var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
-                    markerPosition = new daum.maps.LatLng(37.552651, 126.937765); // 마커가 표시될 위치입니다
-                
-
-                // 마커를 생성합니다
-                var marker = new daum.maps.Marker({
-                    position: markerPosition, 
-                    image: markerImage // 마커이미지 설정 
-                });
-
-                // 커스텀 오버레이에 표시할 컨텐츠 입니다
-                // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
-                // 별도의 이벤트 메소드를 제공하지 않습니다 
-                var content = '<div class="wrap">' + 
-                            '    <div class="info">' + 
-                            '        <div class="title">' + 
-                            '            카카오 스페이스닷원' + 
-                            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-                            '        </div>' + 
-                            '        <div class="body">' + 
-                            '            <div class="img">' +
-                            '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-                            '           </div>' + 
-                            '            <div class="desc">' + 
-                            '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' + 
-                            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
-                            '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
-                            '            </div>' + 
-                            '        </div>' + 
-                            '    </div>' +    
-                            '</div>';
+                }
+                function addMarker(markerPosition, markerImage, i){
+                    
+//                    $('.btn-gradient').click(function(event){
+//                        event.preventDefault();
+//                    });
+                    // 마커가 지도 위에 표시되도록 설정합니다
+                    var marker = new daum.maps.Marker({
+                        position: markerPosition, 
+                        title: array[i],
+                        image: markerImage // 마커이미지 설정 
+                    });
+                    var className = ''+array[i]+' wrap';
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정
+                        // 커스텀 오버레이에 표시할 컨텐츠
+                    var content = document.createElement('div');
+                    content.className = className;
+                    content.innerHTML = '<div class="info">'+  
+                                            '<div class="title">'+  
+                                                '<p>'+array[i]+'</p>'+  
+                                                '<div class="close" title="닫기"></div>'+  
+                                            '</div>'+  
+                                            '<div class="popupBody">'+
+                                                '<div class="img">'+
+                                                    '<img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="100" height="100">'+ 
+                                               '</div>'+  
+                                                '<div class="desc">'+  
+                                                    '<div class="address ellipsis">제주특별자치도 제주시 첨제주특별자치도 제주시 첨제주특별자치도 제주시 첨</div>'+  
+                                                    '<div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>'+
+                                                    '<div class="phone ellipsis">010 - 2222 - 3333</div>'+  
+                                                    '<div class="ellipsis"><br/></div>'+
+                                                    '<div class="timeDiv">'+
+                                                        '<div class="timeDiv1">'+
+                                                            '영업시간'+ 
+                                                        '</div>'+
+                                                        '<div class="timeDiv2">'+
+                                                            '10:00 ~ 22:00'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                    '<div class="dayDiv">'+
+                                                        '<div class="dayDiv1">'+
+                                                            '영업일'+
+                                                        '</div>'+
+                                                        '<div class="dayDiv2">'+
+                                                            '매주 2,4번째 일요일 휴무'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                    '<div class="breakDiv">'+
+                                                        '<div class="breakDiv1">'+
+                                                            '휴게시간'+
+                                                        '</div>'+
+                                                        '<div class="breakDiv2">'+
+                                                            '15:00 ~ 17:00'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                    '<div class="restDiv">'+
+                                                        '<div class="restDiv1">'+
+                                                            '대표메뉴'+
+                                                        '</div>'+
+                                                        '<div class="restDiv2">'+
+                                                            '<div class="restDiv2_1">'+
+                                                                '참치김밥'+
+                                                            '</div>'+
+                                                            '<div class="restDiv2_2">'+
+                                                            '</div>'+
+                                                            '<div class="restDiv2_3">'+
+                                                                '13,000원'+
+                                                            '</div>'+
+                                                            '<div class="restDiv2_1">'+
+                                                                '치즈김밥'+
+                                                            '</div>'+
+                                                            '<div class="restDiv2_2">'+
+                                                            '</div>'+
+                                                            '<div class="restDiv2_3">'+
+                                                                '20,000원'+
+                                                            '</div>'+
+                                                            '<div class="restDiv2_1">'+
+                                                                '신라면'+
+                                                            '</div>'+
+                                                            '<div class="restDiv2_2">'+
+                                                            '</div>'+
+                                                            '<div class="restDiv2_3">'+
+                                                                '50,000원'+
+                                                            '</div>'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                    '<div class="gradeDiv">'+
+                                                        '<div class="gradeDiv1">'+
+                                                            '이용자 평점'+
+                                                        '</div>'+
+                                                        '<div class="gradeDiv2">'+
+                                                            '4.3 / 5.0'+
+                                                        '</div>'+
+                                                        '<div class="gradeDiv3">'+
+                                                            '<img src="/imgs/angryemoji.png"'+ 'class="angryEmoji">'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                    '<div class="btnDiv">'+
+                                                        '<a href="#" class="btn-gradient gray block">상세보기</a>'+
+                                                        '<a href="#" class="btn-gradient red block">바로예약</a>'+
+                                                    '</div>'+
+                                                '</div>'+  
+                                            '</div>'+  
+                                        '</div>';
 
                 // 마커 위에 커스텀오버레이를 표시합니다
                 
@@ -497,27 +292,84 @@
                 });
 
                 // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-                var state = true;
+                
+                
+                $('.wrap').css('display','none');
+                
+                    
                 daum.maps.event.addListener(marker, 'click', function() {
-                    if(state){
+                    var mapProjection = map.getProjection(),
+                        // 해당 위도 경도값을 X,Y값으로 반환해줌
+                        latlng = markerPosition,
+                        // 지도 좌표에 해당하는 위치 좌표
+                        mapPixel = mapProjection.containerPointFromCoords(latlng); 
+                    
+                    var center = map.getCenter();
+                    var mapCenter = mapProjection.containerPointFromCoords(center);
+                    var deltaX = mapPixel.x - mapCenter.x,
+                        deltaY = mapPixel.y - mapCenter.y;
+                    
+                    // case 1 : 마커 최초 클릭
+                    // case 2 : 다른 마커가 활성화 되어있는 상황에서 다른 마커 클릭
+                    // case 3 : 다른 마커를 none 한 후에 또 다른 마커 클릭
+                    // state 초기값은 null
+                    
+                    // 마커를 클릭 시에 모든 오버레이를 none 한 후 마커의 오버레이만 inherit
+                    // -> 마커에서 스토어의 이름을 가져올 방법 생각해봐야 함
+                    // -> 마커에 Title을 set,get 하는 방법으로 해결
+                    
+                    // 해결
+                    // case 1 : state가 null인 상태에서 오버레이를 생성하고 display inherit으로 변경
+                    // case 2 : state가 처음에 클릭했던 marker가 아니면 모든 오버레이 display none 후에
+                    //          markerTitle으로 선택된 marker을 골라내어 해당 오버레이의 display inherit함
+                    // case 3 : state가 이전에 선택했던 marker와 같다면 모든 오버레이의 display none
+                    
+                    var markerTitle = marker.getTitle();
+                    
+                    // case 1
+                    if(selectedMarker === null){
+                        console.log('case 1 : '+selectedMarker);
+                        selectedMarker = markerTitle;
+                        overlay.setMap(map);                        
+                        map.panBy(deltaX - 25, deltaY - 200);
+                        $('.'+markerTitle+'').css('display','inherit');
+                    // case 2
+                    }else if(selectedMarker !== markerTitle){
+                        console.log('case 2 : '+selectedMarker);
                         overlay.setMap(map);
-                        map.panBy(100, 200);
-                        state = false;
-                    }else{
-                        overlay.setMap(null);  
-                        state = true;
+                        map.panBy(deltaX - 25, deltaY - 200);
+                        $('.wrap').css('display','none');
+                        $('.'+markerTitle+'').css('display','inherit');
+                        selectedMarker = markerTitle;      
+                        
+                    // case3
+                    }else if(selectedMarker === markerTitle){
+                        console.log('case 3 : '+selectedMarker);
+                        $('.wrap').css('display','none');
+                        selectedMarker = null;
+//                        overlay.setMap(null);
                     }
                     
                 });
-
-                // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-                function closeOverlay() {
-                    overlay.setMap(null);     
-                }                
-
+          
+                // close 버튼으로 종료 했을시 case 3으로 변경되는 문제
+                // 버튼 클릭시에 selectedMarker를 null 잡아주면 될듯 --> 완료
+                $('.close').click(function(){
+                    $('.wrap').css('display','none'); 
+                    selectedMarker = null;
+                });
+                    
+                    
+                    
+                clusterer.addMarker(marker);    
                 // 마커가 지도 위에 표시되도록 설정합니다
                 marker.setMap(map);  
                 overlay.setMap(null);  
+            } // for end
+                 
+            
+            
+
             </script>
                 <div>
                     
@@ -525,13 +377,6 @@
             
             </div>
         
-        <div id="footerDivOpen" style="position: absolute; z-index: 2; bottom: 0; width: 100%; height: 120px; text-align: center; ">
-            <div style="width: 100%; background-color: rgba( 255, 255, 255, 0.0 ); height: 20px; ">
-                <img id="footerImg" style="display: inline-block; z-index: 3; line-height: 30px; margin: 0px auto; position: absolute; width: 35px; height: 35px; margin-top: 20px;" src="arrow.png">
-            </div>
-            <div style="vertical-align: bottom; background-color: white; bottom: 0px; margin-top: 20px; height: 80px; border-top: 2px solid #e04f5f;">
-                
-            </div>
-        </div>
+        <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>
