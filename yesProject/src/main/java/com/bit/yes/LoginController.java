@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 
 	
-	@RequestMapping("/login.bit")
+	@RequestMapping("/login.yes")
 	public String login() {
 		return "login";
 	}

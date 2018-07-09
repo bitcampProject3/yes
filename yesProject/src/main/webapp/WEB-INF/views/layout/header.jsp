@@ -113,8 +113,8 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">로그인</a></li>
-                    <li><a href="#">회원가입</a></li>
+                    <li><a href="login.yes">로그인</a></li>
+                    <li><a href="join.yes">회원가입</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

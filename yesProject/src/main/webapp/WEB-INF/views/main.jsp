@@ -15,7 +15,7 @@
 
     </head>
     <body>
-       <jsp:include page="header.jsp"></jsp:include>
+       <jsp:include page="./layout/header.jsp"></jsp:include>
         
         <div class="page" id="page">
             <script type="text/javascript">
@@ -377,6 +377,6 @@
             
             </div>
         
-        <jsp:include page="footer.jsp"></jsp:include>
+        <jsp:include page="./layout/footer.jsp"></jsp:include>
     </body>
 </html>

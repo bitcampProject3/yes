@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class JoinController {
 	
 	
-	@RequestMapping("/join.bit")
+	@RequestMapping("/join.yes")
 	public String join() {
 		return "join";
 	}
 	//사업자 회원가입 화면
-	@RequestMapping("/branchJoin.bit")
+	@RequestMapping("/branchJoin.yes")
 	public String branchJoin() {
 		return "branchJoin";
 	}
 	//고객 회원가입 화면
-	@RequestMapping("/customerJoin.bit")
+	@RequestMapping("/customerJoin.yes")
 	public String customerJoin() {
 		return "customerJoin";
 	}
