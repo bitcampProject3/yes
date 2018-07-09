@@ -149,7 +149,7 @@
         <div style="margin-top: 20px">
         <a href="findId.bit" id="form-a">아이디 찾기</a>
         |
-        <a href="fintPw.bit" id="form-a">비밀번호찾기</a>
+        <a href="findPw.bit" id="form-a">비밀번호찾기</a>
         |
         <a href="join.bit" id="form-a">회원가입</a>            
         </div>

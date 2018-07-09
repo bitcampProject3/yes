@@ -94,7 +94,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" style="padding-top: 10px;" href="./"><img src="/imgs/logo_top3.png"/></a>
+                <a class="navbar-brand" style="padding-top: 10px;" href="./"><img src="./imgs/logo_top3.png"/></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->

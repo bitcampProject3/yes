@@ -30,7 +30,7 @@
 <body>
 <div id="footerDivOpen">
     <div class="footerDivBlank">
-        <img id="footerImg" src="/imgs/arrow.png">
+        <img id="footerImg" src="./imgs/arrow.png">
     </div>
     <div class="footerDivCopy">
 

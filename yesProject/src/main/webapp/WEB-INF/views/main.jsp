@@ -7,9 +7,9 @@
         <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/selectDesign.css">
-        <link rel="stylesheet" href="/css/mapStyle.css">
-        <link rel="stylesheet" href="/css/mainStyle.css">
+        <link rel="stylesheet" href="./css/selectDesign.css">
+        <link rel="stylesheet" href="./css/mapStyle.css">
+        <link rel="stylesheet" href="./css/mainStyle.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
@@ -31,7 +31,7 @@
                 window.addEventListener('resize', mapResize);
             }                
             </script>
-            <div><img src="/imgs/icon.png" id="searchIcon1"></div>
+            <div><img src="./imgs/icon.png" id="searchIcon1"></div>
             <div id="searchBox">
             <table class="searchTable">
                 <tr>
@@ -160,7 +160,7 @@
                     minLevel: 5, // 클러스터 할 최소 지도 레벨 
                     styles: [{
                         width : '53px', height : '52px',
-                        background: 'url("/imgs/clusterer.png") no-repeat',
+                        background: 'url("./imgs/clusterer.png") no-repeat',
                         color: '#fff',
                         textAlign: 'center',
                         lineHeight: '50px',
@@ -168,7 +168,7 @@
                 });    
                 //-------------------------------------------------------------------------
                 for(var i=0; i<2; i++){
-                    var imageSrc = '/imgs/markerIcon/foodIcon'+i+'.png', // 마커이미지의 주소입니다
+                    var imageSrc = './imgs/markerIcon/foodIcon'+i+'.png', // 마커이미지의 주소입니다
                     imageSize = new daum.maps.Size(55, 55), // 마커이미지의 크기입니다
                     imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                     
@@ -271,7 +271,7 @@
                                                             '4.3 / 5.0'+
                                                         '</div>'+
                                                         '<div class="gradeDiv3">'+
-                                                            '<img src="/imgs/angryemoji.png"'+ 'class="angryEmoji">'+
+                                                            '<img src="./imgs/angryemoji.png"'+ 'class="angryEmoji">'+
                                                         '</div>'+
                                                     '</div>'+
                                                     '<div class="btnDiv">'+
