@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-         pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!Doctype html>
 <html>
     <head>
@@ -8,369 +9,511 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <link rel="stylesheet" href="./css/selectDesign.css">
-        <link rel="stylesheet" href="./css/mapStyle.css">
-        <link rel="stylesheet" href="./css/mainStyle.css">
+        <link rel="stylesheet" href="./css/mapStyle.css?ver=1">
+        <link rel="stylesheet" href="./css/mainStyle.css?ver=1">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+		
     </head>
     <body>
        <jsp:include page="header.jsp"></jsp:include>
         
         <div class="page" id="page">
             <script type="text/javascript">
+	        
+	           
             function mapResize() {
                 var mapResize = document.getElementById('page');
                 mapResize.style.width = window.innerWidth;
-                mapResize.style.height = window.innerHeight - 120+'px';
+                mapResize.style.height = window.innerHeight - 150+'px';
             }
             window.onload = function() {
                 mapResize();
 
-                // ºê¶ó¿ìÀú Å©±â°¡ º¯ÇÒ ½Ã µ¿ÀûÀ¸·Î »çÀÌÁî¸¦ Á¶ÀıÇØ¾ß ÇÏ´Â°æ¿ì
+                // ë¸Œë¼ìš°ì € í¬ê¸°ê°€ ë³€í•  ì‹œ ë™ì ìœ¼ë¡œ ì‚¬ì´ì¦ˆë¥¼ ì¡°ì ˆí•´ì•¼ í•˜ëŠ”ê²½ìš°
                 window.addEventListener('resize', mapResize);
-            }                
+            }
+            // var arr = [];
+            // function getSigungu() {
+            //     $.ajax({
+            //         url: "/json/area.json",
+            //         dataType : "text",
+            //         error: function () {
+            //             alert('error');
+            //
+            //         },
+            //         success: function (data) {
+            //             $("select[name='gugun1'] option").remove();
+            //             $.each(JSON.parse(data),function (index, value) {
+            //                 if (index === ($('#sido1').val())) {
+            //                     arr = value;
+            //                     for(i = 0; i<arr.length; i++){
+            //                         $('#gugun1').append(new Option(arr[i],"temp"));
+            //                     }
+            //                 }
+            //
+            //             })
+            //         }
+            //     })
+            // }
+            
+            function searchStart() {
+                
+                
+                var testMsg;
+                var searchArr = {};
+                var searchLatArr = [],
+	                searchLngArr = [],
+	                searchNameArr = [];
+                searchArr["searchSelect"] = $('#searchSelect').val();
+                searchArr["searchInput"] = $("input[name='searchInput']").val();
+                
+                $.ajax({
+                    url: "search",
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(searchArr),
+                    success: function (data) {
+                        if (data.length === 0){
+                            alert('í•´ë‹¹í•˜ëŠ” ë§¤ì¥ì´ ì—†ìŠµë‹ˆë‹¤.');
+                            $("input[name='searchInput']").val('');
+                        } else {
+                            $('#searchResult').empty();
+                            $.each(data,  function (idx, val) {
+                                searchLatArr.push(val.latlngy);
+                                searchLngArr.push(val.latlngx);
+                                
+                                var searchListContent = '<div class="results" onmouseover="resultsMouseOver(this, '+val.latlngy+', '+val.latlngx+')" onmouseout="resultsMouseOut(this)">' +
+				                                        '    <div class="searchResultContent">' +
+		                                                '       <div class="searchResultContentTitle">' +
+						                                '         ' + val.branchName +
+			                                            '       </div>' +
+		                                                '       <div class="searchResultContentDiv">' +
+		                                                '           <div class="searchMainImage">' +
+					                                    '               <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="80" height="80" class="searchImageFile">' +
+				                                        '           </div>' +
+					                                    '           <div class="searchResultContentDetail"><br/>' +
+						                                '               ì£¼ì†Œ : ' +val.roadAddress+ '<br/>' +
+						                                '               ì—°ë½ì²˜ : ' +val.phoneNum+ '<br/>' +
+					                                    '               í‰ì  : ' +val.score+ ' / 5.0 <br/>' +
+					                                    '           </div>' +
+		                                                '       </div>' +
+				                                        '    </div>' +
+			                                            '</div>';
+                                
+                                $('#searchResult').append(searchListContent);
+                                
+                            });
+                            var searchCnt = searchLngArr.length;
+                            searchResultList(searchLatArr, searchLngArr);
+                            alert('ì´ ['+searchCnt+']ê±´ ê²€ìƒ‰ ì™„ë£Œ');
+                            $('.searchResultDiv').css('height','400px');
+                            $('#searchBox').css('height','470px');
+                        }
+                    },
+                    error:function(request,status,error){
+                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+                    });
+            }
+            
+            function resultsMouseOver(e, lat, lng) {
+                
+                $('.wrap').css('display', 'none');
+	            $(e).css('background-color','#e04f5f');
+	            $(e).css('color','white');
+	            $(e).css('font-weight','bold');
+	            var moveLatLng = new daum.maps.LatLng(lat, lng);
+	            map.setLevel(3);
+				map.panTo(moveLatLng);
+            }
+            function resultsMouseOut(e) {
+                $(e).css('background-color','white');
+                $(e).css('color','black');
+                $(e).css('font-weight','none');
+                
+            }
+            
+            function searchResultList(searchLatArr , searchLngArr) {
+                var points = [];
+                for (i = 0; i<searchLatArr.length; i++){
+                    var templatlng = new daum.maps.LatLng(searchLatArr[i], searchLngArr[i]);
+                    
+                    points.push(templatlng);
+                }
+                
+                var bounds = new daum.maps.LatLngBounds();
+                for (i = 0; i<points.length; i++){
+                    bounds.extend(points[i]);
+                }
+                map.setBounds(bounds);
+            }
+            
+            
             </script>
             <div><img src="./imgs/icon.png" id="searchIcon1"></div>
-            <div id="searchBox">
-            <table class="searchTable">
-                <tr>
-                    <td class="searchLocal"><span class="searchText">Áö¿ªº°</span></td>
-                    <td class="searchSel">
-                    <div class="selectbox">
-                      <dl class="dropdownSelect">
-                        <dt><a class="searchSelLink" href="#"><span>¼­¿ï½Ã</span></a></dt>
-                        <dd>
-                          <ul class="dropdown2">
-                            <li><a href="#">½Å»óÇ°¼ø</a></li>
-                            <li><a href="#">ÀÎ±â»óÇ°¼ø</a></li>
-                            <li><a href="#">³·Àº°¡°İ¼ø</a></li>
-                            <li><a href="#">³ôÀº°¡°İ¼ø</a></li>
-                          </ul>
-                        </dd>
-                      </dl>
+            <div id="searchBox" style="height: 70px; width: 300px;">
+	            <div style="width: 100%; height: 40px; margin-top: 12px; margin-bottom: 12px;">
+		            <div style="display: inline-block; width: 30%; height: 100%;">
+                        <select id="searchSelect" style="width: 100%; height: 100%;">
+                            <option value="searchRocate">ì§€ì—­ë³„</option>
+                            <option value="searchName">ìƒí˜¸ëª…</option>
+                            <option value="searchMenu">ë©”ë‰´</option>
+                        </select>
                     </div>
-                    </td>
-                    <td class="searchSel">
-                    <div class="selectbox">
-                      <dl class="dropdownSelect2">
-                        <dt><a class="searchSelLink" href="#"><span>¸¶Æ÷±¸</span></a></dt>
-                        <dd>
-                          <ul class="dropdown2">
-                            <li><a href="#">½Å»óÇ°¼ø</a></li>
-                            <li><a href="#">ÀÎ±â»óÇ°¼ø</a></li>
-                            <li><a href="#">³·Àº°¡°İ¼ø</a></li>
-                            <li><a href="#">³ôÀº°¡°İ¼ø</a></li>
-                          </ul>
-                        </dd>
-                      </dl>
+                    <div style="display: inline-block; width: 50%; height: 100%;">
+                        <input type="text" style="width: 100%; height: 100%;" name="searchInput">
                     </div>
-                    </td>
-                    <td class="searchSel">
-                    <div class="selectbox">
-                      <dl class="dropdownSelect3">
-                        <dt><a class="searchSelLink" href="#"><span>½Å¼öµ¿</span></a></dt>
-                        <dd>
-                          <ul class="dropdown2">
-                            <li><a href="#">½Å»óÇ°¼ø</a></li>
-                            <li><a href="#">ÀÎ±â»óÇ°¼ø</a></li>
-                            <li><a href="#">³·Àº°¡°İ¼ø</a></li>
-                            <li><a href="#">³ôÀº°¡°İ¼ø</a></li>
-                          </ul>
-                        </dd>
-                      </dl>
+                    <div style="display: inline-block; width: 15%; height: 100%;">
+                        <button class="searchBtn" onclick="searchStart()" style="width: 100%; height: 100%;">ê²€ìƒ‰</button>
                     </div>
-                    </td>
-                    <td class="searchSel">
-                    <div class="selectbox">
-                      <dl class="dropdownSelect4">
-                        <dt><a class="searchSelLink" href="#"><span>¼±ÅÃ</span></a></dt>
-                        <dd>
-                          <ul class="dropdown2">
-                            <li><a href="#">½Å»óÇ°¼ø</a></li>
-                            <li><a href="#">ÀÎ±â»óÇ°¼ø</a></li>
-                            <li><a href="#">³·Àº°¡°İ¼ø</a></li>
-                            <li><a href="#">³ôÀº°¡°İ¼ø</a></li>
-                          </ul>
-                        </dd>
-                      </dl>
-                    </div>
-                    </td>
-                    <td class="searchSel"></td>
-                </tr>    
-                <tr>
-                    <td class="searchMenu"><span class="searchText">¸Ş´ºº°</span></td>
-                    <td class="searchSel">
-                    <div class="selectbox">
-                      <dl class="dropdownSelect5">
-                        <dt><a class="searchSelLink" href="#"><span>ÇÑ½Ä</span></a></dt>
-                        <dd>
-                          <ul class="dropdown2">
-                            <li><a href="#">½Å»óÇ°¼ø</a></li>
-                            <li><a href="#">ÀÎ±â»óÇ°¼ø</a></li>
-                            <li><a href="#">³·Àº°¡°İ¼ø</a></li>
-                            <li><a href="#">³ôÀº°¡°İ¼ø</a></li>
-                          </ul>
-                        </dd>
-                      </dl>
-                    </div>
-                    </td>
-                    <td class="localText">
-                        <span class="searchRe">[¼­¿ï½Ã ¸¶Æ÷±¸ ½Å¼öµ¿]</span>ÀÇ 
-                    </td>
-                    <td class="menuText">
-                        <span class="searchRe">[ÇÑ½Ä]</span><span class="searchText">°Ë  »ö</span>
-                    </td>
-                    <td class="tdInput"><input type="text" class="form-control" id="searchName"></td>
-                    <td class="tdBtn"><button type="button" class="btn btn-default">Search</button></td>
-                </tr>    
-            </table>
+	            </div>
+	            <div class="searchResultDiv" style="width: 100%; height: 0px;">
+		            <div id="searchResult">
+			           <%--<div style="width: 100%; height: 126px; border-bottom: 1px solid black;"></div>--%>
+			           <%--<div style="width: 100%; height: 126px; border-bottom: 1px solid black;"></div>--%>
+			           <%--<div style="width: 100%; height: 126px; border-bottom: 1px solid black;"></div>--%>
+		            </div>
+	            </div>
             </div>
             
             <div id="map"></div>
-            
-            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=630e98d8425188c04dae0728c65822bb&libraries=clusterer"></script>
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=630e98d8425188c04dae0728c65822bb&libraries=services,clusterer"></script>
             <script>
                 var container = document.getElementById('map');
                 var options = {
                     center: new daum.maps.LatLng(37.552651, 126.937765),
                     level: 2
                 };
-
+				
                 var map = new daum.maps.Map(container, options);
-                
-                // ÀÏ¹İ Áöµµ¿Í ½ºÄ«ÀÌºä·Î Áöµµ Å¸ÀÔÀ» ÀüÈ¯ÇÒ ¼ö ÀÖ´Â ÁöµµÅ¸ÀÔ ÄÁÆ®·ÑÀ» »ı¼ºÇÕ´Ï´Ù
+
+                // ì¼ë°˜ ì§€ë„ì™€ ìŠ¤ì¹´ì´ë·°ë¡œ ì§€ë„ íƒ€ì…ì„ ì „í™˜í•  ìˆ˜ ìˆëŠ” ì§€ë„íƒ€ì… ì»¨íŠ¸ë¡¤ì„ ìƒì„±í•©ë‹ˆë‹¤
                 var mapTypeControl = new daum.maps.MapTypeControl();
 
-                // Áöµµ¿¡ ÄÁÆ®·ÑÀ» Ãß°¡ÇØ¾ß ÁöµµÀ§¿¡ Ç¥½ÃµË´Ï´Ù
-                // daum.maps.ControlPositionÀº ÄÁÆ®·ÑÀÌ Ç¥½ÃµÉ À§Ä¡¸¦ Á¤ÀÇÇÏ´Âµ¥ TOPRIGHT´Â ¿À¸¥ÂÊ À§¸¦ ÀÇ¹ÌÇÕ´Ï´Ù
+                // ì§€ë„ì— ì»¨íŠ¸ë¡¤ì„ ì¶”ê°€í•´ì•¼ ì§€ë„ìœ„ì— í‘œì‹œë©ë‹ˆë‹¤
+                // daum.maps.ControlPositionì€ ì»¨íŠ¸ë¡¤ì´ í‘œì‹œë  ìœ„ì¹˜ë¥¼ ì •ì˜í•˜ëŠ”ë° TOPRIGHTëŠ” ì˜¤ë¥¸ìª½ ìœ„ë¥¼ ì˜ë¯¸í•©ë‹ˆë‹¤
                 map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
 
-                // Áöµµ È®´ë Ãà¼Ò¸¦ Á¦¾îÇÒ ¼ö ÀÖ´Â  ÁÜ ÄÁÆ®·ÑÀ» »ı¼ºÇÕ´Ï´Ù
+                // ì§€ë„ í™•ëŒ€ ì¶•ì†Œë¥¼ ì œì–´í•  ìˆ˜ ìˆëŠ”  ì¤Œ ì»¨íŠ¸ë¡¤ì„ ìƒì„±í•©ë‹ˆë‹¤
                 var zoomControl = new daum.maps.ZoomControl();
                 map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-                
-                var positionTest = [37.552651,126.937765,37.553660,126.937316];
-                var selectedMarker = null;
-                var array = ['store0','store1'];
-               // ¸¶Ä¿ Å¬·¯½ºÅÍ·¯¸¦ »ı¼º 
+
+                // ë§ˆì»¤ í´ëŸ¬ìŠ¤í„°ëŸ¬ë¥¼ ìƒì„±
                 var clusterer = new daum.maps.MarkerClusterer({
-                    map: map, // ¸¶Ä¿µéÀ» Å¬·¯½ºÅÍ·Î °ü¸®ÇÏ°í Ç¥½ÃÇÒ Áöµµ °´Ã¼ 
-                    averageCenter: true, // Å¬·¯½ºÅÍ¿¡ Æ÷ÇÔµÈ ¸¶Ä¿µéÀÇ Æò±Õ À§Ä¡¸¦ Å¬·¯½ºÅÍ ¸¶Ä¿ À§Ä¡·Î ¼³Á¤ 
-                    minLevel: 5, // Å¬·¯½ºÅÍ ÇÒ ÃÖ¼Ò Áöµµ ·¹º§ 
+                    map: map, // ë§ˆì»¤ë“¤ì„ í´ëŸ¬ìŠ¤í„°ë¡œ ê´€ë¦¬í•˜ê³  í‘œì‹œí•  ì§€ë„ ê°ì²´
+                    averageCenter: true, // í´ëŸ¬ìŠ¤í„°ì— í¬í•¨ëœ ë§ˆì»¤ë“¤ì˜ í‰ê·  ìœ„ì¹˜ë¥¼ í´ëŸ¬ìŠ¤í„° ë§ˆì»¤ ìœ„ì¹˜ë¡œ ì„¤ì •
+                    minLevel: 6, // í´ëŸ¬ìŠ¤í„° í•  ìµœì†Œ ì§€ë„ ë ˆë²¨
+	                minClusterSize: 1,
                     styles: [{
                         width : '53px', height : '52px',
                         background: 'url("./imgs/clusterer.png") no-repeat',
                         color: '#fff',
                         textAlign: 'center',
-                        lineHeight: '50px',
+                        lineHeight: '50px'
                     }]
-                });    
-                //-------------------------------------------------------------------------
-                for(var i=0; i<2; i++){
-                    var imageSrc = './imgs/markerIcon/foodIcon'+i+'.png', // ¸¶Ä¿ÀÌ¹ÌÁöÀÇ ÁÖ¼ÒÀÔ´Ï´Ù
-                    imageSize = new daum.maps.Size(55, 55), // ¸¶Ä¿ÀÌ¹ÌÁöÀÇ Å©±âÀÔ´Ï´Ù
-                    imageOption = {offset: new daum.maps.Point(27, 69)}; // ¸¶Ä¿ÀÌ¹ÌÁöÀÇ ¿É¼ÇÀÔ´Ï´Ù. ¸¶Ä¿ÀÇ ÁÂÇ¥¿Í ÀÏÄ¡½ÃÅ³ ÀÌ¹ÌÁö ¾È¿¡¼­ÀÇ ÁÂÇ¥¸¦ ¼³Á¤ÇÕ´Ï´Ù.
-                    
-                    // ¸¶Ä¿ÀÇ ÀÌ¹ÌÁöÁ¤º¸¸¦ °¡Áö°í ÀÖ´Â ¸¶Ä¿ÀÌ¹ÌÁö¸¦ »ı¼ºÇÕ´Ï´Ù
-                    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
-                        markerPosition = new daum.maps.LatLng(positionTest[i+i],positionTest[i+i+1]); // ¸¶Ä¿°¡ Ç¥½ÃµÉ À§Ä¡ÀÔ´Ï´Ù
-                    addMarker(markerPosition, markerImage, i);
+                });
+                var branchCom = [];
+                var addressArray = [];
 
-                }
-                function addMarker(markerPosition, markerImage, i){
-                    
-//                    $('.btn-gradient').click(function(event){
-//                        event.preventDefault();
-//                    });
-                    // ¸¶Ä¿°¡ Áöµµ À§¿¡ Ç¥½ÃµÇµµ·Ï ¼³Á¤ÇÕ´Ï´Ù
-                    var marker = new daum.maps.Marker({
-                        position: markerPosition, 
-                        title: array[i],
-                        image: markerImage // ¸¶Ä¿ÀÌ¹ÌÁö ¼³Á¤ 
+                
+                var geocoder = new daum.maps.services.Geocoder();
+                var coords = null;
+                var markerPosition = null;
+                
+                
+                daum.maps.event.addListener(map, 'zoom_changed', function () {
+						var level = map.getLevel();
+					    if (level >= 5){
+					        $('.wrap').css('display', 'none');
+                            selectedMarker = null;
+					    }
                     });
-                    var className = ''+array[i]+' wrap';
-                        // ¸¶Ä¿¸¦ Áß½ÉÀ¸·Î Ä¿½ºÅÒ ¿À¹ö·¹ÀÌ¸¦ Ç¥½ÃÇÏ±âÀ§ÇØ CSS¸¦ ÀÌ¿ëÇØ À§Ä¡¸¦ ¼³Á¤
-                        // Ä¿½ºÅÒ ¿À¹ö·¹ÀÌ¿¡ Ç¥½ÃÇÒ ÄÁÅÙÃ÷
+                
+                <c:forEach items="${alist}" var="articleList">
+                    geocoder.addressSearch('${articleList.roadAddress}', function (result, status) {
+
+                        // ì •ìƒì ìœ¼ë¡œ ê²€ìƒ‰ì´ ì™„ë£Œëìœ¼ë©´
+                        if (status === daum.maps.services.Status.OK) {
+                            
+                            var branchArr = ['${articleList.id}', '${articleList.branchName}', '${articleList.opTime}', '${articleList.breakTime}', '${articleList.opDate}','${articleList.phoneNum}','${articleList.score}','${articleList.state}','${articleList.zoneCode}', '${articleList.roadAddress}', '${articleList.jibunAddress}', '${articleList.detailAddress}', '${articleList.markerImage}', '${articleList.mainImage}', '${articleList.image1}', '${articleList.image2}', '${articleList.image3}', '${articleList.image4}','${articleList.image5}'];
+                            coords = new daum.maps.LatLng(result[0].y, result[0].x);
+                            
+                            
+                            
+                            <%--ê¸°ë“±ë¡ëœ ìë£Œì— latlng ì…ë ¥ --%>
+                            <%--var latlngY = result[0].y,--%>
+	                            <%--latlngX = result[0].x;--%>
+                            <%--var tempId = '${articleList.id}';--%>
+                            <%--$.ajax({--%>
+                            <%--type: 'POST',--%>
+                            <%--url: '/updatelatlng',--%>
+                            <%--data: JSON.stringify({--%>
+	                            <%--latlngY: latlngY,--%>
+		                        <%--latlngX: latlngX,--%>
+		                        <%--id: tempId--%>
+                            <%--}),--%>
+                            <%--contentType: 'application/json; charset=utf-8',--%>
+                            <%--success: function (data) {--%>
+                                <%--// $.each(data,  function (idx, val) {--%>
+                                <%--//     test.push(val.menu);--%>
+                                <%--//     test.push(val.price);--%>
+                                <%--//     mapSetMarker(test);--%>
+                                <%--// });--%>
+                            <%--},--%>
+                            <%--error: function () {--%>
+                            <%--}--%>
+                             <%--});--%>
+	                        
+	                        
+                            addMarker(coords, branchArr);
+                        }
+                    });
+                </c:forEach>
+
+                
+                var selectedMarker = null;
+
+                function addMarker(markerPosition, branchArr) {
+                   $('.btn-gradient').click(function(event){
+                       event.preventDefault();
+                   });
+                    
+                    var id              = branchArr[0],
+                        branchName      = branchArr[1],
+                        opTime          = branchArr[2],
+                        breakTime       = branchArr[3],
+                        opDate          = branchArr[4],
+	                    phoneNum        = branchArr[5],
+	                    score           = branchArr[6],
+	                    state           = branchArr[7],
+                        zoneCode        = branchArr[8],
+                        roadAddress     = branchArr[9],
+                        jibunAddress    = branchArr[10],
+                        detailAddress   = branchArr[11],
+	                    markerImage     = branchArr[12],
+	                    mainImage       = branchArr[13],
+	                    image1          = branchArr[14],
+	                    image2          = branchArr[15],
+	                    image3          = branchArr[16],
+	                    image4          = branchArr[17],
+	                    image5          = branchArr[18];
+                    var imageSrc = './imgs/markerIcon/'+markerImage, // ë§ˆì»¤ì´ë¯¸ì§€ì˜ ì£¼ì†Œì…ë‹ˆë‹¤
+                        imageSize = new daum.maps.Size(55, 55), // ë§ˆì»¤ì´ë¯¸ì§€ì˜ í¬ê¸°ì…ë‹ˆë‹¤
+                        imageOption = {offset: new daum.maps.Point(27, 69)}; // ë§ˆì»¤ì´ë¯¸ì§€ì˜ ì˜µì…˜ì…ë‹ˆë‹¤. ë§ˆì»¤ì˜ ì¢Œí‘œì™€ ì¼ì¹˜ì‹œí‚¬ ì´ë¯¸ì§€ ì•ˆì—ì„œì˜ ì¢Œí‘œë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
+
+                        // ë§ˆì»¤ì˜ ì´ë¯¸ì§€ì •ë³´ë¥¼ ê°€ì§€ê³  ìˆëŠ” ë§ˆì»¤ì´ë¯¸ì§€ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
+                    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
+                    var marker = new daum.maps.Marker({
+                        position: markerPosition,
+                        title: id,
+                        image: markerImage // ë§ˆì»¤ì´ë¯¸ì§€ ì„¤ì •
+                    });
+                    var className = '' + id + ' wrap';
+	                
+                    
+                    // ë§ˆì»¤ë¥¼ ì¤‘ì‹¬ìœ¼ë¡œ ì»¤ìŠ¤í…€ ì˜¤ë²„ë ˆì´ë¥¼ í‘œì‹œí•˜ê¸°ìœ„í•´ CSSë¥¼ ì´ìš©í•´ ìœ„ì¹˜ë¥¼ ì„¤ì •
+                    // ì»¤ìŠ¤í…€ ì˜¤ë²„ë ˆì´ì— í‘œì‹œí•  ì»¨í…ì¸ 
                     var content = document.createElement('div');
                     content.className = className;
-                    content.innerHTML = '<div class="info">'+  
-                                            '<div class="title">'+  
-                                                '<p>'+array[i]+'</p>'+  
-                                                '<div class="close" title="´İ±â"></div>'+  
-                                            '</div>'+  
-                                            '<div class="popupBody">'+
-                                                '<div class="img">'+
-                                                    '<img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="100" height="100">'+ 
-                                               '</div>'+  
-                                                '<div class="desc">'+  
-                                                    '<div class="address ellipsis">Á¦ÁÖÆ¯º°ÀÚÄ¡µµ Á¦ÁÖ½Ã Ã·Á¦ÁÖÆ¯º°ÀÚÄ¡µµ Á¦ÁÖ½Ã Ã·Á¦ÁÖÆ¯º°ÀÚÄ¡µµ Á¦ÁÖ½Ã Ã·</div>'+  
-                                                    '<div class="jibun ellipsis">(¿ì) 63309 (Áö¹ø) ¿µÆòµ¿ 2181</div>'+
-                                                    '<div class="phone ellipsis">010 - 2222 - 3333</div>'+  
-                                                    '<div class="ellipsis"><br/></div>'+
-                                                    '<div class="timeDiv">'+
-                                                        '<div class="timeDiv1">'+
-                                                            '¿µ¾÷½Ã°£'+ 
-                                                        '</div>'+
-                                                        '<div class="timeDiv2">'+
-                                                            '10:00 ~ 22:00'+
-                                                        '</div>'+
-                                                    '</div>'+
-                                                    '<div class="dayDiv">'+
-                                                        '<div class="dayDiv1">'+
-                                                            '¿µ¾÷ÀÏ'+
-                                                        '</div>'+
-                                                        '<div class="dayDiv2">'+
-                                                            '¸ÅÁÖ 2,4¹øÂ° ÀÏ¿äÀÏ ÈŞ¹«'+
-                                                        '</div>'+
-                                                    '</div>'+
-                                                    '<div class="breakDiv">'+
-                                                        '<div class="breakDiv1">'+
-                                                            'ÈŞ°Ô½Ã°£'+
-                                                        '</div>'+
-                                                        '<div class="breakDiv2">'+
-                                                            '15:00 ~ 17:00'+
-                                                        '</div>'+
-                                                    '</div>'+
-                                                    '<div class="restDiv">'+
-                                                        '<div class="restDiv1">'+
-                                                            '´ëÇ¥¸Ş´º'+
-                                                        '</div>'+
-                                                        '<div class="restDiv2">'+
-                                                            '<div class="restDiv2_1">'+
-                                                                'ÂüÄ¡±è¹ä'+
-                                                            '</div>'+
-                                                            '<div class="restDiv2_2">'+
-                                                            '</div>'+
-                                                            '<div class="restDiv2_3">'+
-                                                                '13,000¿ø'+
-                                                            '</div>'+
-                                                            '<div class="restDiv2_1">'+
-                                                                'Ä¡Áî±è¹ä'+
-                                                            '</div>'+
-                                                            '<div class="restDiv2_2">'+
-                                                            '</div>'+
-                                                            '<div class="restDiv2_3">'+
-                                                                '20,000¿ø'+
-                                                            '</div>'+
-                                                            '<div class="restDiv2_1">'+
-                                                                '½Å¶ó¸é'+
-                                                            '</div>'+
-                                                            '<div class="restDiv2_2">'+
-                                                            '</div>'+
-                                                            '<div class="restDiv2_3">'+
-                                                                '50,000¿ø'+
-                                                            '</div>'+
-                                                        '</div>'+
-                                                    '</div>'+
-                                                    '<div class="gradeDiv">'+
-                                                        '<div class="gradeDiv1">'+
-                                                            'ÀÌ¿ëÀÚ ÆòÁ¡'+
-                                                        '</div>'+
-                                                        '<div class="gradeDiv2">'+
-                                                            '4.3 / 5.0'+
-                                                        '</div>'+
-                                                        '<div class="gradeDiv3">'+
-                                                            '<img src="./imgs/angryemoji.png"'+ 'class="angryEmoji">'+
-                                                        '</div>'+
-                                                    '</div>'+
-                                                    '<div class="btnDiv">'+
-                                                        '<a href="#" class="btn-gradient gray block">»ó¼¼º¸±â</a>'+
-                                                        '<a href="#" class="btn-gradient red block">¹Ù·Î¿¹¾à</a>'+
-                                                    '</div>'+
-                                                '</div>'+  
-                                            '</div>'+  
-                                        '</div>';
+                    content.innerHTML = '<div class="info">' +
+                        '<div class="title">' +
+                        '<p>' + branchName + '</p>' +
+                        '<div class="close" title="ë‹«ê¸°"></div>' +
+                        '</div>' +
+                        '<div class="popupBody">' +
+                        '<div class="img">' +
+                        '<img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="100" height="100">' +
+                        '</div>' +
+                        '<div class="desc">' +
+                        '<div class="address ellipsis">' + roadAddress + ' ' + detailAddress + '</div>' +
+                        '<div class="jibun ellipsis">(ìš°) ' + zoneCode + ' (ì§€ë²ˆ) ' + jibunAddress + '</div>' +
+                        '<div class="phone ellipsis">' + phoneNum + '</div>' +
+                        '<div class="ellipsis"><br/></div>' +
+                        '<div class="timeDiv">' +
+                        '<div class="timeDiv1">' +
+                        'ì˜ì—…ì‹œê°„' +
+                        '</div>' +
+                        '<div class="timeDiv2">' +
+                        opTime +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="dayDiv">' +
+                        '<div class="dayDiv1">' +
+                        'ì˜ì—…ì¼' +
+                        '</div>' +
+                        '<div class="dayDiv2">' +
+                        opDate +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="breakDiv">' +
+                        '<div class="breakDiv1">' +
+                        'íœ´ê²Œì‹œê°„' +
+                        '</div>' +
+                        '<div class="breakDiv2">' +
+                        breakTime +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="restDiv">' +
+                        '<div class="restDiv1">' +
+                        'ëŒ€í‘œë©”ë‰´' +
+                        '</div>' +
+                        '<div class="restDiv2">' +
+                        '<div class="restDiv2_1">' +
+                        '</div>' +
+                        '<div class="restDiv2_2">' +
+                        '</div>' +
+                        '<div class="restDiv2_3">' +
+                        '</div>' +
+                        '<div class="restDiv3_1">' +
+                        '</div>' +
+                        '<div class="restDiv3_2">' +
+                        '</div>' +
+                        '<div class="restDiv3_3">' +
+                        '</div>' +
+                        '<div class="restDiv4_1">' +
+                        '</div>' +
+                        '<div class="restDiv4_2">' +
+                        '</div>' +
+                        '<div class="restDiv4_3">' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="gradeDiv">' +
+                        '<div class="gradeDiv1">' +
+                        'ì´ìš©ì í‰ì ' +
+                        '</div>' +
+                        '<div class="gradeDiv2">' +
+                        score + ' / 5.0' +
+                        '</div>' +
+                        '<div class="gradeDiv3">' +
+                        '<img src="./imgs/angryemoji.png"' + 'class="angryEmoji">' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="btnDiv">' +
+                        '<a href="#" class="btn-gradient gray block">ìƒì„¸ë³´ê¸°</a>' +
+                        '<a href="#" class="btn-gradient red block">ë°”ë¡œì˜ˆì•½</a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
 
-                // ¸¶Ä¿ À§¿¡ Ä¿½ºÅÒ¿À¹ö·¹ÀÌ¸¦ Ç¥½ÃÇÕ´Ï´Ù
-                
-                // ¸¶Ä¿¸¦ Áß½ÉÀ¸·Î Ä¿½ºÅÒ ¿À¹ö·¹ÀÌ¸¦ Ç¥½ÃÇÏ±âÀ§ÇØ CSS¸¦ ÀÌ¿ëÇØ À§Ä¡¸¦ ¼³Á¤Çß½À´Ï´Ù
-                var overlay = new daum.maps.CustomOverlay({
-                    content: content,
-                    map: map,
-                    position: marker.getPosition()       
-                });
+                    // ë§ˆì»¤ ìœ„ì— ì»¤ìŠ¤í…€ì˜¤ë²„ë ˆì´ë¥¼ í‘œì‹œí•©ë‹ˆë‹¤
 
-                // ¸¶Ä¿¸¦ Å¬¸¯ÇßÀ» ¶§ Ä¿½ºÅÒ ¿À¹ö·¹ÀÌ¸¦ Ç¥½ÃÇÕ´Ï´Ù
-                
-                
-                $('.wrap').css('display','none');
-                
+                    // ë§ˆì»¤ë¥¼ ì¤‘ì‹¬ìœ¼ë¡œ ì»¤ìŠ¤í…€ ì˜¤ë²„ë ˆì´ë¥¼ í‘œì‹œí•˜ê¸°ìœ„í•´ CSSë¥¼ ì´ìš©í•´ ìœ„ì¹˜ë¥¼ ì„¤ì •í–ˆìŠµë‹ˆë‹¤
+                    var overlay = new daum.maps.CustomOverlay({
+                        content: content,
+                        map: map,
+                        position: marker.getPosition()
+                    });
+
+
+                    $('.wrap').css('display', 'none');
+					
+
                     
-                daum.maps.event.addListener(marker, 'click', function() {
-                    var mapProjection = map.getProjection(),
-                        // ÇØ´ç À§µµ °æµµ°ªÀ» X,Y°ªÀ¸·Î ¹İÈ¯ÇØÁÜ
-                        latlng = markerPosition,
-                        // Áöµµ ÁÂÇ¥¿¡ ÇØ´çÇÏ´Â À§Ä¡ ÁÂÇ¥
-                        mapPixel = mapProjection.containerPointFromCoords(latlng); 
-                    
-                    var center = map.getCenter();
-                    var mapCenter = mapProjection.containerPointFromCoords(center);
-                    var deltaX = mapPixel.x - mapCenter.x,
-                        deltaY = mapPixel.y - mapCenter.y;
-                    
-                    // case 1 : ¸¶Ä¿ ÃÖÃÊ Å¬¸¯
-                    // case 2 : ´Ù¸¥ ¸¶Ä¿°¡ È°¼ºÈ­ µÇ¾îÀÖ´Â »óÈ²¿¡¼­ ´Ù¸¥ ¸¶Ä¿ Å¬¸¯
-                    // case 3 : ´Ù¸¥ ¸¶Ä¿¸¦ none ÇÑ ÈÄ¿¡ ¶Ç ´Ù¸¥ ¸¶Ä¿ Å¬¸¯
-                    // state ÃÊ±â°ªÀº null
-                    
-                    // ¸¶Ä¿¸¦ Å¬¸¯ ½Ã¿¡ ¸ğµç ¿À¹ö·¹ÀÌ¸¦ none ÇÑ ÈÄ ¸¶Ä¿ÀÇ ¿À¹ö·¹ÀÌ¸¸ inherit
-                    // -> ¸¶Ä¿¿¡¼­ ½ºÅä¾îÀÇ ÀÌ¸§À» °¡Á®¿Ã ¹æ¹ı »ı°¢ÇØºÁ¾ß ÇÔ
-                    // -> ¸¶Ä¿¿¡ TitleÀ» set,get ÇÏ´Â ¹æ¹ıÀ¸·Î ÇØ°á
-                    
-                    // ÇØ°á
-                    // case 1 : state°¡ nullÀÎ »óÅÂ¿¡¼­ ¿À¹ö·¹ÀÌ¸¦ »ı¼ºÇÏ°í display inheritÀ¸·Î º¯°æ
-                    // case 2 : state°¡ Ã³À½¿¡ Å¬¸¯Çß´ø marker°¡ ¾Æ´Ï¸é ¸ğµç ¿À¹ö·¹ÀÌ display none ÈÄ¿¡
-                    //          markerTitleÀ¸·Î ¼±ÅÃµÈ markerÀ» °ñ¶ó³»¾î ÇØ´ç ¿À¹ö·¹ÀÌÀÇ display inheritÇÔ
-                    // case 3 : state°¡ ÀÌÀü¿¡ ¼±ÅÃÇß´ø marker¿Í °°´Ù¸é ¸ğµç ¿À¹ö·¹ÀÌÀÇ display none
-                    
-                    var markerTitle = marker.getTitle();
-                    
-                    // case 1
-                    if(selectedMarker === null){
-                        console.log('case 1 : '+selectedMarker);
-                        selectedMarker = markerTitle;
-                        overlay.setMap(map);                        
-                        map.panBy(deltaX - 25, deltaY - 200);
-                        $('.'+markerTitle+'').css('display','inherit');
-                    // case 2
-                    }else if(selectedMarker !== markerTitle){
-                        console.log('case 2 : '+selectedMarker);
-                        overlay.setMap(map);
-                        map.panBy(deltaX - 25, deltaY - 200);
-                        $('.wrap').css('display','none');
-                        $('.'+markerTitle+'').css('display','inherit');
-                        selectedMarker = markerTitle;      
+	                var callback = function () {
+                        var test = [];
+                        $.ajax({
+	                        type: 'POST',
+	                        url: './popup',
+	                        data: id,
+                            dataType: 'json',
+	                        success: function (data) {
+	                            $.each(data,  function (idx, val) {
+                                    test.push(val.menu);
+                                    test.push(val.price);
+                                    mapSetMarker(test);
+                                });
+                            }
+                        });
                         
-                    // case3
-                    }else if(selectedMarker === markerTitle){
-                        console.log('case 3 : '+selectedMarker);
-                        $('.wrap').css('display','none');
-                        selectedMarker = null;
-//                        overlay.setMap(null);
-                    }
-                    
-                });
-          
-                // close ¹öÆ°À¸·Î Á¾·á ÇßÀ»½Ã case 3À¸·Î º¯°æµÇ´Â ¹®Á¦
-                // ¹öÆ° Å¬¸¯½Ã¿¡ selectedMarker¸¦ null Àâ¾ÆÁÖ¸é µÉµí --> ¿Ï·á
-                $('.close').click(function(){
-                    $('.wrap').css('display','none'); 
-                    selectedMarker = null;
-                });
-                    
-                    
-                    
-                clusterer.addMarker(marker);    
-                // ¸¶Ä¿°¡ Áöµµ À§¿¡ Ç¥½ÃµÇµµ·Ï ¼³Á¤ÇÕ´Ï´Ù
-                marker.setMap(map);  
-                overlay.setMap(null);  
-            } // for end
-                 
-            
-            
+                        function mapSetMarker(test) {
 
+                            var mapProjection = map.getProjection(),
+                                // í•´ë‹¹ ìœ„ë„ ê²½ë„ê°’ì„ X,Yê°’ìœ¼ë¡œ ë°˜í™˜í•´ì¤Œ
+                                latlng = markerPosition,
+                                // ì§€ë„ ì¢Œí‘œì— í•´ë‹¹í•˜ëŠ” ìœ„ì¹˜ ì¢Œí‘œ
+                                mapPixel = mapProjection.containerPointFromCoords(latlng);
+
+                            var center = map.getCenter();
+                            var mapCenter = mapProjection.containerPointFromCoords(center);
+                            var deltaX = mapPixel.x - mapCenter.x,
+                                deltaY = mapPixel.y - mapCenter.y;
+
+
+                            // case 1 : ë§ˆì»¤ ìµœì´ˆ í´ë¦­
+                            // case 2 : ë‹¤ë¥¸ ë§ˆì»¤ê°€ í™œì„±í™” ë˜ì–´ìˆëŠ” ìƒí™©ì—ì„œ ë‹¤ë¥¸ ë§ˆì»¤ í´ë¦­
+                            // case 3 : ë‹¤ë¥¸ ë§ˆì»¤ë¥¼ none í•œ í›„ì— ë˜ ë‹¤ë¥¸ ë§ˆì»¤ í´ë¦­
+                            // state ì´ˆê¸°ê°’ì€ null
+
+                            // ë§ˆì»¤ë¥¼ í´ë¦­ ì‹œì— ëª¨ë“  ì˜¤ë²„ë ˆì´ë¥¼ none í•œ í›„ ë§ˆì»¤ì˜ ì˜¤ë²„ë ˆì´ë§Œ inherit
+                            // -> ë§ˆì»¤ì—ì„œ ìŠ¤í† ì–´ì˜ ì´ë¦„ì„ ê°€ì ¸ì˜¬ ë°©ë²• ìƒê°í•´ë´ì•¼ í•¨
+                            // -> ë§ˆì»¤ì— Titleì„ set,get í•˜ëŠ” ë°©ë²•ìœ¼ë¡œ í•´ê²°
+
+                            // í•´ê²°
+                            // case 1 : stateê°€ nullì¸ ìƒíƒœì—ì„œ ì˜¤ë²„ë ˆì´ë¥¼ ìƒì„±í•˜ê³  display inheritìœ¼ë¡œ ë³€ê²½
+                            // case 2 : stateê°€ ì²˜ìŒì— í´ë¦­í–ˆë˜ markerê°€ ì•„ë‹ˆë©´ ëª¨ë“  ì˜¤ë²„ë ˆì´ display none í›„ì—
+                            //          markerTitleìœ¼ë¡œ ì„ íƒëœ markerì„ ê³¨ë¼ë‚´ì–´ í•´ë‹¹ ì˜¤ë²„ë ˆì´ì˜ display inherití•¨
+                            // case 3 : stateê°€ ì´ì „ì— ì„ íƒí–ˆë˜ markerì™€ ê°™ë‹¤ë©´ ëª¨ë“  ì˜¤ë²„ë ˆì´ì˜ display none
+
+                            var markerTitle = marker.getTitle();
+
+                            // case 1
+                            if (selectedMarker === null) {
+                                selectedMarker = markerTitle;
+                                overlay.setMap(map);
+                                map.panBy(deltaX - 25, deltaY - 250);
+                                $('.' + markerTitle + '').css('display', 'inherit');
+                                // case 2
+                            } else if (selectedMarker !== markerTitle) {
+                                overlay.setMap(map);
+                                map.panBy(deltaX - 25, deltaY - 250);
+                                $('.wrap').css('display', 'none');
+                                $('.' + markerTitle + '').css('display', 'inherit');
+                                selectedMarker = markerTitle;
+                                // case3
+                            } else if (selectedMarker === markerTitle) {
+                                $('.wrap').css('display', 'none');
+                                selectedMarker = null;
+//                              overlay.setMap(null);
+                            }
+                            // close ë²„íŠ¼ìœ¼ë¡œ ì¢…ë£Œ í–ˆì„ì‹œ case 3ìœ¼ë¡œ ë³€ê²½ë˜ëŠ” ë¬¸ì œ
+                            // ë²„íŠ¼ í´ë¦­ì‹œì— selectedMarkerë¥¼ null ì¡ì•„ì£¼ë©´ ë ë“¯ --> ì™„ë£Œ
+                            $('.close').click(function () {
+                                $('.wrap').css('display', 'none');
+                                selectedMarker = null;
+                            });
+
+                            for (i = 0; i < test.length; i++) {
+                                if (test.length > 1) {
+                                    $('.restDiv2_2').css('border-bottom', '1px dotted gray');
+                                    $('.restDiv2_1').text(test[0]);
+                                    $('.restDiv2_3').text(test[1]);
+                                }
+                                if (test.length > 3) {
+                                    $('.restDiv3_2').css('border-bottom', '1px dotted gray');
+                                    $('.restDiv3_1').text(test[2]);
+                                    $('.restDiv3_3').text(test[3]);
+                                }
+                                if (test.length > 5) {
+                                    $('.restDiv4_2').css('border-bottom', '1px dotted gray');
+                                    $('.restDiv4_1').text(test[4]);
+                                    $('.restDiv4_3').text(test[5]);
+                                }
+                            }
+                        }
+                    };
+                    daum.maps.event.addListener(marker, 'click', callback);
+	                clusterer.addMarker(marker);
+                    // ë§ˆì»¤ê°€ ì§€ë„ ìœ„ì— í‘œì‹œë˜ë„ë¡ ì„¤ì •í•©ë‹ˆë‹¤
+                    marker.setMap(map);
+                    overlay.setMap(null);
+                } // for end
+                
+	            
             </script>
+    
+            
                 <div>
                     
                 </div>

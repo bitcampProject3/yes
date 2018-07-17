@@ -3,27 +3,35 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.bit.yes.model.UserDao">
+  <mapper namespace="com.bit.yes.model.BranchDao">
   
-  <!--user추가  -->
-  <select id="insertOne">
-  	insert into user values();
-  </select>
-  
-  
-<!--   	<select id="selectAll" resultType="com.bit.myapp06.model.entity.GuestVo">
-  	SELECT * FROM GUEST ORDER BY SABUN DESC
-  	</select>
-  	
-  	<select id="selectOne" parameterType="int" resultType="com.bit.myapp06.model.entity.GuestVo">
-  	SELECT * FROM GUEST WHERE SABUN=#{value}
-  	</select>
-  	
-  	<update id="updateOne" parameterType="com.bit.myapp06.model.entity.GuestVo">
-  	UPDATE GUEST SET NAME=#{name},PAY=#{pay} WHERE SABUN=#{sabun}
-  	</update>
-  
-  	<delete id="deleteOne" parameterType="int">
-  	DELETE FROM GUEST WHERE SABUN=#{value}
-  	</delete> -->
+    <!--user추가  -->
+    <select id="insertBranch" parameterType="com.bit.yes.model.entity.BranchVo">
+  	  insert into branch_info
+  	  values(#{id}, #{branchName}, #{opTime}, #{breakTime}, #{opDate}, #{menu1}, #{menu2}, #{menu3}, #{zoneCode}, #{address}, #{jibunAddress}, #{addressDetail}, #{phoneNum}, #{image}, #{image2}, #{image3}, #{score}, #{state});
+    </select>
+    <select id="selectAll" resultType="com.bit.yes.model.entity.BranchVo">
+      select * from branch_info a inner join branch_address b on a.id = b.id inner join branch_image c on a.id = c.id;
+    </select>
+    <select id="menuLoad" parameterType="string" resultType="com.bit.yes.model.entity.BranchVo">
+      select * from branch_menu where id like #{branchID} and mainMenu like 'true'
+    </select>
+    <select id="searchResult" parameterType="Map" resultType="com.bit.yes.model.entity.BranchVo">
+      select * from branch_info a inner join branch_address b on a.id = b.id inner join branch_image c on a.id = c.id
+      <choose>
+        <when test="searchSelect.equals('searchRocate')">
+          where roadAddress like concat('%',#{searchInput},'%')
+        </when>
+        <when test="searchSelect.equals('searchName')">
+          where branchname like concat('%',#{searchInput},'%')
+        </when>
+        <when test="searchSelect.equals('searchMenu')">
+          inner join branch_menu d on a.id = d.id where menu like concat('%',#{searchInput},'%')
+        </when>
+      </choose>
+    </select>
+    <!--<update id="updateLatLng" parameterType="Map">-->
+      <!--update branch_address set latlngY = #{latlngY}, latlngX = #{latlngX} where id = #{id};-->
+    <!--</update>-->
+
   </mapper>
