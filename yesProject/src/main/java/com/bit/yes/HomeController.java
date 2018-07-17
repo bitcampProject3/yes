@@ -22,6 +22,7 @@ public class HomeController {
 	@RequestMapping(value = "/callback", method = RequestMethod.GET)
 	public String callback() {
 	return "callback";
+		
 	}
 	
 

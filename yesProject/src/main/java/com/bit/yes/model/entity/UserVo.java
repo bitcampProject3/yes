@@ -21,11 +21,9 @@ public class UserVo {
 	public UserVo() {
 		// TODO Auto-generated constructor stub
 	}
-
-
-
-	public UserVo(String id, String password,String name, String nickName,String email, String phoneNum, String pwQuestion, Date birthDate,
-			String registNum) {
+	
+	public UserVo(String id, String pw, String nickName, String phoneNum, String pwQuestion, Date birthDate,
+			String branchNum) {
 		super();
 		this.id = id;
 		this.password = password;

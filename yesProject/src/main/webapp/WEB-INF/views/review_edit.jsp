@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -120,26 +120,8 @@
                     display: block;
                     clear: both;
                 }
-
             }
         </style>
-        <script>
-        	
-        	$(function(){
-        		$('#joinbtn a').click(function(e){
-        		
-        			
-            		if($('#okbtn').is(':checked')===false)
-        			{
-        			alert('동의해주세요');
-					e.preventDefault();
-        			}
-        		});
-
-        	});
-        
-        </script>
-        
     </head>
     <body>
         <div>
@@ -153,14 +135,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="./imgs/logo.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="main.html"><img src="imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
                     <li><a href="#" class="menuBtn">예약<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">사용자 리뷰</a></li>
+                    <li><a href="review_list.html" class="menuBtn">사용자 리뷰</a></li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
@@ -172,30 +154,52 @@
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.yes">로그인</a></li>
-                    <li><a href="join.yes">회원가입</a></li>
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
             </nav>
-            
+            <div style="">
+            </div>
         </div>
-        
-          <div class="jumbotron" style="text-align: center; width: 70%; height: 70%; margin: 0px auto; background-color: RGB(255,216,216)">
-  <h2 >회원가입 약관</h2>
-  <br/>
-  <textarea cols="100%" rows="10px" readonly="readonly" style="overflow: scroll"></textarea>
-<form>
-        
-  
-  <input type="radio" name="assent" id="okbtn" value="ok" /> 동의
-  <input type="radio" name="assent" value="no" /> 동의하지않음
-</form>
-    <div id="joinbtn" style="margin-top: 30px; ">
-        
-    <a href="customerJoin.yes"  class="btn btn-primary"role="button">고객</a>
-    <a href="branchJoin.yes" class="btn btn-primary" role="button">사업자</a>
-    </div>    
-  </div>
+        <form method="POST">
+        <table class="table">
+        <p>edit page</p>
+            <tr>
+                <th>제목</th>
+                <td><input type="text" id="title" name="title" value="${bean.title }"/></td>
+            </tr>
+            <tr>
+               <th>평점</th>            
+                <td><input type="text" id="rating" name="rating" value="${bean.rating }"/> / 5.0</td>
+           </tr>
+           <tr>
+               <th>내용</th>
+               <td>
+                   <textarea class="form-control col-sm-5" rows="15" id="content" name="content">${bean.content}</textarea>
+               </td>
+           </tr>
+            </table>
+            <input type="hidden" name="idx" id="idx" value="${bean.idx }"/>
+            <div class="form-group">
+
+<label for="InputSubject1">파일첨부</label>
+
+<input id="fileInput" filestyle="" type="file" data-class-button="btn btn-default" data-class-input="form-control" data-button-text="" data-icon-name="fa fa-upload" class="form-control" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);">
+<div class="bootstrap-filestyle input-group">
+<input type="text" id="userfile" class="form-control" name="userfile" disabled="">
+<span class="group-span-filestyle input-group-btn" tabindex="0">
+<label for="fileInput" class="btn btn-default ">
+<span class="glyphicon fa fa-upload"></span>
+</label>
+</span>
+</div>
+</div>
+		<input type="hidden" id="branchID" name="branchID" value="branch1"/>   <!-- 나중에 session 객체 값으로 변경해야 됨 -->
+		<input type="hidden" id="clientID" name="clientID" value="client3"/>   <!-- 나중에 session 객체 값으로 변경해야 됨 -->
+        <button type="submit" class="btn btn-default">완료</button>
+        <a class="btn btn-default" href="../review_list" role="button">취소</a>
+        </form>
     </body>
 </html>
