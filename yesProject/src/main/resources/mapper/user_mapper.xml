@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="user">
+  <mapper namespace="com.bit.yes.model.UserDao">
   
 	  <select id="insertOne" parameterType="com.bit.yes.model.entity.UserVo">
 	 	insert into user_info(id,password,name,nickname,email,phoneNum,pwQuestion,birthDate,registNum) values(#{id},#{pw},#{name},#{nickName},#{email},
