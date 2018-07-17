@@ -23,6 +23,11 @@ public class HomeController {
 		return "main";
 	}
 
-
-
+	
+	@RequestMapping(value = "/callback", method = RequestMethod.GET)
+	public String callback() {
+	return "callback";
+		
+	}
+	
 }
