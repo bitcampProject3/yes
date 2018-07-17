@@ -30,8 +30,8 @@
         </when>
       </choose>
     </select>
-    <!--<update id="updateLatLng" parameterType="Map">-->
-      <!--update branch_address set latlngY = #{latlngY}, latlngX = #{latlngX} where id = #{id};-->
-    <!--</update>-->
+    <!--  <update id="updateLatLng" parameterType="Map">
+      update branch_address set latlngY = #{latlngY}, latlngX = #{latlngX} where id = #{id};
+    </update>-->
 
   </mapper>

@@ -183,13 +183,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-<<<<<<< HEAD:yesProject/src/main/webapp/WEB-INF/views/header.jsp
-                    <li><a href="./insert" class="menuBtn">예약<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">사용자 리뷰</a></li>
-=======
                     <li><a href="#" class="menuBtn">예약<span class="sr-only"></span></a></li>
                     <li><a href="review_list" class="menuBtn">사용자 리뷰</a></li>
->>>>>>> master:yesProject/src/main/webapp/WEB-INF/views/layout/header.jsp
                     <li class="dropdown" id="openCsBtn">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                         <ul class="dropdown-menu" id="dropdown">

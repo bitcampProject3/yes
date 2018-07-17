@@ -29,5 +29,9 @@
   	  <select id="updatePw"  parameterType="String" >
   	  	update user_info set password=#{param1} where id=#{param2}
   	  </select>
+  	  
+  	   <update id="updateInfo" parameterType="com.bit.yes.model.entity.UserVo" >
+  	  	update user_info set password=#{password},nickname=#{nickName},email=#{email},phoneNum=#{phoneNum},registNum=#{registNum} where id=#{id}
+  	  </update>
 
 </mapper>

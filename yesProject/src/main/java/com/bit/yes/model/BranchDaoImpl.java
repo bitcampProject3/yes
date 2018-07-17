@@ -40,6 +40,5 @@ public class BranchDaoImpl implements BranchDao{
 //    @Override
 //    public void updateLatLng(Map<String, Object> updateLatLng) {
 //        sqlSession.getMapper(BranchDao.class).updateLatLng(updateLatLng);
-//        System.out.println("mapper 전송 완료");
 //    }
 }

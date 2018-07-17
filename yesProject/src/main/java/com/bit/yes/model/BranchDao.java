@@ -13,7 +13,7 @@ public interface BranchDao {
 
     List<BranchVo> searchResult(Map<String, Object> searchMap);
 
-//    void updateLatLng(Map<String, Object> updateLatLng);
+    //void updateLatLng(Map<String, Object> updateLatLng);
 
 
 //    void addBranch(BranchVo branchInfoVo);

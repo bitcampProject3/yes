@@ -118,7 +118,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<dependency>
+ 		<dependency>
 
 		<groupId>org.codehaus.jackson</groupId>
 		
@@ -126,7 +126,7 @@
 		
 		<version>1.9.13</version>
 		
-		</dependency>
+		</dependency> 
 
 		<!-- Test -->
 		<dependency>

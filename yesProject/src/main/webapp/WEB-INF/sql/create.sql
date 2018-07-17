@@ -2,7 +2,6 @@
 -- USE mydb;
 
 
-
 create table user_info(
 	id varchar(30) primary key,
 	password varchar(30) not null,
@@ -12,7 +11,7 @@ create table user_info(
 	phoneNum varchar(30) not null,
 	pwQuestion varchar(100) not null,
 	birthDate date not null,
-	registNum varchar(30)/*사업자 등록 번호 */
+	registNum varchar(30)
 
 );
 
