@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-         pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <!Doctype html>
 <html>
     <head>
@@ -16,8 +16,7 @@
     </head>
     <body>
        <jsp:include page="./layout/header.jsp"></jsp:include>
-        
-        <div class="page" id="page">
+        <div class="page" id="page" style="z-index:0;position:relative;">
             <script type="text/javascript">
             function mapResize() {
                 var mapResize = document.getElementById('page');
@@ -27,7 +26,7 @@
             window.onload = function() {
                 mapResize();
 
-                // ºê¶ó¿ìÀú Å©±â°¡ º¯ÇÒ ½Ã µ¿ÀûÀ¸·Î »çÀÌÁî¸¦ Á¶ÀýÇØ¾ß ÇÏ´Â°æ¿ì
+                // ë¸Œë¼ìš°ì € í¬ê¸°ê°€ ë³€í•  ì‹œ ë™ì ìœ¼ë¡œ ì‚¬ì´ì¦ˆë¥¼ ì¡°ì ˆí•´ì•¼ í•˜ëŠ”ê²½ìš°
                 window.addEventListener('resize', mapResize);
             }                
             </script>
@@ -35,17 +34,17 @@
             <div id="searchBox">
             <table class="searchTable">
                 <tr>
-                    <td class="searchLocal"><span class="searchText">Áö¿ªº°</span></td>
+                    <td class="searchLocal"><span class="searchText">ì§€ì—­ë³„</span></td>
                     <td class="searchSel">
                     <div class="selectbox">
                       <dl class="dropdownSelect">
-                        <dt><a class="searchSelLink" href="#"><span>¼­¿ï½Ã</span></a></dt>
+                        <dt><a class="searchSelLink" href="#"><span>ì„œìš¸ì‹œ</span></a></dt>
                         <dd>
                           <ul class="dropdown2">
-                            <li><a href="#">½Å»óÇ°¼ø</a></li>
-                            <li><a href="#">ÀÎ±â»óÇ°¼ø</a></li>
-                            <li><a href="#">³·Àº°¡°Ý¼ø</a></li>
-                            <li><a href="#">³ôÀº°¡°Ý¼ø</a></li>
+                            <li><a href="#">ì‹ ìƒí’ˆìˆœ</a></li>
+                            <li><a href="#">ì¸ê¸°ìƒí’ˆìˆœ</a></li>
+                            <li><a href="#">ë‚®ì€ê°€ê²©ìˆœ</a></li>
+                            <li><a href="#">ë†’ì€ê°€ê²©ìˆœ</a></li>
                           </ul>
                         </dd>
                       </dl>
@@ -54,13 +53,13 @@
                     <td class="searchSel">
                     <div class="selectbox">
                       <dl class="dropdownSelect2">
-                        <dt><a class="searchSelLink" href="#"><span>¸¶Æ÷±¸</span></a></dt>
+                        <dt><a class="searchSelLink" href="#"><span>ë§ˆí¬êµ¬</span></a></dt>
                         <dd>
                           <ul class="dropdown2">
-                            <li><a href="#">½Å»óÇ°¼ø</a></li>
-                            <li><a href="#">ÀÎ±â»óÇ°¼ø</a></li>
-                            <li><a href="#">³·Àº°¡°Ý¼ø</a></li>
-                            <li><a href="#">³ôÀº°¡°Ý¼ø</a></li>
+                            <li><a href="#">ì‹ ìƒí’ˆìˆœ</a></li>
+                            <li><a href="#">ì¸ê¸°ìƒí’ˆìˆœ</a></li>
+                            <li><a href="#">ë‚®ì€ê°€ê²©ìˆœ</a></li>
+                            <li><a href="#">ë†’ì€ê°€ê²©ìˆœ</a></li>
                           </ul>
                         </dd>
                       </dl>
@@ -69,13 +68,13 @@
                     <td class="searchSel">
                     <div class="selectbox">
                       <dl class="dropdownSelect3">
-                        <dt><a class="searchSelLink" href="#"><span>½Å¼öµ¿</span></a></dt>
+                        <dt><a class="searchSelLink" href="#"><span>ì‹ ìˆ˜ë™</span></a></dt>
                         <dd>
                           <ul class="dropdown2">
-                            <li><a href="#">½Å»óÇ°¼ø</a></li>
-                            <li><a href="#">ÀÎ±â»óÇ°¼ø</a></li>
-                            <li><a href="#">³·Àº°¡°Ý¼ø</a></li>
-                            <li><a href="#">³ôÀº°¡°Ý¼ø</a></li>
+                            <li><a href="#">ì‹ ìƒí’ˆìˆœ</a></li>
+                            <li><a href="#">ì¸ê¸°ìƒí’ˆìˆœ</a></li>
+                            <li><a href="#">ë‚®ì€ê°€ê²©ìˆœ</a></li>
+                            <li><a href="#">ë†’ì€ê°€ê²©ìˆœ</a></li>
                           </ul>
                         </dd>
                       </dl>
@@ -84,13 +83,13 @@
                     <td class="searchSel">
                     <div class="selectbox">
                       <dl class="dropdownSelect4">
-                        <dt><a class="searchSelLink" href="#"><span>¼±ÅÃ</span></a></dt>
+                        <dt><a class="searchSelLink" href="#"><span>ì„ íƒ</span></a></dt>
                         <dd>
                           <ul class="dropdown2">
-                            <li><a href="#">½Å»óÇ°¼ø</a></li>
-                            <li><a href="#">ÀÎ±â»óÇ°¼ø</a></li>
-                            <li><a href="#">³·Àº°¡°Ý¼ø</a></li>
-                            <li><a href="#">³ôÀº°¡°Ý¼ø</a></li>
+                            <li><a href="#">ì‹ ìƒí’ˆìˆœ</a></li>
+                            <li><a href="#">ì¸ê¸°ìƒí’ˆìˆœ</a></li>
+                            <li><a href="#">ë‚®ì€ê°€ê²©ìˆœ</a></li>
+                            <li><a href="#">ë†’ì€ê°€ê²©ìˆœ</a></li>
                           </ul>
                         </dd>
                       </dl>
@@ -99,27 +98,27 @@
                     <td class="searchSel"></td>
                 </tr>    
                 <tr>
-                    <td class="searchMenu"><span class="searchText">¸Þ´ºº°</span></td>
+                    <td class="searchMenu"><span class="searchText">ë©”ë‰´ë³„</span></td>
                     <td class="searchSel">
                     <div class="selectbox">
                       <dl class="dropdownSelect5">
-                        <dt><a class="searchSelLink" href="#"><span>ÇÑ½Ä</span></a></dt>
+                        <dt><a class="searchSelLink" href="#"><span>í•œì‹</span></a></dt>
                         <dd>
                           <ul class="dropdown2">
-                            <li><a href="#">½Å»óÇ°¼ø</a></li>
-                            <li><a href="#">ÀÎ±â»óÇ°¼ø</a></li>
-                            <li><a href="#">³·Àº°¡°Ý¼ø</a></li>
-                            <li><a href="#">³ôÀº°¡°Ý¼ø</a></li>
+                            <li><a href="#">ì‹ ìƒí’ˆìˆœ</a></li>
+                            <li><a href="#">ì¸ê¸°ìƒí’ˆìˆœ</a></li>
+                            <li><a href="#">ë‚®ì€ê°€ê²©ìˆœ</a></li>
+                            <li><a href="#">ë†’ì€ê°€ê²©ìˆœ</a></li>
                           </ul>
                         </dd>
                       </dl>
                     </div>
                     </td>
                     <td class="localText">
-                        <span class="searchRe">[¼­¿ï½Ã ¸¶Æ÷±¸ ½Å¼öµ¿]</span>ÀÇ 
+                        <span class="searchRe">[ì„œìš¸ì‹œ ë§ˆí¬êµ¬ ì‹ ìˆ˜ë™]</span>ì˜ 
                     </td>
                     <td class="menuText">
-                        <span class="searchRe">[ÇÑ½Ä]</span><span class="searchText">°Ë  »ö</span>
+                        <span class="searchRe">[í•œì‹]</span><span class="searchText">ê²€  ìƒ‰</span>
                     </td>
                     <td class="tdInput"><input type="text" class="form-control" id="searchName"></td>
                     <td class="tdBtn"><button type="button" class="btn btn-default">Search</button></td>
@@ -139,25 +138,25 @@
 
                 var map = new daum.maps.Map(container, options);
                 
-                // ÀÏ¹Ý Áöµµ¿Í ½ºÄ«ÀÌºä·Î Áöµµ Å¸ÀÔÀ» ÀüÈ¯ÇÒ ¼ö ÀÖ´Â ÁöµµÅ¸ÀÔ ÄÁÆ®·ÑÀ» »ý¼ºÇÕ´Ï´Ù
+                // ì¼ë°˜ ì§€ë„ì™€ ìŠ¤ì¹´ì´ë·°ë¡œ ì§€ë„ íƒ€ìž…ì„ ì „í™˜í•  ìˆ˜ ìžˆëŠ” ì§€ë„íƒ€ìž… ì»¨íŠ¸ë¡¤ì„ ìƒì„±í•©ë‹ˆë‹¤
                 var mapTypeControl = new daum.maps.MapTypeControl();
 
-                // Áöµµ¿¡ ÄÁÆ®·ÑÀ» Ãß°¡ÇØ¾ß ÁöµµÀ§¿¡ Ç¥½ÃµË´Ï´Ù
-                // daum.maps.ControlPositionÀº ÄÁÆ®·ÑÀÌ Ç¥½ÃµÉ À§Ä¡¸¦ Á¤ÀÇÇÏ´Âµ¥ TOPRIGHT´Â ¿À¸¥ÂÊ À§¸¦ ÀÇ¹ÌÇÕ´Ï´Ù
+                // ì§€ë„ì— ì»¨íŠ¸ë¡¤ì„ ì¶”ê°€í•´ì•¼ ì§€ë„ìœ„ì— í‘œì‹œë©ë‹ˆë‹¤
+                // daum.maps.ControlPositionì€ ì»¨íŠ¸ë¡¤ì´ í‘œì‹œë  ìœ„ì¹˜ë¥¼ ì •ì˜í•˜ëŠ”ë° TOPRIGHTëŠ” ì˜¤ë¥¸ìª½ ìœ„ë¥¼ ì˜ë¯¸í•©ë‹ˆë‹¤
                 map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
 
-                // Áöµµ È®´ë Ãà¼Ò¸¦ Á¦¾îÇÒ ¼ö ÀÖ´Â  ÁÜ ÄÁÆ®·ÑÀ» »ý¼ºÇÕ´Ï´Ù
+                // ì§€ë„ í™•ëŒ€ ì¶•ì†Œë¥¼ ì œì–´í•  ìˆ˜ ìžˆëŠ”  ì¤Œ ì»¨íŠ¸ë¡¤ì„ ìƒì„±í•©ë‹ˆë‹¤
                 var zoomControl = new daum.maps.ZoomControl();
                 map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
                 
                 var positionTest = [37.552651,126.937765,37.553660,126.937316];
                 var selectedMarker = null;
                 var array = ['store0','store1'];
-               // ¸¶Ä¿ Å¬·¯½ºÅÍ·¯¸¦ »ý¼º 
+               // ë§ˆì»¤ í´ëŸ¬ìŠ¤í„°ëŸ¬ë¥¼ ìƒì„± 
                 var clusterer = new daum.maps.MarkerClusterer({
-                    map: map, // ¸¶Ä¿µéÀ» Å¬·¯½ºÅÍ·Î °ü¸®ÇÏ°í Ç¥½ÃÇÒ Áöµµ °´Ã¼ 
-                    averageCenter: true, // Å¬·¯½ºÅÍ¿¡ Æ÷ÇÔµÈ ¸¶Ä¿µéÀÇ Æò±Õ À§Ä¡¸¦ Å¬·¯½ºÅÍ ¸¶Ä¿ À§Ä¡·Î ¼³Á¤ 
-                    minLevel: 5, // Å¬·¯½ºÅÍ ÇÒ ÃÖ¼Ò Áöµµ ·¹º§ 
+                    map: map, // ë§ˆì»¤ë“¤ì„ í´ëŸ¬ìŠ¤í„°ë¡œ ê´€ë¦¬í•˜ê³  í‘œì‹œí•  ì§€ë„ ê°ì²´ 
+                    averageCenter: true, // í´ëŸ¬ìŠ¤í„°ì— í¬í•¨ëœ ë§ˆì»¤ë“¤ì˜ í‰ê·  ìœ„ì¹˜ë¥¼ í´ëŸ¬ìŠ¤í„° ë§ˆì»¤ ìœ„ì¹˜ë¡œ ì„¤ì • 
+                    minLevel: 5, // í´ëŸ¬ìŠ¤í„° í•  ìµœì†Œ ì§€ë„ ë ˆë²¨ 
                     styles: [{
                         width : '53px', height : '52px',
                         background: 'url("./imgs/clusterer.png") no-repeat',
@@ -168,13 +167,13 @@
                 });    
                 //-------------------------------------------------------------------------
                 for(var i=0; i<2; i++){
-                    var imageSrc = './imgs/markerIcon/foodIcon'+i+'.png', // ¸¶Ä¿ÀÌ¹ÌÁöÀÇ ÁÖ¼ÒÀÔ´Ï´Ù
-                    imageSize = new daum.maps.Size(55, 55), // ¸¶Ä¿ÀÌ¹ÌÁöÀÇ Å©±âÀÔ´Ï´Ù
-                    imageOption = {offset: new daum.maps.Point(27, 69)}; // ¸¶Ä¿ÀÌ¹ÌÁöÀÇ ¿É¼ÇÀÔ´Ï´Ù. ¸¶Ä¿ÀÇ ÁÂÇ¥¿Í ÀÏÄ¡½ÃÅ³ ÀÌ¹ÌÁö ¾È¿¡¼­ÀÇ ÁÂÇ¥¸¦ ¼³Á¤ÇÕ´Ï´Ù.
+                    var imageSrc = './imgs/markerIcon/foodIcon'+i+'.png', // ë§ˆì»¤ì´ë¯¸ì§€ì˜ ì£¼ì†Œìž…ë‹ˆë‹¤
+                    imageSize = new daum.maps.Size(55, 55), // ë§ˆì»¤ì´ë¯¸ì§€ì˜ í¬ê¸°ìž…ë‹ˆë‹¤
+                    imageOption = {offset: new daum.maps.Point(27, 69)}; // ë§ˆì»¤ì´ë¯¸ì§€ì˜ ì˜µì…˜ìž…ë‹ˆë‹¤. ë§ˆì»¤ì˜ ì¢Œí‘œì™€ ì¼ì¹˜ì‹œí‚¬ ì´ë¯¸ì§€ ì•ˆì—ì„œì˜ ì¢Œí‘œë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
                     
-                    // ¸¶Ä¿ÀÇ ÀÌ¹ÌÁöÁ¤º¸¸¦ °¡Áö°í ÀÖ´Â ¸¶Ä¿ÀÌ¹ÌÁö¸¦ »ý¼ºÇÕ´Ï´Ù
+                    // ë§ˆì»¤ì˜ ì´ë¯¸ì§€ì •ë³´ë¥¼ ê°€ì§€ê³  ìžˆëŠ” ë§ˆì»¤ì´ë¯¸ì§€ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
                     var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
-                        markerPosition = new daum.maps.LatLng(positionTest[i+i],positionTest[i+i+1]); // ¸¶Ä¿°¡ Ç¥½ÃµÉ À§Ä¡ÀÔ´Ï´Ù
+                        markerPosition = new daum.maps.LatLng(positionTest[i+i],positionTest[i+i+1]); // ë§ˆì»¤ê°€ í‘œì‹œë  ìœ„ì¹˜ìž…ë‹ˆë‹¤
                     addMarker(markerPosition, markerImage, i);
 
                 }
@@ -183,34 +182,34 @@
 //                    $('.btn-gradient').click(function(event){
 //                        event.preventDefault();
 //                    });
-                    // ¸¶Ä¿°¡ Áöµµ À§¿¡ Ç¥½ÃµÇµµ·Ï ¼³Á¤ÇÕ´Ï´Ù
+                    // ë§ˆì»¤ê°€ ì§€ë„ ìœ„ì— í‘œì‹œë˜ë„ë¡ ì„¤ì •í•©ë‹ˆë‹¤
                     var marker = new daum.maps.Marker({
                         position: markerPosition, 
                         title: array[i],
-                        image: markerImage // ¸¶Ä¿ÀÌ¹ÌÁö ¼³Á¤ 
+                        image: markerImage // ë§ˆì»¤ì´ë¯¸ì§€ ì„¤ì • 
                     });
                     var className = ''+array[i]+' wrap';
-                        // ¸¶Ä¿¸¦ Áß½ÉÀ¸·Î Ä¿½ºÅÒ ¿À¹ö·¹ÀÌ¸¦ Ç¥½ÃÇÏ±âÀ§ÇØ CSS¸¦ ÀÌ¿ëÇØ À§Ä¡¸¦ ¼³Á¤
-                        // Ä¿½ºÅÒ ¿À¹ö·¹ÀÌ¿¡ Ç¥½ÃÇÒ ÄÁÅÙÃ÷
+                        // ë§ˆì»¤ë¥¼ ì¤‘ì‹¬ìœ¼ë¡œ ì»¤ìŠ¤í…€ ì˜¤ë²„ë ˆì´ë¥¼ í‘œì‹œí•˜ê¸°ìœ„í•´ CSSë¥¼ ì´ìš©í•´ ìœ„ì¹˜ë¥¼ ì„¤ì •
+                        // ì»¤ìŠ¤í…€ ì˜¤ë²„ë ˆì´ì— í‘œì‹œí•  ì»¨í…ì¸ 
                     var content = document.createElement('div');
                     content.className = className;
                     content.innerHTML = '<div class="info">'+  
                                             '<div class="title">'+  
                                                 '<p>'+array[i]+'</p>'+  
-                                                '<div class="close" title="´Ý±â"></div>'+  
+                                                '<div class="close" title="ë‹«ê¸°"></div>'+  
                                             '</div>'+  
                                             '<div class="popupBody">'+
                                                 '<div class="img">'+
                                                     '<img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="100" height="100">'+ 
                                                '</div>'+  
                                                 '<div class="desc">'+  
-                                                    '<div class="address ellipsis">Á¦ÁÖÆ¯º°ÀÚÄ¡µµ Á¦ÁÖ½Ã Ã·Á¦ÁÖÆ¯º°ÀÚÄ¡µµ Á¦ÁÖ½Ã Ã·Á¦ÁÖÆ¯º°ÀÚÄ¡µµ Á¦ÁÖ½Ã Ã·</div>'+  
-                                                    '<div class="jibun ellipsis">(¿ì) 63309 (Áö¹ø) ¿µÆòµ¿ 2181</div>'+
+                                                    '<div class="address ellipsis">ì œì£¼íŠ¹ë³„ìžì¹˜ë„ ì œì£¼ì‹œ ì²¨ì œì£¼íŠ¹ë³„ìžì¹˜ë„ ì œì£¼ì‹œ ì²¨ì œì£¼íŠ¹ë³„ìžì¹˜ë„ ì œì£¼ì‹œ ì²¨</div>'+  
+                                                    '<div class="jibun ellipsis">(ìš°) 63309 (ì§€ë²ˆ) ì˜í‰ë™ 2181</div>'+
                                                     '<div class="phone ellipsis">010 - 2222 - 3333</div>'+  
                                                     '<div class="ellipsis"><br/></div>'+
                                                     '<div class="timeDiv">'+
                                                         '<div class="timeDiv1">'+
-                                                            '¿µ¾÷½Ã°£'+ 
+                                                            'ì˜ì—…ì‹œê°„'+ 
                                                         '</div>'+
                                                         '<div class="timeDiv2">'+
                                                             '10:00 ~ 22:00'+
@@ -218,15 +217,15 @@
                                                     '</div>'+
                                                     '<div class="dayDiv">'+
                                                         '<div class="dayDiv1">'+
-                                                            '¿µ¾÷ÀÏ'+
+                                                            'ì˜ì—…ì¼'+
                                                         '</div>'+
                                                         '<div class="dayDiv2">'+
-                                                            '¸ÅÁÖ 2,4¹øÂ° ÀÏ¿äÀÏ ÈÞ¹«'+
+                                                            'ë§¤ì£¼ 2,4ë²ˆì§¸ ì¼ìš”ì¼ íœ´ë¬´'+
                                                         '</div>'+
                                                     '</div>'+
                                                     '<div class="breakDiv">'+
                                                         '<div class="breakDiv1">'+
-                                                            'ÈÞ°Ô½Ã°£'+
+                                                            'íœ´ê²Œì‹œê°„'+
                                                         '</div>'+
                                                         '<div class="breakDiv2">'+
                                                             '15:00 ~ 17:00'+
@@ -234,38 +233,38 @@
                                                     '</div>'+
                                                     '<div class="restDiv">'+
                                                         '<div class="restDiv1">'+
-                                                            '´ëÇ¥¸Þ´º'+
+                                                            'ëŒ€í‘œë©”ë‰´'+
                                                         '</div>'+
                                                         '<div class="restDiv2">'+
                                                             '<div class="restDiv2_1">'+
-                                                                'ÂüÄ¡±è¹ä'+
+                                                                'ì°¸ì¹˜ê¹€ë°¥'+
                                                             '</div>'+
                                                             '<div class="restDiv2_2">'+
                                                             '</div>'+
                                                             '<div class="restDiv2_3">'+
-                                                                '13,000¿ø'+
+                                                                '13,000ì›'+
                                                             '</div>'+
                                                             '<div class="restDiv2_1">'+
-                                                                'Ä¡Áî±è¹ä'+
+                                                                'ì¹˜ì¦ˆê¹€ë°¥'+
                                                             '</div>'+
                                                             '<div class="restDiv2_2">'+
                                                             '</div>'+
                                                             '<div class="restDiv2_3">'+
-                                                                '20,000¿ø'+
+                                                                '20,000ì›'+
                                                             '</div>'+
                                                             '<div class="restDiv2_1">'+
-                                                                '½Å¶ó¸é'+
+                                                                'ì‹ ë¼ë©´'+
                                                             '</div>'+
                                                             '<div class="restDiv2_2">'+
                                                             '</div>'+
                                                             '<div class="restDiv2_3">'+
-                                                                '50,000¿ø'+
+                                                                '50,000ì›'+
                                                             '</div>'+
                                                         '</div>'+
                                                     '</div>'+
                                                     '<div class="gradeDiv">'+
                                                         '<div class="gradeDiv1">'+
-                                                            'ÀÌ¿ëÀÚ ÆòÁ¡'+
+                                                            'ì´ìš©ìž í‰ì '+
                                                         '</div>'+
                                                         '<div class="gradeDiv2">'+
                                                             '4.3 / 5.0'+
@@ -275,23 +274,23 @@
                                                         '</div>'+
                                                     '</div>'+
                                                     '<div class="btnDiv">'+
-                                                        '<a href="#" class="btn-gradient gray block">»ó¼¼º¸±â</a>'+
-                                                        '<a href="#" class="btn-gradient red block">¹Ù·Î¿¹¾à</a>'+
+                                                        '<a href="#" class="btn-gradient gray block">ìƒì„¸ë³´ê¸°</a>'+
+                                                        '<a href="#" class="btn-gradient red block">ë°”ë¡œì˜ˆì•½</a>'+
                                                     '</div>'+
                                                 '</div>'+  
                                             '</div>'+  
                                         '</div>';
 
-                // ¸¶Ä¿ À§¿¡ Ä¿½ºÅÒ¿À¹ö·¹ÀÌ¸¦ Ç¥½ÃÇÕ´Ï´Ù
+                // ë§ˆì»¤ ìœ„ì— ì»¤ìŠ¤í…€ì˜¤ë²„ë ˆì´ë¥¼ í‘œì‹œí•©ë‹ˆë‹¤
                 
-                // ¸¶Ä¿¸¦ Áß½ÉÀ¸·Î Ä¿½ºÅÒ ¿À¹ö·¹ÀÌ¸¦ Ç¥½ÃÇÏ±âÀ§ÇØ CSS¸¦ ÀÌ¿ëÇØ À§Ä¡¸¦ ¼³Á¤Çß½À´Ï´Ù
+                // ë§ˆì»¤ë¥¼ ì¤‘ì‹¬ìœ¼ë¡œ ì»¤ìŠ¤í…€ ì˜¤ë²„ë ˆì´ë¥¼ í‘œì‹œí•˜ê¸°ìœ„í•´ CSSë¥¼ ì´ìš©í•´ ìœ„ì¹˜ë¥¼ ì„¤ì •í–ˆìŠµë‹ˆë‹¤
                 var overlay = new daum.maps.CustomOverlay({
                     content: content,
                     map: map,
                     position: marker.getPosition()       
                 });
 
-                // ¸¶Ä¿¸¦ Å¬¸¯ÇßÀ» ¶§ Ä¿½ºÅÒ ¿À¹ö·¹ÀÌ¸¦ Ç¥½ÃÇÕ´Ï´Ù
+                // ë§ˆì»¤ë¥¼ í´ë¦­í–ˆì„ ë•Œ ì»¤ìŠ¤í…€ ì˜¤ë²„ë ˆì´ë¥¼ í‘œì‹œí•©ë‹ˆë‹¤
                 
                 
                 $('.wrap').css('display','none');
@@ -299,9 +298,9 @@
                     
                 daum.maps.event.addListener(marker, 'click', function() {
                     var mapProjection = map.getProjection(),
-                        // ÇØ´ç À§µµ °æµµ°ªÀ» X,Y°ªÀ¸·Î ¹ÝÈ¯ÇØÁÜ
+                        // í•´ë‹¹ ìœ„ë„ ê²½ë„ê°’ì„ X,Yê°’ìœ¼ë¡œ ë°˜í™˜í•´ì¤Œ
                         latlng = markerPosition,
-                        // Áöµµ ÁÂÇ¥¿¡ ÇØ´çÇÏ´Â À§Ä¡ ÁÂÇ¥
+                        // ì§€ë„ ì¢Œí‘œì— í•´ë‹¹í•˜ëŠ” ìœ„ì¹˜ ì¢Œí‘œ
                         mapPixel = mapProjection.containerPointFromCoords(latlng); 
                     
                     var center = map.getCenter();
@@ -309,20 +308,20 @@
                     var deltaX = mapPixel.x - mapCenter.x,
                         deltaY = mapPixel.y - mapCenter.y;
                     
-                    // case 1 : ¸¶Ä¿ ÃÖÃÊ Å¬¸¯
-                    // case 2 : ´Ù¸¥ ¸¶Ä¿°¡ È°¼ºÈ­ µÇ¾îÀÖ´Â »óÈ²¿¡¼­ ´Ù¸¥ ¸¶Ä¿ Å¬¸¯
-                    // case 3 : ´Ù¸¥ ¸¶Ä¿¸¦ none ÇÑ ÈÄ¿¡ ¶Ç ´Ù¸¥ ¸¶Ä¿ Å¬¸¯
-                    // state ÃÊ±â°ªÀº null
+                    // case 1 : ë§ˆì»¤ ìµœì´ˆ í´ë¦­
+                    // case 2 : ë‹¤ë¥¸ ë§ˆì»¤ê°€ í™œì„±í™” ë˜ì–´ìžˆëŠ” ìƒí™©ì—ì„œ ë‹¤ë¥¸ ë§ˆì»¤ í´ë¦­
+                    // case 3 : ë‹¤ë¥¸ ë§ˆì»¤ë¥¼ none í•œ í›„ì— ë˜ ë‹¤ë¥¸ ë§ˆì»¤ í´ë¦­
+                    // state ì´ˆê¸°ê°’ì€ null
                     
-                    // ¸¶Ä¿¸¦ Å¬¸¯ ½Ã¿¡ ¸ðµç ¿À¹ö·¹ÀÌ¸¦ none ÇÑ ÈÄ ¸¶Ä¿ÀÇ ¿À¹ö·¹ÀÌ¸¸ inherit
-                    // -> ¸¶Ä¿¿¡¼­ ½ºÅä¾îÀÇ ÀÌ¸§À» °¡Á®¿Ã ¹æ¹ý »ý°¢ÇØºÁ¾ß ÇÔ
-                    // -> ¸¶Ä¿¿¡ TitleÀ» set,get ÇÏ´Â ¹æ¹ýÀ¸·Î ÇØ°á
+                    // ë§ˆì»¤ë¥¼ í´ë¦­ ì‹œì— ëª¨ë“  ì˜¤ë²„ë ˆì´ë¥¼ none í•œ í›„ ë§ˆì»¤ì˜ ì˜¤ë²„ë ˆì´ë§Œ inherit
+                    // -> ë§ˆì»¤ì—ì„œ ìŠ¤í† ì–´ì˜ ì´ë¦„ì„ ê°€ì ¸ì˜¬ ë°©ë²• ìƒê°í•´ë´ì•¼ í•¨
+                    // -> ë§ˆì»¤ì— Titleì„ set,get í•˜ëŠ” ë°©ë²•ìœ¼ë¡œ í•´ê²°
                     
-                    // ÇØ°á
-                    // case 1 : state°¡ nullÀÎ »óÅÂ¿¡¼­ ¿À¹ö·¹ÀÌ¸¦ »ý¼ºÇÏ°í display inheritÀ¸·Î º¯°æ
-                    // case 2 : state°¡ Ã³À½¿¡ Å¬¸¯Çß´ø marker°¡ ¾Æ´Ï¸é ¸ðµç ¿À¹ö·¹ÀÌ display none ÈÄ¿¡
-                    //          markerTitleÀ¸·Î ¼±ÅÃµÈ markerÀ» °ñ¶ó³»¾î ÇØ´ç ¿À¹ö·¹ÀÌÀÇ display inheritÇÔ
-                    // case 3 : state°¡ ÀÌÀü¿¡ ¼±ÅÃÇß´ø marker¿Í °°´Ù¸é ¸ðµç ¿À¹ö·¹ÀÌÀÇ display none
+                    // í•´ê²°
+                    // case 1 : stateê°€ nullì¸ ìƒíƒœì—ì„œ ì˜¤ë²„ë ˆì´ë¥¼ ìƒì„±í•˜ê³  display inheritìœ¼ë¡œ ë³€ê²½
+                    // case 2 : stateê°€ ì²˜ìŒì— í´ë¦­í–ˆë˜ markerê°€ ì•„ë‹ˆë©´ ëª¨ë“  ì˜¤ë²„ë ˆì´ display none í›„ì—
+                    //          markerTitleìœ¼ë¡œ ì„ íƒëœ markerì„ ê³¨ë¼ë‚´ì–´ í•´ë‹¹ ì˜¤ë²„ë ˆì´ì˜ display inherití•¨
+                    // case 3 : stateê°€ ì´ì „ì— ì„ íƒí–ˆë˜ markerì™€ ê°™ë‹¤ë©´ ëª¨ë“  ì˜¤ë²„ë ˆì´ì˜ display none
                     
                     var markerTitle = marker.getTitle();
                     
@@ -352,8 +351,8 @@
                     
                 });
           
-                // close ¹öÆ°À¸·Î Á¾·á ÇßÀ»½Ã case 3À¸·Î º¯°æµÇ´Â ¹®Á¦
-                // ¹öÆ° Å¬¸¯½Ã¿¡ selectedMarker¸¦ null Àâ¾ÆÁÖ¸é µÉµí --> ¿Ï·á
+                // close ë²„íŠ¼ìœ¼ë¡œ ì¢…ë£Œ í–ˆì„ì‹œ case 3ìœ¼ë¡œ ë³€ê²½ë˜ëŠ” ë¬¸ì œ
+                // ë²„íŠ¼ í´ë¦­ì‹œì— selectedMarkerë¥¼ null ìž¡ì•„ì£¼ë©´ ë ë“¯ --> ì™„ë£Œ
                 $('.close').click(function(){
                     $('.wrap').css('display','none'); 
                     selectedMarker = null;
@@ -362,7 +361,7 @@
                     
                     
                 clusterer.addMarker(marker);    
-                // ¸¶Ä¿°¡ Áöµµ À§¿¡ Ç¥½ÃµÇµµ·Ï ¼³Á¤ÇÕ´Ï´Ù
+                // ë§ˆì»¤ê°€ ì§€ë„ ìœ„ì— í‘œì‹œë˜ë„ë¡ ì„¤ì •í•©ë‹ˆë‹¤
                 marker.setMap(map);  
                 overlay.setMap(null);  
             } // for end
@@ -371,12 +370,12 @@
             
 
             </script>
-                <div>
+          <!--   <div>
                     
-                </div>
+                </div> -->
             
             </div>
         
-        <jsp:include page="./layout/footer.jsp"></jsp:include>
+        <%-- <jsp:include page="./layout/footer.jsp"></jsp:include>  --%>
     </body>
 </html>
