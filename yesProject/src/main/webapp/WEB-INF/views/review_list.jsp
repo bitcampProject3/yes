@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!Doctype html>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -21,7 +23,10 @@
                 font-family: 'Do Hyeon', sans-serif;
                 font-size: 30px;
             }
-            @media (min-width: 1095px) {
+            @media (min-width: 1095px) { /*ì‚¬ì´ì¦ˆ í´ ë•Œ*/
+                
+                
+                
                 .container-fluid{
                     background-color: #e04f5f; 
                     height: 120px;
@@ -57,8 +62,24 @@
                 .dropdown-toggle:hover{
                     color: black;
                 }
+                
+                
+                #menu a{
+                    font-family: 'Nanum Gothic', sans-serif;
+                }  
+                
+                #image {
+                    height: 100px;
+                    width: 150px;
+                }
+
+                /*.drop_back{
+                    background-color: #e04f5f; 
+                    height: 120px;
+                }*/
             }
-            @media (max-width: 1110px) {
+            @media (max-width: 1110px) { /*ì‚¬ì´ì¦ˆ ì‘ì„ ë•Œ*/
+                
                 li > a{
                     font-size: 20px;
                 }
@@ -120,7 +141,16 @@
                     display: block;
                     clear: both;
                 }
-                /*Ãà¼ÒÈ­½Ã ¸Ş´º ¼öÁ¤*/
+                
+                #menu a{
+                    font-family: 'Nanum Gothic', sans-serif;
+                }  
+                
+                #image {
+                    height: 100px;
+                    width: 150px;
+                }
+                /*ì¶•ì†Œí™”ì‹œ ë©”ë‰´ ìˆ˜ì •*/
 /*
                 .navbar-collapse{
                     width: 200px;
@@ -132,7 +162,6 @@
 */
             }
         </style>
-        
     </head>
     <body>
         <div>
@@ -146,49 +175,150 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="./imgs/logo.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="main.html"><img src="imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li><a href="#" class="menuBtn">¿¹¾à<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">»ç¿ëÀÚ ¸®ºä</a></li>
+                    <li><a href="#" class="menuBtn">ì˜ˆì•½<span class="sr-only"></span></a></li>
+                    <li><a href="review_list.html" class="menuBtn">ì‚¬ìš©ì ë¦¬ë·°</a></li>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">°í°´¼¾ÅÍ<span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ê³ ê°ì„¼í„°<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">°øÁö»çÇ×</a></li>
+                        <li><a href="#">ê³µì§€ì‚¬í•­</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">°í°´ »ó´ã</a></li>
-                        <li><a href="#">»ç¾÷ÀÚ »ó´ã</a></li>
+                        <li><a href="#">ê³ ê° ìƒë‹´</a></li>
+                        <li><a href="#">ì‚¬ì—…ì ìƒë‹´</a></li>
                       </ul>
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.bit">·Î±×ÀÎ</a></li>
-                    <li><a href="join.bit">È¸¿ø°¡ÀÔ</a></li>
+                    <li><a href="#">ë¡œê·¸ì¸</a></li>
+                    <li><a href="#">íšŒì›ê°€ì…</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
             </nav>
-            
+            <div style="">
+            </div>
         </div>
-        
-          <div class="jumbotron" style="text-align: center; width: 70%; height: 70%; margin: 0px auto; background-color: RGB(255,216,216)">
-  <h2 >È¸¿ø°¡ÀÔ ¾à°ü</h2>
-  <br/>
-  <textarea cols="100%" rows="10px" readonly="readonly" style="overflow: scroll"></textarea>
-<form>
-        
-  
-  <input type="radio" name="assent" value="ok" /> µ¿ÀÇ
-  <input type="radio" name="assent" value="no" /> µ¿ÀÇÇÏÁö¾ÊÀ½
+        <div class="drop_back"  id="menu">ì§€ì—­ë³„ 
+<div class="btn-group" id="menu">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" >
+    ê´‘ì—­ì‹œ / ë„
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+</div>
+<div class="btn-group">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    êµ¬ / ì‹œ
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+</div>
+<div class="btn-group">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    ë™ / êµ¬
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+</div>
+            <div class="btn-group">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    ë™
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+</div>
+<br/> ë©”ë‰´ë³„
+ <div class="btn-group">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    ë©”ë‰´
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+</div> <br>ê²€ìƒ‰
+<form class="form-inline" role="form">
+<div class="form-group"> <label class="sr-only"       for="exampleInputEmail2">í‚¤ì›Œë“œê²€ìƒ‰
+</label> <input type="email" class="form-control" id="exampleInputEmail2" placeholder="í‚¤ì›Œë“œê²€ìƒ‰"></div>
+<button type="submit" class="btn btn-default">ê²€ìƒ‰</button>  
 </form>
-    <div style="margin-top: 30px; ">
+</div>
+<br/><br/><br/>
+<table class="table table-hover" id="table">
+
+<%--     		<c:forEach items="${alist }" var="bean">
+    			<tr>
+    				<td>${bean.branchID }</td>
+    				<td>${bean.clientID }</td>
+    				<td>${bean.index }</td>
+    				<td>${bean.title }</td>
+    			</tr> 
+    		</c:forEach> --%>
+<thead>
+	<tr>
+		<th>ê¸€ë²ˆí˜¸</th>
+		<th>ëŒ€í‘œì´ë¯¸ì§€</th>
+		<th>ì œëª©</th>
+		<th>ì‘ì„±ì¼</th>
+	</tr>
+</thead>    		
+<tbody>    		
+<c:forEach items="${alist }" var="bean">
+  <tr>
+<%--       <td><a href="../review_detail?index=${bean.index }"><img src="imgs/food1.jpg" id="image"/> ${bean.title}  </a></td> --%>
+	  <td>${bean.idx }</td>
+      <td><a href="review_list/${bean.idx }"><img src="imgs/food1.jpg" id="image"/></a></td>
+      <td><a href="review_list/${bean.idx }"> ${bean.title}  </a></td>
+      <td>${bean.calendar }</td>
+
+  </tr>
+</c:forEach>
+</tbody>
+</table>
+
+<br/>
+    <a class="btn btn-default" href="./review_write" role="button">ê¸€ì“°ê¸°</a>
+<br/>
+<div>
+  <ul class="pagination">
+    <li><a href="#">Prev</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">Next</a></li>
+  </ul>
+</div>
         
-    <a href="customerJoin.bit"  class="btn btn-primary"role="button">°í°´</a>
-    <a href="branchJoin.bit" class="btn btn-primary" role="button">»ç¾÷ÀÚ</a>
-    </div>    
-  </div>
+<!--<div class="container-fluid" > <div class="row"> <div class="col-md-3">.col-md-3</div> <div class="col-md-3">.col-md-3</div> <div class="col-md-3">.col-md-3</div> <div class="col-md-3">.col-md-3</div> </div></div>-->
     </body>
 </html>
