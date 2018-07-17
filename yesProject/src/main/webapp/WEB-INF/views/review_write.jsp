@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -120,20 +120,34 @@
                     display: block;
                     clear: both;
                 }
-                /*Ãà¼ÒÈ­½Ã ¸Ş´º ¼öÁ¤*/
-/*
-                .navbar-collapse{
-                    width: 200px;
-                    padding-right: 0px;
-                }
-                .navbar-nav{
-                    background-color: black;    
-                }
-*/
             }
         </style>
-        
     </head>
+    
+    <script type="text/javascript">
+
+$(document).ready(function(){
+
+	$("#fileInput").on('change', function(){  // ê°’ì´ ë³€ê²½ë˜ë©´
+
+		if(window.FileReader){  // modern browser
+
+			var filename = $(this)[0].files[0].name;
+
+		} else {  // old IE
+
+			var filename = $(this).val().split('/').pop().split('\\').pop();  // íŒŒì¼ëª…ë§Œ ì¶”ì¶œ
+
+		}
+		// ì¶”ì¶œí•œ íŒŒì¼ëª… ì‚½ì…
+
+		$("#userfile").val(filename);
+
+	});
+
+});
+
+</script>
     <body>
         <div>
             <nav class="navbar navbar-default">
@@ -146,49 +160,69 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="./imgs/logo.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="main.html"><img src="imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li><a href="#" class="menuBtn">¿¹¾à<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">»ç¿ëÀÚ ¸®ºä</a></li>
+                    <li><a href="#" class="menuBtn">ì˜ˆì•½<span class="sr-only"></span></a></li>
+                    <li><a href="review_list.html" class="menuBtn">ì‚¬ìš©ì ë¦¬ë·°</a></li>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">°í°´¼¾ÅÍ<span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ê³ ê°ì„¼í„°<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">°øÁö»çÇ×</a></li>
+                        <li><a href="#">ê³µì§€ì‚¬í•­</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">°í°´ »ó´ã</a></li>
-                        <li><a href="#">»ç¾÷ÀÚ »ó´ã</a></li>
+                        <li><a href="#">ê³ ê° ìƒë‹´</a></li>
+                        <li><a href="#">ì‚¬ì—…ì ìƒë‹´</a></li>
                       </ul>
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.bit">·Î±×ÀÎ</a></li>
-                    <li><a href="join.bit">È¸¿ø°¡ÀÔ</a></li>
+                    <li><a href="#">ë¡œê·¸ì¸</a></li>
+                    <li><a href="#">íšŒì›ê°€ì…</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
             </nav>
-            
+            <div style="">
+            </div>
         </div>
-        
-          <div class="jumbotron" style="text-align: center; width: 70%; height: 70%; margin: 0px auto; background-color: RGB(255,216,216)">
-  <h2 >È¸¿ø°¡ÀÔ ¾à°ü</h2>
-  <br/>
-  <textarea cols="100%" rows="10px" readonly="readonly" style="overflow: scroll"></textarea>
-<form>
-        
-  
-  <input type="radio" name="assent" value="ok" /> µ¿ÀÇ
-  <input type="radio" name="assent" value="no" /> µ¿ÀÇÇÏÁö¾ÊÀ½
-</form>
-    <div style="margin-top: 30px; ">
-        
-    <a href="customerJoin.bit"  class="btn btn-primary"role="button">°í°´</a>
-    <a href="branchJoin.bit" class="btn btn-primary" role="button">»ç¾÷ÀÚ</a>
-    </div>    
-  </div>
+        <form method="POST">
+        <table class="table">
+            <tr>
+                <th>ì œëª©</th>
+                <td><input type="text" id="title" name="title"/></td>
+            </tr>
+            <tr>
+               <th>í‰ì </th>            
+                <td><input type="text" id="rating" name="rating"/> / 5.0</td>
+           </tr>
+           <tr>
+               <th>ë‚´ìš©</th>
+               <td>
+                   <textarea class="form-control col-sm-5" rows="15" id="content" name="content"></textarea>
+               </td>
+           </tr>
+            </table>
+            <div class="form-group">
+
+	<label for="InputSubject1">íŒŒì¼ì²¨ë¶€</label>
+	
+	<input id="fileInput" filestyle="" type="file" data-class-button="btn btn-default" data-class-input="form-control" data-button-text="" data-icon-name="fa fa-upload" class="form-control" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);">
+	<div class="bootstrap-filestyle input-group">
+	<input type="text" id="userfile" class="form-control" name="userfile" disabled="">
+	<span class="group-span-filestyle input-group-btn" tabindex="0">
+	<label for="fileInput" class="btn btn-default ">
+	<span class="glyphicon fa fa-upload"></span>
+	</label>
+	</span>
+	</div>
+	</div>
+		<input type="hidden" id="branchID" name="branchID" value="branch1"/>
+		<input type="hidden" id="clientID" name="clientID" value="client3"/>
+        <button type="submit" class="btn btn-default">ì™„ë£Œ</button>
+        <a class="btn btn-default" href="../review_list" role="button">ì·¨ì†Œ</a>
+        </form>
     </body>
 </html>

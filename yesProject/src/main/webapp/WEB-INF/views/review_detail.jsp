@@ -1,15 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
         <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/selectDesign.css">
+        <link rel="stylesheet" href="./css/mapStyle.css">
+        <link rel="stylesheet" href="./css/mainStyle.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <style>
+<style>
             *{
                 font-family: 'Nanum Gothic', sans-serif;
                 
@@ -29,7 +32,7 @@
                 .navbar-collapse{
                     padding-top: 40px; 
                     padding-left: 360px; 
-                    font-size: 20px;
+                    font-size: 2s0px;
                 }
                 li > a{
                     color: white;
@@ -56,6 +59,18 @@
                 }
                 .dropdown-toggle:hover{
                     color: black;
+                }
+                
+                /*ì¶”ê°€í•œ ì½”ë“œ*/
+                
+                #frame {
+                    width:800px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                #content{
+                    height:300px;
+                    width: 500px;
                 }
             }
             @media (max-width: 1110px) {
@@ -120,7 +135,12 @@
                     display: block;
                     clear: both;
                 }
-                /*Ãà¼ÒÈ­½Ã ¸Ş´º ¼öÁ¤*/
+                
+                
+                
+                /* ì¶”ê°€í•œ ì½”ë“œ */
+               
+                /*ì¶•ì†Œí™”ì‹œ ë©”ë‰´ ìˆ˜ì •*/
 /*
                 .navbar-collapse{
                     width: 200px;
@@ -146,49 +166,112 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="./imgs/logo.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="main.html"><img src="imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li><a href="#" class="menuBtn">¿¹¾à<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">»ç¿ëÀÚ ¸®ºä</a></li>
+                    <li><a href="#" class="menuBtn">ì˜ˆì•½<span class="sr-only"></span></a></li>
+                    <li><a href="review.html" class="menuBtn">ì‚¬ìš©ì ë¦¬ë·°</a></li>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">°í°´¼¾ÅÍ<span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ê³ ê°ì„¼í„°<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">°øÁö»çÇ×</a></li>
+                        <li><a href="#">ê³µì§€ì‚¬í•­</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">°í°´ »ó´ã</a></li>
-                        <li><a href="#">»ç¾÷ÀÚ »ó´ã</a></li>
+                        <li><a href="#">ê³ ê° ìƒë‹´</a></li>
+                        <li><a href="#">ì‚¬ì—…ì ìƒë‹´</a></li>
                       </ul>
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.bit">·Î±×ÀÎ</a></li>
-                    <li><a href="join.bit">È¸¿ø°¡ÀÔ</a></li>
+                    <li><a href="#">ë¡œê·¸ì¸</a></li>
+                    <li><a href="#">íšŒì›ê°€ì…</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
             </nav>
-            
+            <div style="">
+            </div>
         </div>
+        <form method="POST">
+        <a class="btn btn-default" href="../review_list" role="button">ë’¤ë¡œ</a>
+        <button type="submit" class="btn btn-default">ì‚­ì œ</button>
+        <a class="btn btn-default" href="../review_edit/${bean.idx }" role="button">ìˆ˜ì •</a>
+        </form>
+        <table class="table" id="frame">
+            <tr>
+                <th>ê¸€ë²ˆí˜¸</th>
+                <td>${bean.idx } </td>
+            </tr>
+            <tr>
+                <th>ì œëª©</th>
+                <td>${bean.title }</td>
+            </tr>
+            <tr>
+               <th>í‰ì </th>
+               <td>${bean.rating}</td>            
+           </tr>
+           <tr>
+               <th>ë‚´ìš©</th>
+               <td >
+                  <div class="panel panel-default" id="content">
+                      <div class="panel-body" id="content"> ${bean.content }</div>
+                  </div>
+               </td>
+           </tr>
+            </table>
         
-          <div class="jumbotron" style="text-align: center; width: 70%; height: 70%; margin: 0px auto; background-color: RGB(255,216,216)">
-  <h2 >È¸¿ø°¡ÀÔ ¾à°ü</h2>
-  <br/>
-  <textarea cols="100%" rows="10px" readonly="readonly" style="overflow: scroll"></textarea>
-<form>
-        
-  
-  <input type="radio" name="assent" value="ok" /> µ¿ÀÇ
-  <input type="radio" name="assent" value="no" /> µ¿ÀÇÇÏÁö¾ÊÀ½
-</form>
-    <div style="margin-top: 30px; ">
-        
-    <a href="customerJoin.bit"  class="btn btn-primary"role="button">°í°´</a>
-    <a href="branchJoin.bit" class="btn btn-primary" role="button">»ç¾÷ÀÚ</a>
-    </div>    
-  </div>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" id="frame"> 
+	
+	<!--í˜ì´ì§€-->
+	<ol class="carousel-indicators" >
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+	</ol>
+	<!--í˜ì´ì§€-->
+
+	<div class="carousel-inner" id="frame">
+		<!--ìŠ¬ë¼ì´ë“œ1-->
+		<div class="item active"> 
+			<img src="http://www.blueb.co.kr/SRC2/_image/w01.jpg" style="width:100%" alt="First slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 1</h1>
+					<p>í…ìŠ¤íŠ¸ 1</p>
+				</div>
+			</div>
+		</div>
+		<!--ìŠ¬ë¼ì´ë“œ1-->
+
+		<!--ìŠ¬ë¼ì´ë“œ2-->
+		<div class="item"> 
+			<img src="http://www.blueb.co.kr/SRC2/_image/w02.jpg" style="width:100%" data-src="" alt="Second slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 2</h1>
+					<p>í…ìŠ¤íŠ¸ 2</p>
+				</div>
+			</div>
+		</div>
+		<!--ìŠ¬ë¼ì´ë“œ2-->
+		
+		<!--ìŠ¬ë¼ì´ë“œ3-->
+		<div class="item"> 
+			<img src="http://www.blueb.co.kr/SRC2/_image/w03.jpg" style="width:100%" data-src="" alt="Third slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 3</h1>
+					<p>í…ìŠ¤íŠ¸ 3</p>
+				</div>
+			</div>
+		</div>
+		<!--ìŠ¬ë¼ì´ë“œ3-->
+	</div>
+	<!--ì´ì „, ë‹¤ìŒ ë²„íŠ¼-->
+	<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
+	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
+</div>
     </body>
 </html>
