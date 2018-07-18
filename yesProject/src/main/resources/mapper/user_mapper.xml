@@ -6,8 +6,8 @@
   <mapper namespace="com.bit.yes.model.UserDao">
   
 	  <select id="insertOne" parameterType="com.bit.yes.model.entity.UserVo">
-	 	insert into user_info(id,password,name,nickname,email,phoneNum,pwQuestion,birthDate,registNum) values(#{id},#{pw},#{name},#{nickName},#{email},
-	  	#{phoneNum},#{pwQuestion},#{birthDate},#{branchNum}) 
+	 	insert into user_info(id,password,name,nickname,email,phoneNum,pwQuestion,birthDate,registNum) values(#{id},#{password},#{name},#{nickName},#{email},
+	  	#{phoneNum},#{pwQuestion},#{birthDate},#{registNum})
 	  </select>
 	  
 	  

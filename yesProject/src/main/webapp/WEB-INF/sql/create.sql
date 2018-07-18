@@ -15,6 +15,9 @@ create table user_info(
 
 );
 
+select * user_info;
+
+
 
 
 create table branch_info(

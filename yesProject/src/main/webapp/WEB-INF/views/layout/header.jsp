@@ -10,6 +10,9 @@
 <html>
 <head>
 	<style>
+    #slide *{
+        font-family: 'Jua', sans-serif;
+    }
 
 	#slide h1{
 		margin:80px 0px;
@@ -38,6 +41,9 @@
     <script>
         $(document).ready(function(){
             
+            $('#slide').animate(
+                {right:-300},'slow'
+                );
         	$('#mypage').click(function(){
                 $('#slide').css({"display":"inline-block"});
                 $('#slide').animate(

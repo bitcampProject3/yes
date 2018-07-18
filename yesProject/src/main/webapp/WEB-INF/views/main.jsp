@@ -16,7 +16,7 @@
 		
     </head>
     <body>
-       <jsp:include page="./layout/header.jsp"></jsp:include>
+       <jsp:include page="./layout/header.jsp?ver=1"></jsp:include>
          
         <div class="page" id="page" style="z-index:0;position:relative;">
             <script type="text/javascript">
