@@ -51,6 +51,11 @@ public class MyPageController {
 	
 	}
 	
+	public String reservation() {
+		return "";
+	}
+	
+	
 	
 	
 }
