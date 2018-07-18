@@ -8,14 +8,14 @@ public interface UserDao {
 
 	
 	
-	public void insertOne(UserVo bean) throws SQLException; //È¸¿ø°¡ÀÔ
-	//·Î±×ÀÎ
+	public void insertOne(UserVo bean) throws SQLException; //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//ï¿½Î±ï¿½ï¿½ï¿½
 	public UserVo loginCheck(String id,String password) throws SQLException;
 	public UserVo login(String id) throws SQLException;
-	//¾ÆÀÌµð ºñ¹Ð¹øÈ£ Ã£±â
+	//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½
 	public String findId(String name,String email,String birth) throws SQLException;
 	public String findPw(String id,String name,String birth,String email,String answer) throws SQLException;
-	public void updatePw(String pw,String id) throws SQLException; //ºñ¹Ð¹øÈ£ ¼öÁ¤
-	//³»Á¤º¸ 
+	public void updatePw(String pw,String id) throws SQLException; //ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	public int updateInfo(UserVo bean) throws SQLException;
 }
