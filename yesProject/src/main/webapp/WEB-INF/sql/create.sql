@@ -2,16 +2,17 @@
 -- USE mydb;
 
 
+/*사업자 넘버 추가*/
+
 create table user_info(
 	id varchar(30) primary key,
 	password varchar(30) not null,
-	name varchar(30) not null,
 	nickname varchar(30) not null,
 	email varchar(30) not null,
 	phoneNum varchar(30) not null,
 	pwQuestion varchar(100) not null,
 	birthDate date not null,
-	registNum varchar(30)
+	registNum varchar(30)/*사업자 등록번호*/
 
 );
 
@@ -116,6 +117,6 @@ create table client_Counsel(
 	comment varchar(20) not null
 );
 
-drop table user_info;
-select * from user_info where id='guddlsel1003' and password='1234';
-select * from user_info;
+
+
+

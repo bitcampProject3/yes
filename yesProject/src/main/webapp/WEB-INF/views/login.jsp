@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -71,20 +70,6 @@
                 
             }
         </style>
-        <script>
-        
-        $(function(){
-        
-        	if(${result}!=null){
-        		
-        		alert('${result}');
-        	}
-        	if(${errMsg}!=null){
-        		alert('${errMsg}');
-        	}
-        });
-        
-        </script>
     </head>
     <body>
     
@@ -93,40 +78,37 @@
     </div>
    
    
-    <form id="loginform" action="check" method="post" style="width: 70%; margin: 0px auto; padding-top:50px;padding-left:270px;">
+    <form style="width: 70%; margin: 0px auto; padding-top:50px;padding-left:270px;">
       <div class="form-group">
-        <label for="id">ì•„ì´ë””</label>
+        <label for="id">¾ÆÀÌµğ</label>
         <input type="text" class="form-control" id="id" name="id" >
       </div>
       <div class="form-group">
-        <label for="pw">ë¹„ë°€ë²ˆí˜¸</label>
-        <input type="password" class="form-control" id="pw" name="password" >
+        <label for="pw">ºñ¹Ğ¹øÈ£</label>
+        <input type="password" class="form-control" id="pw" name="pw" >
       </div>
        
              
                                                                                                                        
-      <button type="submit" class="btn btn-primary" style="padding-left:10px; width:62%; font-size: 20px; margin-top: 30px; ">ë¡œê·¸ì¸</button>
+      <button type="submit" class="btn btn-primary" style="padding-left:10px; width:62%; font-size: 20px; margin-top: 30px; ">·Î±×ÀÎ</button>
       <br/>
          <div style="width:90%; margin-top:20px; " >
             
             <div style="display: inline-block; position:relative; bottom: 20px; ">
                 
-                <!-- ë„¤ì´ë²„ì•„ì´ë””ë¡œë¡œê·¸ì¸ ë²„íŠ¼ ë…¸ì¶œ ì˜ì—­ -->
+                <!-- ³×ÀÌ¹ö¾ÆÀÌµğ·Î·Î±×ÀÎ ¹öÆ° ³ëÃâ ¿µ¿ª -->
                 <div id="naver_id_login" ></div>
 
-                  <!-- //ë„¤ì´ë²„ì•„ì´ë””ë¡œë¡œê·¸ì¸ ë²„íŠ¼ ë…¸ì¶œ ì˜ì—­ -->
+                  <!-- //³×ÀÌ¹ö¾ÆÀÌµğ·Î·Î±×ÀÎ ¹öÆ° ³ëÃâ ¿µ¿ª -->
                   <script type="text/javascript">
-                  
-                  
-                    var naver_id_login = new naver_id_login("urGoHBK2Hl9eBQpjZEMD", "http://localhost:8090/yes/callback");
+                    var naver_id_login = new naver_id_login("urGoHBK2Hl9eBQpjZEMD", "http://localhost:8090/yes/callback.bit");
                     var state = naver_id_login.getUniqState();
                     naver_id_login.setButton("green", 3,47);
-                    naver_id_login.setDomain("http://localhost:8090/");
+                    naver_id_login.setDomain("http://localhost:8090/yes/login.bit");
                     naver_id_login.setState(state);
                     naver_id_login.setPopup(false);
-                    naver_id_login.init_naver_id_login(); //ì´ˆê¸°í™” 
-                    
-                  </script>
+                    naver_id_login.init_naver_id_login();
+                  </script>   
 
                 
             </div>
@@ -134,62 +116,49 @@
                 
                 
                 <a id="kakao-login-btn" ></a>
-				<a href="http://developers.kakao.com/logout"></a>
+
     	
 
- 	<script type="text/javascript">
-      // ì‚¬ìš©í•  ì•±ì˜ JavaScript í‚¤ë¥¼ ì„¤ì •í•´ ì£¼ì„¸ìš”.
-      Kakao.init('630e98d8425188c04dae0728c65822bb');
-      // ì¹´ì¹´ì˜¤ ë¡œê·¸ì¸ ë²„íŠ¼ì„ ìƒì„±í•©ë‹ˆë‹¤.
-      Kakao.Auth.createLoginButton({
-        container: '#kakao-login-btn',
-        success: function(authObj) {
-          // ë¡œê·¸ì¸ ì„±ê³µì‹œ, APIë¥¼ í˜¸ì¶œí•©ë‹ˆë‹¤.
-          Kakao.API.request({
-            url: '/v2/user/me',
-            success: function(res) {
-              console.log(JSON.stringify(res.properties.profile_image));
-              console.log(JSON.stringify(res.properties.nickname));
-              var name=JSON.stringify(res.properties.nickname);
-              $.ajax({
-                 	type:"POST",
-                	url:"./kakaologin",
-                	data:{
-                		"name":name
-                	},
-                	success:function(data){
-                	} 
-              });
-              $(location).attr("href","http://localhost:8090/yes/");
-              
-            },
-            fail: function(error) {
-              alert(JSON.stringify(error));
-            }
-          });
-        },
-        fail: function(err) {
-          alert(JSON.stringify(err));
-        }
-      });
-		</script>
+                <script type='text/javascript'>
+                //<![CDATA[
+
+                     Kakao.init('630e98d8425188c04dae0728c65822bb');
+                // Ä«Ä«¿À ·Î±×ÀÎ ¹öÆ°À» »ı¼ºÇÕ´Ï´Ù.
+                    Kakao.Auth.createLoginButton({
+                    container: '#kakao-login-btn',
+                    success: function(authObj) {
+                    alert(JSON.stringify(authObj));
+                    },
+                    fail: function(err) {
+                    alert(JSON.stringify(err));
+                    }
+                    });
+                //]]>
+                </script>
+                
                 
                 
             </div>
             
         </div>      
       
+
+      
       
      <div class="form-group" style="margin-top:20px; border-top: 1px solid gray;width:57%">
         <div style="margin-top: 20px">
-        <a href="findId.yes" id="form-a">ì•„ì´ë””/ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</a>
+        <a href="findId.bit" id="form-a">¾ÆÀÌµğ Ã£±â</a>
         |
-        <a href="join.yes" id="form-a">íšŒì›ê°€ì…</a>            
+        <a href="findPw.bit" id="form-a">ºñ¹Ğ¹øÈ£Ã£±â</a>
+        |
+        <a href="join.bit" id="form-a">È¸¿ø°¡ÀÔ</a>            
         </div>
 
       </div>
       
     </form>
+   
+  
    
    
    

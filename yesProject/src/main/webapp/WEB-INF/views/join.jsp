@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -120,25 +120,18 @@
                     display: block;
                     clear: both;
                 }
-
+                /*Ãà¼ÒÈ­½Ã ¸Ş´º ¼öÁ¤*/
+/*
+                .navbar-collapse{
+                    width: 200px;
+                    padding-right: 0px;
+                }
+                .navbar-nav{
+                    background-color: black;    
+                }
+*/
             }
         </style>
-        <script>
-        	
-        	$(function(){
-        		$('#joinbtn a').click(function(e){
-        		
-        			
-            		if($('#okbtn').is(':checked')===false)
-        			{
-        			alert('ë™ì˜í•´ì£¼ì„¸ìš”');
-					e.preventDefault();
-        			}
-        		});
-
-        	});
-        
-        </script>
         
     </head>
     <body>
@@ -159,21 +152,21 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li><a href="#" class="menuBtn">ì˜ˆì•½<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">ì‚¬ìš©ì ë¦¬ë·°</a></li>
+                    <li><a href="#" class="menuBtn">¿¹¾à<span class="sr-only"></span></a></li>
+                    <li><a href="#" class="menuBtn">»ç¿ëÀÚ ¸®ºä</a></li>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ê³ ê°ì„¼í„°<span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">°í°´¼¾ÅÍ<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">ê³µì§€ì‚¬í•­</a></li>
+                        <li><a href="#">°øÁö»çÇ×</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">ê³ ê° ìƒë‹´</a></li>
-                        <li><a href="#">ì‚¬ì—…ì ìƒë‹´</a></li>
+                        <li><a href="#">°í°´ »ó´ã</a></li>
+                        <li><a href="#">»ç¾÷ÀÚ »ó´ã</a></li>
                       </ul>
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.yes">ë¡œê·¸ì¸</a></li>
-                    <li><a href="join.yes">íšŒì›ê°€ì…</a></li>
+                    <li><a href="login.bit">·Î±×ÀÎ</a></li>
+                    <li><a href="join.bit">È¸¿ø°¡ÀÔ</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -182,20 +175,26 @@
         </div>
         
           <div class="jumbotron" style="text-align: center; width: 70%; height: 70%; margin: 0px auto; background-color: RGB(255,216,216)">
-  <h2 >íšŒì›ê°€ì… ì•½ê´€</h2>
+  <h2 >È¸¿ø°¡ÀÔ ¾à°ü</h2>
   <br/>
   <textarea cols="100%" rows="10px" readonly="readonly" style="overflow: scroll"></textarea>
 <form>
         
   
-  <input type="radio" name="assent" id="okbtn" value="ok" /> ë™ì˜
-  <input type="radio" name="assent" value="no" /> ë™ì˜í•˜ì§€ì•ŠìŒ
+  <input type="radio" name="assent" value="ok" /> µ¿ÀÇ
+  <input type="radio" name="assent" value="no" /> µ¿ÀÇÇÏÁö¾ÊÀ½
 </form>
-    <div id="joinbtn" style="margin-top: 30px; ">
+    <div style="margin-top: 30px; ">
         
-    <a href="customerJoin.yes"  class="btn btn-primary"role="button">ê³ ê°</a>
-    <a href="branchJoin.yes" class="btn btn-primary" role="button">ì‚¬ì—…ì</a>
+    <a href="customerJoin.bit"  class="btn btn-primary"role="button">°í°´</a>
+    <a href="branchJoin.bit" class="btn btn-primary" role="button">»ç¾÷ÀÚ</a>
     </div>    
+  
+  
   </div>
+        
+        
+        
+        
     </body>
 </html>
