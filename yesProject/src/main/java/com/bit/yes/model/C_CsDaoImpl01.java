@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bit.yes.model.entity.C_CsVo;
+import com.bit.yes.model.entity.UserVo;
 import com.bit.yes.model.entity.branch_infoVo;
 
 @Repository
@@ -33,13 +34,14 @@ public class C_CsDaoImpl01 implements C_CsDao {
 	}
 
 	@Override
-	public List<C_CsVo> writeList(int offset, int noOfRecords) throws SQLException {
+	public List<C_CsVo> writeList(int offset, int noOfRecords,String clientID) throws SQLException {
 		List<C_CsVo> writeList = new ArrayList<C_CsVo>();
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
 		params.put("offset", offset);
 		params.put("noOfRecords", noOfRecords);
+		params.put("clientID", clientID);
 		
 		writeList = sqlSession.selectList("c_writeList", params);
 		this.noOfRecords = sqlSession.selectOne("c_writeGetCount");
@@ -48,9 +50,9 @@ public class C_CsDaoImpl01 implements C_CsDao {
 	}
 
 	@Override
-	public int writeGetCount() throws SQLException {
+	public int writeGetCount(String clientID) throws SQLException {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("c_writeGetCount");
+		return sqlSession.selectOne("c_writeGetCount",clientID);
 		
 	}
 
@@ -64,6 +66,12 @@ public class C_CsDaoImpl01 implements C_CsDao {
 	public List<branch_infoVo> reserveOne(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("yes.reserveOne", id);
+	}
+
+	@Override
+	public UserVo c_selectnickname(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("yes.c_selectnickname", id);
 	}
 
 }

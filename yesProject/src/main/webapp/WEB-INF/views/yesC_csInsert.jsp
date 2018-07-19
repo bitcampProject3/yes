@@ -257,27 +257,26 @@
 
                <form method="post">
                 <div class="form-group"> 
-                <label for="reserveList">예약 내역</label> 
-                    <select name="reserveList" id="reserveList" class="form-control" style="width: 50%">
+                <label for="branchID">예약 내역</label> 
+                    <select name="branchID" id="branchID" class="form-control" style="width: 50%">
                         <option value="" disabled selected>예약 내역을 선택해주세요</option>   
-                        <option value="해당 없음">- 해당 없음</option>
+                        <option value="해당 없음">- 해당 없음(기타)</option>
                         <c:forEach var="bean" items="${bean}">
-                        <option value="[${bean.address }]${bean.name}">- [${bean.address }]${bean.name }
+                        <option value="${bean.id}">- [${bean.address }]${bean.name }
                         </option>
                         </c:forEach>
                     </select>       
-                </div> 
+                </div>
                 <div class="form-group"> 
                 <label for="title">제목</label>
                 <input type="text" style="width: 80%"class="form-control" name ="title" id="title" 
                 placeholder="제목을 입력해주세요"> 
                 </div> 
+                
                 <input type="hidden" value=${clientID } name="clientID" id="clientID"/>
-				<div class="form-group"> 
-                <label for="writer">작성자</label> 
-                <input type="text" style="width:30%" class="form-control" name ="writer" id="writer" placeholder="작성자"> 
-                </div> 
-
+                
+                <input type="hidden" value=${userInfo.nickName } name ="writer" id="writer"/> 
+				
                 <div class="form-group"> 
                 <label for="content">내용:</label> 
                 <textarea class="form-control" rows="10" name="content" id="content"></textarea> 

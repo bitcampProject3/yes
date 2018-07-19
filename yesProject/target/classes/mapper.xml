@@ -68,7 +68,10 @@
   			select * from mydb.notice where info = 1 order by notice.index DESC
   		</select>
   		
-<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  -->  		
+  		
+  		
+  		
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  -->  		
 	<!-- 고객 상담 쿼리문 -->
 	<select id="c_selectAll" resultType="com.bit.yes.model.entity.C_CsVo">
 	  		SELECT * FROM client_Counsel ORDER BY client_Counsel.INDEX DESC
@@ -79,18 +82,21 @@
   			SELECT * FROM client_Counsel WHERE client_Counsel.INDEX = #{index}
   	</select>
   	
+  	<select id="c_selectnickname" resultType="com.bit.yes.model.entity.UserVo">
+  			SELECT * FROM user_info where id = #{id} 
+  	</select>
   	<insert id="c_insertOne" parameterType="com.bit.yes.model.entity.C_CsVo">
-  			INSERT INTO client_Counsel VALUES ('ghdlf2',#{clientID},#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d") , #{image},null,#{reserveList} )
+  			INSERT INTO client_Counsel VALUES (#{branchID},#{clientID},#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d") , #{image},null)
   	</insert>
   
   	<!-- 페이징 처리 -->
   	<!-- 전체 레코드 개수 조회 -->
 	  	<select id ="c_writeGetCount" resultType="int">
-	  		select count(*) from mydb.client_Counsel
+	  		select count(*) from mydb.client_Counsel where clientID = #{clientID}
 	  	</select>
 	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
   		<select id="c_writeList" parameterType="hashmap" resultMap="C_CsVo">
-  			select * from mydb.client_Counsel order by client_Counsel.index DESC limit #{offset}, #{noOfRecords}
+  			select * from mydb.client_Counsel where clientID=#{clientID} order by client_Counsel.index DESC limit #{offset}, #{noOfRecords}
   		</select>
   		
   		<select id ="c_writeInfoList" resultMap = "C_CsVo">
@@ -102,30 +108,104 @@
   		</select>
   		
   		<select id="reserveOne" resultType="com.bit.yes.model.entity.branch_infoVo" parameterType="java.lang.String">
-  			select * from mydb.branch_info where id = ${id}
+  			select * from mydb.branch_info where id = #{id}
   		</select>
-<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  -->  		
+  		
+  		
+  		
+  		
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  -->  		
 	<!-- 사업자 상담 쿼리문 -->
   	<select id="s_selectOne" resultType="com.bit.yes.model.entity.S_CsVo">
   			SELECT * FROM branch_Counsel WHERE branch_Counsel.INDEX = #{index}
   	</select>
   	
   	<insert id="s_insertOne" parameterType="com.bit.yes.model.entity.S_CsVo">
-  			INSERT INTO branch_Counsel VALUES (#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d") , #{image},null,#{reserveList} )
+  			INSERT INTO branch_Counsel VALUES (#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d") , #{image},null,#{questionSelect} )
   	</insert>
-  
+  	<select id="s_selectnickname" resultType="com.bit.yes.model.entity.UserVo">
+  			SELECT * FROM user_info where id = #{id} 
+  	</select>
   	<!-- 페이징 처리 -->
   	<!-- 전체 레코드 개수 조회 -->
 	  	<select id ="s_writeGetCount" resultType="int">
-	  		select count(*) from mydb.branch_Counsel
+	  		select count(*) from mydb.branch_Counsel where writer = #{writer}
 	  	</select>
 	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
   		<select id="s_writeList" parameterType="hashmap" resultMap="S_CsVo">
-  			select * from mydb.branch_Counsel order by branch_Counsel.index DESC limit #{offset}, #{noOfRecords}
+  			select * from mydb.branch_Counsel where writer=#{writer} order by branch_Counsel.index DESC limit #{offset}, #{noOfRecords}
   		</select>
   		
   		<select id ="s_writeInfoList" resultMap = "S_CsVo">
   			select * from mydb.branch_Counsel where info = 1 order by branch_Counsel.index DESC
   		</select>
+  		
+  		
+  		
+  		
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  -->  		
+	<!-- 관리자 상담 답변  쿼리문 -->
+	<select id="ac_selectAll" resultType="com.bit.yes.model.entity.C_CsVo">
+	  		SELECT * FROM client_Counsel ORDER BY client_Counsel.INDEX DESC
+	  	
+	</select>
+  	
+  	<select id="ac_selectOne" resultType="com.bit.yes.model.entity.C_CsVo">
+  			SELECT * FROM client_Counsel WHERE client_Counsel.INDEX = #{index}
+  	</select>
+  	
+  	<select id="ac_selectnickname" resultType="com.bit.yes.model.entity.UserVo">
+  			SELECT * FROM user_info where id = #{id} 
+  	</select>
+  	
+  	<update id="acupdateOne" parameterType="com.bit.yes.model.entity.C_CsVo">
+  			UPDATE client_counsel SET COMMENT = #{comment} WHERE client_counsel.index = #{index}
+  	</update>
 
+  	<!-- 페이징 처리 -->
+  	<!-- 전체 레코드 개수 조회 -->
+	  	<select id ="ac_writeGetCount" resultType="int">
+	  		select count(*) from mydb.client_Counsel
+	  	</select>
+	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
+  		<select id="ac_writeList" parameterType="hashmap" resultMap="C_CsVo">
+  			select * from mydb.client_Counsel order by client_Counsel.index DESC limit #{coffset}, #{cnoOfRecords}
+  		</select>
+  		
+  		<select id ="ac_writeInfoList" resultMap = "C_CsVo">
+  			select * from mydb.client_Counsel where info = 1 order by client_Counsel.index DESC
+  		</select>
+  		
+  		<select id="areserveselectAll" resultType="com.bit.yes.model.entity.branch_infoVo" >
+  			SELECT * FROM mydb.branch_info WHERE id = ANY(SELECT branchID FROM mydb.reserve_list WHERE clientID = #{id})
+  		</select>
+  		
+  		<select id="areserveOne" resultType="com.bit.yes.model.entity.branch_infoVo" parameterType="java.lang.String">
+  			select * from mydb.branch_info where id = #{id}
+  		</select>
+	
+	<select id="as_selectOne" resultType="com.bit.yes.model.entity.S_CsVo">
+  			SELECT * FROM branch_Counsel WHERE branch_Counsel.INDEX = #{index}
+  	</select>
+  	
+  	<select id="as_selectnickname" resultType="com.bit.yes.model.entity.UserVo">
+  			SELECT * FROM user_info where id = #{id} 
+  	</select>
+  	
+  	<update id="asupdateOne" parameterType="com.bit.yes.model.entity.S_CsVo">
+  			UPDATE branch_counsel SET COMMENT = #{comment} WHERE branch_counsel.index = #{index}
+  	</update>
+  	<!-- 페이징 처리 -->
+  	<!-- 전체 레코드 개수 조회 -->
+	  	<select id ="as_writeGetCount" resultType="int">
+	  		select count(*) from mydb.branch_Counsel
+	  	</select>
+	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
+  		<select id="as_writeList" parameterType="hashmap" resultMap="S_CsVo">
+  			select * from mydb.branch_Counsel order by branch_Counsel.index DESC limit #{soffset}, #{snoOfRecords}
+  		</select>
+  		
+  		<select id ="as_writeInfoList" resultMap = "S_CsVo">
+  			select * from mydb.branch_Counsel where info = 1 order by branch_Counsel.index DESC
+  		</select>	
   </mapper>

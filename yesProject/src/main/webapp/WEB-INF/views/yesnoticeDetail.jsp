@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -172,6 +173,14 @@
             }
         </style>
         
+        <%
+        pageContext.setAttribute("cr", "\r");
+        pageContext.setAttribute("cn", "\n");
+        pageContext.setAttribute("crcn", "\r\n");
+        pageContext.setAttribute("sp", "&nbsp;");
+        pageContext.setAttribute("br", "<br/>");
+        %>
+        
     </head>
     <body>
         <div>
@@ -239,7 +248,12 @@
                    </article>
                    </section>
                     <div style="padding-bottom: 30px">
-                       ${bean.content }
+                    	<c:set var="cmt" value="${fn:replace(bean.content, crcn,br) }"/>
+                    	<c:set var="cmt" value="${fn:replace(cmt,cr,br) }"/>
+                    	<c:set var="cmt" value="${fn:replace(cmt,cn,br) }"/>
+                    	<c:set var="cmt" value="${fn:replace(cmt,' ',sp) }"/>
+                    	
+                    	<c:out value="${cmt }" escapeXml="false"/>
                     </div>
                 </div>
 

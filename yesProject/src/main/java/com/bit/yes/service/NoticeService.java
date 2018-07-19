@@ -35,7 +35,6 @@ public class NoticeService {
 	
 	public void updatePage(NoticeVo bean) throws SQLException {
 		noticeDao.updateOne(bean);
-		System.out.println("service update"+bean);
 	}
 	
 	// 페이징 처리

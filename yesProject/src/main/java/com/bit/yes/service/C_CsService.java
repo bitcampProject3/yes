@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bit.yes.model.C_CsDao;
 import com.bit.yes.model.entity.C_CsVo;
+import com.bit.yes.model.entity.UserVo;
 import com.bit.yes.model.entity.branch_infoVo;
 
 @Service
@@ -33,12 +34,15 @@ public class C_CsService {
 	}
 	
 	// ∆‰¿Ã¬° √≥∏Æ
-	public List<C_CsVo> writeList(int offset, int noOfRecords) throws SQLException {
-		return csDao.writeList(offset, noOfRecords);
+	public List<C_CsVo> writeList(int offset, int noOfRecords,String clientID) throws SQLException {
+		return csDao.writeList(offset, noOfRecords, clientID);
 	}
 	
-	public int writeGetCount() throws Exception {
-		return csDao.writeGetCount();
+	public int writeGetCount(String clientID) throws Exception {
+		return csDao.writeGetCount(clientID);
 	}
-	
+
+	public UserVo selectNick(String id) throws SQLException{
+		return csDao.c_selectnickname(id);
+	}
 }

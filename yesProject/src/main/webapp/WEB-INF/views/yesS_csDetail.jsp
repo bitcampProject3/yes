@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -121,7 +122,7 @@
                     display: block;
                     clear: both;
                 }
-                /*Ãà¼ÒÈ­½Ã ¸Þ´º ¼öÁ¤*/
+                /*ì¶•ì†Œí™”ì‹œ ë©”ë‰´ ìˆ˜ì •*/
 /*
                 .navbar-collapse{
                     width: 200px;
@@ -162,6 +163,14 @@
             }
         </style>
         
+        <%
+        pageContext.setAttribute("cr", "\r");
+        pageContext.setAttribute("cn", "\n");
+        pageContext.setAttribute("crcn", "\r\n");
+        pageContext.setAttribute("sp", "&nbsp;");
+        pageContext.setAttribute("br", "<br/>");
+        %>
+        
     </head>
     <body>
         <div>
@@ -175,27 +184,27 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="logo_top2.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="../resources/imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li><a href="#" class="menuBtn">¿¹¾à<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">»ç¿ëÀÚ ¸®ºä</a></li>
+                    <li><a href="#" class="menuBtn">ì˜ˆì•½<span class="sr-only"></span></a></li>
+                    <li><a href="#" class="menuBtn">ì‚¬ìš©ìž ë¦¬ë·°</a></li>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">°í°´¼¾ÅÍ<span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ê³ ê°ì„¼í„°<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">°øÁö»çÇ×</a></li>
+                        <li><a href="#">ê³µì§€ì‚¬í•­</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">°í°´ »ó´ã</a></li>
-                        <li><a href="#">»ç¾÷ÀÚ »ó´ã</a></li>
+                        <li><a href="#">ê³ ê° ìƒë‹´</a></li>
+                        <li><a href="#">ì‚¬ì—…ìž ìƒë‹´</a></li>
                       </ul>
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">·Î±×ÀÎ</a></li>
-                    <li><a href="#">È¸¿ø°¡ÀÔ</a></li>
+                    <li><a href="#">ë¡œê·¸ì¸</a></li>
+                    <li><a href="#">íšŒì›ê°€ìž…</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -209,47 +218,45 @@
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
                   <h1 style="padding: 5px; margin-bottom: 20px;">
-                      <a href="" style="color: black;">1:1¹®ÀÇ-°¡¸ÍÁ¡</a>
+                      <a href="" style="color: black;">1:1ë¬¸ì˜-ê°€ë§¹ì </a>
                   </h1>
 
               </div>
             </div>
             <div style="padding-left: 40px; padding-right: 40px;">
-                <header style="padding-top: 15px"><h4><b>»çÀÌÆ® ÀÌ¿ëÀ» ÇÏ´Âµ¥ ¾î¶»°Ô ÀÌ¿ëÀ» ÇØ¾ßÇÒÁö ¸ð¸£°Ú¾î¿ä...</b></h4></header>
+                <header style="padding-top: 15px"><h4><b>${bean.title }</b></h4></header>
                 <div>
                    <section style="width: 100%; padding-bottom: 30px">
                    <article>     
                     <tr>
                         <td>
-                            <b>¹®ÀÇÀ¯Çü : <span>[Áöµµ À§Ä¡ Ç¥½Ã °ü·Ã]</span></b>
+                            <b>ë¬¸ì˜ìœ í˜• : <span> ${bean.questionSelect  } </span></b>
                         </td>
                     </tr>
                     <br>
                     <tr>
-                        <td>2017-12-06</td>
+                        <td>${bean.calendar }</td>
                         <td>&nbsp;|&nbsp;</td>
-                        <td>ÀÛ¼ºÀÚ: ±è°³¼ö</td>
+                        <td>${userInfo.nickName }</td>
                     </tr>  
                    </article>
                    </section>
                     <div style="padding-bottom: 30px">
-                        ¾È³çÇÏ¼¼¿ä.<br>
-                        ±è°³¶ËÀÌ¶ó°í ÇÕ´Ï´Ù<br><br>
-                        
-                        ´Ù¸§ÀÌ ¾Æ´Ï¶ó »çÀÌÆ®¸¦ ÀÌ¿ëÇÏ´Âµ¥ ÀÖ¾î¼­ ¾î¶² ¹æ½ÄÀ¸·Î ¿¹¾àÀÌ<br>
-                        ÀÌ·ç¾îÁö´ÂÁö Àß ¸ð¸£°Ú¾î¼­ ¹®ÀÇµå·Áº¾´Ï´Ù<br><br>
-                        
-                        ¾î¶»°Ô ÀÌ¿ëÀ» ÇÏ´ÂÁö ÀÚ¼¼ÇÑ ¼³¸íÁ» ºÎÅ¹µå¸®°Ú½À´Ï´Ù!!<br>
-                        ¾ÕÀ¸·Îµµ ÀÚÁÖ ÀÌ¿ëÇÒÅ×´Ï ¾ó¸ª ¾Ë·ÁÁÖ¼¼¿ä!!!<br>
-                        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        
+                    	<c:set var="cmt" value="${fn:replace(bean.content, crcn,br) }"/>
+                    	<c:set var="cmt" value="${fn:replace(cmt,cr,br) }"/>
+                    	<c:set var="cmt" value="${fn:replace(cmt,cn,br) }"/>
+                    	<c:set var="cmt" value="${fn:replace(cmt,' ',sp) }"/>
+                    	
+                    	<c:out value="${cmt }" escapeXml="false"/>
                     
                     </div>
                 </div>
             </div>
             <div style="border-top: 1px solid #ccc; padding-bottom: 5px"></div>
-            <!-- ´äº¯ ¿µ¿ª -->
-            <div style="padding-bottom: 50px;">
+            <!-- ë‹µë³€ ì˜ì—­ -->
+            <c:choose>
+			  <c:when test = "${bean.comment ne null}">
+            	<div style="padding-bottom: 50px;">
                 <table style="width: 100%"> 
                     <td class="answerA" style="text-align: center;">
                         <h2 style="color: #e04f5f">A</h2>
@@ -258,27 +265,27 @@
                         <div>
                             <section>
                                 <header style="padding-bottom: 30px;">
-                                    <span style="color:#e04f5f"><h3 style="margin-top: 45px;"><b>´äº¯</b></h3></span>
-                                    <b>[°í°´¼¾ÅÍ¿¡¼­ ´äº¯µå¸³´Ï´Ù.]</b>
+                                    <span style="color:#e04f5f"><h3 style="margin-top: 45px;"><b>ë‹µë³€</b></h3></span>
+                                    <b>[ê³ ê°ì„¼í„°ì—ì„œ ë‹µë³€ë“œë¦½ë‹ˆë‹¤.]</b>
                                 </header>
-                       <!-- ´äº¯ÇÏ´Â °÷ -->
                                 <article style="width: auto; height: auto; padding-bottom: 40px;">
-                                    ¹®ÀÇÇÏ½Å ³»¿ëÀ» Åä´ë·Î º» °á°ú ÇØ´ç ¸Þ´º¿¡ ¿À·ù°¡ ÀÖÀ½À» È®ÀÎÇÏ¿´°í<br><br>
-                                    
-                                    È®ÀÎµÈ °á°ú¸¦ Åä´ë·Î ½Å¼ÓÇÏ°Ô Ã³¸®ÇÏµµ·Ï ÇÏ°Ú½À´Ï´Ù.<br>
-                                    °¨»çÇÕ´Ï´Ù
+                                    <c:set var="comments" value="${fn:replace(bean.comment, crcn,br) }"/>
+			                    	<c:set var="comments" value="${fn:replace(comments,cr,br) }"/>
+			                    	<c:set var="comments" value="${fn:replace(comments,cn,br) }"/>
+			                    	<c:set var="comments" value="${fn:replace(comments,' ',sp) }"/>
+			                    	
+			                    	<b><c:out value="${comments }" escapeXml="false"/></b>
                                     
                                     
                                 </article>
-                        <!-- ´äº¯ÇÏ´Â °÷ -->        
                                 <footer>
                                     <ul>
-                                        <li style="margin-bottom: 15px">Ãß°¡·Î ÇÊ¿äÇÑ ³»¿ëÀÌ ÀÖÀ¸½Ã¸é ¾ðÁ¦µçÁö 
-                                        °í°´¼¾ÅÍ·Î(1588-4763)<br>
-                                        ¶Ç´Â, 1:1¹®ÀÇ¸¦ ÅëÇØ ¿äÃ»ÇØ ÁÖ½Ã¸é
-                                        °¨»çÇÏ°Ú½À´Ï´Ù.
+                                        <li style="margin-bottom: 15px">ì¶”ê°€ë¡œ í•„ìš”í•œ ë‚´ìš©ì´ ìžˆìœ¼ì‹œë©´ ì–¸ì œë“ ì§€ 
+                                        ê³ ê°ì„¼í„°ë¡œ(1588-4763)<br>
+                                        ë˜ëŠ”, 1:1ë¬¸ì˜ë¥¼ í†µí•´ ìš”ì²­í•´ ì£¼ì‹œë©´
+                                        ê°ì‚¬í•˜ê² ìŠµë‹ˆë‹¤.
                                         </li>
-                                        <li>¹®ÀÇ¸¦ ÅëÇØ Á¦°øµÈ ³»¿ëÀº ¸ðµÎ ÀúÀåÀÌ µÊÀ» ¾Ë·Áµå¸³´Ï´Ù.</li>
+                                        <li>ë¬¸ì˜ë¥¼ í†µí•´ ì œê³µëœ ë‚´ìš©ì€ ëª¨ë‘ ì €ìž¥ì´ ë¨ì„ ì•Œë ¤ë“œë¦½ë‹ˆë‹¤.</li>
                                         
                                     </ul>
                                     
@@ -288,31 +295,19 @@
                     </td>
                 </table>   
             </div>
-            
-            <div>
-               <table style="width: 100%">       
-                <tr>
-                    <td style="width: 10%;text-align: center;"><h4>°ü¸®ÀÚ</h4></td>
-                    <td style="width: 80%;"><textarea style="width: 100%;"></textarea></td>
-                    <td style="width: 10%;text-align: center;">
-                        <button class="btn btn-normal" style="width: 70%; height: 41px;" >
-                           <span>´äº¯</span>
-                        </button>
-                        
-                    </td>
-
-                </tr>    
-               </table>
-                
-            </div>
+			</c:when>
+			<c:when test = "${bean.comment eq null }">
+				<div style="text-align: center"><h4><b>ë‹µë³€ì´ ë“±ë¡ë˜ì–´ ìžˆì§€ ì•ŠìŠµë‹ˆë‹¤....</b></h4></div>
+			</c:when>
+			</c:choose>
             
             </div>      
                 
             <div class="container" style="margin-top: 10px;">
               
                 <div class="huge-top">
-                    <button class="btn btn-normal pull-right" >
-                       <span>¸ñ·ÏÀ¸·Î</span>
+                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;" onclick="history.back(1)"  >
+                       <span>ëª©ë¡ìœ¼ë¡œ</span>
                     </button>
                     
                 </div>

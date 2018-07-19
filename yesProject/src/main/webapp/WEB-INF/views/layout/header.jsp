@@ -108,13 +108,14 @@
                             <li><a href="./yesnotice/">공지사항</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="./yesC_cs/">고객 상담</a></li>
-                            <li><a href="#">사업자 상담</a></li>
+                            <li><a href="./yesS_cs/">사업자 상담</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="login.yes">로그인</a></li>
                     <li><a href="join.yes">회원가입</a></li>
+                    <li><a href="./counselAll/">답변목록</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

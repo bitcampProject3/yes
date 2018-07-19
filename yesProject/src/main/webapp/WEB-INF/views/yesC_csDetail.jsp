@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -162,6 +163,14 @@
             }
         </style>
         
+        <%
+        pageContext.setAttribute("cr", "\r");
+        pageContext.setAttribute("cn", "\n");
+        pageContext.setAttribute("crcn", "\r\n");
+        pageContext.setAttribute("sp", "&nbsp;");
+        pageContext.setAttribute("br", "<br/>");
+        %>
+        
     </head>
     <body>
         <div>
@@ -221,26 +230,42 @@
                    <article>     
                     <tr>
                         <td>
-                            <b>예약내역 : <span>[${beans.address }]${beans.name } </span></b>
+                        	<c:choose>
+                        	<c:when test="${id eq '해당 없음'}">
+								    <b>예약내역 : <span>[해당 없음:(기타)]  </span></b>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<c:forEach var="beans" items="${beans }">
+								    <b>예약내역 : <span>[${beans.address }] ${beans.name } </span></b>
+    		                    </c:forEach>
+                        	</c:otherwise>
+                        	</c:choose>
                         </td>
                     </tr>
                     <br>
                     <tr>
                         <td>${bean.calendar }</td>
                         <td>&nbsp;|&nbsp;</td>
-                        <td>${bean.writer }</td>
+                        <td>작성자 : ${bean.writer }</td>
                     </tr>  
                    </article>
                    </section>
                     <div style="padding-bottom: 30px">
-                        ${bean.content }
+                    	<c:set var="cmt" value="${fn:replace(bean.content, crcn,br) }"/>
+                    	<c:set var="cmt" value="${fn:replace(cmt,cr,br) }"/>
+                    	<c:set var="cmt" value="${fn:replace(cmt,cn,br) }"/>
+                    	<c:set var="cmt" value="${fn:replace(cmt,' ',sp) }"/>
+                    	
+                    	<c:out value="${cmt }" escapeXml="false"/>
                     
                     </div>
                 </div>
             </div>
             <div style="border-top: 1px solid #ccc; padding-bottom: 5px"></div>
             <!-- 답변 영역 -->
-            <div style="padding-bottom: 50px;">
+            <c:choose>
+			  <c:when test = "${bean.comment ne null}">
+            	<div style="padding-bottom: 50px;">
                 <table style="width: 100%"> 
                     <td class="answerA" style="text-align: center;">
                         <h2 style="color: #e04f5f">A</h2>
@@ -252,16 +277,16 @@
                                     <span style="color:#e04f5f"><h3 style="margin-top: 45px;"><b>답변</b></h3></span>
                                     <b>[고객센터에서 답변드립니다.]</b>
                                 </header>
-                       <!-- 답변하는 곳 -->
                                 <article style="width: auto; height: auto; padding-bottom: 40px;">
-                                    문의하신 내용을 토대로 본 결과 해당 메뉴에 오류가 있음을 확인하였고<br><br>
-                                    
-                                    확인된 결과를 토대로 신속하게 처리하도록 하겠습니다.<br>
-                                    감사합니다
+                                    <c:set var="comments" value="${fn:replace(bean.comment, crcn,br) }"/>
+			                    	<c:set var="comments" value="${fn:replace(comments,cr,br) }"/>
+			                    	<c:set var="comments" value="${fn:replace(comments,cn,br) }"/>
+			                    	<c:set var="comments" value="${fn:replace(comments,' ',sp) }"/>
+			                    	
+			                    	<b><c:out value="${comments }" escapeXml="false"/></b>
                                     
                                     
                                 </article>
-                        <!-- 답변하는 곳 -->        
                                 <footer>
                                     <ul>
                                         <li style="margin-bottom: 15px">추가로 필요한 내용이 있으시면 언제든지 
@@ -279,14 +304,18 @@
                     </td>
                 </table>   
             </div>
-            
+			</c:when>
+			<c:when test = "${bean.comment eq null }">
+				<div style="text-align: center"><h4><b>답변이 등록되어 있지 않습니다....</b></h4></div>
+			</c:when>
+			</c:choose>
             
             </div>      
                 
             <div class="container" style="margin-top: 10px;">
               
                 <div class="huge-top">
-                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;" onclick="history.back(1)" >
+                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;" onclick="history.back(1)"  >
                        <span>목록으로</span>
                     </button>
                     

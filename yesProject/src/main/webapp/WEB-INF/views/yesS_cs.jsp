@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -122,7 +122,7 @@
                     display: block;
                     clear: both;
                 }
-                /*Ãà¼ÒÈ­½Ã ¸Þ´º ¼öÁ¤*/
+                /*ì¶•ì†Œí™”ì‹œ ë©”ë‰´ ìˆ˜ì •*/
 /*
                 .navbar-collapse{
                     width: 200px;
@@ -153,6 +153,10 @@
             border-color: #e04f5f;
             color: white;
             }
+            a:hover,a:link,a:visited{
+    	    	text-decoration: none; color:black;
+
+            }
 
         </style>
         
@@ -169,27 +173,27 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="logo_top2.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="../resources/imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li><a href="#" class="menuBtn">¿¹¾à<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">»ç¿ëÀÚ ¸®ºä</a></li>
+                    <li><a href="#" class="menuBtn">ì˜ˆì•½<span class="sr-only"></span></a></li>
+                    <li><a href="#" class="menuBtn">ì‚¬ìš©ìž ë¦¬ë·°</a></li>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">°í°´¼¾ÅÍ<span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ê³ ê°ì„¼í„°<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">°øÁö»çÇ×</a></li>
+                        <li><a href="#">ê³µì§€ì‚¬í•­</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">°í°´ »ó´ã</a></li>
-                        <li><a href="#">»ç¾÷ÀÚ »ó´ã</a></li>
+                        <li><a href="#">ê³ ê° ìƒë‹´</a></li>
+                        <li><a href="#">ì‚¬ì—…ìž ìƒë‹´</a></li>
                       </ul>
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">·Î±×ÀÎ</a></li>
-                    <li><a href="#">È¸¿ø°¡ÀÔ</a></li>
+                    <li><a href="#">ë¡œê·¸ì¸</a></li>
+                    <li><a href="#">íšŒì›ê°€ìž…</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -201,13 +205,13 @@
                border-bottom-color: #e04f5f">
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
-                  <h1 style="padding: 5px; margin-bottom: 20px;">³ªÀÇ ¹®ÀÇ³»¿ª(°¡¸ÍÁ¡)</h1>
+                  <h1 style="padding: 5px; margin-bottom: 20px;">ë‚˜ì˜ ë¬¸ì˜ë‚´ì—­(ê°€ë§¹ì )</h1>
                 <div class="row" >
                   <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray; cursor: pointer; 
                      onclick="location.href="#"";">
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              °øÁö»çÇ×
+                              ê³µì§€ì‚¬í•­
                           </p>
                       </h4>
                   </div>
@@ -217,7 +221,7 @@
                        onclick="location.href="#"";">                                          
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              °í°´ »ó´ã
+                              ê³ ê° ìƒë‹´
                           </p>
                       </h4>
                   </div>
@@ -226,7 +230,7 @@
                      onclick="location.href="#"";">
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              »ç¾÷ÀÚ »ó´ã
+                              ì‚¬ì—…ìž ìƒë‹´
                           </p>
                       </h4>
                   </div>
@@ -236,9 +240,10 @@
             
             <div class="container" style="margin-top: 10px;">
                <ul>
-                   <li>°¡¸ÍÁ¡ Á¤º¸ ¼öÁ¤, ¹®ÀÇ ³»¿ª, ¼­ºñ½º ºÒ¸¸ µîÀÇ ¹®ÀÇµîÀº ÀüÈ­¹®ÀÇ¸¦ ÅëÇØ Á÷Á¢ ¹®ÀÇ½Ã ºü¸¥ Ã³¸®°¡ °¡´ÉÇÕ´Ï´Ù.</li>
-                   <li>ÀüÈ­¹øÈ£, ÁÖ¼Ò, ÀÌ¸ÞÀÏ, °èÁÂ¹øÈ£ µîÀÇ °³ÀÎÁ¤º¸´Â Å¸ÀÎ¿¡ ÀÇÇØ µµ¿ëµÉ À§ÇèÀÌ ÀÖÀ¸´Ï, ¹®ÀÇ ½Ã ÀÔ·ÂÇÏÁö ¾Êµµ·Ï ÁÖÀÇÇØ ÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.</li>
+                   <li>ê°€ë§¹ì  ì •ë³´ ìˆ˜ì •, ë¬¸ì˜ ë‚´ì—­, ì„œë¹„ìŠ¤ ë¶ˆë§Œ ë“±ì˜ ë¬¸ì˜ë“±ì€ ì „í™”ë¬¸ì˜ë¥¼ í†µí•´ ì§ì ‘ ë¬¸ì˜ì‹œ ë¹ ë¥¸ ì²˜ë¦¬ê°€ ê°€ëŠ¥í•©ë‹ˆë‹¤.</li>
+                   <li>ì „í™”ë²ˆí˜¸, ì£¼ì†Œ, ì´ë©”ì¼, ê³„ì¢Œë²ˆí˜¸ ë“±ì˜ ê°œì¸ì •ë³´ëŠ” íƒ€ì¸ì— ì˜í•´ ë„ìš©ë  ìœ„í—˜ì´ ìžˆìœ¼ë‹ˆ, ë¬¸ì˜ ì‹œ ìž…ë ¥í•˜ì§€ ì•Šë„ë¡ ì£¼ì˜í•´ ì£¼ì‹œê¸° ë°”ëžë‹ˆë‹¤.</li>
                </ul>
+				
                 <table class="table table-board table table-hover" style="border-top: 1px solid #e04f5f;border-bottom: 2px solid #ddd">
                     <colgroup>
                         <col width="15%">
@@ -248,13 +253,13 @@
                     </colgroup>
                     <thead>
                         <tr>
-                            <th style="text-align: center">±Û ¹øÈ£</th>
-                            <th style="text-align: center">Á¦¸ñ</th>
-                            <th style="text-align: center">±Û¾´ÀÌ</th>
-                            <th style="text-align: center">³¯Â¥</th>
+                            <th style="text-align: center">ê¸€ ë²ˆí˜¸</th>
+                            <th style="text-align: center">ì œëª©</th>
+                            <th style="text-align: center">ê¸€ì“´ì´</th>
+                            <th style="text-align: center">ë‚ ì§œ</th>
                         </tr>
                     </thead>    
-                        <c:forEach var="bean" items="${bean}">
+                        <c:forEach var="bean" items="${page}" varStatus="status">
 
 						<tr>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
@@ -262,34 +267,36 @@
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
 							${bean.title}</td>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
-							${bean.writer}</td>
+							${userNick[status.index] }</td>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
 							${bean.calendar}</td>
 						</tr>
-		
+					
 					</c:forEach>
 
                 </table>
                 <div class="huge-top" width="100%">
+                <a href="./yesS_csInsert">
                     <button class="btn btn-normal pull-right" id="insert">
                        <span>
-                            ¹®ÀÇÇÏ±â
+                            ë¬¸ì˜í•˜ê¸°
                        </span>
                     </button> 
+                </a>    
                 </div>
                 
                 <c:choose>
 		<c:when test="${paging.numberOfRecords ne NULL and paging.numberOfRecords ne '' and paging.numberOfRecords ne 0}">
 		<div id="paginationUI" class="text-center" style="margin-left: 37px">
 			<ul class="pagination pagination-lg">
-				<c:if test="${paging.currentPageNo gt 5}">  											  <!-- ÇöÀç ÆäÀÌÁö°¡ 5º¸´Ù Å©´Ù¸é(Áï, 6ÆäÀÌÁö ÀÌ»óÀÌ¶ó¸é) -->
-					<li><a href="javascript:goPage(${paging.prevPageNo}, ${paging.maxPost})">ÀÌÀü</a></li> <!-- ÀÌÀüÆäÀÌÁö Ç¥½Ã -->
+				<c:if test="${paging.currentPageNo gt 5}">  											  <!-- í˜„ìž¬ íŽ˜ì´ì§€ê°€ 5ë³´ë‹¤ í¬ë‹¤ë©´(ì¦‰, 6íŽ˜ì´ì§€ ì´ìƒì´ë¼ë©´) -->
+					<li><a href="javascript:goPage(${paging.prevPageNo}, ${paging.maxPost})">ì´ì „</a></li> <!-- ì´ì „íŽ˜ì´ì§€ í‘œì‹œ -->
 				</c:if>
-				<!-- ´Ù¸¥ ÆäÀÌÁö¸¦ Å¬¸¯ÇÏ¿´À» ½Ã, ±× ÆäÀÌÁöÀÇ ³»¿ë ¹× ÇÏ´ÜÀÇ ÆäÀÌÂ¡ ¹öÆ°À» »ý¼ºÇÏ´Â Á¶°Ç¹®-->
+				<!-- ë‹¤ë¥¸ íŽ˜ì´ì§€ë¥¼ í´ë¦­í•˜ì˜€ì„ ì‹œ, ê·¸ íŽ˜ì´ì§€ì˜ ë‚´ìš© ë° í•˜ë‹¨ì˜ íŽ˜ì´ì§• ë²„íŠ¼ì„ ìƒì„±í•˜ëŠ” ì¡°ê±´ë¬¸-->
 					<c:forEach var="i" begin="${paging.startPageNo}" end="${paging.endPageNo}" step="1"> 
 		            <c:choose>
 		                <c:when test="${i eq paging.currentPageNo}"> 
-		                      <li class="active"><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> <!-- 1ÆäÀÌÁöºÎÅÍ 10°³¾¿ »Ì¾Æ³»°í, 1,2,3ÆäÀÌÁö¼øÀ¸·Î ³ªÅ¸³»¶ó-->
+		                      <li class="active"><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> <!-- 1íŽ˜ì´ì§€ë¶€í„° 10ê°œì”© ë½‘ì•„ë‚´ê³ , 1,2,3íŽ˜ì´ì§€ìˆœìœ¼ë¡œ ë‚˜íƒ€ë‚´ë¼-->
 		                </c:when>
 		                	<c:otherwise>
 		                    <li><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> 
@@ -297,12 +304,12 @@
 					</c:choose>
 					</c:forEach>
 			
-				<!-- ¼Ò¼öÁ¡ Á¦°Å =>-->
+				<!-- ì†Œìˆ˜ì  ì œê±° =>-->
 				<fmt:parseNumber var="currentPage" integerOnly="true" value="${(paging.currentPageNo-1)/5}"/>
 				<fmt:parseNumber var="finalPage" integerOnly="true" value="${(paging.finalPageNo-1)/5}"/>
 					
-				<c:if test="${currentPage < finalPage}"> <!-- ÇöÀç ÆäÀÌÁö°¡ ¸¶Áö¸· ÆäÀÌÁöº¸´Ù ÀÛÀ¸¸é '´ÙÀ½'À» Ç¥½ÃÇÑ´Ù. -->
-					<li><a href="javascript:goPage(${paging.nextPageNo}, ${paging.maxPost})">´ÙÀ½</a></li>
+				<c:if test="${currentPage < finalPage}"> <!-- í˜„ìž¬ íŽ˜ì´ì§€ê°€ ë§ˆì§€ë§‰ íŽ˜ì´ì§€ë³´ë‹¤ ìž‘ìœ¼ë©´ 'ë‹¤ìŒ'ì„ í‘œì‹œí•œë‹¤. -->
+					<li><a href="javascript:goPage(${paging.nextPageNo}, ${paging.maxPost})">ë‹¤ìŒ</a></li>
 				</c:if> 
 			</ul>
 		</div>
@@ -320,7 +327,7 @@ function goPage(pages, lines) {
                 
             <div class="col-lg-4" style="float: none;margin: auto; width: 373px;">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="°Ë»ö¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä">
+                  <input type="text" class="form-control" placeholder="ê²€ìƒ‰ì–´ë¥¼ ìž…ë ¥í•˜ì„¸ìš”">
                   <span class="input-group-btn">
                     <button class="btn btn-default" type="button" style="color: #e04f5f">
                     <span class="glyphicon glyphicon-search">
