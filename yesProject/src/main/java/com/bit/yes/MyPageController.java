@@ -11,10 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.yes.model.UserDao;
+import com.bit.yes.model.entity.BranchVo;
 import com.bit.yes.model.entity.UserVo;
+import com.bit.yes.service.ReserveListService;
 
 
 @Controller
@@ -22,8 +24,17 @@ public class MyPageController {
 
 	@Autowired
 	SqlSession sqlSession;
+	@Autowired
+	ReserveListService service;
 	
-	//내정보
+	
+	
+	public void setService(ReserveListService service) {
+		this.service = service;
+	}
+	
+	
+	//내정보------------------
 	@RequestMapping("/myInfo.yes")
 	public String myInfo(HttpSession session,Model model) throws SQLException {
 		UserVo user=(UserVo) session.getAttribute("member");
@@ -50,9 +61,20 @@ public class MyPageController {
 		}
 	
 	}
-	
-	public String reservation() {
-		return "";
+	//------------예약 현황-----------
+	@RequestMapping("/reservation.yes")
+	public String reservation(HttpSession session,Model model) throws SQLException {
+		String id=((UserVo)session.getAttribute("member")).getId();
+		service.listPage(model,id);
+		return "mypage/myReserve";
+	}
+
+	//----------예약한 가게의 정보 불러오기----------
+	@ResponseBody
+	@RequestMapping(value="/branchInfo",method=RequestMethod.POST)
+	public BranchVo reservation2(String id,Model model) throws SQLException {
+		BranchVo bean=service.selectOne(id);
+		return bean;
 	}
 	
 	

@@ -8,7 +8,7 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/resources/applicationContext.xml</config>
-		<config>src/main/resources/mapper/user_mapper.xml</config>
+		<config>src/main/resources/mapper/reserveList_mapper.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>

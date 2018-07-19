@@ -54,14 +54,17 @@ create table br_accept(
 );
 
 
+--reserveTime >예약 시간 , checkTime 예약했을때시간--
 create table reserve_list(
-	branchID varchar(20) primary key,
+	branchID varchar(20) not null,
 	clientID varchar(20) not null,
-	reserveTime date not null,
+	reserveTime varchar(20) not null,
+	checkTime datetime not null, 
 	personel int not null,
-	request varchar(100) not null
-
+	request varchar(100) not null,
+	useState varchar(10) NOT NULL
 );
+
 
 
 create table review(
@@ -117,5 +120,23 @@ create table client_Counsel(
 );
 
 drop table user_info;
-select * from user_info where id='guddlsel1003' and password='1234';
 select * from user_info;
+
+
+----reserve_list > 이용 여부 컬럼 추가(혜원)// 2018-07-18----------
+alter table reserve_list add useState varchar(10) NOT NULL;
+
+drop table reserve_list;
+
+
+select * from branch_info;
+select * from reserve_list;
+insert into reserve_list values ('branch01','hyewon','2018-12-25-18:00',CURRENT_TIMESTAMP,2,'아이가 먹을거예요','N');
+insert into reserve_list values ('branch02','hyewon','2018-12-24-17:00',CURRENT_TIMESTAMP,2,'아이가 먹을거예요','N');
+insert into reserve_list values ('branch01','wonywony93','2018-12-25-16:00',CURRENT_TIMESTAMP,3,'아이가 먹을거예요','N');
+
+select branchID,branchName,clientID,reserveTime,personel,request,useState from reserve_list a inner join branch_info b on a.branchID=b.id where clientID='hyewon';
+select * from branch_info;
+
+
+select * from branch_info a inner join branch_address b on a.id=b.id where a.id='branch01';

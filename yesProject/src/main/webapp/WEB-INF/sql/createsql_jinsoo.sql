@@ -129,6 +129,7 @@ alter table branch_info add addressdetail varchar(40) NOT NULL;
 alter table branch_info add image2 varchar(20) NOT NULL;
 alter table branch_info add image3 varchar(20) NOT NULL;
 
+
 alter table branch_info change menu menu1 varchar(20) not null;
 alter table branch_info change menu1 menu1 varchar(30) NOT NULL;
 alter table branch_info change menu2 menu2 varchar(30) NOT NULL;
@@ -805,4 +806,9 @@ select * from branch_address;
 --      inner join branch_menu d on a.id = d.id
 --where menu like '%¿ìµ¿%';
 ---------------------------------------------------------------------------------
+
+
+
+
+
 
