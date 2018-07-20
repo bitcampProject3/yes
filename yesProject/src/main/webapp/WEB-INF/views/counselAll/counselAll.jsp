@@ -32,103 +32,134 @@
         yearSuffix: '년'
 
     });
-
-    $(function() {
-        $(".datepicker1").datepicker({
-            showAnimation:'slide',
-            showOtherMonths:true,
-            selectOtherMonths:true,
-            changeMonth: true,
-            changeYear:true,
-            showButtonPanel:true
-        });
-    });   
-    $(function() {
-        $(".datepicker2").datepicker({
-            showAnimation:'slide',
-            showOtherMonths:true,
-            selectOtherMonths:true,
-            changeMonth: true,
-            changeYear:true,
-            showButtonPanel:true
-        });
-    });   
-
-    $(document).ready(function(){
-        $("#datepicker1").datepicker({
-        numberOfMonths: 2,
-        onSelect: function(selected) {
-        $("#datepicker2").datepicker("option","minDate", selected)
-        }
-        });
-        $("#datepicker2").datepicker({
-        numberOfMonths: 2,
-        onSelect: function(selected) {
-        $("#datepicker1").datepicker("option","maxDate", selected)
-        }
-        });
-        });
 </script>
 
-<script type="text/javascript">
-var rangeDate = 31; // set limit day
-var setSdate, setEdate;
-$("#from").datepicker({
-    dateFormat: 'yy-mm-dd',
-    minDate: 0,
-    onSelect: function(selectDate){
-        var stxt = selectDate.split("-");
-            stxt[1] = stxt[1] - 1;
-        var sdate = new Date(stxt[0], stxt[1], stxt[2]);
-        var edate = new Date(stxt[0], stxt[1], stxt[2]);
-            edate.setDate(sdate.getDate() + rangeDate);
-        
-        $('#to').datepicker('option', {
-            minDate: selectDate,
-            beforeShow : function () {
-                $("#to").datepicker( "option", "maxDate", edate );                
-                setSdate = selectDate;
-                console.log(setSdate)
-        }});
-        //to 설정
-    }
-    //from 선택되었을 때
-});
-            
-$("#to").datepicker({ 
-    dateFormat: 'yy-mm-dd',
-    onSelect : function(selectDate){
-        setEdate = selectDate;
-        console.log(setEdate)
-    }
-});
-$('.btn').on('click', function(e){
-    if($('input#from').val() == ''){
-        alert('시작일을 선택해주세요.');
-        $('input#from').focus();
-        return false;
-    }else if($('input#to').val() == ''){
-        alert('종료일을 선택해주세요.');
-        $('input#to').focus();
-        return false;
-    }
-
-    var t1 = $('input#from').val().split("-");
-    var t2 = $('input#to').val().split("-");
-    var t1date = new Date(t1[0], t1[1], t1[2]);
-    var t2date = new Date(t2[0], t2[1], t2[2]);
-    var diff = t2date - t1date;
-    var currDay = 24 * 60 * 60 * 1000;
-    if(parseInt(diff/currDay) > rangeDate){
-        alert('로그 조회 기간은 ' + rangeDate + '일을 초과할 수 없습니다.');        
-        return false;
-    }
-
-    alert("성공")
-});
-</script>
-
-
+	<script type="text/javascript">
+	//var rangeDate = 31; // set limit day
+	var setSdate, setEdate;
+	$(function(){
+		$("#from1").datepicker({
+		    dateFormat: 'yy-mm-dd',
+		    onSelect: function(selectDate){
+		        var stxt = selectDate.split("-");
+		            stxt[1] = stxt[1] - 1;
+		        var sdate = new Date(stxt[0], stxt[1], stxt[2]);
+		        var edate = new Date(stxt[0], stxt[1], stxt[2]);
+		            /* edate.setDate(sdate.getDate() + rangeDate); 
+		            - 두번째달력에서 처음 날짜부터 끝 날짜 설정하는 것 */
+		            edate.setDate(sdate.getDate());
+		        
+		        $('#to1').datepicker('option', {
+		            minDate: selectDate,
+		            beforeShow : function () {
+		            	/* $("#to").datepicker( "option", "maxDate", edate ); 
+		            	- 두번째달력에서 처음 날짜부터 끝 날짜 설정하는 것 */             
+		                setSdate = selectDate;
+		                console.log(setSdate)
+		        }});
+		        //to 설정
+		    }
+		    //from 선택되었을 때
+			});
+		});
+	
+	
+	$(function(){
+		$("#to1").datepicker({ 
+		    dateFormat: 'yy-mm-dd',
+		    onSelect : function(selectDate){
+		        setEdate = selectDate;
+		        console.log(setEdate)
+		    }
+			});
+			$('.btn1').on('click', function(e){
+			    if($('input#from1').val() == ''){
+			        alert('시작일을 선택해주세요.');
+			        $('input#from1').focus();
+			        return false;
+			    }else if($('input#to1').val() == ''){
+			        alert('종료일을 선택해주세요.');
+			        $('input#to1').focus();
+			        return false;
+			    }
+				/*
+			    var t1 = $('input#from').val().split("-");
+			    var t2 = $('input#to').val().split("-");
+			    var t1date = new Date(t1[0], t1[1], t1[2]);
+			    var t2date = new Date(t2[0], t2[1], t2[2]);
+			    var diff = t2date - t1date;
+			    var currDay = 24 * 60 * 60 * 1000;
+			    if(parseInt(diff/currDay) > rangeDate){
+			        alert('로그 조회 기간은 ' + rangeDate + '일을 초과할 수 없습니다.');        
+			        return false;
+			    */    
+	    		alert("성공1")
+				});
+			});            
+	</script>
+	<script type="text/javascript">
+	//var rangeDate = 31; // set limit day
+	var setSdate, setEdate;
+	$(function(){
+		$("#from2").datepicker({
+		    dateFormat: 'yy-mm-dd',
+		    onSelect: function(selectDate){
+		        var stxt = selectDate.split("-");
+		            stxt[1] = stxt[1] - 1;
+		        var sdate = new Date(stxt[0], stxt[1], stxt[2]);
+		        var edate = new Date(stxt[0], stxt[1], stxt[2]);
+		            /* edate.setDate(sdate.getDate() + rangeDate); 
+		            - 두번째달력에서 처음 날짜부터 끝 날짜 설정하는 것 */
+		            edate.setDate(sdate.getDate());
+		        
+		        $('#to2').datepicker('option', {
+		            minDate: selectDate,
+		            beforeShow : function () {
+		            	/* $("#to").datepicker( "option", "maxDate", edate ); 
+		            	- 두번째달력에서 처음 날짜부터 끝 날짜 설정하는 것 */             
+		                setSdate = selectDate;
+		                console.log(setSdate)
+		        }});
+		        //to 설정
+		    }
+		    //from 선택되었을 때
+			});
+		});
+	
+	
+	$(function(){
+		$("#to2").datepicker({ 
+		    dateFormat: 'yy-mm-dd',
+		    onSelect : function(selectDate){
+		        setEdate = selectDate;
+		        console.log(setEdate)
+		    }
+			});
+			$('.btn2').on('click', function(e){
+			    if($('input#from2').val() == ''){
+			        alert('시작일을 선택해주세요.');
+			        $('input#from2').focus();
+			        return false;
+			    }else if($('input#to2').val() == ''){
+			        alert('종료일을 선택해주세요.');
+			        $('input#to2').focus();
+			        return false;
+			    }
+				/*
+			    var t1 = $('input#from').val().split("-");
+			    var t2 = $('input#to').val().split("-");
+			    var t1date = new Date(t1[0], t1[1], t1[2]);
+			    var t2date = new Date(t2[0], t2[1], t2[2]);
+			    var diff = t2date - t1date;
+			    var currDay = 24 * 60 * 60 * 1000;
+			    if(parseInt(diff/currDay) > rangeDate){
+			        alert('로그 조회 기간은 ' + rangeDate + '일을 초과할 수 없습니다.');        
+			        return false;
+			    */    
+	    		alert("성공2")
+				});
+			});            
+	</script>
         
         <style>
             *{
@@ -336,28 +367,27 @@ $('.btn').on('click', function(e){
             
             <div class="container" style="margin-top: 10px;">
              <div><h2>1:1 고객 상담</h2></div>
-              <div>
-                  날짜: <input type="text" class="datepicker1">
-                  ~ <input type="text" class="datepicker2"> 
-                  
-              </div>
-  				<div>
+  				<div style="margin-bottom:10px;">
   					<h4>기간 선택</h4>
-						<div class="wrap">
-						  <div>
-						      시작일
-						  </div>
-						  <div>
-						      <input type="text" id="from">
-						  </div>
-						  <div>
-						      ~ 종료일
-						  </div>
-						  <div>
-						      <input type="text" id="to">
-						  </div>  
-						</div>
-						<button class="btn">조회</button>
+						<table class="wrap">
+						<tr>
+							<td>
+						      조회 날짜&nbsp;
+							</td>
+							<td>
+						      <input type="text" id="from1">
+							</td>
+							<td>
+						      &nbsp;&nbsp;~&nbsp;&nbsp; 
+							</td>
+							<td>
+						      <input type="text" id="to1">
+							</td>
+						<td>
+						<button class="btn1" style="margin-left:10px;">조회</button>
+						</td>
+						</tr>	
+						</table>
   				</div>
                 <table class="table table-board table table-hover" style="border-top: 1px solid #e04f5f;border-bottom: 2px solid #ddd">
                     <colgroup>
@@ -460,11 +490,28 @@ function cgoPage(cpages, lines) {
                
             <div class="container" style="margin-top: 10px;">
              <div><h2>1:1 사업자 상담</h2></div>
-              <div>
-                  날짜: <input type="text" class="datepicker1" id="from" name="from">
-                  ~ <input type="text" class="datepicker2" id="to" name="to">
-                  
-              </div>
+              <div style="margin-bottom:10px;">
+  					<h4>기간 선택</h4>
+						<table class="wrap">
+						<tr>
+							<td>
+						      조회 날짜&nbsp;
+							</td>
+							<td>
+						      <input type="text" id="from2">
+							</td>
+							<td>
+						      &nbsp;&nbsp;~&nbsp;&nbsp; 
+							</td>
+							<td>
+						      <input type="text" id="to2">
+							</td>
+						<td>
+						<button class="btn2" style="margin-left:10px;">조회</button>
+						</td>
+						</tr>	
+						</table>
+  				</div>
   
                 <table class="table table-board table table-hover" style="border-top: 1px solid #e04f5f;border-bottom: 2px solid #ddd">
                     <colgroup>
