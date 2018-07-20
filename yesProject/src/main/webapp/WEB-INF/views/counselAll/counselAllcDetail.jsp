@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -184,7 +184,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="../resources/imgs/logo_top2.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="../"><img src="../resources/imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -195,10 +195,10 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">공지사항</a></li>
+                        <li><a href="../yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">고객 상담</a></li>
-                        <li><a href="#">사업자 상담</a></li>
+                        <li><a href="../yesC_cs/">고객 상담</a></li>
+                        <li><a href="../yesS_cs/">사업자 상담</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -218,26 +218,39 @@
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
                   <h1 style="padding: 5px; margin-bottom: 20px;">
-                      <a href="" style="color: black;">1:1문의-가맹점</a>
+                      <a href="" style="color: black;">1:1문의-고객</a>
                   </h1>
 
               </div>
             </div>
             <div style="padding-left: 40px; padding-right: 40px;">
-                <header style="padding-top: 15px"><h4><b>${bean.title }</b></h4></header>
+            	<c:set var="titles" value="${fn:replace(bean.title, crcn,br) }"/>
+				<c:set var="titles" value="${fn:replace(titles,cr,br) }"/>
+                <c:set var="titles" value="${fn:replace(titles,cn,br) }"/>
+                <c:set var="titles" value="${fn:replace(titles,' ',sp) }"/>
+                <header style="padding-top: 15px"><h4><b><c:out value="${titles }" escapeXml="false"/></b></h4></header>
                 <div>
                    <section style="width: 100%; padding-bottom: 30px">
                    <article>     
                     <tr>
                         <td>
-                            <b>문의유형 : <span> ${bean.questionSelect  } </span></b>
+                        	<c:choose>
+                        	<c:when test="${id eq '해당 없음'}">
+								    <b>예약내역 : <span>[해당 없음:(기타)]  </span></b>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<c:forEach var="beans" items="${beans }">
+								    <b>예약내역 : <span>[${beans.address }] ${beans.name } </span></b>
+    		                    </c:forEach>
+                        	</c:otherwise>
+                        	</c:choose>
                         </td>
                     </tr>
                     <br>
                     <tr>
                         <td>${bean.calendar }</td>
                         <td>&nbsp;|&nbsp;</td>
-                        <td>${userInfo.nickName }</td>
+                        <td>작성자 : ${bean.writer }</td>
                     </tr>  
                    </article>
                    </section>
@@ -253,7 +266,7 @@
                 </div>
             </div>
             <div style="border-top: 1px solid #ccc; padding-bottom: 5px"></div>
-            <!-- 답변 영역 -->
+			<!-- 답변 영역 -->
 			<c:choose>
 			  <c:when test = "${bean.comment ne null}">
             	<div style="padding-bottom: 50px;">
@@ -274,7 +287,8 @@
 			                    	<c:set var="comments" value="${fn:replace(comments,cn,br) }"/>
 			                    	<c:set var="comments" value="${fn:replace(comments,' ',sp) }"/>
 			                    	
-			                    	<c:out value="${comments }" escapeXml="false"/>
+			                    	<b><c:out value="${comments }" escapeXml="false"/></b>
+                                    
                                     
                                 </article>
                                 <footer>
@@ -327,7 +341,7 @@
             <div class="container" style="margin-top: 10px;">
               
                 <div class="huge-top">
-                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;" onclick="history.back(1)"  >
+                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;" onclick="history.back(1)" >
                        <span>목록으로</span>
                     </button>
                     

@@ -53,7 +53,7 @@ public class C_CsController {
 			model.addAttribute("page", page);
 			model.addAttribute("paging",paging);
 			
-			return "yesC_cs";
+			return "./clientCounsel/yesC_cs";
 		}
 		
 		@RequestMapping(value="/yesC_cs/{idx}", method=RequestMethod.GET)
@@ -65,7 +65,7 @@ public class C_CsController {
 			 	model.addAttribute("beans", csService.reserveOne(id));
 				model.addAttribute("bean", csService.selectPage(idx));
 			
-			return "yesC_csDetail";
+			return "./clientCounsel/yesC_csDetail";
 		}
 		
 		@RequestMapping("/yesC_cs/yesC_csInsert")
@@ -76,7 +76,7 @@ public class C_CsController {
 			model.addAttribute("userInfo",nickName);
 			
 			model.addAttribute("bean", csService.reserveList(id));
-			return "yesC_csInsert";
+			return "./clientCounsel/yesC_csInsert";
 		}
 		
 		@RequestMapping(value="/yesC_cs/yesC_csInsert",method=RequestMethod.POST)

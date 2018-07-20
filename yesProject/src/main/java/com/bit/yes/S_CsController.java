@@ -36,7 +36,7 @@ public class S_CsController {
 			int maxPost = 10;
 			
 			// 이것도 로그인해서 들어온 사용자의 id값을 넣어주면 id에 해당하는 게시글 목록만 출력
-			String writer = "ghdlf"; 
+			String writer = "ghdlf2"; 
 
 			
 			if(req.getParameter("pages") != null)
@@ -62,7 +62,7 @@ public class S_CsController {
 			model.addAttribute("page", page);
 			model.addAttribute("paging",paging);
 			
-			return "yesS_cs";
+			return "./branchCounsel/yesS_cs";
 		}
 		
 		@RequestMapping(value="/yesS_cs/{idx}", method=RequestMethod.GET)
@@ -73,7 +73,7 @@ public class S_CsController {
 			
 			model.addAttribute("userInfo", nickName);
 			model.addAttribute("bean", scsService.selectPage(idx));
-			return "yesS_csDetail";
+			return "./branchCounsel/yesS_csDetail";
 		}
 		
 		@RequestMapping("/yesS_cs/yesS_csInsert")
@@ -84,7 +84,7 @@ public class S_CsController {
 			nickName=scsService.selectNick(id);
 			model.addAttribute("userInfo",nickName);
 			model.addAttribute("clientID", id);
-			return "yesS_csInsert";
+			return "./branchCounsel/yesS_csInsert";
 		}
 		
 		@RequestMapping(value="/yesS_cs/yesS_csInsert",method=RequestMethod.POST)

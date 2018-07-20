@@ -47,18 +47,18 @@ public class NoticeBbsController {
 		model.addAttribute("page", page);
 		model.addAttribute("paging",paging);
 		
-		return "yesnotice";
+		return "./notice/yesnotice";
 	}
 	
 	@RequestMapping("/yesnotice/yesnoticeInsert")
 	public String insertpage(Model model) throws SQLException {
-		return "yesnoticeInsert";
+		return "./notice/yesnoticeInsert";
 	}
 	
 	@RequestMapping(value="/yesnotice/yesnoticeUpdate/{idx}",method=RequestMethod.GET)
 	public String updatepage(@PathVariable int idx,Model model) throws SQLException {
 		model.addAttribute("bean", noticeService.selectPage(idx));
-		return "yesnoticeUpdate";
+		return "./notice/yesnoticeUpdate";
 	}
 	
 	// 삽입 상세보기 삭제 수정
@@ -72,7 +72,7 @@ public class NoticeBbsController {
 	@RequestMapping(value="/yesnotice/{idx}",method=RequestMethod.GET )
 	public String detail(@PathVariable int idx,Model model) throws SQLException {
 		model.addAttribute("bean", noticeService.selectPage(idx));
-		return "yesnoticeDetail";
+		return "./notice/yesnoticeDetail";
 	}
 	
 	@RequestMapping(value="/yesnotice/{idx}",method=RequestMethod.DELETE)

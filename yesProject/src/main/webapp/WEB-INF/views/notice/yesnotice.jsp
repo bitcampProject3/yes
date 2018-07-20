@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -11,19 +11,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-			$(function(){
-				$("input").hide();
-				$("#del").submit(function(e){
-					//e.preventDefault();
-					var result=window.confirm("삭제하시겠습니까?");
-					console.log(result);
-					if(result) return true;
-					return false;
-				});
-			});
-		</script>
-        
         <style>
             *{
                 font-family: 'Nanum Gothic', sans-serif;
@@ -166,20 +153,12 @@
             border-color: #e04f5f;
             color: white;
             }
-            
             a:hover,a:link,a:visited{
             	text-decoration: none; color:black;
 
             }
+
         </style>
-        
-        <%
-        pageContext.setAttribute("cr", "\r");
-        pageContext.setAttribute("cn", "\n");
-        pageContext.setAttribute("crcn", "\r\n");
-        pageContext.setAttribute("sp", "&nbsp;");
-        pageContext.setAttribute("br", "<br/>");
-        %>
         
     </head>
     <body>
@@ -205,10 +184,10 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">공지사항</a></li>
+                        <li><a href="../yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">고객 상담</a></li>
-                        <li><a href="#">사업자 상담</a></li>
+                        <li><a href="../yesC_cs/">고객 상담</a></li>
+                        <li><a href="../yesS_cs/">사업자 상담</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -221,70 +200,137 @@
             </nav>
             </div>
            
-        <div class="container" style=" border-bottom: 1px solid #CCCCCC;">
            
-           <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
+           <div class="container" style=" border: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
                border-bottom-color: #e04f5f">
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
-                  <h1 style="padding: 5px; margin-bottom: 20px;">
-                      <a href="" style="color: black;">공지사항</a>
-                  </h1>
-
+                  <h1 style="padding: 5px; margin-bottom: 20px;">공지사항</h1>
+                <div class="row" >
+                  <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray; background-color: #e04f5f;
+                    color: white; cursor: pointer;" onclick="location.href='../yesnotice/'">
+                      <h4>
+                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
+                              공지사항
+                          </p>
+                      </h4>
+                  </div>
+                  <div id="cube" class="col-xs-6 col-sm-4" style=" 
+                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;
+                        cursor: pointer;" onclick="location.href='../yesC_cs/'">                                          
+                      <h4>
+                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
+                              고객 상담
+                          </p>
+                      </h4>
+                  </div>
+                   <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray;
+                     cursor: pointer;" onclick="location.href='../yesS_cs/'">
+                      <h4>
+                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
+                              사업자 상담
+                          </p>
+                      </h4>
+                  </div>
+                </div>
               </div>
             </div>
-            <div style="padding-left: 40px; padding-right: 40px;">
-      
-                <header style="padding-top: 15px"><h4><b>[안내] ${bean.title }</b></h4></header>
-                <div>
-                   <section style="width: 100%; padding-bottom: 30px">
-                   <article>
-                       
-                    <tr>
-                        <td>${bean.calendar }</td>
-                        <td>&nbsp;|&nbsp;</td>
-                        <td>${bean.writer }</td>
-                    </tr>
-                   </article>
-                   </section>
-                    <div style="padding-bottom: 30px">
-                    	<c:set var="cmt" value="${fn:replace(bean.content, crcn,br) }"/>
-                    	<c:set var="cmt" value="${fn:replace(cmt,cr,br) }"/>
-                    	<c:set var="cmt" value="${fn:replace(cmt,cn,br) }"/>
-                    	<c:set var="cmt" value="${fn:replace(cmt,' ',sp) }"/>
-                    	
-                    	<c:out value="${cmt }" escapeXml="false"/>
-                    </div>
-                </div>
+            
+            <div class="container" style="margin-top: 10px;">
+                <table class="table table-board table table-hover" style="border-top: 1px solid #e04f5f;border-bottom: 2px solid #ddd">
+                    <colgroup>
+                        <col width="15%">
+                        <col width="*">
+                        <col width="15%">
+                        <col width="15%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">글 번호</th>
+                            <th style="text-align: center">제목</th>
+                            <th style="text-align: center">글쓴이</th>
+                            <th style="text-align: center">날짜</th>
+                        </tr>
+                    </thead>
+                    <c:forEach var="bean" items="${page}">
 
+						<tr>
+							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
+							${bean.index}</td>
+							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
+							${bean.title}</td>
+							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
+							${bean.writer}</td>
+							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
+							${bean.calendar}</td>
+						</tr>
+		
+					</c:forEach>
+
+
+                </table>
+                <div class="huge-top">
+                <a href="./yesnoticeInsert">
+                    <button class="btn btn-normal pull-right" id="insert">
+                       <span class="glyphicon glyphicon-pencil">작성</span>
+                    </button>
+                </a>    
+                </div>
+                
+                		<!-- 페이징  -->
+ 	<c:choose>
+		<c:when test="${paging.numberOfRecords ne NULL and paging.numberOfRecords ne '' and paging.numberOfRecords ne 0}">
+		<div id="paginationUI" class="text-center" style="margin-left: 37px">
+			<ul class="pagination pagination-lg">
+				<c:if test="${paging.currentPageNo gt 5}">  											  <!-- 현재 페이지가 5보다 크다면(즉, 6페이지 이상이라면) -->
+					<li><a href="javascript:goPage(${paging.prevPageNo}, ${paging.maxPost})">이전</a></li> <!-- 이전페이지 표시 -->
+				</c:if>
+				<!-- 다른 페이지를 클릭하였을 시, 그 페이지의 내용 및 하단의 페이징 버튼을 생성하는 조건문-->
+					<c:forEach var="i" begin="${paging.startPageNo}" end="${paging.endPageNo}" step="1"> 
+		            <c:choose>
+		                <c:when test="${i eq paging.currentPageNo}"> 
+		                      <li class="active"><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> <!-- 1페이지부터 10개씩 뽑아내고, 1,2,3페이지순으로 나타내라-->
+		                </c:when>
+		                	<c:otherwise>
+		                    <li><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> 
+							</c:otherwise>
+					</c:choose>
+					</c:forEach>
+			
+				<!-- 소수점 제거 =>-->
+				<fmt:parseNumber var="currentPage" integerOnly="true" value="${(paging.currentPageNo-1)/5}"/>
+				<fmt:parseNumber var="finalPage" integerOnly="true" value="${(paging.finalPageNo-1)/5}"/>
+					
+				<c:if test="${currentPage < finalPage}"> <!-- 현재 페이지가 마지막 페이지보다 작으면 '다음'을 표시한다. -->
+					<li><a href="javascript:goPage(${paging.nextPageNo}, ${paging.maxPost})">다음</a></li>
+				</c:if> 
+			</ul>
+		</div>
+		</c:when>
+		</c:choose>
+
+<script>
+function goPage(pages, lines) {
+    location.href = '?' + "pages=" + pages;
+}
+</script> 
+ 
+ 
+            <div class="text-center">
+                
+            <div class="col-lg-4" style="float: none;margin: auto; width: 373px;">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="검색어를 입력하세요">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" style="color: #e04f5f">
+                    <span class="glyphicon glyphicon-search">
+                    </span>
+                    </button>
+                  </span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
             </div>
             </div>      
-                
-            <div class="container" style="margin-top: 10px;">
-              
-                <div class="huge-top">
-                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;margin-left:10px;" onclick="history.back(1)" >
-                       <span>목록으로</span>
-                    </button>
-
-                    <a href="./yesnoticeUpdate/${bean.index }">
-                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;margin-left:10px;" id="update" type="submit">
-                       <span>수정</span>
-                    </button>
-                    </a>
-
-                    
-                    <form method="post" id="del" style="display:inline">
-						<input type="hidden" name="_method" value="delete"/>
-						<input type="hidden" name="idx" value="${bean.index }"/>
-                    <button class="btn btn-normal pull-right delete" style="margin-bottom: 10px" type="submit" >
-                       <span>삭제</span>
-                    </button>
-                    </form>
-                    
-                </div>
-                
-            </div>
       
                 
 

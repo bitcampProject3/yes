@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -153,13 +154,19 @@
             border-color: #e04f5f;
             color: white;
             }
+            
             a:hover,a:link,a:visited{
-            	text-decoration: none; color:black;
+    	    	text-decoration: none; color:black;
 
             }
-
         </style>
-        
+        <%
+        pageContext.setAttribute("cr", "\r");
+        pageContext.setAttribute("cn", "\n");
+        pageContext.setAttribute("crcn", "\r\n");
+        pageContext.setAttribute("sp", "&nbsp;");
+        pageContext.setAttribute("br", "<br/>");
+        %>
     </head>
     <body>
         <div>
@@ -173,7 +180,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="../resources/imgs/logo_top2.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="../"><img src="../resources/imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -184,10 +191,10 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">공지사항</a></li>
+                        <li><a href="../yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">고객 상담</a></li>
-                        <li><a href="#">사업자 상담</a></li>
+                        <li><a href="../yesC_cs/">고객 상담</a></li>
+                        <li><a href="../yesS_cs/">사업자 상담</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -205,10 +212,10 @@
                border-bottom-color: #e04f5f">
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
-                  <h1 style="padding: 5px; margin-bottom: 20px;">공지사항</h1>
+                  <h1 style="padding: 5px; margin-bottom: 20px;">나의 문의내역(고객)</h1>
                 <div class="row" >
-                  <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray; background-color: #e04f5f;
-                    color: white; cursor: pointer; onclick="location.href="#"";">
+                  <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray; cursor: pointer;" 
+                     onclick="location.href='../yesnotice/'">
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
                               공지사항
@@ -216,8 +223,9 @@
                       </h4>
                   </div>
                   <div id="cube" class="col-xs-6 col-sm-4" style=" 
-                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;
-                        cursor: pointer; onclick="location.href="#"";">                                          
+                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;  
+                       color:white; background-color: #e04f5f; cursor: pointer;" 
+                       onclick="location.href='../yesC_cs/'">                                          
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
                               고객 상담
@@ -225,7 +233,7 @@
                       </h4>
                   </div>
                    <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray;
-                     cursor: pointer; onclick="location.href="#"";">
+                     cursor: pointer;" onclick="location.href='../yesS_cs/'">
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
                               사업자 상담
@@ -237,6 +245,10 @@
             </div>
             
             <div class="container" style="margin-top: 10px;">
+               <ul>
+                   <li>가맹점 정보, 해당 가맹점 문의, 가맹점 불만 등의 문의는 전화문의를 통해 해당 파트너사에 직접 문의시 빠른 처리가 가능합니다.</li>
+                   <li>전화번호, 주소, 이메일, 계좌번호 등의 개인정보는 타인에 의해 도용될 위험이 있으니, 문의 시 입력하지 않도록 주의해 주시기 바랍니다.</li>
+               </ul>
                 <table class="table table-board table table-hover" style="border-top: 1px solid #e04f5f;border-bottom: 2px solid #ddd">
                     <colgroup>
                         <col width="15%">
@@ -251,14 +263,17 @@
                             <th style="text-align: center">글쓴이</th>
                             <th style="text-align: center">날짜</th>
                         </tr>
-                    </thead>
-                    <c:forEach var="bean" items="${page}">
-
+                    </thead>    
+                        <c:forEach var="bean" items="${page}">
+						<c:set var="titles" value="${fn:replace(bean.title, crcn,br) }"/>
+						<c:set var="titles" value="${fn:replace(titles,cr,br) }"/>
+                		<c:set var="titles" value="${fn:replace(titles,cn,br) }"/>
+               			<c:set var="titles" value="${fn:replace(titles,' ',sp) }"/>
 						<tr>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
 							${bean.index}</td>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
-							${bean.title}</td>
+							<c:out value="${titles }" escapeXml="false"/></td>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
 							${bean.writer}</td>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
@@ -266,19 +281,21 @@
 						</tr>
 		
 					</c:forEach>
+                        
 
 
                 </table>
-                <div class="huge-top">
-                <a href="./yesnoticeInsert">
-                    <button class="btn btn-normal pull-right" id="insert">
-                       <span class="glyphicon glyphicon-pencil">작성</span>
-                    </button>
-                </a>    
+                <div class="huge-top" width="100%">
+                <a href="./yesC_csInsert">
+                    <button class="btn btn-normal pull-right" id="counsel">
+                       <span>
+                            문의하기
+                       </span>
+                    </button> 
+                </a>
                 </div>
                 
-                		<!-- 페이징  -->
- 	<c:choose>
+                <c:choose>
 		<c:when test="${paging.numberOfRecords ne NULL and paging.numberOfRecords ne '' and paging.numberOfRecords ne 0}">
 		<div id="paginationUI" class="text-center" style="margin-left: 37px">
 			<ul class="pagination pagination-lg">
@@ -314,8 +331,7 @@ function goPage(pages, lines) {
     location.href = '?' + "pages=" + pages;
 }
 </script> 
- 
- 
+                
             <div class="text-center">
                 
             <div class="col-lg-4" style="float: none;margin: auto; width: 373px;">

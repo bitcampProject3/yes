@@ -80,7 +80,7 @@ public class CounselAllController {
 			model.addAttribute("cpage", cpage);
 			model.addAttribute("cpaging",cpaging);
 			
-			return "counselAll";
+			return "./counselAll/counselAll";
 
 		
 		}
@@ -93,7 +93,7 @@ public class CounselAllController {
 			 	model.addAttribute("beans", caService.creserveOne(id));
 				model.addAttribute("bean", caService.cselectPage(idx));
 				
-			return "counselAllcDetail";
+			return "./counselAll/counselAllcDetail";
 		}
 
 		
@@ -105,7 +105,7 @@ public class CounselAllController {
 			
 			model.addAttribute("userInfo", nickName);
 			model.addAttribute("bean", caService.sselectPage(idx));
-			return "counselAllsDetail";
+			return "./counselAll/counselAllsDetail";
 		}
 		
 		@RequestMapping(value="/counselAll/client={idx}",method=RequestMethod.POST)

@@ -11,6 +11,19 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+			$(function(){
+				$("input").hide();
+				$("#del").submit(function(e){
+					//e.preventDefault();
+					var result=window.confirm("삭제하시겠습니까?");
+					console.log(result);
+					if(result) return true;
+					return false;
+				});
+			});
+		</script>
+        
         <style>
             *{
                 font-family: 'Nanum Gothic', sans-serif;
@@ -147,19 +160,16 @@
                 .col-xs-6 {
                     width: 100%;
                 }
-                .answerA{
-                    width:20%;
-                }
-            }
-            @media all and (min-width: 768px) {
-                .answerA{
-                    width:15%;
-                }
             }
             .pagination>.active>a, .pagination>.active>a:hover, .pagination>.active>a:visited, .pagination>.active>a:link{
             background-color: #e04f5f;
             border-color: #e04f5f;
             color: white;
+            }
+            
+            a:hover,a:link,a:visited{
+            	text-decoration: none; color:black;
+
             }
         </style>
         
@@ -195,10 +205,10 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">공지사항</a></li>
+                        <li><a href="../yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">고객 상담</a></li>
-                        <li><a href="#">사업자 상담</a></li>
+                        <li><a href="../yesC_cs/">고객 상담</a></li>
+                        <li><a href="../yesS_cs/">사업자 상담</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -211,34 +221,30 @@
             </nav>
             </div>
            
-            <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left: 0px; padding-right: 0px;">
+        <div class="container" style=" border-bottom: 1px solid #CCCCCC;">
            
-           <div class="container" style=" border-bottom: 1px solid; padding-left:0px; padding-right:0px; 
+           <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
                border-bottom-color: #e04f5f">
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
                   <h1 style="padding: 5px; margin-bottom: 20px;">
-                      <a href="" style="color: black;">1:1문의-가맹점</a>
+                      <a href="" style="color: black;">공지사항</a>
                   </h1>
 
               </div>
             </div>
             <div style="padding-left: 40px; padding-right: 40px;">
-                <header style="padding-top: 15px"><h4><b>${bean.title }</b></h4></header>
+      
+                <header style="padding-top: 15px"><h4><b>[안내] ${bean.title }</b></h4></header>
                 <div>
                    <section style="width: 100%; padding-bottom: 30px">
-                   <article>     
-                    <tr>
-                        <td>
-                            <b>문의유형 : <span> ${bean.questionSelect  } </span></b>
-                        </td>
-                    </tr>
-                    <br>
+                   <article>
+                       
                     <tr>
                         <td>${bean.calendar }</td>
                         <td>&nbsp;|&nbsp;</td>
-                        <td>${userInfo.nickName }</td>
-                    </tr>  
+                        <td>${bean.writer }</td>
+                    </tr>
                    </article>
                    </section>
                     <div style="padding-bottom: 30px">
@@ -248,71 +254,42 @@
                     	<c:set var="cmt" value="${fn:replace(cmt,' ',sp) }"/>
                     	
                     	<c:out value="${cmt }" escapeXml="false"/>
-                    
                     </div>
                 </div>
+
             </div>
-            <div style="border-top: 1px solid #ccc; padding-bottom: 5px"></div>
-            <!-- 답변 영역 -->
-            <c:choose>
-			  <c:when test = "${bean.comment ne null}">
-            	<div style="padding-bottom: 50px;">
-                <table style="width: 100%"> 
-                    <td class="answerA" style="text-align: center;">
-                        <h2 style="color: #e04f5f">A</h2>
-                    </td>
-                    <td style="width:auto">
-                        <div>
-                            <section>
-                                <header style="padding-bottom: 30px;">
-                                    <span style="color:#e04f5f"><h3 style="margin-top: 45px;"><b>답변</b></h3></span>
-                                    <b>[고객센터에서 답변드립니다.]</b>
-                                </header>
-                                <article style="width: auto; height: auto; padding-bottom: 40px;">
-                                    <c:set var="comments" value="${fn:replace(bean.comment, crcn,br) }"/>
-			                    	<c:set var="comments" value="${fn:replace(comments,cr,br) }"/>
-			                    	<c:set var="comments" value="${fn:replace(comments,cn,br) }"/>
-			                    	<c:set var="comments" value="${fn:replace(comments,' ',sp) }"/>
-			                    	
-			                    	<b><c:out value="${comments }" escapeXml="false"/></b>
-                                    
-                                    
-                                </article>
-                                <footer>
-                                    <ul>
-                                        <li style="margin-bottom: 15px">추가로 필요한 내용이 있으시면 언제든지 
-                                        고객센터로(1588-4763)<br>
-                                        또는, 1:1문의를 통해 요청해 주시면
-                                        감사하겠습니다.
-                                        </li>
-                                        <li>문의를 통해 제공된 내용은 모두 저장이 됨을 알려드립니다.</li>
-                                        
-                                    </ul>
-                                    
-                                </footer>
-                            </section>
-                        </div>
-                    </td>
-                </table>   
-            </div>
-			</c:when>
-			<c:when test = "${bean.comment eq null }">
-				<div style="text-align: center"><h4><b>답변이 등록되어 있지 않습니다....</b></h4></div>
-			</c:when>
-			</c:choose>
-            
             </div>      
                 
             <div class="container" style="margin-top: 10px;">
               
                 <div class="huge-top">
-                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;" onclick="history.back(1)"  >
+                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;margin-left:10px;" onclick="history.back(1)" >
                        <span>목록으로</span>
                     </button>
+
+                    <a href="./yesnoticeUpdate/${bean.index }">
+                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;margin-left:10px;" id="update" type="submit">
+                       <span>수정</span>
+                    </button>
+                    </a>
+
+                    
+                    <form method="post" id="del" style="display:inline">
+						<input type="hidden" name="_method" value="delete"/>
+						<input type="hidden" name="idx" value="${bean.index }"/>
+                    <button class="btn btn-normal pull-right delete" style="margin-bottom: 10px" type="submit" >
+                       <span>삭제</span>
+                    </button>
+                    </form>
                     
                 </div>
                 
             </div>
+      
+                
+
+
+   
 
     </body>
 </html>

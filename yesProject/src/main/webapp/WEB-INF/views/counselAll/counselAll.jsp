@@ -2,6 +2,7 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -67,6 +68,64 @@
         }
         });
         });
+</script>
+
+<script type="text/javascript">
+var rangeDate = 31; // set limit day
+var setSdate, setEdate;
+$("#from").datepicker({
+    dateFormat: 'yy-mm-dd',
+    minDate: 0,
+    onSelect: function(selectDate){
+        var stxt = selectDate.split("-");
+            stxt[1] = stxt[1] - 1;
+        var sdate = new Date(stxt[0], stxt[1], stxt[2]);
+        var edate = new Date(stxt[0], stxt[1], stxt[2]);
+            edate.setDate(sdate.getDate() + rangeDate);
+        
+        $('#to').datepicker('option', {
+            minDate: selectDate,
+            beforeShow : function () {
+                $("#to").datepicker( "option", "maxDate", edate );                
+                setSdate = selectDate;
+                console.log(setSdate)
+        }});
+        //to 설정
+    }
+    //from 선택되었을 때
+});
+            
+$("#to").datepicker({ 
+    dateFormat: 'yy-mm-dd',
+    onSelect : function(selectDate){
+        setEdate = selectDate;
+        console.log(setEdate)
+    }
+});
+$('.btn').on('click', function(e){
+    if($('input#from').val() == ''){
+        alert('시작일을 선택해주세요.');
+        $('input#from').focus();
+        return false;
+    }else if($('input#to').val() == ''){
+        alert('종료일을 선택해주세요.');
+        $('input#to').focus();
+        return false;
+    }
+
+    var t1 = $('input#from').val().split("-");
+    var t2 = $('input#to').val().split("-");
+    var t1date = new Date(t1[0], t1[1], t1[2]);
+    var t2date = new Date(t2[0], t2[1], t2[2]);
+    var diff = t2date - t1date;
+    var currDay = 24 * 60 * 60 * 1000;
+    if(parseInt(diff/currDay) > rangeDate){
+        alert('로그 조회 기간은 ' + rangeDate + '일을 초과할 수 없습니다.');        
+        return false;
+    }
+
+    alert("성공")
+});
 </script>
 
 
@@ -218,7 +277,13 @@
                 width: auto;
             }
         </style>
-        
+        <%
+        pageContext.setAttribute("cr", "\r");
+        pageContext.setAttribute("cn", "\n");
+        pageContext.setAttribute("crcn", "\r\n");
+        pageContext.setAttribute("sp", "&nbsp;");
+        pageContext.setAttribute("br", "<br/>");
+        %>
     </head>
     <body>
         <div>
@@ -232,7 +297,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="../resources/imgs/logo_top2.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="../"><img src="../resources/imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -243,10 +308,10 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">공지사항</a></li>
+                        <li><a href="../yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">고객 상담</a></li>
-                        <li><a href="#">사업자 상담</a></li>
+                        <li><a href="../yesC_cs/">고객 상담</a></li>
+                        <li><a href="../yesS_cs/">사업자 상담</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -272,17 +337,35 @@
             <div class="container" style="margin-top: 10px;">
              <div><h2>1:1 고객 상담</h2></div>
               <div>
-                  날짜: <input type="text" class="datepicker1" id="from" name="from">
-                  ~ <input type="text" class="datepicker2" id="to" name="to">
+                  날짜: <input type="text" class="datepicker1">
+                  ~ <input type="text" class="datepicker2"> 
                   
               </div>
-  
+  				<div>
+  					<h4>기간 선택</h4>
+						<div class="wrap">
+						  <div>
+						      시작일
+						  </div>
+						  <div>
+						      <input type="text" id="from">
+						  </div>
+						  <div>
+						      ~ 종료일
+						  </div>
+						  <div>
+						      <input type="text" id="to">
+						  </div>  
+						</div>
+						<button class="btn">조회</button>
+  				</div>
                 <table class="table table-board table table-hover" style="border-top: 1px solid #e04f5f;border-bottom: 2px solid #ddd">
                     <colgroup>
                         <col width="15%">
                         <col width="*">
                         <col width="15%">
                         <col width="15%">
+                        <col width="10%">
                     </colgroup>
                     <thead>
                         <tr>
@@ -290,19 +373,31 @@
                             <th style="text-align: center">제목</th>
                             <th style="text-align: center">글쓴이</th>
                             <th style="text-align: center">날짜</th>
+                            <th style="text-align: center">답변여부</th>
                         </tr>
                     </thead>    
                         <c:forEach var="cbean" items="${cpage}">
-
+						<c:set var="ctitles" value="${fn:replace(cbean.title, crcn,br) }"/>
+						<c:set var="ctitles" value="${fn:replace(ctitles,cr,br) }"/>
+                		<c:set var="ctitles" value="${fn:replace(ctitles,cn,br) }"/>
+               			<c:set var="ctitles" value="${fn:replace(ctitles,' ',sp) }"/>
 						<tr>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./client=${cbean.index }' ">
 							${cbean.index}</td>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./client=${cbean.index }' ">
-							${cbean.title}</td>
+							<c:out value="${ctitles }" escapeXml="false"/></td>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./client=${cbean.index }' ">
 							${cbean.writer}</td>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./client=${cbean.index }' ">
 							${cbean.calendar}</td>
+							<c:choose>
+								<c:when test="${cbean.comment eq null }">
+									<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./client=${cbean.index }' ">X</td>
+								</c:when>
+								<c:otherwise>
+									<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./client=${cbean.index }' ">O</td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 		
 					</c:forEach>
@@ -377,6 +472,7 @@ function cgoPage(cpages, lines) {
                         <col width="*">
                         <col width="15%">
                         <col width="15%">
+                        <col width="10%">
                     </colgroup>
                     <thead>
                         <tr>
@@ -384,19 +480,31 @@ function cgoPage(cpages, lines) {
                             <th style="text-align: center">제목</th>
                             <th style="text-align: center">글쓴이</th>
                             <th style="text-align: center">날짜</th>
+                            <th style="text-align: center">답변여부</th>
                         </tr>
                     </thead>    
                         <c:forEach var="sbean" items="${spage}" varStatus="status">
-
+						<c:set var="stitles" value="${fn:replace(sbean.title, crcn,br) }"/>
+						<c:set var="stitles" value="${fn:replace(stitles,cr,br) }"/>
+                		<c:set var="stitles" value="${fn:replace(stitles,cn,br) }"/>
+               			<c:set var="stitles" value="${fn:replace(stitles,' ',sp) }"/>
 						<tr>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./store=${sbean.index }' ">
 							${sbean.index}</td>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./store=${sbean.index }' ">
-							${sbean.title}</td>
+							<c:out value="${stitles }" escapeXml="false"/></td>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./store=${sbean.index }' ">
 							${userNick[status.index] }</td>
 							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./store=${sbean.index }' ">
 							${sbean.calendar}</td>
+							<c:choose>
+								<c:when test="${sbean.comment eq null }">
+									<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./client=${cbean.index }' ">X</td>
+								</c:when>
+								<c:otherwise>
+									<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./client=${cbean.index }' ">O</td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 					
 					</c:forEach>

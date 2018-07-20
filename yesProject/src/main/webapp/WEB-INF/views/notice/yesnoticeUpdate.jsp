@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -147,18 +147,36 @@
                 .col-xs-6 {
                     width: 100%;
                 }
+                #btnform{
+                    width: 100%;
+                    margin-top: 10px;
+                    display: inline-grid;
+                }
+                
+                #writeCancel{
+                    margin-top: 10px;
+                }
+                
+                #writeReset{
+                    margin-right: 0px;
+                    margin-top: 5px;
+                }
+
             }
             .pagination>.active>a, .pagination>.active>a:hover, .pagination>.active>a:visited, .pagination>.active>a:link{
             background-color: #e04f5f;
             border-color: #e04f5f;
             color: white;
             }
-            a:hover,a:link,a:visited{
-    	    	text-decoration: none; color:black;
-
-            }
-
         </style>
+        
+        <%
+        pageContext.setAttribute("cr", "\r");
+        pageContext.setAttribute("cn", "\n");
+        pageContext.setAttribute("crcn", "\r\n");
+        pageContext.setAttribute("sp", "&nbsp;");
+        pageContext.setAttribute("br", "<br/>");
+        %>
         
     </head>
     <body>
@@ -173,7 +191,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="../resources/imgs/logo_top2.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="../../resources/imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -184,10 +202,10 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">공지사항</a></li>
+                        <li><a href="../../yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">고객 상담</a></li>
-                        <li><a href="#">사업자 상담</a></li>
+                        <li><a href="../../yesC_cs/">고객 상담</a></li>
+                        <li><a href="../../yesS_cs/">사업자 상담</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -200,15 +218,15 @@
             </nav>
             </div>
            
-           
+           <div class="container">
            <div class="container" style=" border: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
                border-bottom-color: #e04f5f">
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
-                  <h1 style="padding: 5px; margin-bottom: 20px;">나의 문의내역(가맹점)</h1>
+                  <h1 style="padding: 5px; margin-bottom: 20px;">공지사항</h1>
                 <div class="row" >
-                  <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray; cursor: pointer; 
-                     onclick="location.href="#"";">
+                  <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray; background-color: #e04f5f;
+                    color: white; cursor: pointer;" onclick="location.href='../../yesnotice/'">
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
                               공지사항
@@ -216,9 +234,8 @@
                       </h4>
                   </div>
                   <div id="cube" class="col-xs-6 col-sm-4" style=" 
-                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;  
-                      cursor: pointer; 
-                       onclick="location.href="#"";">                                          
+                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;
+                        cursor: pointer;" onclick="location.href='../../yesC_cs/'">                                          
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
                               고객 상담
@@ -226,8 +243,7 @@
                       </h4>
                   </div>
                    <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray;
-                     color:white; background-color: #e04f5f; cursor: pointer; 
-                     onclick="location.href="#"";">
+                     cursor: pointer;" onclick="location.href='../../yesS_cs/'">
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
                               사업자 상담
@@ -236,113 +252,68 @@
                   </div>
                 </div>
               </div>
-            </div>
-            
-            <div class="container" style="margin-top: 10px;">
-               <ul>
-                   <li>가맹점 정보 수정, 문의 내역, 서비스 불만 등의 문의등은 전화문의를 통해 직접 문의시 빠른 처리가 가능합니다.</li>
-                   <li>전화번호, 주소, 이메일, 계좌번호 등의 개인정보는 타인에 의해 도용될 위험이 있으니, 문의 시 입력하지 않도록 주의해 주시기 바랍니다.</li>
-               </ul>
-				
-                <table class="table table-board table table-hover" style="border-top: 1px solid #e04f5f;border-bottom: 2px solid #ddd">
-                    <colgroup>
-                        <col width="15%">
-                        <col width="*">
-                        <col width="15%">
-                        <col width="15%">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th style="text-align: center">글 번호</th>
-                            <th style="text-align: center">제목</th>
-                            <th style="text-align: center">글쓴이</th>
-                            <th style="text-align: center">날짜</th>
-                        </tr>
-                    </thead>    
-                        <c:forEach var="bean" items="${page}" varStatus="status">
+        </div>
+           
+            <div class="panel panel-c">
+            <div class="panel-heading"><h4>수정하기</h4></div>  
+                <div class="panel-body">
 
-						<tr>
-							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
-							${bean.index}</td>
-							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
-							${bean.title}</td>
-							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
-							${userNick[status.index] }</td>
-							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
-							${bean.calendar}</td>
-						</tr>
-					
-					</c:forEach>
+                <div class="container"> 
+                
+				<form method="post">
+                <div class="form-group"> 
+                <label for="title">제목</label> 
+                <input type="text" style="width: 80%"class="form-control" name ="title" id="title" placeholder="제목을 입력해주세요"
+                value="${bean.title }"> 
+                </div> 
+                
+                
+                <div class="form-group"> 
+                <label for="writer">작성자</label> 
+                <input type="text" style="width:30%" class="form-control" name ="writer" id="writer" placeholder="작성자"
+                value="${bean.writer }" disabled="disabled"> 
+                </div> 
 
-                </table>
-                <div class="huge-top" width="100%">
-                <a href="./yesS_csInsert">
-                    <button class="btn btn-normal pull-right" id="insert">
-                       <span>
-                            문의하기
-                       </span>
-                    </button> 
-                </a>    
+
+                <div class="form-group"> 
+                <c:set var="cmt" value="${fn:replace(bean.content, crcn,br) }"/>
+                <c:set var="cmt" value="${fn:replace(cmt,cr,br) }"/>
+                <c:set var="cmt" value="${fn:replace(cmt,cn,br) }"/>
+                <c:set var="cmt" value="${fn:replace(cmt,' ',sp) }"/>
+                <c:set var="cmt" value="${fn:replace(cmt,br,crcn) }"/>
+                <label for="content">내용:</label> 
+                <textarea class="form-control" rows="10" name="content" id="content"><c:out value="${cmt }" escapeXml="false"/></textarea> 
+                
+                </div> 
+
+
+                <div class="form-group" style="padding-bottom: 20px; border-bottom: 1px solid #ccc;"> 
+                <label for="image">파일 첨부</label> 
+                <input type="file" id="image" name="image"> 
+                </div> 
+
+
+                <div class="center-block" style='width:200px;text-align: center;'>
+                <!-- Standard button -->
+                    <button id="update" name="update" type="submit" class="btn btn-default">수정하기</button>
                 </div>
-                
-                <c:choose>
-		<c:when test="${paging.numberOfRecords ne NULL and paging.numberOfRecords ne '' and paging.numberOfRecords ne 0}">
-		<div id="paginationUI" class="text-center" style="margin-left: 37px">
-			<ul class="pagination pagination-lg">
-				<c:if test="${paging.currentPageNo gt 5}">  											  <!-- 현재 페이지가 5보다 크다면(즉, 6페이지 이상이라면) -->
-					<li><a href="javascript:goPage(${paging.prevPageNo}, ${paging.maxPost})">이전</a></li> <!-- 이전페이지 표시 -->
-				</c:if>
-				<!-- 다른 페이지를 클릭하였을 시, 그 페이지의 내용 및 하단의 페이징 버튼을 생성하는 조건문-->
-					<c:forEach var="i" begin="${paging.startPageNo}" end="${paging.endPageNo}" step="1"> 
-		            <c:choose>
-		                <c:when test="${i eq paging.currentPageNo}"> 
-		                      <li class="active"><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> <!-- 1페이지부터 10개씩 뽑아내고, 1,2,3페이지순으로 나타내라-->
-		                </c:when>
-		                	<c:otherwise>
-		                    <li><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> 
-							</c:otherwise>
-					</c:choose>
-					</c:forEach>
-			
-				<!-- 소수점 제거 =>-->
-				<fmt:parseNumber var="currentPage" integerOnly="true" value="${(paging.currentPageNo-1)/5}"/>
-				<fmt:parseNumber var="finalPage" integerOnly="true" value="${(paging.finalPageNo-1)/5}"/>
-					
-				<c:if test="${currentPage < finalPage}"> <!-- 현재 페이지가 마지막 페이지보다 작으면 '다음'을 표시한다. -->
-					<li><a href="javascript:goPage(${paging.nextPageNo}, ${paging.maxPost})">다음</a></li>
-				</c:if> 
-			</ul>
-		</div>
-		</c:when>
-		</c:choose>
 
-<script>
-function goPage(pages, lines) {
-    location.href = '?' + "pages=" + pages;
-}
-</script>  
-                
-                
-            <div class="text-center">
-                
-            <div class="col-lg-4" style="float: none;margin: auto; width: 373px;">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="검색어를 입력하세요">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="color: #e04f5f">
-                    <span class="glyphicon glyphicon-search">
-                    </span>
-                    </button>
-                  </span>
-                </div><!-- /input-group -->
-            </div><!-- /.col-lg-6 -->
-            </div>
-            </div>      
-      
+                <div id="btnform"> 
+                <button class="btn btn-default pull-right" id="writeCancel" onclick="history.go(-2)" style="margin-right: 5px;">
+                       <span>
+                          	 작성 취소
+                       </span>
+                </button> 
+                <button id="writeReset" type="reset" class="btn btn-default pull-right" style="margin-right: 5px; ">
+                    		다시 쓰기
+                </button>
+                </div> 
+				</form>
                 
 
-
-   
-
+                </div> 
+                </div> <!--panel end--> 
+            </div> 
+        </div>
     </body>
 </html>

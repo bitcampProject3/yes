@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -133,7 +132,7 @@
                 }
 */
             }
-             #cube:hover{
+            #cube:hover{
                 background-color: #e04f5f;
                 color: white;
           
@@ -168,8 +167,9 @@
             border-color: #e04f5f;
             color: white;
             }
-        </style>
 
+        </style>
+        
     </head>
     <body>
         <div>
@@ -183,7 +183,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="../resources/imgs/logo_top2.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="../"><img src="../resources/imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -194,10 +194,10 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">공지사항</a></li>
+                        <li><a href="../yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">고객 상담</a></li>
-                        <li><a href="#">사업자 상담</a></li>
+                        <li><a href="../yesC_cs/">고객 상담</a></li>
+                        <li><a href="../yesS_cs/">사업자 상담</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -215,10 +215,10 @@
                border-bottom-color: #e04f5f">
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
-                  <h1 style="padding: 5px; margin-bottom: 20px;">나의 문의내역(고객)</h1>
+                  <h1 style="padding: 5px; margin-bottom: 20px;">나의 문의내역(가맹점)</h1>
                 <div class="row" >
-                  <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray; cursor: pointer; 
-                     onclick="location.href="#"";">
+                  <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray; cursor: pointer;" 
+                     onclick="location.href='../yesnotice/'">
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
                               공지사항
@@ -227,8 +227,8 @@
                   </div>
                   <div id="cube" class="col-xs-6 col-sm-4" style=" 
                      border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;  
-                       color:white; background-color: #e04f5f; cursor: pointer; 
-                       onclick="location.href="#"";">                                          
+                      cursor: pointer;" 
+                       onclick="location.href='../yesC_cs/'">                                          
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
                               고객 상담
@@ -236,7 +236,8 @@
                       </h4>
                   </div>
                    <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray;
-                     cursor: pointer; onclick="location.href="#"";">
+                     color:white; background-color: #e04f5f; cursor: pointer;" 
+                     onclick="location.href='../yesS_cs/'">
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
                               사업자 상담
@@ -246,10 +247,11 @@
                 </div>
               </div>
             </div>
-            <div class="panel panel-c">
-            <div class="panel-heading"><h4>1:1 문의</h4></div>  
+            
+           <div class="panel panel-c">
+            <div class="panel-heading"><h4>1:1 (가맹점)문의</h4></div>  
                <ul>
-                   <li>가맹점 정보, 해당 가맹점 문의, 가맹점 불만 등의 문의는 전화문의를 통해 파트너사에 직접 문의시 빠른 처리가 가능합니다.</li>
+                   <li>가맹점 정보 수정, 문의 내역, 서비스 불만 등의 문의등은 전화문의를 통해 직접 문의시 빠른 처리가 가능합니다.</li>
                    <li>전화번호, 주소, 이메일, 계좌번호 등의 개인정보는 타인에 의해 도용될 위험이 있으니, 문의 시 입력하지 않도록 주의해 주시기 바랍니다.</li>
                </ul>
                 <div class="panel-body">
@@ -257,39 +259,38 @@
 
                <form method="post">
                 <div class="form-group"> 
-                <label for="branchID">예약 내역</label> 
-                    <select name="branchID" id="branchID" class="form-control" style="width: 50%">
-                        <option value="" disabled selected>예약 내역을 선택해주세요</option>   
-                        <option value="해당 없음">- 해당 없음(기타)</option>
-                        <c:forEach var="bean" items="${bean}">
-                        <option value="${bean.id}">- [${bean.address }]${bean.name }
-                        </option>
-                        </c:forEach>
+                <label for="questionSelect">문의 유형</label> 
+                    <select name="questionSelect" id="questionSelect" class="form-control" style="width: 50%">
+                        <option value="" disabled selected>문의 유형을 선택해주세요</option>   
+                        <option value="해당 없음(기타)">- 해당 없음(기타)</option>
+                        <option value="[지도 위치 표시 관련]">- [지도 위치 표시 관련]</option>
+                        <option value="[가맹점 정보 수정/삭제]">- [정보 수정/삭제]</option>
+                        <option value="[시스템 관련]">- [시스템 관련]</option>
+                        <option value="[사이트 이용방법 관련]">- [사이트 이용방법 관련]</option>
                     </select>       
-                </div>
+                </div> 
+               
                 <div class="form-group"> 
-                <label for="title">제목</label>
+                <label for="title">제목</label> 
                 <input type="text" style="width: 80%"class="form-control" name ="title" id="title" 
                 placeholder="제목을 입력해주세요"> 
                 </div> 
-                
-                <input type="hidden" value=${clientID } name="clientID" id="clientID"/>
-                
-                <input type="hidden" value=${userInfo.nickName } name ="writer" id="writer"/> 
-				
+
+
                 <div class="form-group"> 
                 <label for="content">내용:</label> 
                 <textarea class="form-control" rows="10" name="content" id="content"></textarea> 
                 </div> 
+               	
+                <input type="hidden" value=${clientID } name="writer" id="writer"/>
 
-
-                <div class="form-group" style="padding-bottom: 20px; border-bottom: 1px solid #ccc;"> 
+                <div class="form-group" style="padding-bottom: 20px; border-bottom: 1px solid #ccc;">
                 <label for="image">파일 첨부</label> 
                 <input type="file" id="image" name="image"> 
                 </div> 
 
-		
- 				<div class="center-block" style='width:200px;text-align: center;'>
+
+				<div class="center-block" style='width:200px;text-align: center;'>
                 <!-- Standard button -->
                     <button id="writebtn" type="submit" class="btn btn-default">글 쓰기</button>
                 </div>

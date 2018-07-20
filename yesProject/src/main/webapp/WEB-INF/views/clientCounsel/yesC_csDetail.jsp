@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -146,29 +147,29 @@
                 .col-xs-6 {
                     width: 100%;
                 }
-                #btnform{
-                    width: 100%;
-                    margin-top: 10px;
-                    display: inline-grid;
+                .answerA{
+                    width:20%;
                 }
-                
-                #writeCancel{
-                    margin-top: 10px;
+            }
+            @media all and (min-width: 768px) {
+                .answerA{
+                    width:15%;
                 }
-                
-                #writeReset{
-                    margin-right: 0px;
-                    margin-top: 5px;
-                }
-
             }
             .pagination>.active>a, .pagination>.active>a:hover, .pagination>.active>a:visited, .pagination>.active>a:link{
             background-color: #e04f5f;
             border-color: #e04f5f;
             color: white;
             }
-
         </style>
+        
+        <%
+        pageContext.setAttribute("cr", "\r");
+        pageContext.setAttribute("cn", "\n");
+        pageContext.setAttribute("crcn", "\r\n");
+        pageContext.setAttribute("sp", "&nbsp;");
+        pageContext.setAttribute("br", "<br/>");
+        %>
         
     </head>
     <body>
@@ -183,7 +184,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="../resources/imgs/logo_top2.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="../"><img src="../resources/imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -194,10 +195,10 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="#">공지사항</a></li>
+                        <li><a href="../yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">고객 상담</a></li>
-                        <li><a href="#">사업자 상담</a></li>
+                        <li><a href="../yesC_cs/">고객 상담</a></li>
+                        <li><a href="../yesS_cs/">사업자 상담</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -210,107 +211,121 @@
             </nav>
             </div>
            
-           <div class="container">
-           <div class="container" style=" border: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
+            <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left: 0px; padding-right: 0px;">
+           
+           <div class="container" style=" border-bottom: 1px solid; padding-left:0px; padding-right:0px; 
                border-bottom-color: #e04f5f">
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
-                  <h1 style="padding: 5px; margin-bottom: 20px;">나의 문의내역(가맹점)</h1>
-                <div class="row" >
-                  <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray; cursor: pointer; 
-                     onclick="location.href="#"";">
-                      <h4>
-                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              공지사항
-                          </p>
-                      </h4>
-                  </div>
-                  <div id="cube" class="col-xs-6 col-sm-4" style=" 
-                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;  
-                      cursor: pointer; 
-                       onclick="location.href="#"";">                                          
-                      <h4>
-                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              고객 상담
-                          </p>
-                      </h4>
-                  </div>
-                   <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray;
-                     color:white; background-color: #e04f5f; cursor: pointer; 
-                     onclick="location.href="#"";">
-                      <h4>
-                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              사업자 상담
-                          </p>
-                      </h4>
-                  </div>
-                </div>
+                  <h1 style="padding: 5px; margin-bottom: 20px;">
+                      <a href="" style="color: black;">1:1문의-고객</a>
+                  </h1>
+
               </div>
             </div>
+            <div style="padding-left: 40px; padding-right: 40px;">
+            	<c:set var="titles" value="${fn:replace(bean.title, crcn,br) }"/>
+				<c:set var="titles" value="${fn:replace(titles,cr,br) }"/>
+                <c:set var="titles" value="${fn:replace(titles,cn,br) }"/>
+                <c:set var="titles" value="${fn:replace(titles,' ',sp) }"/>
+                <header style="padding-top: 15px"><h4><b><c:out value="${titles }" escapeXml="false"/></b></h4></header>
+                <div>
+                   <section style="width: 100%; padding-bottom: 30px">
+                   <article>     
+                    <tr>
+                        <td>
+                        	<c:choose>
+                        	<c:when test="${id eq '해당 없음'}">
+								    <b>예약내역 : <span>[해당 없음:(기타)]  </span></b>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<c:forEach var="beans" items="${beans }">
+								    <b>예약내역 : <span>[${beans.address }] ${beans.name } </span></b>
+    		                    </c:forEach>
+                        	</c:otherwise>
+                        	</c:choose>
+                        </td>
+                    </tr>
+                    <br>
+                    <tr>
+                        <td>${bean.calendar }</td>
+                        <td>&nbsp;|&nbsp;</td>
+                        <td>작성자 : ${bean.writer }</td>
+                    </tr>  
+                   </article>
+                   </section>
+                    <div style="padding-bottom: 30px">
+                    	<c:set var="cmt" value="${fn:replace(bean.content, crcn,br) }"/>
+                    	<c:set var="cmt" value="${fn:replace(cmt,cr,br) }"/>
+                    	<c:set var="cmt" value="${fn:replace(cmt,cn,br) }"/>
+                    	<c:set var="cmt" value="${fn:replace(cmt,' ',sp) }"/>
+                    	
+                    	<c:out value="${cmt }" escapeXml="false"/>
+                    
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #ccc; padding-bottom: 5px"></div>
+            <!-- 답변 영역 -->
+            <c:choose>
+			  <c:when test = "${bean.comment ne null}">
+            	<div style="padding-bottom: 50px;">
+                <table style="width: 100%"> 
+                    <td class="answerA" style="text-align: center;">
+                        <h2 style="color: #e04f5f">A</h2>
+                    </td>
+                    <td style="width:auto">
+                        <div>
+                            <section>
+                                <header style="padding-bottom: 30px;">
+                                    <span style="color:#e04f5f"><h3 style="margin-top: 45px;"><b>답변</b></h3></span>
+                                    <b>[고객센터에서 답변드립니다.]</b>
+                                </header>
+                                <article style="width: auto; height: auto; padding-bottom: 40px;">
+                                    <c:set var="comments" value="${fn:replace(bean.comment, crcn,br) }"/>
+			                    	<c:set var="comments" value="${fn:replace(comments,cr,br) }"/>
+			                    	<c:set var="comments" value="${fn:replace(comments,cn,br) }"/>
+			                    	<c:set var="comments" value="${fn:replace(comments,' ',sp) }"/>
+			                    	
+			                    	<b><c:out value="${comments }" escapeXml="false"/></b>
+                                    
+                                    
+                                </article>
+                                <footer>
+                                    <ul>
+                                        <li style="margin-bottom: 15px">추가로 필요한 내용이 있으시면 언제든지 
+                                        고객센터로(1588-4763)<br>
+                                        또는, 1:1문의를 통해 요청해 주시면
+                                        감사하겠습니다.
+                                        </li>
+                                        <li>문의를 통해 제공된 내용은 모두 저장이 됨을 알려드립니다.</li>
+                                        
+                                    </ul>
+                                    
+                                </footer>
+                            </section>
+                        </div>
+                    </td>
+                </table>   
+            </div>
+			</c:when>
+			<c:when test = "${bean.comment eq null }">
+				<div style="text-align: center"><h4><b>답변이 등록되어 있지 않습니다....</b></h4></div>
+			</c:when>
+			</c:choose>
             
-           <div class="panel panel-c">
-            <div class="panel-heading"><h4>1:1 (가맹점)문의</h4></div>  
-               <ul>
-                   <li>가맹점 정보 수정, 문의 내역, 서비스 불만 등의 문의등은 전화문의를 통해 직접 문의시 빠른 처리가 가능합니다.</li>
-                   <li>전화번호, 주소, 이메일, 계좌번호 등의 개인정보는 타인에 의해 도용될 위험이 있으니, 문의 시 입력하지 않도록 주의해 주시기 바랍니다.</li>
-               </ul>
-                <div class="panel-body">
-                <div class="container"> 
-
-               <form method="post">
-                <div class="form-group"> 
-                <label for="questionSelect">문의 유형</label> 
-                    <select name="questionSelect" id="questionSelect" class="form-control" style="width: 50%">
-                        <option value="" disabled selected>문의 유형을 선택해주세요</option>   
-                        <option value="해당 없음(기타)">- 해당 없음(기타)</option>
-                        <option value="[지도 위치 표시 관련]">- [지도 위치 표시 관련]</option>
-                        <option value="[가맹점 정보 수정/삭제]">- [정보 수정/삭제]</option>
-                        <option value="[시스템 관련]">- [시스템 관련]</option>
-                        <option value="[사이트 이용방법 관련]">- [사이트 이용방법 관련]</option>
-                    </select>       
-                </div> 
-               
-                <div class="form-group"> 
-                <label for="title">제목</label> 
-                <input type="text" style="width: 80%"class="form-control" name ="title" id="title" 
-                placeholder="제목을 입력해주세요"> 
-                </div> 
-
-
-                <div class="form-group"> 
-                <label for="content">내용:</label> 
-                <textarea class="form-control" rows="10" name="content" id="content"></textarea> 
-                </div> 
-               	
-                <input type="hidden" value=${clientID } name="writer" id="writer"/>
-
-                <div class="form-group" style="padding-bottom: 20px; border-bottom: 1px solid #ccc;">
-                <label for="image">파일 첨부</label> 
-                <input type="file" id="image" name="image"> 
-                </div> 
-
-
-				<div class="center-block" style='width:200px;text-align: center;'>
-                <!-- Standard button -->
-                    <button id="writebtn" type="submit" class="btn btn-default">글 쓰기</button>
+            </div>      
+                
+            <div class="container" style="margin-top: 10px;">
+              
+                <div class="huge-top">
+                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;" onclick="history.back(1)"  >
+                       <span>목록으로</span>
+                    </button>
+                    
                 </div>
                 
-                <div id="btnform"> 
-                <button id="writeReset" type="reset" class="btn btn-default pull-right" style="margin-right: 5px; ">
-                    		다시 쓰기
-                </button>
-                </div> 
-				</form>
-                <button class="btn btn-default pull-right" id="writeCancel" onclick="history.back(1)" style="margin-right: 5px;">
-                       <span>
-                          	 목록으로
-                       </span>
-                </button> 
+            </div>
 
-                </div> 
-                </div> <!--panel end--> 
-            </div> 
-        </div>
-   
     </body>
 </html>
