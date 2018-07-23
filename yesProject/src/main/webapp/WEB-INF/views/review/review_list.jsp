@@ -164,8 +164,7 @@ nav a {
                 }
                 .navbar-nav{
                     background-color: black;    
-                }
-*/
+                }*/
 }
 </style>
 </head>
@@ -214,74 +213,30 @@ nav a {
 		</nav>
 		<div style=""></div>
 	</div>
-	<div class="drop_back" id="menu">
-		지역별
-		<div class="btn-group" id="menu">
-			<a class="btn dropdown-toggle" data-toggle="dropdown"> 광역시 / 도 <span
-				class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
-				<li>4</li>
-			</ul>
+
+	<form class="form-inline" method="post">
+		<div class="form-group">
+			<!-- <label class="sr-only">Email</label> -->
+			<p class="form-control-static">검색 분류</p>
 		</div>
-		<div class="btn-group">
-			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> 구
-				/ 시 <span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
-				<li>4</li>
-			</ul>
+		<div class="form-group">
+			<select class="form-control">
+				<option>전체</option>
+				<option>지역</option>
+				<option>음식</option>
+				<option>가게명</option>
+			</select>
 		</div>
-		<div class="btn-group">
-			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> 동
-				/ 구 <span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
-				<li>4</li>
-			</ul>
+		<br />
+		<br />
+		<!-- <p class="form-control-static">ㅇㅇㅇ</p> -->
+		<div class="form-group">
+			<input type="text" class="form-control" id="inputPassword2"
+				placeholder="검색어 입력">
 		</div>
-		<div class="btn-group">
-			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> 동
-				<span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
-				<li>4</li>
-			</ul>
-		</div>
-		<br /> 메뉴별
-		<div class="btn-group">
-			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-				메뉴 <span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
-				<li>4</li>
-			</ul>
-		</div>
-		<br>검색
-		<form class="form-inline" role="form">
-			<div class="form-group">
-				<label class="sr-only" for="exampleInputEmail2">키워드검색 </label> <input
-					type="email" class="form-control" id="exampleInputEmail2"
-					placeholder="키워드검색">
-			</div>
-			<button type="submit" class="btn btn-default">검색</button>
-		</form>
-	</div>
+		<button type="submit" class="btn btn-default">검색</button>
+	</form>
+	<br />
 	<br />
 	<br />
 	<br />
@@ -297,87 +252,82 @@ nav a {
     		</c:forEach> --%>
 		<thead>
 			<tr>
-				<th>글번호</th>
-				<th>대표이미지</th>
-				<th>제목</th>
-				<th>작성일</th>
+				<th class="text-center" style="cursor: pointer;">글번호</th>
+				<th class="text-center" style="cursor: pointer;">대표이미지</th>
+				<th class="text-center" style="cursor: pointer;">제목</th>
+				<th class="text-center" style="cursor: pointer;">작성일</th>
 			</tr>
 		</thead>
 		<tbody>
 
 			<c:forEach var="bean" items="${page}" varStatus="status">
-
 				<tr>
 					<td class="text-center" style="cursor: pointer;"
 						onClick=" location.href='review_list/${bean.idx }' ">${bean.idx}</td>
 					<td class="text-center" style="cursor: pointer;"
-						onClick=" location.href='review_list/${bean.idx }' ">${bean.title}</td>
+						onClick=" location.href='review_list/${bean.idx }' "><img
+						src="review_imgs/${imageList[status.index].imageName }" id="image" /></td>
 					<td class="text-center" style="cursor: pointer;"
-						onClick=" location.href='review_list/${bean.idx }' "><img src="review_imgs/${imageList[status.index].imageName }" id="image"/></td>
+						onClick=" location.href='review_list/${bean.idx }' ">${bean.title}</td>
 					<td class="text-center" style="cursor: pointer;"
 						onClick=" location.href='review_list/${bean.idx }' ">
 						${bean.calendar}</td>
 				</tr>
 
 			</c:forEach>
-
-			<%-- <c:forEach items="${alist }" var="bean" varStatus="status">
-  <tr>
-      <td><a href="../review_detail?index=${bean.index }"><img src="imgs/food1.jpg" id="image"/> ${bean.title}  </a></td>
-	  <td>${bean.idx }</td>
-       <td><a href="review_list/${bean.idx }"><img src="review_imgs/m_9ec1ba31-7cfa-45cb-b4de-274b3bdc5a34clusterer.png" id="image"/></a></td>
-
-<!-- 프로젝트 경로로 바꿔서 이미지 제대로 나오도록 하기  -->
-     <td><a href="review_list/${bean.idx }"><img src="review_imgs/${imageList[status.index].imageName }" id="image"/></td>
-      <td><a href="review_list/${bean.idx }"> ${bean.title}  </a></td>
-      <td>${bean.calendar }</td>
-
-  </tr>
-</c:forEach> --%>
 		</tbody>
 	</table>
 
 	<br />
 	<a class="btn btn-default" href="./review_write" role="button">글쓰기</a>
 	<br />
-	
-	
 	<!-- paging  -->
-	 	<c:choose>
-		<c:when test="${paging.numberOfRecords ne NULL and paging.numberOfRecords ne '' and paging.numberOfRecords ne 0}">
-		<div id="paginationUI" class="text-center" style="margin-left: 37px">
-			<ul class="pagination pagination-lg">
-				<c:if test="${paging.currentPageNo gt 5}">  											  <!-- 현재 페이지가 5보다 크다면(즉, 6페이지 이상이라면) -->
-					<li><a href="javascript:goPage(${paging.prevPageNo}, ${paging.maxPost})">이전</a></li> <!-- 이전페이지 표시 -->
-				</c:if>
-				<!-- 다른 페이지를 클릭하였을 시, 그 페이지의 내용 및 하단의 페이징 버튼을 생성하는 조건문-->
-					<c:forEach var="i" begin="${paging.startPageNo}" end="${paging.endPageNo}" step="1"> 
-		            <c:choose>
-		                <c:when test="${i eq paging.currentPageNo}"> 
-		                      <li class="active"><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> <!-- 1페이지부터 10개씩 뽑아내고, 1,2,3페이지순으로 나타내라-->
-		                </c:when>
-		                	<c:otherwise>
-		                    <li><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> 
+	<c:choose>
+		<c:when
+			test="${paging.numberOfRecords ne NULL and paging.numberOfRecords ne '' and paging.numberOfRecords ne 0}">
+			<div id="paginationUI" class="text-center" style="margin-left: 37px">
+				<ul class="pagination pagination-lg">
+					<c:if test="${paging.currentPageNo gt 5}">
+						<!-- 현재 페이지가 5보다 크다면(즉, 6페이지 이상이라면) -->
+						<li><a
+							href="javascript:goPage(${paging.prevPageNo}, ${paging.maxPost})">이전</a></li>
+						<!-- 이전페이지 표시 -->
+					</c:if>
+					<!-- 다른 페이지를 클릭하였을 시, 그 페이지의 내용 및 하단의 페이징 버튼을 생성하는 조건문-->
+					<c:forEach var="i" begin="${paging.startPageNo}"
+						end="${paging.endPageNo}" step="1">
+						<c:choose>
+							<c:when test="${i eq paging.currentPageNo}">
+								<li class="active"><a
+									href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li>
+								<!-- 1페이지부터 10개씩 뽑아내고, 1,2,3페이지순으로 나타내라-->
+							</c:when>
+							<c:otherwise>
+								<li><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li>
 							</c:otherwise>
-					</c:choose>
+						</c:choose>
 					</c:forEach>
-			
-				<!-- 소수점 제거 =>-->
-				<fmt:parseNumber var="currentPage" integerOnly="true" value="${(paging.currentPageNo-1)/5}"/>
-				<fmt:parseNumber var="finalPage" integerOnly="true" value="${(paging.finalPageNo-1)/5}"/>
-					
-				<c:if test="${currentPage < finalPage}"> <!-- 현재 페이지가 마지막 페이지보다 작으면 '다음'을 표시한다. -->
-					<li><a href="javascript:goPage(${paging.nextPageNo}, ${paging.maxPost})">다음</a></li>
-				</c:if> 
-			</ul>
-		</div>
-		</c:when>
-		</c:choose>
 
-<script>
-function goPage(pages, lines) {
-    location.href = '?' + "pages=" + pages;
-}
-</script> 
+					<!-- 소수점 제거 =>-->
+					<fmt:parseNumber var="currentPage" integerOnly="true"
+						value="${(paging.currentPageNo-1)/5}" />
+					<fmt:parseNumber var="finalPage" integerOnly="true"
+						value="${(paging.finalPageNo-1)/5}" />
+
+					<c:if test="${currentPage < finalPage}">
+						<!-- 현재 페이지가 마지막 페이지보다 작으면 '다음'을 표시한다. -->
+						<li><a
+							href="javascript:goPage(${paging.nextPageNo}, ${paging.maxPost})">다음</a></li>
+					</c:if>
+				</ul>
+			</div>
+		</c:when>
+	</c:choose>
+
+	<script>
+		function goPage(pages, lines) {
+			location.href = '?' + "pages=" + pages;
+		}
+	</script>
 </body>
 </html>

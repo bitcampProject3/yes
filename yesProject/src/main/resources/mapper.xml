@@ -30,7 +30,7 @@
   </select> -->
   
   <select id="reviewListImage" resultType="com.bit.yes.model.entity.ImageVo">
-  	select * from review_images where imageName like 'm_%'
+  	select * from review_images where imageName like 'm_%' order by idx desc
   </select>
   
   <select id="reviewSubImage" resultType="com.bit.yes.model.entity.ImageVo">
