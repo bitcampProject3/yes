@@ -14,6 +14,7 @@ public interface ReviewDao {
 	List<ImageVo> reviewSubImage(int index) throws SQLException;
 	ReviewVo reviewSelect(int index) throws SQLException;
 	int reviewDelete(int index) throws SQLException;
+	int reviewDeleteFile(int index) throws SQLException;
 	int reviewWrite(ReviewVo bean) throws SQLException;
 	int reviewImgUpload(ImageVo bean) throws SQLException;
 	int reviewEdit(ReviewVo bean) throws SQLException;

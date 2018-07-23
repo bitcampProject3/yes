@@ -53,6 +53,11 @@ public class ReviewDaoImpl implements ReviewDao {
 		return sqlSession.delete("review.reviewDelete", index);
 	}
 	
+	
+	public int reviewDeleteFile(int index) throws SQLException {
+		return sqlSession.delete("review.reviewDeleteFile", index);
+	}
+	
 	@Override
 	public int reviewWrite(ReviewVo bean) throws SQLException {
 		
@@ -92,6 +97,4 @@ public class ReviewDaoImpl implements ReviewDao {
 
 		return sqlSession.selectOne("writeGetCount");
 	}
-
-
 }

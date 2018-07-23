@@ -69,6 +69,10 @@ public class ReviewService {
 		return reviewDao.reviewDelete(index);
 	}
 	
+	public int deleteFile(int index) throws SQLException {
+		return reviewDao.reviewDeleteFile(index);
+	}
+	
 	public void editOne(ReviewVo bean) throws SQLException {
 		
 		reviewDao.reviewEdit(bean);

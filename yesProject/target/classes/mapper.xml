@@ -47,7 +47,9 @@
   
   <delete id="reviewDelete" parameterType="int">
   	delete from review where idx=#{val};
-  	delete from review_images where idx=#{val}
+  </delete>
+  <delete id="reviewDeleteFile" parameterType="int">
+  	delete from review_images where idx=#{val};
   </delete>
   
   <insert id="reviewWrite" parameterType="com.bit.yes.model.entity.ReviewVo">

@@ -169,8 +169,9 @@ public class ReviewListController {
 	public String reviewDelete(@PathVariable int index) throws SQLException {
 
 		service.deleteOne(index);
+		service.deleteFile(index);
 
-		return "redirect:/review/review_list";
+		return "redirect:/review_list";
 	}
 	
 	
