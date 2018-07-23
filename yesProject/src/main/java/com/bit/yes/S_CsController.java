@@ -79,7 +79,8 @@ public class S_CsController {
 		@RequestMapping("/yesS_cs/yesS_csInsert")
 		public String insertpage(String id, UserVo nickName,Model model) throws SQLException {
 			
-			id="ghdlf2"; // 로그인 해서 들어온 해당 고객의 아이디 입력 
+			// 로그인 해서 들어온 해당 고객의 아이디 입력 
+			id="ghdlf2"; 
 			
 			nickName=scsService.selectNick(id);
 			model.addAttribute("userInfo",nickName);

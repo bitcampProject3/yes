@@ -114,4 +114,47 @@ public class CounselAllImpl01 implements CounselAllDao {
 		return 0;
 	}
 
+	@Override
+	public List<C_CsVo> sacwriteList(int coffset, int cnoOfRecords, String sDate, String eDate) throws SQLException {
+		List<C_CsVo> sacwriteList = new ArrayList<C_CsVo>();
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("coffset", coffset);
+		params.put("cnoOfRecords", cnoOfRecords);
+		params.put("sDate", sDate);
+		params.put("eDate", eDate);
+		sacwriteList = sqlSession.selectList("yes.sac_writeList", params);
+		this.cnoOfRecords = sqlSession.selectOne("yes.sac_writeGetCount");
+		return sacwriteList;
+	}
+
+	@Override
+	public int sacwriteGetCount(String sDate, String eDate) throws SQLException {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("sDate", sDate);
+		params.put("eDate", eDate);
+		return sqlSession.selectOne("yes.sac_writeGetCount",params);
+	}
+
+	@Override
+	public List<S_CsVo> saswriteList(int soffset, int snoOfRecords, String sDate, String eDate) throws SQLException {
+		List<S_CsVo> saswriteList = new ArrayList<S_CsVo>();
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("soffset", soffset);
+		params.put("snoOfRecords", cnoOfRecords);
+		params.put("sDate", sDate);
+		params.put("eDate", eDate);
+		saswriteList = sqlSession.selectList("yes.sas_writeList", params);
+		this.snoOfRecords = sqlSession.selectOne("yes.sas_writeGetCount");
+		return saswriteList;
+	}
+
+	@Override
+	public int saswriteGetCount(String sDate, String eDate) throws SQLException {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("sDate", sDate);
+		params.put("eDate", eDate);
+		return sqlSession.selectOne("yes.sas_writeGetCount",params);
+	}
+
 }

@@ -28,8 +28,12 @@ public class NoticeBbsController {
 	// 화면 출력
 	@RequestMapping("/yesnotice/")
 	public String list(Model model, HttpServletRequest req) throws Exception {
+		
 		int currentPageNo = 1;
 		int maxPost = 10;
+		
+		// 로그인 했을 경우 들어오는 id값
+		String id = "admin";
 		
 		if(req.getParameter("pages") != null)
 			currentPageNo = Integer.parseInt(req.getParameter("pages"));
@@ -44,6 +48,7 @@ public class NoticeBbsController {
 		
 		paging.makePaging();
 		
+		model.addAttribute("id",id);
 		model.addAttribute("page", page);
 		model.addAttribute("paging",paging);
 		
@@ -71,6 +76,11 @@ public class NoticeBbsController {
 	
 	@RequestMapping(value="/yesnotice/{idx}",method=RequestMethod.GET )
 	public String detail(@PathVariable int idx,Model model) throws SQLException {
+		
+		// 로그인 했을 경우 들어오는 id값
+		String id = "admin";
+		
+		model.addAttribute("id", id);
 		model.addAttribute("bean", noticeService.selectPage(idx));
 		return "./notice/yesnoticeDetail";
 	}

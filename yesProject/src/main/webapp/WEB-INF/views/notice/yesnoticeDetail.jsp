@@ -194,7 +194,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="../resources/imgs/logo_top2.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="../"><img src="../resources/imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -266,14 +266,18 @@
                     <button class="btn btn-normal pull-right" style="margin-bottom: 10px;margin-left:10px;" onclick="history.back(1)" >
                        <span>목록으로</span>
                     </button>
-
+					<c:choose>
+                		<c:when test="${id eq 'admin'}"> 
                     <a href="./yesnoticeUpdate/${bean.index }">
                     <button class="btn btn-normal pull-right" style="margin-bottom: 10px;margin-left:10px;" id="update" type="submit">
                        <span>수정</span>
                     </button>
                     </a>
+                    	</c:when>
+                    </c:choose>	
 
-                    
+                    <c:choose>
+                		<c:when test="${id eq 'admin'}"> 
                     <form method="post" id="del" style="display:inline">
 						<input type="hidden" name="_method" value="delete"/>
 						<input type="hidden" name="idx" value="${bean.index }"/>
@@ -281,6 +285,8 @@
                        <span>삭제</span>
                     </button>
                     </form>
+                    	</c:when>
+                    </c:choose>	
                     
                 </div>
                 

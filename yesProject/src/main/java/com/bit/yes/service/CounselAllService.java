@@ -71,6 +71,23 @@ public class CounselAllService {
 		
 	}
 	
+	// 날짜 검색 시 페이징 처리
 	
+	public List<C_CsVo> sacwriteList(int coffset, int cnoOfRecords,String sDate, String eDate) throws SQLException {
+		return csaDao.sacwriteList(coffset, cnoOfRecords, sDate, eDate);
+	}
+	
+	public int sacwriteGetCount(String sDate, String eDate) throws Exception {
+		return csaDao.sacwriteGetCount(sDate, eDate);
+	}
+	// 날짜 검색 시 페이징 처리
+	
+	public List<S_CsVo> saswriteList(int soffset, int snoOfRecords,String sDate, String eDate) throws SQLException {
+		return csaDao.saswriteList(soffset, snoOfRecords, sDate, eDate);
+	}
+	
+	public int saswriteGetCount(String sDate, String eDate) throws Exception {
+		return csaDao.saswriteGetCount(sDate, eDate);
+	}
 	
 }

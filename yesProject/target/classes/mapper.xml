@@ -176,6 +176,26 @@
   			select * from mydb.client_Counsel where info = 1 order by client_Counsel.index DESC
   		</select>
   		
+  		<!-- 날짜를 통한 검색시 게시글 조회 -->
+  		<select id = "sac_writeGetCount" resultType="int" >
+  			<![CDATA[ 
+  			select count(*) from mydb.client_Counsel WHERE calendar >= #{sDate} AND calendar <= #{eDate}
+  			]]> 
+  		</select>
+  		
+  		<select id="sac_writeList" parameterType="hashmap" resultMap="C_CsVo">
+  			<![CDATA[ 
+  			select * from mydb.client_Counsel WHERE calendar >= #{sDate} AND calendar <= #{eDate} order by client_Counsel.index DESC limit #{coffset}, #{cnoOfRecords}
+  			]]> 
+  		</select>
+  		
+  		<select id ="sac_writeInfoList" resultMap = "C_CsVo">
+  			<![CDATA[ 
+  			select * from mydb.client_Counsel where info = 1 order by client_Counsel.index DESC
+  			]]> 
+  		</select>
+  		<!-- 날짜를 통한 검색시 게시글 조회 -->
+  		
   		<select id="areserveselectAll" resultType="com.bit.yes.model.entity.branch_infoVo" >
   			SELECT * FROM mydb.branch_info WHERE id = ANY(SELECT branchID FROM mydb.reserve_list WHERE clientID = #{id})
   		</select>
@@ -207,5 +227,25 @@
   		
   		<select id ="as_writeInfoList" resultMap = "S_CsVo">
   			select * from mydb.branch_Counsel where info = 1 order by branch_Counsel.index DESC
-  		</select>	
+  		</select>
+  	<!-- 날짜를 통한 검색시 게시글 조회 -->
+  		<select id = "sas_writeGetCount" resultType="int" >
+  			<![CDATA[ 
+  			select count(*) from mydb.branch_Counsel WHERE calendar >= #{sDate} AND calendar <= #{eDate}
+  			]]> 
+  		</select>
+  		
+  		<select id="sas_writeList" parameterType="hashmap" resultMap="S_CsVo">
+  			<![CDATA[ 
+  			select * from mydb.branch_Counsel WHERE calendar >= #{sDate} AND calendar <= #{eDate} order by branch_Counsel.index DESC limit #{soffset}, #{snoOfRecords}
+  			]]> 
+  		</select>
+  		
+  		<select id ="sas_writeInfoList" resultMap = "S_CsVo">
+  			<![CDATA[ 
+  			select * from mydb.branch_Counsel where info = 1 order by branch_Counsel.index DESC
+  			]]> 
+  		</select>
+  		<!-- 날짜를 통한 검색시 게시글 조회 -->	
+  			
   </mapper>

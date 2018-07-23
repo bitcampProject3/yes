@@ -14,6 +14,14 @@ public interface CounselAllDao {
 	
 	List<C_CsVo> cwriteList(int coffset, int cnoOfRecords) throws SQLException;
 	
+	List<C_CsVo> sacwriteList(int coffset, int cnoOfRecords, String sDate, String eDate) throws SQLException;
+	
+	int sacwriteGetCount(String sDate, String eDate) throws SQLException;
+
+	List<S_CsVo> saswriteList(int soffset, int snoOfRecords, String sDate, String eDate) throws SQLException;
+	
+	int saswriteGetCount(String sDate, String eDate) throws SQLException;
+	
 	List<branch_infoVo> creserveList(String id) throws SQLException;
 
 	List<branch_infoVo> creserveOne(String id) throws SQLException;

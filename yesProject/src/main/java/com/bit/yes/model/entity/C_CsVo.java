@@ -14,7 +14,9 @@ public class C_CsVo {
 	private String image;
 	private String comment;
 	private String reserveList;
-	
+	private Date sDate;
+	private Date eDate;
+
 	public C_CsVo() {
 		// TODO Auto-generated constructor stub
 	}
@@ -99,18 +101,35 @@ public class C_CsVo {
 		this.reserveList = reserveList;
 	}
 
+	public Date getsDate() {
+		return sDate;
+	}
+
+	public void setsDate(Date sDate) {
+		this.sDate = sDate;
+	}
+
+	public Date geteDate() {
+		return eDate;
+	}
+
+	public void seteDate(Date eDate) {
+		this.eDate = eDate;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((ClientID == null) ? 0 : ClientID.hashCode());
 		result = prime * result + ((branchID == null) ? 0 : branchID.hashCode());
-		result = prime * result + ((calendar == null) ? 0 : calendar.hashCode());
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((eDate == null) ? 0 : eDate.hashCode());
 		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + index;
 		result = prime * result + ((reserveList == null) ? 0 : reserveList.hashCode());
+		result = prime * result + ((sDate == null) ? 0 : sDate.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((writer == null) ? 0 : writer.hashCode());
 		return result;
@@ -135,11 +154,6 @@ public class C_CsVo {
 				return false;
 		} else if (!branchID.equals(other.branchID))
 			return false;
-		if (calendar == null) {
-			if (other.calendar != null)
-				return false;
-		} else if (!calendar.equals(other.calendar))
-			return false;
 		if (comment == null) {
 			if (other.comment != null)
 				return false;
@@ -149,6 +163,11 @@ public class C_CsVo {
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
+			return false;
+		if (eDate == null) {
+			if (other.eDate != null)
+				return false;
+		} else if (!eDate.equals(other.eDate))
 			return false;
 		if (image == null) {
 			if (other.image != null)
@@ -161,6 +180,11 @@ public class C_CsVo {
 			if (other.reserveList != null)
 				return false;
 		} else if (!reserveList.equals(other.reserveList))
+			return false;
+		if (sDate == null) {
+			if (other.sDate != null)
+				return false;
+		} else if (!sDate.equals(other.sDate))
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -179,11 +203,12 @@ public class C_CsVo {
 	public String toString() {
 		return "C_CsVo [branchID=" + branchID + ", ClientID=" + ClientID + ", index=" + index + ", title=" + title
 				+ ", content=" + content + ", writer=" + writer + ", calendar=" + calendar + ", image=" + image
-				+ ", comment=" + comment + ", reserveList=" + reserveList + "]";
+				+ ", comment=" + comment + ", reserveList=" + reserveList + ", sDate=" + sDate + ", eDate=" + eDate
+				+ "]";
 	}
 
 	public C_CsVo(String branchID, String clientID, int index, String title, String content, String writer,
-			Date calendar, String image, String comment, String reserveList) {
+			Date calendar, String image, String comment, String reserveList, Date sDate, Date eDate) {
 		super();
 		this.branchID = branchID;
 		ClientID = clientID;
@@ -195,7 +220,11 @@ public class C_CsVo {
 		this.image = image;
 		this.comment = comment;
 		this.reserveList = reserveList;
+		this.sDate = sDate;
+		this.eDate = eDate;
 	}
+
+	
 	
 	
 	

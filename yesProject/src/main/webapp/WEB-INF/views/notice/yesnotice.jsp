@@ -173,7 +173,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="#"><img src="../resources/imgs/logo_top2.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="../"><img src="../resources/imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -269,13 +269,18 @@
 
 
                 </table>
+                <!-- 관리자일 경우 작성버튼이 보임  -->
+                <c:choose>
+                <c:when test="${id eq 'admin'}"> 
                 <div class="huge-top">
                 <a href="./yesnoticeInsert">
-                    <button class="btn btn-normal pull-right" id="insert">
-                       <span class="glyphicon glyphicon-pencil">작성</span>
+                    <button class="btn btn-normal pull-right" id="insert" style="padding-bottom:12px;">
+                       <span class="glyphicon glyphicon-pencil" >작성</span>
                     </button>
                 </a>    
                 </div>
+                </c:when>
+                </c:choose>
                 
                 		<!-- 페이징  -->
  	<c:choose>

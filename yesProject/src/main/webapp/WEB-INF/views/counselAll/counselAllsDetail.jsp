@@ -322,6 +322,7 @@
                </table>
                </form>   
             </div>
+            <div style="padding-bottom: 5px"></div>
             </c:when>
 			</c:choose>
             <!-- 답변작성 하는 곳 영역 -->    
