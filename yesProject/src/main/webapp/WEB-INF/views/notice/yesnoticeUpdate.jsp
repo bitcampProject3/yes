@@ -260,7 +260,7 @@
 
                 <div class="container"> 
                 
-				<form method="post">
+				<form method="post" enctype="multipart/form-data">
                 <div class="form-group"> 
                 <label for="title">제목</label> 
                 <input type="text" style="width: 80%"class="form-control" name ="title" id="title" placeholder="제목을 입력해주세요"
@@ -288,8 +288,8 @@
 
 
                 <div class="form-group" style="padding-bottom: 20px; border-bottom: 1px solid #ccc;"> 
-                <label for="image">파일 첨부</label> 
-                <input type="file" id="image" name="image"> 
+                 <label for="file">파일 첨부</label> 
+                <input multiple="multiple" type="file" name="subImages">  
                 </div> 
 
 

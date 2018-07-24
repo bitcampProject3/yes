@@ -10,7 +10,6 @@
 	<result property="content" column="CONTENT"/>
 	<result property="writer" column="WRITER"/>
 	<result property="calendar" column="CALENDAR"/>
-	<result property="image" column="IMAGE"/>
 </resultMap>
   <resultMap id="C_CsVo" type="com.bit.yes.model.entity.C_CsVo">
 	<result property="index" column="INDEX"/>
@@ -18,7 +17,6 @@
 	<result property="content" column="CONTENT"/>
 	<result property="writer" column="WRITER"/>
 	<result property="calendar" column="CALENDAR"/>
-	<result property="image" column="IMAGE"/>
 	<result property="comment" column="COMMENT"/>
 </resultMap>
   <resultMap id="S_CsVo" type="com.bit.yes.model.entity.S_CsVo">
@@ -27,7 +25,6 @@
 	<result property="content" column="CONTENT"/>
 	<result property="writer" column="WRITER"/>
 	<result property="calendar" column="CALENDAR"/>
-	<result property="image" column="IMAGE"/>
 	<result property="comment" column="COMMENT"/>
 </resultMap>
 
@@ -43,15 +40,23 @@
   	</select>
   	
   	<insert id="insertOne" parameterType="com.bit.yes.model.entity.NoticeVo">
-  			INSERT INTO NOTICE VALUES (#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d"), #{image})
+  			INSERT INTO NOTICE VALUES (#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d"))
   	</insert>
   	
   	<delete id="deleteOne" parameterType="int">
-  			DELETE FROM NOTICE WHERE notice.index = #{value}
+  			DELETE NOTICE, NOTICE_IMAGES FROM NOTICE INNER JOIN NOTICE_IMAGES WHERE notice.index=notice_IMAGES.index AND notice_IMAGES.index=#{value};
   	</delete>
+
+  	<delete id="updatedelete" parameterType="int">
+  			DELETE FROM mydb.notice_images WHERE notice_images.index=#{index};
+  	</delete>
+
+  	<insert id="updateimg" parameterType="com.bit.yes.model.entity.ImageVo">
+  			insert into NOTICE_IMAGES values(#{index}, #{imageName})
+  	</insert>
   	
   	<update id="updateOne" parameterType="com.bit.yes.model.entity.NoticeVo">
-  			UPDATE NOTICE SET TITLE=#{title}, CONTENT=#{content}, IMAGE=#{image} WHERE notice.index = #{index}
+  			UPDATE NOTICE SET TITLE=#{title}, CONTENT=#{content} WHERE notice.index = #{index}
   	</update>
   
   	<!-- 페이징 처리 -->
@@ -86,7 +91,7 @@
   			SELECT * FROM user_info where id = #{id} 
   	</select>
   	<insert id="c_insertOne" parameterType="com.bit.yes.model.entity.C_CsVo">
-  			INSERT INTO client_Counsel VALUES (#{branchID},#{clientID},#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d") , #{image},null)
+  			INSERT INTO client_Counsel VALUES (#{branchID},#{clientID},#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d"),null)
   	</insert>
   
   	<!-- 페이징 처리 -->
@@ -121,7 +126,7 @@
   	</select>
   	
   	<insert id="s_insertOne" parameterType="com.bit.yes.model.entity.S_CsVo">
-  			INSERT INTO branch_Counsel VALUES (#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d") , #{image},null,#{questionSelect} )
+  			INSERT INTO branch_Counsel VALUES (#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d"),null,#{questionSelect} )
   	</insert>
   	<select id="s_selectnickname" resultType="com.bit.yes.model.entity.UserVo">
   			SELECT * FROM user_info where id = #{id} 
@@ -247,5 +252,23 @@
   			]]> 
   		</select>
   		<!-- 날짜를 통한 검색시 게시글 조회 -->	
+  		
+  		
+  		<!-- 파일 이미지 업로드 처리 -->
+  		<insert id="noticeImgUpload" parameterType="com.bit.yes.model.entity.ImageVo">
+		  	insert into notice_images values ((select max((mydb.notice.index)) from mydb.notice), #{imageName})
+		  </insert>
+		<select id="noticeSubImage" resultType="com.bit.yes.model.entity.ImageVo">
+		  	select * from mydb.notice_images where notice_images.index = #{index}
+		</select>
+
+  		<!-- 파일 이미지 업로드 처리 -->
+  		<insert id="c_counselImgUpload" parameterType="com.bit.yes.model.entity.ImageVo">
+		  	insert into c_counsel_images values ((select max((mydb.c_counsel.index)) from mydb.c_counsel), #{imageName})
+		  </insert>
+		<select id="c_counselSubImage" resultType="com.bit.yes.model.entity.ImageVo">
+		  	select * from mydb.c_counsel_images where c_counsel_images.index = #{index}
+		</select>
+  		
   			
   </mapper>

@@ -9,7 +9,6 @@ public class branch_infoVo {
 	private String menu;
 	private String address;
 	private String phoneNum;
-	private String image;
 	private int score;
 	private String name;
 	
@@ -73,14 +72,6 @@ public class branch_infoVo {
 		this.phoneNum = phoneNum;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
 	public int getScore() {
 		return score;
 	}
@@ -104,7 +95,6 @@ public class branch_infoVo {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((breakTime == null) ? 0 : breakTime.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + ((menu == null) ? 0 : menu.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((opDate == null) ? 0 : opDate.hashCode());
@@ -137,11 +127,6 @@ public class branch_infoVo {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (image == null) {
-			if (other.image != null)
-				return false;
-		} else if (!image.equals(other.image))
 			return false;
 		if (menu == null) {
 			if (other.menu != null)
@@ -176,8 +161,8 @@ public class branch_infoVo {
 	@Override
 	public String toString() {
 		return "branch_infoVo [id=" + id + ", opTime=" + opTime + ", breakTime=" + breakTime + ", opDate=" + opDate
-				+ ", menu=" + menu + ", address=" + address + ", phoneNum=" + phoneNum + ", image=" + image + ", score="
-				+ score + ", name=" + name + "]";
+				+ ", menu=" + menu + ", address=" + address + ", phoneNum=" + phoneNum + ", score=" + score + ", name="
+				+ name + "]";
 	}
 
 	public branch_infoVo(String id, String opTime, String breakTime, String opDate, String menu, String address,
@@ -190,7 +175,6 @@ public class branch_infoVo {
 		this.menu = menu;
 		this.address = address;
 		this.phoneNum = phoneNum;
-		this.image = image;
 		this.score = score;
 		this.name = name;
 	}

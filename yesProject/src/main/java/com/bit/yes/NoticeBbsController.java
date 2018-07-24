@@ -1,7 +1,10 @@
 package com.bit.yes;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +15,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.NoticeVo;
 import com.bit.yes.model.paging.Paging;
 import com.bit.yes.service.NoticeService;
@@ -67,35 +73,96 @@ public class NoticeBbsController {
 	}
 	
 	// 삽입 상세보기 삭제 수정
-	
+	// 삽입
 	@RequestMapping(value="/yesnotice/yesnoticeInsert",method=RequestMethod.POST)
-	public String insert(NoticeVo noticevo, Model model) throws SQLException {
+	public String insert(NoticeVo noticevo,MultipartHttpServletRequest mtfrequest, Model model) throws SQLException {
+
 		noticeService.addPage(noticevo);
+		
+		String genId, fileName, path;
+		ImageVo imageBean = new ImageVo();
+		java.util.List<MultipartFile> subFiles = mtfrequest.getFiles("subImages");
+
+		genId = UUID.randomUUID().toString();
+		
+		String attach_path = "resources/notice_imgs/";
+		
+		String root_path=mtfrequest.getSession().getServletContext().getRealPath("/");
+		
+		path = root_path + attach_path;
+		
+		try {
+			for(MultipartFile subFile : subFiles) {
+				String originalFileName = subFile.getOriginalFilename();
+				genId = UUID.randomUUID().toString();
+				fileName = genId + originalFileName;
+				imageBean.setImageName(fileName);
+				subFile.transferTo(new File(path + fileName));
+				noticeService.noticeImgUpload(imageBean);
+			}
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		return "redirect:/yesnotice/";
 	}
 	
+	// 상세보기
 	@RequestMapping(value="/yesnotice/{idx}",method=RequestMethod.GET )
 	public String detail(@PathVariable int idx,Model model) throws SQLException {
-		
 		// 로그인 했을 경우 들어오는 id값
 		String id = "admin";
 		
 		model.addAttribute("id", id);
 		model.addAttribute("bean", noticeService.selectPage(idx));
+		model.addAttribute("subImages", noticeService.noticeSubImage(idx));
+		
 		return "./notice/yesnoticeDetail";
 	}
-	
+	// 삭제
 	@RequestMapping(value="/yesnotice/{idx}",method=RequestMethod.DELETE)
 	public String delete(@PathVariable int idx) throws SQLException {
 		noticeService.deletePage(idx);
 		return "redirect:/yesnotice/";
 	}
-	
+	// 수정
 	@RequestMapping(value="/yesnotice/yesnoticeUpdate/{idx}",method=RequestMethod.POST )
-	public String edit(@PathVariable int idx,@ModelAttribute NoticeVo bean) throws SQLException {
+	public String edit(@ModelAttribute NoticeVo bean,@PathVariable int idx,MultipartHttpServletRequest mtfrequest) throws SQLException {
 		bean.setIndex(idx);
+		System.out.println("인덱스"+idx);
+		noticeService.updatedeletePage(idx);
+		System.out.println("삭제성공");
 		noticeService.updatePage(bean);
-		System.out.println(bean);
+		System.out.println("bean 수정성공 ");
+		
+		String genId, fileName, path;
+		ImageVo imageBean = new ImageVo();
+		java.util.List<MultipartFile> subFiles = mtfrequest.getFiles("subImages");
+
+		genId = UUID.randomUUID().toString();
+		
+		String attach_path = "resources/notice_imgs/";
+		
+		String root_path=mtfrequest.getSession().getServletContext().getRealPath("/");
+		
+		path = root_path + attach_path;
+		
+		try {
+			for(MultipartFile subFile : subFiles) {
+				String originalFileName = subFile.getOriginalFilename();
+				genId = UUID.randomUUID().toString();
+				fileName = genId + originalFileName;
+				imageBean.setIndex(idx);
+				imageBean.setImageName(fileName);
+				System.out.println(imageBean);
+				subFile.transferTo(new File(path + fileName));
+				noticeService.updateimgPage(imageBean);
+				
+			}
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		return "redirect:/yesnotice/";
 	}
 

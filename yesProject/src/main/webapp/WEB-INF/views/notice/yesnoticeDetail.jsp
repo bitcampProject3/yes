@@ -23,6 +23,36 @@
 				});
 			});
 		</script>
+		<script>
+		function doImgPop(img){ 
+			 img1= new Image(); 
+			 img1.src=(img); 
+			 imgControll(img); 
+			} 
+			  
+			function imgControll(img){ 
+			 if((img1.width!=0)&&(img1.height!=0)){ 
+			    viewImage(img); 
+			  } 
+			  else{ 
+			     controller="imgControll('"+img+"')"; 
+			     intervalID=setTimeout(controller,20); 
+			  } 
+			}
+
+			function viewImage(img){ 
+			 W=img1.width; 
+			 H=img1.height;
+			 var popupX = (window.screen.width / 2) - (200 / 2);
+			 var popupY= (window.screen.height /2) - (300 / 2);
+			 O="width="+W+",height="+H+",left="+popupX+", top="+popupY+",scrollbars=yes"; 
+			 imgWin=window.open("","",O); 
+			 imgWin.document.write("<html><head><title>    이미지상세보기    </title></head>");
+			 imgWin.document.write("<body topmargin=0 leftmargin=0>");
+			 imgWin.document.write("<img src="+img+" onclick='self.close()' style='cursor:pointer;' title ='클릭하시면 창이 닫힙니다.'>");
+			 imgWin.document.close();
+			}
+		</script>
         
         <style>
             *{
@@ -254,6 +284,17 @@
                     	<c:set var="cmt" value="${fn:replace(cmt,' ',sp) }"/>
                     	
                     	<c:out value="${cmt }" escapeXml="false"/>
+                    </div>
+                    <div><h4><b>첨부 파일 : 크게 보시려면 확대하세요 </b></h4></div>
+                    <div>
+                    <c:forEach items="${subImages }" var="subImage">
+						<div>
+							<img src="../resources/notice_imgs/${subImage.imageName }"
+								style="width: 10%; cursor:pointer;" data-src="" alt="이미지 없음" id="image" 
+								onclick="doImgPop('../resources/notice_imgs/${subImage.imageName }')">
+						</div>
+					</c:forEach>
+                    
                     </div>
                 </div>
 

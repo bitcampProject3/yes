@@ -9,7 +9,6 @@ public class S_CsVo {
 	private String content;
 	private String writer;
 	private Date calendar;
-	private String image;
 	private String comment;
 	private String questionSelect;
 	
@@ -69,15 +68,6 @@ public class S_CsVo {
 	}
 
 
-	public String getImage() {
-		return image;
-	}
-
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
 
 	public String getComment() {
 		return comment;
@@ -105,7 +95,6 @@ public class S_CsVo {
 		int result = 1;
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + index;
 		result = prime * result + ((questionSelect == null) ? 0 : questionSelect.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -133,11 +122,6 @@ public class S_CsVo {
 				return false;
 		} else if (!content.equals(other.content))
 			return false;
-		if (image == null) {
-			if (other.image != null)
-				return false;
-		} else if (!image.equals(other.image))
-			return false;
 		if (index != other.index)
 			return false;
 		if (questionSelect == null) {
@@ -159,11 +143,11 @@ public class S_CsVo {
 	}
 
 
+
 	@Override
 	public String toString() {
 		return "S_CsVo [index=" + index + ", title=" + title + ", content=" + content + ", writer=" + writer
-				+ ", calendar=" + calendar + ", image=" + image + ", comment=" + comment + ", questionSelect="
-				+ questionSelect + "]";
+				+ ", calendar=" + calendar + ", comment=" + comment + ", questionSelect=" + questionSelect + "]";
 	}
 
 
@@ -175,7 +159,6 @@ public class S_CsVo {
 		this.content = content;
 		this.writer = writer;
 		this.calendar = calendar;
-		this.image = image;
 		this.comment = comment;
 		this.questionSelect = questionSelect;
 	}

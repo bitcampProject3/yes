@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.NoticeVo;
 
 @Repository
@@ -36,6 +37,16 @@ public class NoticeDaoImpl01 implements NoticeDao {
 		return 0;
 	}
 
+	@Override
+	public int updatedelete(int index) throws SQLException {
+		return sqlSession.delete("yes.updatedelete", index);
+	}
+	
+	@Override
+	public int updateimg(ImageVo beans) throws SQLException {
+		sqlSession.insert("yes.updateimg", beans);
+		return 0;
+	}
 	@Override
 	public int updateOne(NoticeVo bean) throws SQLException {
 		return sqlSession.update("yes.updateOne", bean);
@@ -69,5 +80,20 @@ public class NoticeDaoImpl01 implements NoticeDao {
 		return sqlSession.selectOne("writeGetCount");
 		
 	}
+	
+	///////////////¾÷·Îµå
+
+	@Override
+	public List<ImageVo> noticeSubImage(int index) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("yes.noticeSubImage", index);
+	}
+
+	@Override
+	public int noticeImgUpload(ImageVo bean) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("yes.noticeImgUpload", bean);
+	}
+	
 
 }

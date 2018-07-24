@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.bit.yes.model.NoticeDao;
+import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.NoticeVo;
 
 @Service
@@ -33,6 +34,15 @@ public class NoticeService {
 		
 	}
 	
+	public void updatedeletePage(int index) throws SQLException {
+		noticeDao.updatedelete(index);
+	}
+	
+	public void updateimgPage(ImageVo beans) throws SQLException {
+		System.out.println(beans);
+		noticeDao.updateimg(beans);
+	}
+	
 	public void updatePage(NoticeVo bean) throws SQLException {
 		noticeDao.updateOne(bean);
 	}
@@ -44,6 +54,15 @@ public class NoticeService {
 	
 	public int writeGetCount() throws Exception {
 		return noticeDao.writeGetCount();
+	}
+	
+	// 업로드 처리
+	public void noticeImgUpload(ImageVo bean) throws SQLException {
+		noticeDao.noticeImgUpload(bean);
+	}
+
+	public List<ImageVo> noticeSubImage(int index) throws SQLException {
+		return noticeDao.noticeSubImage(index);
 	}
 	
 }

@@ -11,7 +11,6 @@ public class C_CsVo {
 	private String content;
 	private String writer;
 	private Date calendar;
-	private String image;
 	private String comment;
 	private String reserveList;
 	private Date sDate;
@@ -77,14 +76,6 @@ public class C_CsVo {
 		this.calendar = calendar;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
 	public String getComment() {
 		return comment;
 	}
@@ -126,7 +117,6 @@ public class C_CsVo {
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((eDate == null) ? 0 : eDate.hashCode());
-		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + index;
 		result = prime * result + ((reserveList == null) ? 0 : reserveList.hashCode());
 		result = prime * result + ((sDate == null) ? 0 : sDate.hashCode());
@@ -169,11 +159,6 @@ public class C_CsVo {
 				return false;
 		} else if (!eDate.equals(other.eDate))
 			return false;
-		if (image == null) {
-			if (other.image != null)
-				return false;
-		} else if (!image.equals(other.image))
-			return false;
 		if (index != other.index)
 			return false;
 		if (reserveList == null) {
@@ -199,12 +184,13 @@ public class C_CsVo {
 		return true;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "C_CsVo [branchID=" + branchID + ", ClientID=" + ClientID + ", index=" + index + ", title=" + title
-				+ ", content=" + content + ", writer=" + writer + ", calendar=" + calendar + ", image=" + image
-				+ ", comment=" + comment + ", reserveList=" + reserveList + ", sDate=" + sDate + ", eDate=" + eDate
-				+ "]";
+				+ ", content=" + content + ", writer=" + writer + ", calendar=" + calendar + ", comment=" + comment
+				+ ", reserveList=" + reserveList + ", sDate=" + sDate + ", eDate=" + eDate + "]";
 	}
 
 	public C_CsVo(String branchID, String clientID, int index, String title, String content, String writer,
@@ -217,7 +203,6 @@ public class C_CsVo {
 		this.content = content;
 		this.writer = writer;
 		this.calendar = calendar;
-		this.image = image;
 		this.comment = comment;
 		this.reserveList = reserveList;
 		this.sDate = sDate;

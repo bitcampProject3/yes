@@ -6,17 +6,18 @@ public class NoticeVo {
 	private String content;
 	private String writer;
 	private String calendar;
-	private String image;
 	
 	public NoticeVo() {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	@Override
 	public String toString() {
 		return "NoticeVo [index=" + index + ", title=" + title + ", content=" + content + ", writer=" + writer
-				+ ", calendar=" + calendar + ", image=" + image + "]";
+				+ ", calendar=" + calendar + "]";
 	}
+
 
 	public int getIndex() {
 		return index;
@@ -58,13 +59,6 @@ public class NoticeVo {
 		this.calendar = calendar;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
 
 	public NoticeVo(int index, String title, String content, String writer, String calendar, String image) {
 		super();
@@ -73,7 +67,6 @@ public class NoticeVo {
 		this.content = content;
 		this.writer = writer;
 		this.calendar = calendar;
-		this.image = image;
 	}
 
 	@Override
@@ -82,7 +75,6 @@ public class NoticeVo {
 		int result = 1;
 		result = prime * result + ((calendar == null) ? 0 : calendar.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + index;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((writer == null) ? 0 : writer.hashCode());
@@ -107,11 +99,6 @@ public class NoticeVo {
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
-			return false;
-		if (image == null) {
-			if (other.image != null)
-				return false;
-		} else if (!image.equals(other.image))
 			return false;
 		if (index != other.index)
 			return false;
