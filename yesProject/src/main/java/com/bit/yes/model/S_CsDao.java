@@ -3,6 +3,7 @@ package com.bit.yes.model;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.S_CsVo;
 import com.bit.yes.model.entity.UserVo;
 
@@ -18,4 +19,8 @@ public interface S_CsDao {
 	int writeGetCount(String clientID) throws SQLException;
 	
 	UserVo s_selectnickname(String id) throws SQLException;
+	
+	List<ImageVo> s_counselSubImage(int index) throws SQLException;
+	
+	int s_counselImgUpload(ImageVo bean) throws SQLException;
 }

@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.S_CsVo;
 import com.bit.yes.model.entity.UserVo;
 
@@ -59,6 +60,18 @@ public class S_CsDaoImpl01 implements S_CsDao {
 	public UserVo s_selectnickname(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("yes.s_selectnickname", id);
+	}
+
+	@Override
+	public List<ImageVo> s_counselSubImage(int index) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("yes.s_counselSubImage", index);
+	}
+
+	@Override
+	public int s_counselImgUpload(ImageVo bean) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("yes.s_counselImgUpload", bean);
 	}
 
 

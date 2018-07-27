@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.bit.yes.model.entity.C_CsVo;
 import com.bit.yes.model.entity.S_CsVo;
 import com.bit.yes.model.entity.UserVo;
+import com.bit.yes.model.entity.branch_addressVo;
 import com.bit.yes.model.paging.Paging;
 import com.bit.yes.service.CounselAllService;
 
@@ -51,7 +52,7 @@ public class CounselAllController {
 
 			model.addAttribute("cpage", cpage);
 			model.addAttribute("cpaging",cpaging);
-			
+
 			return "./counselAll/counselAllc";
 
 		}
@@ -80,7 +81,7 @@ public class CounselAllController {
 			for(i=0; i<spage.size(); i++) {
 				id= spage.get(i).getWriter();
 				UserVo nickName = caService.sselectNick(id);
-				ids[i] = nickName.getNickName();
+				ids[i] = nickName.getNickname();
 			}
 			
 			
@@ -98,9 +99,24 @@ public class CounselAllController {
 		public String detail(@PathVariable int idx, Model model) throws SQLException { 
 			
 			String id = (caService.cselectPage(idx)).getBranchID();
-				model.addAttribute("id",id);
-			 	model.addAttribute("beans", caService.creserveOne(id));
-				model.addAttribute("bean", caService.cselectPage(idx));
+		
+				if(id.equals("해당 없음")) {
+					model.addAttribute("id",id);
+					model.addAttribute("beans", caService.creserveOne(id)); //branch_info 값
+					model.addAttribute("bean", caService.cselectPage(idx));
+					model.addAttribute("subImages", caService.c_counselSubImage(idx));
+				}else {
+					branch_addressVo address = caService.c_selectAddress(id);
+					String road = address.getRoadAddress();
+					String jibun = address.getJibunAddress();
+					model.addAttribute("road", road );
+					model.addAttribute("jibun", jibun);
+					model.addAttribute("id",id);
+					model.addAttribute("beans", caService.creserveOne(id)); //branch_info 값
+					model.addAttribute("bean", caService.cselectPage(idx));
+					model.addAttribute("subImages", caService.c_counselSubImage(idx));			
+				
+				}
 				
 			return "./counselAll/counselAllcDetail";
 		}
@@ -114,6 +130,8 @@ public class CounselAllController {
 			
 			model.addAttribute("userInfo", nickName);
 			model.addAttribute("bean", caService.sselectPage(idx));
+			model.addAttribute("subImages", caService.s_counselSubImage(idx));
+			
 			return "./counselAll/counselAllsDetail";
 		}
 		
@@ -179,7 +197,7 @@ public class CounselAllController {
 			for(i=0; i<spage.size(); i++) {
 				id= spage.get(i).getWriter();
 				UserVo nickName = caService.sselectNick(id);
-				ids[i] = nickName.getNickName();
+				ids[i] = nickName.getNickname();
 			}
 			
 			model.addAttribute("userNick", ids);

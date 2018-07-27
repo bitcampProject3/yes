@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -9,7 +12,17 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+        
+        <!------------->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+		<script type="text/javascript">
+			function visit(select){
+			        var url = select.options[select.selectedIndex].getAttribute('value');
+			        if(url) location.href = url;
+			}
+		</script>
         <style>
             *{
                 font-family: 'Nanum Gothic', sans-serif;
@@ -121,7 +134,7 @@
                     display: block;
                     clear: both;
                 }
-                /*Ï∂ïÏÜåÌôîÏãú Î©îÎâ¥ ÏàòÏ†ï*/
+                /*√‡º“»≠Ω√ ∏ﬁ¥∫ ºˆ¡§*/
 /*
                 .navbar-collapse{
                     width: 200px;
@@ -146,31 +159,26 @@
                 .col-xs-6 {
                     width: 100%;
                 }
-                #btnform{
-                    width: 100%;
-                    margin-top: 10px;
-                    display: inline-grid;
-                }
-                
-                #writeCancel{
-                    margin-top: 10px;
-                }
-                
-                #writeReset{
-                    margin-right: 0px;
-                    margin-top: 5px;
-                }
-
             }
             .pagination>.active>a, .pagination>.active>a:hover, .pagination>.active>a:visited, .pagination>.active>a:link{
             background-color: #e04f5f;
             border-color: #e04f5f;
             color: white;
             }
+            
+            .ui-datepicker select.ui-datepicker-month {
+                width: auto;
+            }
         </style>
-        
+        <%
+        pageContext.setAttribute("cr", "\r");
+        pageContext.setAttribute("cn", "\n");
+        pageContext.setAttribute("crcn", "\r\n");
+        pageContext.setAttribute("sp", "&nbsp;");
+        pageContext.setAttribute("br", "<br/>");
+        %>
     </head>
-    <body>
+      <body>
         <div>
             <nav class="navbar navbar-default">
               <div class="container-fluid">
@@ -188,115 +196,73 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li><a href="#" class="menuBtn">ÏòàÏïΩ<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">ÏÇ¨Ïö©Ïûê Î¶¨Î∑∞</a></li>
+                    <li><a href="#" class="menuBtn">øπæ‡<span class="sr-only"></span></a></li>
+                    <li><a href="#" class="menuBtn">ªÁøÎ¿⁄ ∏Æ∫‰</a></li>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Í≥†Í∞ùÏÑºÌÑ∞<span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">∞Ì∞¥ºæ≈Õ<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="../yesnotice/">Í≥µÏßÄÏÇ¨Ìï≠</a></li>
+                        <li><a href="../yesnotice/">∞¯¡ˆªÁ«◊</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="../yesC_cs/">Í≥†Í∞ù ÏÉÅÎã¥</a></li>
-                        <li><a href="../yesS_cs/">ÏÇ¨ÏóÖÏûê ÏÉÅÎã¥</a></li>
+                        <li><a href="../yesC_cs/">∞Ì∞¥ ªÛ¥„</a></li>
+                        <li><a href="../yesS_cs/">ªÁæ˜¿⁄ ªÛ¥„</a></li>
                       </ul>
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Î°úÍ∑∏Ïù∏</a></li>
-                    <li><a href="#">ÌöåÏõêÍ∞ÄÏûÖ</a></li>
+                    <li><a href="#">∑Œ±◊¿Œ</a></li>
+                    <li><a href="#">»∏ø¯∞°¿‘</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
             </nav>
             </div>
            
-           <div class="container">
-           <div class="container" style=" border: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
-               border-bottom-color: #e04f5f">
-                
-              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
-                  <h1 style="padding: 5px; margin-bottom: 20px;">Í≥µÏßÄÏÇ¨Ìï≠</h1>
-                <div class="row" >
-                  <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray; background-color: #e04f5f;
-                    color: white; cursor: pointer;" onclick="location.href='../yesnotice/'">
-                      <h4>
-                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              Í≥µÏßÄÏÇ¨Ìï≠
-                          </p>
-                      </h4>
-                  </div>
-                  <div id="cube" class="col-xs-6 col-sm-4" style=" 
-                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;
-                        cursor: pointer;" onclick="location.href='../yesC_cs/'">                                          
-                      <h4>
-                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              Í≥†Í∞ù ÏÉÅÎã¥
-                          </p>
-                      </h4>
-                  </div>
-                   <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray;
-                     cursor: pointer;" onclick="location.href='../yesS_cs/'">
-                      <h4>
-                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              ÏÇ¨ÏóÖÏûê ÏÉÅÎã¥
-                          </p>
-                      </h4>
-                  </div>
+           
+        <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
+               border-bottom-color: #e04f5f">    
+            <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
+                  <h1 style="padding: 5px; margin-bottom: 20px;">
+                      <a href="" style="color: black;">∞¸∏Æ¿⁄ º±≈√ ∆‰¿Ã¡ˆ</a>
+                  </h1>
                 </div>
               </div>
-        </div>
+            
+            <div class="container">
+              <div class="row">
+            <div class="col-sm" id="cube" 
+            style="text-align: center;padding-top: 50px;padding-bottom: 50px;cursor: pointer;" 
+            onclick="location.href='./userAllList'">
+            
+                <h2 style="margin-top:0px;margin-bottom: 0px;">»∏ø¯∏ÆΩ∫∆Æ</h2>      
+                    
+            </div>  
+            
+            <div class="col-sm">
+            <table class="table table-board" style="text-align: center; margin-bottom: 0px; border-bottom: 1px solid #CCCCCC;" >
+            <tr>
+                <td style="padding-top:23px; padding-bottom:23px">
+                    <h2>ªÛ¥„ ø‰√ª ∏Ò∑œ</h2>
+                    <select onchange="visit(this)">
+                    <option value="" disabled selected>¿Ãµø«“ ªÛ¥„ ≥ªø™¿ª º±≈√«ÿ¡÷ººø‰</option>
+                    <option value="../counselAllc/"><b>1:1 ∞Ì∞¥ ªÛ¥„</b></option> <!-- ªÛ¥Î∞Ê∑Œ -->
+                    <option value="../counselAlls/"><b>1:1 ªÁæ˜¿⁄ ªÛ¥„</b></option> <!-- ªÛ¥Î∞Ê∑Œ -->
+                    <option><b>¿Ãµø æ¯¿Ω</b></option>
+			        </select>          
+                </td>
+            </tr>
+            </table>
+            </div>   
+               
+            <div class="col-sm" id="cube" 
+            style="text-align: center;padding-top: 50px;padding-bottom: 50px;cursor: pointer;
+               border-bottom: 1px solid #CCCCCC;"
+            onclick="location.href='#'">
+            
+                <h2 style="margin-top:0px;margin-bottom: 0px;">∏≈¿Â µÓ∑œ(Ω¬¿Œ), ∏≈¿Â ¡§∫∏ ºˆ¡§, «ÿ¡ˆ(Ω¬¿Œ)</h2>          
            
-            <div class="panel panel-c">
-            <div class="panel-heading"><h4>Í∏Ä ÏûëÏÑ±</h4></div>  
-                <div class="panel-body">
-
-                <div class="container"> 
-				<form method="post" enctype="multipart/form-data">
-                <div class="form-group"> 
-                <label for="title">Ï†úÎ™©</label> 
-                <input type="text" style="width: 80%"class="form-control" name ="title" id="title" placeholder="Ï†úÎ™©ÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî"> 
-                </div> 
-                
-                
-                <div class="form-group"> 
-                <label for="writer">ÏûëÏÑ±Ïûê</label> 
-                <input type="text" style="width:30%" class="form-control" name ="writer" id="writer" placeholder="ÏûëÏÑ±Ïûê"> 
-                </div> 
-
-
-                <div class="form-group"> 
-                <label for="content">ÎÇ¥Ïö©:</label> 
-                <textarea class="form-control" rows="10" name="content" id="content"></textarea> 
-
-                </div> 
-
-
-                <div class="form-group" style="padding-bottom: 20px; border-bottom: 1px solid #ccc;"> 
-                <label for="file">ÌååÏùº Ï≤®Î∂Ä</label> 
-                <input multiple="multiple" type="file" name="subImages"/>
-                </div> 
-
-
-                <div class="center-block" style='width:200px;text-align: center;'>
-                <!-- Standard button -->
-                    <button id="writebtn" type="submit" class="btn btn-default">Í∏Ä Ïì∞Í∏∞</button>
-                </div>
-                
-                <div id="btnform"> 
-                <button id="writeReset" type="reset" class="btn btn-default pull-right" style="margin-right: 5px; ">
-                    		Îã§Ïãú Ïì∞Í∏∞
-                </button>
-                </div> 
-				</form>
-                <button class="btn btn-default pull-right" id="writeCancel" onclick="history.back(1)" style="margin-right: 5px;">
-                       <span>
-                          	 Î™©Î°ùÏúºÎ°ú
-                       </span>
-                </button> 
-
-                </div> 
-                </div> <!--panel end--> 
-            </div> 
-        </div>
-   
+            </div>   
+            </div>
+            </div>
+              
     </body>
 </html>

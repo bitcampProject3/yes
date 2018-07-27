@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bit.yes.model.entity.C_CsVo;
+import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.S_CsVo;
 import com.bit.yes.model.entity.UserVo;
+import com.bit.yes.model.entity.branch_addressVo;
 import com.bit.yes.model.entity.branch_infoVo;
 
 @Repository
@@ -155,6 +157,24 @@ public class CounselAllImpl01 implements CounselAllDao {
 		params.put("sDate", sDate);
 		params.put("eDate", eDate);
 		return sqlSession.selectOne("yes.sas_writeGetCount",params);
+	}
+
+	@Override
+	public List<ImageVo> c_counselSubImage(int index) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("yes.c_counselSubImage", index);
+	}
+
+	@Override
+	public List<ImageVo> s_counselSubImage(int index) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("yes.s_counselSubImage", index);
+	}
+
+	@Override
+	public branch_addressVo c_selectAddress(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("yes.c_selectAddress", id);
 	}
 
 }

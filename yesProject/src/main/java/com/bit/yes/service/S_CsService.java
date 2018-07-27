@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.yes.model.S_CsDao;
+import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.S_CsVo;
 import com.bit.yes.model.entity.UserVo;
 
@@ -35,5 +36,14 @@ public class S_CsService {
 	
 	public UserVo selectNick(String id) throws SQLException{
 		return scsDao.s_selectnickname(id);
+	}
+	
+	// 업로드 처리
+	public void s_counselImgUpload(ImageVo bean) throws SQLException {
+		scsDao.s_counselImgUpload(bean);
+	}
+
+	public List<ImageVo> s_counselSubImage(int index) throws SQLException {
+		return scsDao.s_counselSubImage(index);
 	}
 }

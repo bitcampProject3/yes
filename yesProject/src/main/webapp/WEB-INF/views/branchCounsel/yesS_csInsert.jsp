@@ -257,7 +257,7 @@
                 <div class="panel-body">
                 <div class="container"> 
 
-               <form method="post">
+               <form method="post" enctype="multipart/form-data">
                 <div class="form-group"> 
                 <label for="questionSelect">문의 유형</label> 
                     <select name="questionSelect" id="questionSelect" class="form-control" style="width: 50%">
@@ -284,10 +284,10 @@
                	
                 <input type="hidden" value=${clientID } name="writer" id="writer"/>
 
-                <div class="form-group" style="padding-bottom: 20px; border-bottom: 1px solid #ccc;">
-                <label for="image">파일 첨부</label> 
-                <input type="file" id="image" name="image"> 
-                </div> 
+                <div class="form-group" style="padding-bottom: 20px; border-bottom: 1px solid #ccc;"> 
+                <label for="file">파일 첨부</label> 
+                <input multiple="multiple" type="file" name="subImages"/>
+                </div>  
 
 
 				<div class="center-block" style='width:200px;text-align: center;'>

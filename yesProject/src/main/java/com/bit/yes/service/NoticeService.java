@@ -39,7 +39,6 @@ public class NoticeService {
 	}
 	
 	public void updateimgPage(ImageVo beans) throws SQLException {
-		System.out.println(beans);
 		noticeDao.updateimg(beans);
 	}
 	

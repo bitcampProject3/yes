@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bit.yes.model.entity.C_CsVo;
+import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.UserVo;
+import com.bit.yes.model.entity.branch_addressVo;
 import com.bit.yes.model.entity.branch_infoVo;
 
 @Repository
@@ -72,6 +74,24 @@ public class C_CsDaoImpl01 implements C_CsDao {
 	public UserVo c_selectnickname(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("yes.c_selectnickname", id);
+	}
+
+	@Override
+	public List<ImageVo> c_counselSubImage(int index) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("yes.c_counselSubImage", index);
+	}
+
+	@Override
+	public int c_counselImgUpload(ImageVo bean) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("yes.c_counselImgUpload", bean);
+	}
+
+	@Override
+	public branch_addressVo c_selectAddress(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("yes.c_selectAddress", id);
 	}
 
 }

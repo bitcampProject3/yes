@@ -82,30 +82,35 @@ public class NoticeBbsController {
 		String genId, fileName, path;
 		ImageVo imageBean = new ImageVo();
 		java.util.List<MultipartFile> subFiles = mtfrequest.getFiles("subImages");
-
 		genId = UUID.randomUUID().toString();
-		
 		String attach_path = "resources/notice_imgs/";
-		
 		String root_path=mtfrequest.getSession().getServletContext().getRealPath("/");
-		
 		path = root_path + attach_path;
 		
 		try {
 			for(MultipartFile subFile : subFiles) {
 				String originalFileName = subFile.getOriginalFilename();
-				genId = UUID.randomUUID().toString();
-				fileName = genId + originalFileName;
-				imageBean.setImageName(fileName);
-				subFile.transferTo(new File(path + fileName));
-				noticeService.noticeImgUpload(imageBean);
+				if(originalFileName == "") {
+					fileName = "0" + originalFileName;
+					System.out.println(fileName);
+					imageBean.setImageName(fileName);
+					noticeService.noticeImgUpload(imageBean);
+				}else {
+					fileName = genId + originalFileName;
+					genId = UUID.randomUUID().toString();
+					imageBean.setImageName(fileName);
+					subFile.transferTo(new File(path + fileName));
+					noticeService.noticeImgUpload(imageBean);
+				}
+				
 			}
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		return "redirect:/yesnotice/";
 	}
+
 	
 	// 상세보기
 	@RequestMapping(value="/yesnotice/{idx}",method=RequestMethod.GET )
@@ -129,11 +134,8 @@ public class NoticeBbsController {
 	@RequestMapping(value="/yesnotice/yesnoticeUpdate/{idx}",method=RequestMethod.POST )
 	public String edit(@ModelAttribute NoticeVo bean,@PathVariable int idx,MultipartHttpServletRequest mtfrequest) throws SQLException {
 		bean.setIndex(idx);
-		System.out.println("인덱스"+idx);
 		noticeService.updatedeletePage(idx);
-		System.out.println("삭제성공");
 		noticeService.updatePage(bean);
-		System.out.println("bean 수정성공 ");
 		
 		String genId, fileName, path;
 		ImageVo imageBean = new ImageVo();
@@ -150,13 +152,19 @@ public class NoticeBbsController {
 		try {
 			for(MultipartFile subFile : subFiles) {
 				String originalFileName = subFile.getOriginalFilename();
-				genId = UUID.randomUUID().toString();
-				fileName = genId + originalFileName;
-				imageBean.setIndex(idx);
-				imageBean.setImageName(fileName);
-				System.out.println(imageBean);
-				subFile.transferTo(new File(path + fileName));
-				noticeService.updateimgPage(imageBean);
+				if(originalFileName == "") {
+					fileName = "0" + originalFileName;
+					imageBean.setImageName(fileName);
+					imageBean.setIndex(idx);
+					noticeService.updateimgPage(imageBean);
+				}else {
+					fileName = genId + originalFileName;
+					genId = UUID.randomUUID().toString();
+					imageBean.setImageName(fileName);
+					imageBean.setIndex(idx);
+					subFile.transferTo(new File(path + fileName));
+					noticeService.updateimgPage(imageBean);
+				}
 				
 			}
 		}catch (IOException e) {

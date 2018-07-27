@@ -11,6 +11,36 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script>
+		function doImgPop(img){ 
+			 img1= new Image(); 
+			 img1.src=(img); 
+			 imgControll(img); 
+			} 
+			  
+			function imgControll(img){ 
+			 if((img1.width!=0)&&(img1.height!=0)){ 
+			    viewImage(img); 
+			  } 
+			  else{ 
+			     controller="imgControll('"+img+"')"; 
+			     intervalID=setTimeout(controller,20); 
+			  } 
+			}
+
+			function viewImage(img){ 
+			 W=img1.width; 
+			 H=img1.height;
+			 var popupX = (window.screen.width / 2)-(200 / 2);
+			 var popupY= (window.screen.height /2)-(300 / 2);
+			 O="width="+W+",height="+H+",left="+popupX+", top="+popupY+",scrollbars=yes"; 
+			 imgWin=window.open("","",O); 
+			 imgWin.document.write("<html><head><title>    이미지상세보기    </title></head>");
+			 imgWin.document.write("<body topmargin=0 leftmargin=0>");
+			 imgWin.document.write("<img src="+img+" onclick='self.close()' style='cursor:pointer;' title ='클릭하시면 창이 닫힙니다.'>");
+			 imgWin.document.close();
+			}
+		</script>
         <style>
             *{
                 font-family: 'Nanum Gothic', sans-serif;
@@ -254,6 +284,27 @@
                     	<c:out value="${cmt }" escapeXml="false"/>
                     
                     </div>
+                    <c:forEach items="${subImages }" var="subImage" begin="0" end="0">
+                    <c:choose>
+					<c:when test="${subImage.imageName eq '0'}">
+					<div><h4><b>첨부 파일이 없습니다. </b></h4></div>
+					</c:when>
+					
+                    <c:when test="${subImage.imageName ne '0' }">
+                    <div><h4><b>첨부 파일 : 크게 보시려면 확대하세요 </b></h4></div>
+                    <div>
+                    <c:forEach items="${subImages }" var="subImage">
+						<div>
+							<img src="../resources/s_counsel_imgs/${subImage.imageName }"
+								style="width: 10%; cursor:pointer;" data-src="" id="image" 
+								onclick="doImgPop('../resources/s_counsel_imgs/${subImage.imageName }')">
+						</div>
+					</c:forEach>
+                    
+                    </div>
+                    </c:when>
+                    </c:choose>
+                    </c:forEach>
                 </div>
             </div>
             <div style="border-top: 1px solid #ccc; padding-bottom: 5px"></div>
@@ -299,10 +350,13 @@
                     </td>
                 </table>   
             </div>
+            <div style="padding-bottom: 5px"></div>
 			</c:when>
 			<c:when test = "${bean.comment eq null }">
 				<div style="text-align: center"><h4><b>답변이 등록되어 있지 않습니다....</b></h4></div>
+			<div style="padding-bottom: 5px"></div>
 			</c:when>
+			
 			</c:choose>
             
             </div>      

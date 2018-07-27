@@ -4,8 +4,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.bit.yes.model.entity.C_CsVo;
+import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.S_CsVo;
 import com.bit.yes.model.entity.UserVo;
+import com.bit.yes.model.entity.branch_addressVo;
 import com.bit.yes.model.entity.branch_infoVo;
 
 public interface CounselAllDao {
@@ -44,5 +46,13 @@ public interface CounselAllDao {
 	UserVo s_selectnickname(String id) throws SQLException;
 	
 	int supdateOne(S_CsVo bean) throws SQLException;
+	
+	////////////////////////////////////////////////////////
+	
+	List<ImageVo> c_counselSubImage(int index) throws SQLException;
+	
+	List<ImageVo> s_counselSubImage(int index) throws SQLException;
+	
+	branch_addressVo c_selectAddress(String id) throws SQLException;
 	
 }

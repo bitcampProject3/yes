@@ -27,7 +27,44 @@
 	<result property="calendar" column="CALENDAR"/>
 	<result property="comment" column="COMMENT"/>
 </resultMap>
+<resultMap id="UserVo" type="com.bit.yes.model.entity.UserVo">
+	<result property="id" column="ID"/>
+	<result property="password" column="PASSWORD"/>
+	<result property="name" column="NAME"/>
+	<result property="nickname" column="NICKNAME"/>
+	<result property="email" column="EMAIL"/>
+	<result property="phoneNum" column="PHONENUM"/>
+	<result property="pwQuestion" column="PWQUESTION"/>
+	<result property="birthDate" column="BIRTHDATE"/>
+	<result property="registNum" column="REGISTNUM"/>
+</resultMap>
 
+	<!-- 전체 회원리스트 쿼리문 -->
+	
+	<!-- 전체 레코드 개수 조회 -->
+	  	<select id ="all_writeGetCount" resultType="int">
+	  		select count(*) from mydb.user_info 
+	  	</select>
+	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
+  		<select id="all_writeList" parameterType="hashmap" resultMap="UserVo">
+  			select * from mydb.user_info order by NAME,BIRTHDATE ASC limit #{alloffset}, #{allnoOfRecords}
+  		</select>
+  		<select id ="all_writeInfoList" resultMap = "UserVo">
+  			select * from mydb.user_info where info = 1 order by user_info.name,user_info.birthDate ASC
+  		</select>
+  		
+  	<!-- 회원리스트에서 id값을 통해 유저정보 가져오기-->	
+  		<select id="user_selectOne" resultType="com.bit.yes.model.entity.UserVo">
+  			select * from mydb.user_info where id = #{id}
+  		</select>	
+  	<!-- 회원리스트에서 id값을 통해 가맹점정보 가져오기(유저인데 만약 reginstNum이 있으면 이것도 가져가서 출력) -->	
+  		<select id="user_branch_selectOne" resultType="com.bit.yes.model.entity.branch_infoVo">
+  			select * from mydb.branch_info where id = #{id}
+  		</select>
+  	<!-- branch_address로 db가 따로 있으므로 이것도 가져가서 출력 -->	
+  		<select id="user_branch_selectOne_address" resultType="com.bit.yes.model.entity.branch_addressVo">
+  			select * from mydb.branch_address where id = #{id}
+  		</select>
 	
 	<!-- 공지사항 쿼리문 -->
 	<select id="selectAll" resultType="com.bit.yes.model.entity.NoticeVo">
@@ -90,10 +127,14 @@
   	<select id="c_selectnickname" resultType="com.bit.yes.model.entity.UserVo">
   			SELECT * FROM user_info where id = #{id} 
   	</select>
+  	<select id="c_selectAddress" resultType="com.bit.yes.model.entity.branch_addressVo">
+  			select * from branch_address where id = #{id}
+  	</select>
+  	
   	<insert id="c_insertOne" parameterType="com.bit.yes.model.entity.C_CsVo">
   			INSERT INTO client_Counsel VALUES (#{branchID},#{clientID},#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d"),null)
   	</insert>
-  
+  	
   	<!-- 페이징 처리 -->
   	<!-- 전체 레코드 개수 조회 -->
 	  	<select id ="c_writeGetCount" resultType="int">
@@ -264,10 +305,18 @@
 
   		<!-- 파일 이미지 업로드 처리 -->
   		<insert id="c_counselImgUpload" parameterType="com.bit.yes.model.entity.ImageVo">
-		  	insert into c_counsel_images values ((select max((mydb.c_counsel.index)) from mydb.c_counsel), #{imageName})
+		  	insert into c_counsel_images values ((select max((mydb.client_counsel.index)) from mydb.client_counsel), #{imageName})
 		  </insert>
 		<select id="c_counselSubImage" resultType="com.bit.yes.model.entity.ImageVo">
 		  	select * from mydb.c_counsel_images where c_counsel_images.index = #{index}
+		</select>
+		
+  		<!-- 파일 이미지 업로드 처리 -->
+  		<insert id="s_counselImgUpload" parameterType="com.bit.yes.model.entity.ImageVo">
+		  	insert into s_counsel_images values ((select max((mydb.branch_counsel.index)) from mydb.branch_counsel), #{imageName})
+		  </insert>
+		<select id="s_counselSubImage" resultType="com.bit.yes.model.entity.ImageVo">
+		  	select * from mydb.s_counsel_images where s_counsel_images.index = #{index}
 		</select>
   		
   			

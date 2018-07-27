@@ -263,7 +263,7 @@
 
               </div>
             </div>
-            <div style="padding-left: 40px; padding-right: 40px;">
+            <div style="padding-left: 40px; padding-right: 40px; padding-bottom:20px;">
       
                 <header style="padding-top: 15px"><h4><b>[안내] ${bean.title }</b></h4></header>
                 <div>
@@ -285,17 +285,29 @@
                     	
                     	<c:out value="${cmt }" escapeXml="false"/>
                     </div>
+                    
+                    
+                    <c:forEach items="${subImages }" var="subImage" begin="0" end="0">
+                    <c:choose>
+					<c:when test="${subImage.imageName eq '0'}">
+					<div><h4><b>첨부 파일이 없습니다. </b></h4></div>
+					</c:when>
+					
+                    <c:when test="${subImage.imageName ne '0' }">
                     <div><h4><b>첨부 파일 : 크게 보시려면 확대하세요 </b></h4></div>
                     <div>
                     <c:forEach items="${subImages }" var="subImage">
 						<div>
 							<img src="../resources/notice_imgs/${subImage.imageName }"
-								style="width: 10%; cursor:pointer;" data-src="" alt="이미지 없음" id="image" 
+								style="width: 10%; cursor:pointer;" data-src="" id="image" 
 								onclick="doImgPop('../resources/notice_imgs/${subImage.imageName }')">
 						</div>
 					</c:forEach>
                     
                     </div>
+                    </c:when>
+                    </c:choose>
+                    </c:forEach>
                 </div>
 
             </div>

@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.bit.yes.model.C_CsDao;
 import com.bit.yes.model.entity.C_CsVo;
+import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.UserVo;
+import com.bit.yes.model.entity.branch_addressVo;
 import com.bit.yes.model.entity.branch_infoVo;
 
 @Service
@@ -44,5 +46,18 @@ public class C_CsService {
 
 	public UserVo selectNick(String id) throws SQLException{
 		return csDao.c_selectnickname(id);
+	}
+	
+	// 업로드 처리
+	public void c_counselImgUpload(ImageVo bean) throws SQLException {
+		csDao.c_counselImgUpload(bean);
+	}
+
+	public List<ImageVo> c_counselSubImage(int index) throws SQLException {
+		return csDao.c_counselSubImage(index);
+	}
+	
+	public branch_addressVo c_selectAddress(String id) throws SQLException{
+		return csDao.c_selectAddress(id);
 	}
 }

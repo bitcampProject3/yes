@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.bit.yes.model.CounselAllDao;
 import com.bit.yes.model.entity.C_CsVo;
+import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.S_CsVo;
 import com.bit.yes.model.entity.UserVo;
+import com.bit.yes.model.entity.branch_addressVo;
 import com.bit.yes.model.entity.branch_infoVo;
 
 @Service
@@ -90,4 +92,17 @@ public class CounselAllService {
 		return csaDao.saswriteGetCount(sDate, eDate);
 	}
 	
+	// 업로드 처리
+	
+	public List<ImageVo> s_counselSubImage(int index) throws SQLException {
+		return csaDao.s_counselSubImage(index);
+	}
+
+	public List<ImageVo> c_counselSubImage(int index) throws SQLException {
+		return csaDao.c_counselSubImage(index);
+	}
+	
+	public branch_addressVo c_selectAddress(String id) throws SQLException{
+		return csaDao.c_selectAddress(id);
+	}
 }
