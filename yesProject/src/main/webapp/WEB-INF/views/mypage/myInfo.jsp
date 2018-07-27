@@ -120,12 +120,22 @@
     </head>
     <body style="overflow:auto; z-index:0; positio:relative;">
        <jsp:include page="../layout/header.jsp"></jsp:include>
-         <br/>
-         <h1>내정보</h1>
+        <div class="container" style=" border-bottom: 1px solid #CCCCCC;">
+           
+           <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
+               border-bottom-color: #e04f5f; margin-top:30px;">
+                
+              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px;  ">
+                  <h1 style="padding: 5px; margin-bottom: 20px; ">
+                      <a href="" style="color: black;">내정보</a>
+                  </h1>
+
+              </div>
+            </div>
          
-        <form id="updateform"action="mypageUpdate" method="POST" class="form-horizontal">
+        <form id="updateform"action="mypageUpdate" method="POST" class="form-horizontal" >
 		  
-		<table class="table" style="width:50%; margin:0px auto; border:1px solid gray;">
+		<table class="table" style="width:50%; margin:50px auto; border:1px solid gray; ">
   
 			<tbody>
 			<tr>
@@ -163,7 +173,7 @@
 			<td class="table-label">생년월일</td>
 			<td>${user.birthDate }</td>
 			</tr>
-			<c:if test="${user.registNum!=0 }"> 
+			<c:if test="${user.registNum != 0 }"> 
 			<tr>
 			<td class="table-label">사업자 등록 번호</td>
 			<td><input type="text" class="form-control" id="registNum" name="registNum" value="${user.registNum }"/>
@@ -171,15 +181,23 @@
 			</td>
 			</tr>
 			</c:if> 
+			<tr>
+			<td colspan="2">
+			<input type="hidden" id="registNum" name="registNum" value="0"/>
+		<button type="submit" class="btn btn-primary" style="margin:0px auto; width:100%;" >수정</button>
+			</td>
+			
+			</tr>
+		
+			
 			</tbody>
 		
 		</table>  
 		  
-		  <button type="submit" class="btn btn-default" >수정</button> 
 		  
 		</form>
          
             
-       
+       	</div>
     </body>
 </html>

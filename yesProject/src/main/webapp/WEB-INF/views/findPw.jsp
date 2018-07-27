@@ -11,6 +11,8 @@
         <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
        	<script src="./js/jquery.validate.js"></script>
+       	
+       	
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>     
         <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
        
@@ -87,17 +89,23 @@
 
 	<script>
 	
+		if('${err}' == '고객님의 정보를 확인해주세요'){
+			alert('${err}');
+		}
+		
 		$(function(){
+			
+			
     		$('#updateForm').validate({
     			focusout:true,
     			onsubmit:false,
     			onkeyup: true,
     			rules:{
-    				pw:{required:true,minlength:4},
-    				pw2:{required:true,equalTo:"#pw"},
+    				password:{required:true,minlength:4},
+    				pw2:{required:true,equalTo:"#password"},
     			},
     			messages:{
-    				pw:{
+    				password:{
     					required:"필수정보입니다",
     					minlength:"최소 4자 이상 입력하세요"
     				},
@@ -205,7 +213,7 @@
 		<div class="pw-group">
 			<label for="pw">비밀번호</label>
 			<input type="hidden" name="id" value="${id }"/>
-		    <input type="password" class="form-control" id="pw" name="pw" />
+		    <input type="password" class="form-control" id="password" name="password" />
 		    <p></p>
 		</div>
 		<br/>

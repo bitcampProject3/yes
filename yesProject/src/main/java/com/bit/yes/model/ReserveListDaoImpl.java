@@ -14,7 +14,6 @@ import com.bit.yes.model.entity.ReserveListVo;
 @Repository
 public class ReserveListDaoImpl implements ReserveListDao {
 
-
    @Autowired
    SqlSession sqlSession;
 

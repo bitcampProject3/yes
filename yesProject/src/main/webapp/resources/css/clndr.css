@@ -45,8 +45,8 @@ p {
   margin: 3em auto 1em auto;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  border-bottom: 2px solid #414141;
-  background: #f4f4f4;
+/*   border-bottom: 2px solid #414141;
+  background: #f4f4f4; */
 }
 .left-align {
   text-align: left;
@@ -123,8 +123,9 @@ p {
 }
 .cal1 .clndr .clndr-table .header-days {
   height: 30px;
-  font-size: 10px;
-  background: #0D70A6;
+  font-size: 12px;
+  font-weight: bold;
+  background: #e04f5f;
 }
 .cal1 .clndr .clndr-table .header-days .header-day {
   vertical-align: middle;
@@ -138,6 +139,7 @@ p {
 }
 .cal1 .clndr .clndr-table tr {
   height: 85px;
+  overflow:hidden;
 }
 .cal1 .clndr .clndr-table tr td {
   vertical-align: top;
@@ -153,11 +155,11 @@ p {
 }
 .cal1 .clndr .clndr-table tr .day.today,
 .cal1 .clndr .clndr-table tr .day.my-today {
-  background: #9AD6E3;
+  background: #FFD8D8;
 }
 .cal1 .clndr .clndr-table tr .day.today:hover,
 .cal1 .clndr .clndr-table tr .day.my-today:hover {
-  background: #72c6d8;
+  background: #FFA7A7;
 }
 .cal1 .clndr .clndr-table tr .day.today.event,
 .cal1 .clndr .clndr-table tr .day.my-today.event {
@@ -183,6 +185,8 @@ p {
   padding: 8px;
   font-size: 12px;
   text-align: right;
+  max-height: 85px;
+  overflow: hidden;
 }
 .cal1 .clndr .clndr-table tr .empty,
 .cal1 .clndr .clndr-table tr .adjacent-month,
@@ -216,12 +220,21 @@ p {
 }
 .cal2 {
   max-width: 177px;
-  margin: 30px auto;
+  margin: 10px auto;
   font-family: 'Droid Sans Mono';
+  height:100%;
+}
+.cal2 .clndr-table{
+   text-align:center;
+    margin: 0px auto;
+    width:100%;
+
 }
 .cal2 .clndr .clndr-controls {
   display: block;
   display: inline-block;
+  font-size: 17px;
+  font-weight: bold;
   width: 100%;
   margin-bottom: 3px;
 }
@@ -279,9 +292,14 @@ p {
 .cal2 .clndr .clndr-grid .day.event {
   background-color: #B4E09F;
 }
-.cal2 .clndr .clndr-grid .day.today {
-  background-color: #E3C57F;
+<!--내가 추가한 부분-->
+.cal2 .clndr .clndr-table tr .day.today,
+.cal2 .clndr .clndr-table tr .day.my-today
+{
+  /* background-color: #E3C57F; */
+  background: #FFD8D8;
 }
+<!--추가-->
 .cal2 .clndr .clndr-grid .day.selected {
   background-color: #E37FD6;
 }
@@ -431,4 +449,7 @@ p {
 .clndr-previous-year-button.inactive {
   opacity: 0.5;
   cursor: default;
+}
+.time{
+   margin-top: 2px;
 }

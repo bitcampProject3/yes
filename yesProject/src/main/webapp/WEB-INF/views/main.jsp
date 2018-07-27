@@ -1,23 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+         pageEncoding="EUC-KR"%>
 <!Doctype html>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/selectDesign.css">
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mapStyle.css?ver=2">
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css">
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/clndrstyle.css?ver=3">
-	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 	    <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
     </head>
-    <body>
+ <body>
        
        <jsp:include page="./layout/header.jsp?ver=1" flush="false"/>
-         
+        
         <div class="page" id="page" style="z-index:0;position:relative;">
             <script type="text/javascript">
 	        
@@ -30,7 +26,7 @@
             window.onload = function() {
                 mapResize();
 
-                // ë¸Œë¼ìš°ì € í¬ê¸°ê°€ ë³€í•  ì‹œ ë™ì ìœ¼ë¡œ ì‚¬ì´ì¦ˆë¥¼ ì¡°ì ˆí•´ì•¼ í•˜ëŠ”ê²½ìš°
+                // ºê¶ó¿ìÀú Å©±â°¡ º¯ÇÒ ½Ã µ¿ÀûÀ¸·Î »çÀÌÁî¸¦ Á¶ÀıÇØ¾ß ÇÏ´Â°æ¿ì
                 window.addEventListener('resize', mapResize);
             }
             // var arr = [];
@@ -75,7 +71,7 @@
                     data: JSON.stringify(searchArr),
                     success: function (data) {
                         if (data.length === 0){
-                            alert('í•´ë‹¹í•˜ëŠ” ë§¤ì¥ì´ ì—†ìŠµë‹ˆë‹¤.');
+                            alert('ÇØ´çÇÏ´Â ¸ÅÀåÀÌ ¾ø½À´Ï´Ù.');
                             $("input[name='searchInput']").val('');
                         } else {
                             $('#searchResult').empty();
@@ -93,9 +89,9 @@
 					                                    '               <img src="./imgs/foodimgs/'+val.mainImage+'" width="80" height="80" class="searchImageFile">' +
 				                                        '           </div>' +
 					                                    '           <div class="searchResultContentDetail"><br/>' +
-						                                '               ì£¼ì†Œ : ' +val.roadAddress+ '<br/>' +
-						                                '               ì—°ë½ì²˜ : ' +val.phoneNum+ '<br/>' +
-					                                    '               í‰ì  : ' +val.score+ ' / 5.0 <br/>' +
+						                                '               ÁÖ¼Ò : ' +val.roadAddress+ '<br/>' +
+						                                '               ¿¬¶ôÃ³ : ' +val.phoneNum+ '<br/>' +
+					                                    '               ÆòÁ¡ : ' +val.score+ ' / 5.0 <br/>' +
 					                                    '           </div>' +
 		                                                '       </div>' +
 				                                        '    </div>' +
@@ -106,7 +102,7 @@
                             });
                             var searchCnt = searchLngArr.length;
                             searchResultList(searchLatArr, searchLngArr);
-                            alert('ì´ ['+searchCnt+']ê±´ ê²€ìƒ‰ ì™„ë£Œ');
+                            alert('ÃÑ ['+searchCnt+']°Ç °Ë»ö ¿Ï·á');
                             $('.searchResultDiv').css('height','400px');
                             $('#searchBox').css('height','470px');
                         }
@@ -155,16 +151,16 @@
 	            <div style="width: 100%; height: 40px; margin-top: 12px; margin-bottom: 12px;">
 		            <div style="display: inline-block; width: 30%; height: 100%;">
                         <select id="searchSelect" style="width: 100%; height: 100%;">
-                            <option value="searchRocate">ì§€ì—­ë³„</option>
-                            <option value="searchName">ìƒí˜¸ëª…</option>
-                            <option value="searchMenu">ë©”ë‰´</option>
+                            <option value="searchRocate">Áö¿ªº°</option>
+                            <option value="searchName">»óÈ£¸í</option>
+                            <option value="searchMenu">¸Ş´º</option>
                         </select>
                     </div>
                     <div style="display: inline-block; width: 50%; height: 100%;">
                         <input type="text" style="width: 100%; height: 100%;" name="searchInput">
                     </div>
                     <div style="display: inline-block; width: 15%; height: 100%;">
-                        <button class="searchBtn" onclick="searchStart()" style="width: 100%; height: 100%;">ê²€ìƒ‰</button>
+                        <button class="searchBtn" onclick="searchStart()" style="width: 100%; height: 100%;">°Ë»ö</button>
                     </div>
 	            </div>
 	            <div class="searchResultDiv" style="width: 100%; height: 0px;">
@@ -185,22 +181,22 @@
 
 		        var map = new daum.maps.Map(container, options);
 
-		        // ì¼ë°˜ ì§€ë„ì™€ ìŠ¤ì¹´ì´ë·°ë¡œ ì§€ë„ íƒ€ì…ì„ ì „í™˜í•  ìˆ˜ ìˆëŠ” ì§€ë„íƒ€ì… ì»¨íŠ¸ë¡¤ì„ ìƒì„±í•©ë‹ˆë‹¤
+		        // ÀÏ¹İ Áöµµ¿Í ½ºÄ«ÀÌºä·Î Áöµµ Å¸ÀÔÀ» ÀüÈ¯ÇÒ ¼ö ÀÖ´Â ÁöµµÅ¸ÀÔ ÄÁÆ®·ÑÀ» »ı¼ºÇÕ´Ï´Ù
 		        var mapTypeControl = new daum.maps.MapTypeControl();
 
-		        // ì§€ë„ì— ì»¨íŠ¸ë¡¤ì„ ì¶”ê°€í•´ì•¼ ì§€ë„ìœ„ì— í‘œì‹œë©ë‹ˆë‹¤
-		        // daum.maps.ControlPositionì€ ì»¨íŠ¸ë¡¤ì´ í‘œì‹œë  ìœ„ì¹˜ë¥¼ ì •ì˜í•˜ëŠ”ë° TOPRIGHTëŠ” ì˜¤ë¥¸ìª½ ìœ„ë¥¼ ì˜ë¯¸í•©ë‹ˆë‹¤
+		        // Áöµµ¿¡ ÄÁÆ®·ÑÀ» Ãß°¡ÇØ¾ß ÁöµµÀ§¿¡ Ç¥½ÃµË´Ï´Ù
+		        // daum.maps.ControlPositionÀº ÄÁÆ®·ÑÀÌ Ç¥½ÃµÉ À§Ä¡¸¦ Á¤ÀÇÇÏ´Âµ¥ TOPRIGHT´Â ¿À¸¥ÂÊ À§¸¦ ÀÇ¹ÌÇÕ´Ï´Ù
 		        map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
 
-		        // ì§€ë„ í™•ëŒ€ ì¶•ì†Œë¥¼ ì œì–´í•  ìˆ˜ ìˆëŠ”  ì¤Œ ì»¨íŠ¸ë¡¤ì„ ìƒì„±í•©ë‹ˆë‹¤
+		        // Áöµµ È®´ë Ãà¼Ò¸¦ Á¦¾îÇÒ ¼ö ÀÖ´Â  ÁÜ ÄÁÆ®·ÑÀ» »ı¼ºÇÕ´Ï´Ù
 		        var zoomControl = new daum.maps.ZoomControl();
 		        map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 
-		        // ë§ˆì»¤ í´ëŸ¬ìŠ¤í„°ëŸ¬ë¥¼ ìƒì„±
+		        // ¸¶Ä¿ Å¬·¯½ºÅÍ·¯¸¦ »ı¼º
 		        var clusterer = new daum.maps.MarkerClusterer({
-			        map: map, // ë§ˆì»¤ë“¤ì„ í´ëŸ¬ìŠ¤í„°ë¡œ ê´€ë¦¬í•˜ê³  í‘œì‹œí•  ì§€ë„ ê°ì²´
-			        averageCenter: true, // í´ëŸ¬ìŠ¤í„°ì— í¬í•¨ëœ ë§ˆì»¤ë“¤ì˜ í‰ê·  ìœ„ì¹˜ë¥¼ í´ëŸ¬ìŠ¤í„° ë§ˆì»¤ ìœ„ì¹˜ë¡œ ì„¤ì •
-			        minLevel: 6, // í´ëŸ¬ìŠ¤í„° í•  ìµœì†Œ ì§€ë„ ë ˆë²¨
+			        map: map, // ¸¶Ä¿µéÀ» Å¬·¯½ºÅÍ·Î °ü¸®ÇÏ°í Ç¥½ÃÇÒ Áöµµ °´Ã¼
+			        averageCenter: true, // Å¬·¯½ºÅÍ¿¡ Æ÷ÇÔµÈ ¸¶Ä¿µéÀÇ Æò±Õ À§Ä¡¸¦ Å¬·¯½ºÅÍ ¸¶Ä¿ À§Ä¡·Î ¼³Á¤
+			        minLevel: 6, // Å¬·¯½ºÅÍ ÇÒ ÃÖ¼Ò Áöµµ ·¹º§
 			        minClusterSize: 1,
 			        styles: [{
 				        width : '53px', height : '52px',
@@ -229,7 +225,7 @@
 		        <c:forEach items="${alist}" var="articleList">
 		        geocoder.addressSearch('${articleList.roadAddress}', function (result, status) {
 
-			        // ì •ìƒì ìœ¼ë¡œ ê²€ìƒ‰ì´ ì™„ë£Œëìœ¼ë©´
+			        // Á¤»óÀûÀ¸·Î °Ë»öÀÌ ¿Ï·áµÆÀ¸¸é
 			        if (status === daum.maps.services.Status.OK) {
 
 				        var branchArr = ['${articleList.id}', '${articleList.branchName}',
@@ -249,7 +245,7 @@
 
 
 						if (('${articleList.latlngx}' && '${articleList.latlngy}')==null){
-				        //ê¸°ë“±ë¡ëœ ìë£Œì— latlng ì…ë ¥
+				        //±âµî·ÏµÈ ÀÚ·á¿¡ latlng ÀÔ·Â
 						var latlngY = result[0].y,
 							latlngX = result[0].x;
 						var tempId = '${articleList.id}';
@@ -263,7 +259,7 @@
 							}),
 							contentType: 'application/json; charset=utf-8',
 							success: function (data) {
-								console.log(tempId+' ì¢Œí‘œ ì—…ë°ì´íŠ¸ ì™„ë£Œ');
+								console.log(tempId+' ÁÂÇ¥ ¾÷µ¥ÀÌÆ® ¿Ï·á');
 								// $.each(data,  function (idx, val) {
 								//     test.push(val.menu);
 								//     test.push(val.price);
@@ -313,28 +309,28 @@
 			            category        = branchArr[22],
 			            branchExplain   = branchArr[23];
 			            
-			        var imageSrc = './imgs/markerIcon/'+markerImage, // ë§ˆì»¤ì´ë¯¸ì§€ì˜ ì£¼ì†Œì…ë‹ˆë‹¤
-				        imageSize = new daum.maps.Size(55, 55), // ë§ˆì»¤ì´ë¯¸ì§€ì˜ í¬ê¸°ì…ë‹ˆë‹¤
-				        imageOption = {offset: new daum.maps.Point(27, 69)}; // ë§ˆì»¤ì´ë¯¸ì§€ì˜ ì˜µì…˜ì…ë‹ˆë‹¤. ë§ˆì»¤ì˜ ì¢Œí‘œì™€ ì¼ì¹˜ì‹œí‚¬ ì´ë¯¸ì§€ ì•ˆì—ì„œì˜ ì¢Œí‘œë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
+			        var imageSrc = './imgs/markerIcon/'+markerImage, // ¸¶Ä¿ÀÌ¹ÌÁöÀÇ ÁÖ¼ÒÀÔ´Ï´Ù
+				        imageSize = new daum.maps.Size(55, 55), // ¸¶Ä¿ÀÌ¹ÌÁöÀÇ Å©±âÀÔ´Ï´Ù
+				        imageOption = {offset: new daum.maps.Point(27, 69)}; // ¸¶Ä¿ÀÌ¹ÌÁöÀÇ ¿É¼ÇÀÔ´Ï´Ù. ¸¶Ä¿ÀÇ ÁÂÇ¥¿Í ÀÏÄ¡½ÃÅ³ ÀÌ¹ÌÁö ¾È¿¡¼­ÀÇ ÁÂÇ¥¸¦ ¼³Á¤ÇÕ´Ï´Ù.
 
-			        // ë§ˆì»¤ì˜ ì´ë¯¸ì§€ì •ë³´ë¥¼ ê°€ì§€ê³  ìˆëŠ” ë§ˆì»¤ì´ë¯¸ì§€ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
+			        // ¸¶Ä¿ÀÇ ÀÌ¹ÌÁöÁ¤º¸¸¦ °¡Áö°í ÀÖ´Â ¸¶Ä¿ÀÌ¹ÌÁö¸¦ »ı¼ºÇÕ´Ï´Ù
 			        var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
 			        var marker = new daum.maps.Marker({
 				        position: markerPosition,
 				        title: id,
-				        image: markerImage // ë§ˆì»¤ì´ë¯¸ì§€ ì„¤ì •
+				        image: markerImage // ¸¶Ä¿ÀÌ¹ÌÁö ¼³Á¤
 			        });
 			        var className = '' + id + ' wrap';
 
 
-			        // ë§ˆì»¤ë¥¼ ì¤‘ì‹¬ìœ¼ë¡œ ì»¤ìŠ¤í…€ ì˜¤ë²„ë ˆì´ë¥¼ í‘œì‹œí•˜ê¸°ìœ„í•´ CSSë¥¼ ì´ìš©í•´ ìœ„ì¹˜ë¥¼ ì„¤ì •
-			        // ì»¤ìŠ¤í…€ ì˜¤ë²„ë ˆì´ì— í‘œì‹œí•  ì»¨í…ì¸ 
+			        // ¸¶Ä¿¸¦ Áß½ÉÀ¸·Î Ä¿½ºÅÒ ¿À¹ö·¹ÀÌ¸¦ Ç¥½ÃÇÏ±âÀ§ÇØ CSS¸¦ ÀÌ¿ëÇØ À§Ä¡¸¦ ¼³Á¤
+			        // Ä¿½ºÅÒ ¿À¹ö·¹ÀÌ¿¡ Ç¥½ÃÇÒ ÄÁÅÙÃ÷
 			        var content = document.createElement('div');
 			        content.className = className;
 			        content.innerHTML = '<div class="info">' +
 				        '<div class="title">' +
 				        '<p>' + branchName + '</p>' +
-				        '<div class="close" title="ë‹«ê¸°"></div>' +
+				        '<div class="close" title="´İ±â"></div>' +
 				        '</div>' +
 				        '<div class="popupBody">' +
 				        '<div class="img">' +
@@ -342,12 +338,12 @@
 				        '</div>' +
 				        '<div class="desc">' +
 				        '<div class="address ellipsis">' + roadAddress + ' ' + detailAddress + '</div>' +
-				        '<div class="jibun ellipsis">(ìš°) ' + zoneCode + ' (ì§€ë²ˆ) ' + jibunAddress + '</div>' +
+				        '<div class="jibun ellipsis">(¿ì) ' + zoneCode + ' (Áö¹ø) ' + jibunAddress + '</div>' +
 				        '<div class="phone ellipsis">' + phoneNum + '</div>' +
 				        '<div class="ellipsis"><br/></div>' +
 				        '<div class="timeDiv">' +
 				        '<div class="timeDiv1">' +
-				        'ì˜ì—…ì‹œê°„' +
+				        '¿µ¾÷½Ã°£' +
 				        '</div>' +
 				        '<div class="timeDiv2">' +
 				        opTime +
@@ -355,7 +351,7 @@
 				        '</div>' +
 				        '<div class="dayDiv">' +
 				        '<div class="dayDiv1">' +
-				        'ì˜ì—…ì¼' +
+				        '¿µ¾÷ÀÏ' +
 				        '</div>' +
 				        '<div class="dayDiv2">' +
 				        opDate +
@@ -363,7 +359,7 @@
 				        '</div>' +
 				        '<div class="breakDiv">' +
 				        '<div class="breakDiv1">' +
-				        'íœ´ê²Œì‹œê°„' +
+				        'ÈŞ°Ô½Ã°£' +
 				        '</div>' +
 				        '<div class="breakDiv2">' +
 				        breakTime +
@@ -371,7 +367,7 @@
 				        '</div>' +
 				        '<div class="restDiv">' +
 				        '<div class="restDiv1">' +
-				        'ëŒ€í‘œë©”ë‰´' +
+				        '´ëÇ¥¸Ş´º' +
 				        '</div>' +
 				        '<div class="restDiv2">' +
 				        '<div class="restDiv2_1">' +
@@ -396,7 +392,7 @@
 				        '</div>' +
 				        '<div class="gradeDiv">' +
 				        '<div class="gradeDiv1">' +
-				        'ì´ìš©ì í‰ì ' +
+				        'ÀÌ¿ëÀÚ ÆòÁ¡' +
 				        '</div>' +
 				        '<div class="gradeDiv2">' +
 				        score + ' / 5.0' +
@@ -406,16 +402,16 @@
 				        '</div>' +
 				        '</div>' +
 				        '<div class="btnDiv">' +
-				        '<a href="#ex1" onclick="javascript:branchDetail(\''+branchArr+'\');" rel="modal:open" class="btn-gradient gray block">ìƒì„¸ë³´ê¸°</a>' +
-				        '<a href="#reserveModal" onclick="javascript:reserveModal(\''+branchName+'\',\''+id+'\')" rel="modal:open" class="btn-gradient red block">ë°”ë¡œì˜ˆì•½</a>' +
+				        '<a href="#ex1" onclick="javascript:branchDetail(\''+branchArr+'\');" rel="modal:open" class="btn-gradient gray block">»ó¼¼º¸±â</a>' +
+				        '<a href="#reserveModal" onclick="javascript:reserveModal(\''+branchName+'\',\''+id+'\')" rel="modal:open" class="btn-gradient red block">¹Ù·Î¿¹¾à</a>' +
 				        '</div>' +
 				        '</div>' +
 				        '</div>' +
 				        '</div>';
 
-			        // ë§ˆì»¤ ìœ„ì— ì»¤ìŠ¤í…€ì˜¤ë²„ë ˆì´ë¥¼ í‘œì‹œí•©ë‹ˆë‹¤
+			        // ¸¶Ä¿ À§¿¡ Ä¿½ºÅÒ¿À¹ö·¹ÀÌ¸¦ Ç¥½ÃÇÕ´Ï´Ù
 
-			        // ë§ˆì»¤ë¥¼ ì¤‘ì‹¬ìœ¼ë¡œ ì»¤ìŠ¤í…€ ì˜¤ë²„ë ˆì´ë¥¼ í‘œì‹œí•˜ê¸°ìœ„í•´ CSSë¥¼ ì´ìš©í•´ ìœ„ì¹˜ë¥¼ ì„¤ì •í–ˆìŠµë‹ˆë‹¤
+			        // ¸¶Ä¿¸¦ Áß½ÉÀ¸·Î Ä¿½ºÅÒ ¿À¹ö·¹ÀÌ¸¦ Ç¥½ÃÇÏ±âÀ§ÇØ CSS¸¦ ÀÌ¿ëÇØ À§Ä¡¸¦ ¼³Á¤Çß½À´Ï´Ù
 			        var overlay = new daum.maps.CustomOverlay({
 				        content: content,
 				        map: map,
@@ -447,9 +443,9 @@
 				        function mapSetMarker(test) {
 
 					        var mapProjection = map.getProjection(),
-						        // í•´ë‹¹ ìœ„ë„ ê²½ë„ê°’ì„ X,Yê°’ìœ¼ë¡œ ë°˜í™˜í•´ì¤Œ
+						        // ÇØ´ç À§µµ °æµµ°ªÀ» X,Y°ªÀ¸·Î ¹İÈ¯ÇØÁÜ
 						        latlng = markerPosition,
-						        // ì§€ë„ ì¢Œí‘œì— í•´ë‹¹í•˜ëŠ” ìœ„ì¹˜ ì¢Œí‘œ
+						        // Áöµµ ÁÂÇ¥¿¡ ÇØ´çÇÏ´Â À§Ä¡ ÁÂÇ¥
 						        mapPixel = mapProjection.containerPointFromCoords(latlng);
 
 					        var center = map.getCenter();
@@ -458,20 +454,20 @@
 						        deltaY = mapPixel.y - mapCenter.y;
 
 
-					        // case 1 : ë§ˆì»¤ ìµœì´ˆ í´ë¦­
-					        // case 2 : ë‹¤ë¥¸ ë§ˆì»¤ê°€ í™œì„±í™” ë˜ì–´ìˆëŠ” ìƒí™©ì—ì„œ ë‹¤ë¥¸ ë§ˆì»¤ í´ë¦­
-					        // case 3 : ë‹¤ë¥¸ ë§ˆì»¤ë¥¼ none í•œ í›„ì— ë˜ ë‹¤ë¥¸ ë§ˆì»¤ í´ë¦­
-					        // state ì´ˆê¸°ê°’ì€ null
+					        // case 1 : ¸¶Ä¿ ÃÖÃÊ Å¬¸¯
+					        // case 2 : ´Ù¸¥ ¸¶Ä¿°¡ È°¼ºÈ­ µÇ¾îÀÖ´Â »óÈ²¿¡¼­ ´Ù¸¥ ¸¶Ä¿ Å¬¸¯
+					        // case 3 : ´Ù¸¥ ¸¶Ä¿¸¦ none ÇÑ ÈÄ¿¡ ¶Ç ´Ù¸¥ ¸¶Ä¿ Å¬¸¯
+					        // state ÃÊ±â°ªÀº null
 
-					        // ë§ˆì»¤ë¥¼ í´ë¦­ ì‹œì— ëª¨ë“  ì˜¤ë²„ë ˆì´ë¥¼ none í•œ í›„ ë§ˆì»¤ì˜ ì˜¤ë²„ë ˆì´ë§Œ inherit
-					        // -> ë§ˆì»¤ì—ì„œ ìŠ¤í† ì–´ì˜ ì´ë¦„ì„ ê°€ì ¸ì˜¬ ë°©ë²• ìƒê°í•´ë´ì•¼ í•¨
-					        // -> ë§ˆì»¤ì— Titleì„ set,get í•˜ëŠ” ë°©ë²•ìœ¼ë¡œ í•´ê²°
+					        // ¸¶Ä¿¸¦ Å¬¸¯ ½Ã¿¡ ¸ğµç ¿À¹ö·¹ÀÌ¸¦ none ÇÑ ÈÄ ¸¶Ä¿ÀÇ ¿À¹ö·¹ÀÌ¸¸ inherit
+					        // -> ¸¶Ä¿¿¡¼­ ½ºÅä¾îÀÇ ÀÌ¸§À» °¡Á®¿Ã ¹æ¹ı »ı°¢ÇØºÁ¾ß ÇÔ
+					        // -> ¸¶Ä¿¿¡ TitleÀ» set,get ÇÏ´Â ¹æ¹ıÀ¸·Î ÇØ°á
 
-					        // í•´ê²°
-					        // case 1 : stateê°€ nullì¸ ìƒíƒœì—ì„œ ì˜¤ë²„ë ˆì´ë¥¼ ìƒì„±í•˜ê³  display inheritìœ¼ë¡œ ë³€ê²½
-					        // case 2 : stateê°€ ì²˜ìŒì— í´ë¦­í–ˆë˜ markerê°€ ì•„ë‹ˆë©´ ëª¨ë“  ì˜¤ë²„ë ˆì´ display none í›„ì—
-					        //          markerTitleìœ¼ë¡œ ì„ íƒëœ markerì„ ê³¨ë¼ë‚´ì–´ í•´ë‹¹ ì˜¤ë²„ë ˆì´ì˜ display inherití•¨
-					        // case 3 : stateê°€ ì´ì „ì— ì„ íƒí–ˆë˜ markerì™€ ê°™ë‹¤ë©´ ëª¨ë“  ì˜¤ë²„ë ˆì´ì˜ display none
+					        // ÇØ°á
+					        // case 1 : state°¡ nullÀÎ »óÅÂ¿¡¼­ ¿À¹ö·¹ÀÌ¸¦ »ı¼ºÇÏ°í display inheritÀ¸·Î º¯°æ
+					        // case 2 : state°¡ Ã³À½¿¡ Å¬¸¯Çß´ø marker°¡ ¾Æ´Ï¸é ¸ğµç ¿À¹ö·¹ÀÌ display none ÈÄ¿¡
+					        //          markerTitleÀ¸·Î ¼±ÅÃµÈ markerÀ» °ñ¶ó³»¾î ÇØ´ç ¿À¹ö·¹ÀÌÀÇ display inheritÇÔ
+					        // case 3 : state°¡ ÀÌÀü¿¡ ¼±ÅÃÇß´ø marker¿Í °°´Ù¸é ¸ğµç ¿À¹ö·¹ÀÌÀÇ display none
 
 					        var markerTitle = marker.getTitle();
 
@@ -494,8 +490,8 @@
 						        selectedMarker = null;
 //                              overlay.setMap(null);
 					        }
-					        // close ë²„íŠ¼ìœ¼ë¡œ ì¢…ë£Œ í–ˆì„ì‹œ case 3ìœ¼ë¡œ ë³€ê²½ë˜ëŠ” ë¬¸ì œ
-					        // ë²„íŠ¼ í´ë¦­ì‹œì— selectedMarkerë¥¼ null ì¡ì•„ì£¼ë©´ ë ë“¯ --> ì™„ë£Œ
+					        // close ¹öÆ°À¸·Î Á¾·á ÇßÀ»½Ã case 3À¸·Î º¯°æµÇ´Â ¹®Á¦
+					        // ¹öÆ° Å¬¸¯½Ã¿¡ selectedMarker¸¦ null Àâ¾ÆÁÖ¸é µÉµí --> ¿Ï·á
 					        $('.close').click(function () {
 						        $('.wrap').css('display', 'none');
 						        selectedMarker = null;
@@ -522,13 +518,13 @@
 			        };
 			        daum.maps.event.addListener(marker, 'click', callback);
 			        clusterer.addMarker(marker);
-			        // ë§ˆì»¤ê°€ ì§€ë„ ìœ„ì— í‘œì‹œë˜ë„ë¡ ì„¤ì •í•©ë‹ˆë‹¤
+			        // ¸¶Ä¿°¡ Áöµµ À§¿¡ Ç¥½ÃµÇµµ·Ï ¼³Á¤ÇÕ´Ï´Ù
 			        marker.setMap(map);
 			        overlay.setMap(null);
 		        } // for end
 		        
 				function reserveModal(name, id) {
-			        $('.modalTopSpan').empty().append(name+' ì˜ˆì•½');
+			        $('.modalTopSpan').empty().append(name+' ¿¹¾à');
 			        $('.reserveTimeDiv').attr('id',id);
 		        }
 		        
@@ -590,12 +586,12 @@
 					$('.modalOpDay').empty();
 					$('.modalExplain').empty();
 					
-					// ë§¤ì¥ detail í˜ì´ì§€ì— dbì •ë³´ ì¶”ê°€
+					// ¸ÅÀå detail ÆäÀÌÁö¿¡ dbÁ¤º¸ Ãß°¡
 					$('.detailModalTopTitle').append(branchName);
 					$('.modalScore').append(score+' / 5.0');
 					$('.modalStatus').append(state);
 					$('.modalAddress').append(roadAddress);
-					$('.modalJibunAddress').append('(ìš°) '+zoneCode+' (ì§€ë²ˆ) '+jibunAddress);
+					$('.modalJibunAddress').append('(¿ì) '+zoneCode+' (Áö¹ø) '+jibunAddress);
 					$('.modalPhoneNum').append(phoneNum);
 					$('.modalOpTime').append(opTime);
 					$('.modalBreakTime').append(breakTime);
@@ -623,7 +619,7 @@
 			            <div class="detailModalTopTitle">
 			            </div>
 				        <div class="detailModalTopCategory">
-					        <span class="categorySpan">ì„œìš¸ ë§ˆí¬êµ¬ í•œì‹</span>
+					        <span class="categorySpan">¼­¿ï ¸¶Æ÷±¸ ÇÑ½Ä</span>
 				        </div>
 			        </div>
 	                <div class="detailModalLeft">
@@ -651,25 +647,25 @@
 			                <div class="modalStatus"></div>
 		                </div>
 		                <div>
-			                <div class="modalAddressDiv">ì£¼ì†Œ</div>
+			                <div class="modalAddressDiv">ÁÖ¼Ò</div>
 			                <div class="modalAddress"></div>
 		                </div>
 		                <div class="modalJibunAddress">
 		                </div>
 		                <div>
-			                <div class="modalPhoneNumDiv">ì—°ë½ì²˜</div>
+			                <div class="modalPhoneNumDiv">¿¬¶ôÃ³</div>
 			                <div class="modalPhoneNum"></div>
 		                </div>
 		                <div>
-			                <div class="modalOpTimeDiv">ì˜ì—…ì‹œê°„</div>
+			                <div class="modalOpTimeDiv">¿µ¾÷½Ã°£</div>
 			                <div class="modalOpTime"></div>
 		                </div>
 		                <div>
-			                <div class="modalBreakTimeDiv">íœ´ê²Œì‹œê°„</div>
+			                <div class="modalBreakTimeDiv">ÈŞ°Ô½Ã°£</div>
 			                <div class="modalBreakTime"></div>
 		                </div>
 		                <div class="modalOpDayBox">
-			                <div class="modalOpDayDiv">ì˜ì—…ì¼</div>
+			                <div class="modalOpDayDiv">¿µ¾÷ÀÏ</div>
 			                <div class="modalOpDay" ></div>
 		                </div>
 		                
@@ -714,21 +710,21 @@
 		                <div class="modalExplain">
 		                </div>
 		                <div class="modalBbs">
-			                <div class="modalBbsMore">ë”ë³´ê¸°</div>
+			                <div class="modalBbsMore">´õº¸±â</div>
 			                <div class="modalBbsTitle">
-				                <div class="modalBbsTitleSub">ì œëª©</div>
-				                <div class="modalBbsTitleDate">ë‚ ì§œ</div>
-				                <div class="modalBbsTitleWriter">ì‘ì„±ì</div>
+				                <div class="modalBbsTitleSub">Á¦¸ñ</div>
+				                <div class="modalBbsTitleDate">³¯Â¥</div>
+				                <div class="modalBbsTitleWriter">ÀÛ¼ºÀÚ</div>
 			                </div>
 			                <div class="modalBbsList">
-				                <div class="modalBbsListSub">ì´ë ‡ê²Œ ë§›ì—†ëŠ” ì§‘ì€ ì²˜ìŒ ë³¸ë‹¤....</div>
+				                <div class="modalBbsListSub">ÀÌ·¸°Ô ¸À¾ø´Â ÁıÀº Ã³À½ º»´Ù....</div>
 				                <div class="modalBbsListDate">2018-07-19</div>
-				                <div class="modalBbsListName">ë§Œë³µ</div>
+				                <div class="modalBbsListName">¸¸º¹</div>
 			                </div>
 			                <div class="modalBbsList">
-				                <div class="modalBbsListSub">ì´ë ‡ê²Œ ë§›ìˆëŠ” ì§‘ì€ ì²˜ìŒ ë³¸ë‹¤....</div>
+				                <div class="modalBbsListSub">ÀÌ·¸°Ô ¸ÀÀÖ´Â ÁıÀº Ã³À½ º»´Ù....</div>
 				                <div class="modalBbsListDate">2018-07-17</div>
-				                <div class="modalBbsListName">ì²œë³µ</div>
+				                <div class="modalBbsListName">Ãµº¹</div>
 			                </div>
 		                </div>
 	                </div>
@@ -742,28 +738,28 @@
             </div>
             <div id="reserveModal" class="modal" style="height: 600px; max-height: 600px; max-width: 400px; width: 400px;">
 		        <div class="detailModalTop" style="width: 400px; color: white;">
-			        <span class="modalTopSpan">ì˜ˆì•½</span>
+			        <span class="modalTopSpan">¿¹¾à</span>
 		        </div>
 	            <div id="calendar"></div>
 	            <div class="reserveTimeDiv">
 		            <div class="reservePersonel">
-			            <input type="number" min="1" max="10" class="reservePersonelInput" placeholder="1"/>ëª…
+			            <input type="number" min="1" max="10" class="reservePersonelInput" placeholder="1"/>¸í
 		            </div>
 		            <div class="reserveTimeSelect">
 			            <select class="timeSelect">
-				            <option>ì˜ˆì•½ì‹œê°„</option>
+				            <option>¿¹¾à½Ã°£</option>
 			            </select>
 		            </div>
 	            </div>
 	            <div class="resultTimeDiv">
-		           17ë…„ 7ì›” 30ì¼ 2ëª…
+		           17³â 7¿ù 30ÀÏ 2¸í
 	            </div>
 	            <div class="reserveRequest">
-		           <input type="text" class="reserveRequestInput" placeholder="ìš”ì²­ì‚¬í•­"/>
+		           <input type="text" class="reserveRequestInput" placeholder="¿äÃ»»çÇ×"/>
 	            </div>
 	            <div class="reserveBtn">
-		            <a href="#" class="btn-gradient gray block">ì·¨ì†Œ</a>
-		            <a href="#" class="btn-gradient red block">ì˜ˆì•½</a>
+		            <a href="#" class="btn-gradient gray block">Ãë¼Ò</a>
+		            <a href="#" class="btn-gradient red block">¿¹¾à</a>
 	            </div>
             </div>
     <script>

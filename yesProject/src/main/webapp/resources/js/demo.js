@@ -2,7 +2,6 @@
 var calendars = {};
 // var newjQuery = $.noConflict();
 jQuery(document).ready( function() {
-
     // Assuming you've got the appropriate language files,
     // clndr will respect whatever moment's language is set to.
     // moment.locale('ru');
@@ -94,7 +93,6 @@ jQuery(document).ready( function() {
         showAdjacentMonths: true,
         adjacentDaysChangeMonth: false
     });
-
     // Bind all clndrs to the left and right arrow keys
     jQuery(document).keydown( function(e) {
         // Left arrow

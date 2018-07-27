@@ -4,7 +4,6 @@ import java.sql.Date;
 
 
 public class ReserveListVo {
-
    private String branchID;
    private String branchName;
    private String clientID;

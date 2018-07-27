@@ -1649,11 +1649,4 @@
 
         return this.data('plugin_clndr');
     };
-
-
-
-
-
-
-
 }));

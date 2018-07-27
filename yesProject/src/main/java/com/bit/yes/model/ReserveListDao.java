@@ -8,7 +8,6 @@ import com.bit.yes.model.entity.BranchVo;
 import com.bit.yes.model.entity.ReserveListVo;
 
 public interface ReserveListDao {
-
    //고객 예약 현황 리스트
    public List<ReserveListVo> reserveList(String id) throws SQLException;
    public BranchVo selectOne(String branchID) throws SQLException;

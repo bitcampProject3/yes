@@ -1,6 +1,7 @@
 package com.bit.yes.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,10 +12,10 @@ import org.springframework.ui.Model;
 import com.bit.yes.model.ReserveListDao;
 import com.bit.yes.model.entity.BranchVo;
 import com.bit.yes.model.entity.ReserveListVo;
+import com.mysql.cj.xdevapi.JsonArray;
 
 @Service
 public class ReserveListService {
-
 
    @Autowired
    ReserveListDao reserveDao;
@@ -63,10 +64,7 @@ public class ReserveListService {
    }
 
 	public List<ReserveListVo> reserveDatePreview(Map<String,Object> map) {
-         return reserveDao.reserveDatePreview(map);
+       return reserveDao.reserveDatePreview(map);
+    }
 
-
-
-
-	}
 }
