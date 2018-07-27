@@ -2,19 +2,15 @@ package com.bit.yes.model.entity;
 
 import java.sql.Date;
 
-
-
 public class UserVo {
 
 	private String id;
-	private String password;
-	private String name;
+	private String pw;
 	private String nickName;
-	private String email;
 	private String phoneNum;
 	private String pwQuestion;
 	private Date birthDate;
-	private String registNum; //사업자 등록번호
+	private String branchNum;
 	
 	
 	
@@ -26,14 +22,12 @@ public class UserVo {
 			String branchNum) {
 		super();
 		this.id = id;
-		this.password = password;
-		this.name=name;
+		this.pw = pw;
 		this.nickName = nickName;
-		this.email=email;
 		this.phoneNum = phoneNum;
 		this.pwQuestion = pwQuestion;
 		this.birthDate = birthDate;
-		this.registNum = registNum;
+		this.branchNum = branchNum;
 	}
 
 
@@ -50,29 +44,14 @@ public class UserVo {
 
 
 
-
-
-
-	public String getPassword() {
-		return password;
+	public String getPw() {
+		return pw;
 	}
 
 
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-
-	public String getRegistNum() {
-		return registNum;
-	}
-
-
-
-	public void setRegistNum(String registNum) {
-		this.registNum = registNum;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 
 
@@ -125,35 +104,22 @@ public class UserVo {
 
 
 
-	public String getEmail() {
-		return email;
+	public String getBranchNum() {
+		return branchNum;
 	}
 
 
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-
-	public String getName() {
-		return name;
-	}
-
-
-
-	public void setName(String name) {
-		this.name = name;
+	public void setBranchNum(String branchNum) {
+		this.branchNum = branchNum;
 	}
 
 
 
 	@Override
 	public String toString() {
-		return "UserVo [id=" + id + ", password=" + password + ", name=" + name + ", nickName=" + nickName + ", email=" + email
-				+ ", phoneNum=" + phoneNum + ", pwQuestion=" + pwQuestion + ", birthDate=" + birthDate + ", registNum="
-				+ registNum + "]";
+		return "UserVo [id=" + id + ", pw=" + pw + ", nickName=" + nickName + ", phoneNum=" + phoneNum + ", pwQuestion="
+				+ pwQuestion + ", birthDate=" + birthDate + ", branchNum=" + branchNum + "]";
 	}
 
 
@@ -162,13 +128,11 @@ public class UserVo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((registNum == null) ? 0 : registNum.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((branchNum == null) ? 0 : branchNum.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
 		result = prime * result + ((phoneNum == null) ? 0 : phoneNum.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((pw == null) ? 0 : pw.hashCode());
 		result = prime * result + ((pwQuestion == null) ? 0 : pwQuestion.hashCode());
 		return result;
 	}
@@ -184,25 +148,15 @@ public class UserVo {
 		if (getClass() != obj.getClass())
 			return false;
 		UserVo other = (UserVo) obj;
-		if (registNum == null) {
-			if (other.registNum != null)
+		if (branchNum == null) {
+			if (other.branchNum != null)
 				return false;
-		} else if (!registNum.equals(other.registNum))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
+		} else if (!branchNum.equals(other.branchNum))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
 			return false;
 		if (nickName == null) {
 			if (other.nickName != null)
@@ -214,10 +168,10 @@ public class UserVo {
 				return false;
 		} else if (!phoneNum.equals(other.phoneNum))
 			return false;
-		if (password == null) {
-			if (other.password != null)
+		if (pw == null) {
+			if (other.pw != null)
 				return false;
-		} else if (!password.equals(other.password))
+		} else if (!pw.equals(other.pw))
 			return false;
 		if (pwQuestion == null) {
 			if (other.pwQuestion != null)
@@ -226,9 +180,7 @@ public class UserVo {
 			return false;
 		return true;
 	}
-
-
-
+	
 	
 	
 	

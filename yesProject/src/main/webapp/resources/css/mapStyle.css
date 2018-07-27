@@ -19,14 +19,14 @@ html, body {width:100%;height:100%;margin:0;padding:0;}
 .wrap * {padding: 0;margin: 0;}
 .wrap .info {width: 286px;height: 390px;border-radius: 5px;border: 1px solid #ccc; overflow: hidden;background: #fff;}
 .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-.info .title {padding: 5px 0px 5px 5px;height: 30px;background: #ffadb6;border-bottom: 1px solid #ddd;font-size: 16px;}
+.info .title {padding: 5px 0 5 5px;height: 30px;background: #ffadb6;border-bottom: 1px solid #ddd;font-size: 16px;}
 .title>p{margin-left: 5px; line-height: 30px; font-size: 16px;font-weight: bold;}
 .info .close {position: absolute;top: 7px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
 .info .close:hover {cursor: pointer;}
 .info .popupBody {position: relative;overflow: hidden;}
 .info .desc {position: relative;margin: 10px 0 0 10px;height: 275px;}
 .desc .ellipsis {overflow: hidden; margin-left: 100px; width: 160px;}
-.desc .jibun {font-size: 7px;color: #888;margin-top: 2px;}
+.desc .jibun {font-size: 11px;color: #888;margin-top: 2px;}
 .info .img {position: absolute;top: 6px;left: 5px;width: 100px;height: 100px;border: 1px solid #ddd;color: #888;overflow: hidden;}
 .info:after {content: '';position: absolute;margin-left: -12px;left: 10%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
 .info .link {color: #5085BB;}

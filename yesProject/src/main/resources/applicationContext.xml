@@ -13,28 +13,17 @@
 	<bean id="dataSource"
 	class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 	p:driverClassName="com.mysql.cj.jdbc.Driver"
-	p:url="jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC&amp;characterEncoding=UTF-8"
+	p:url="jdbc:mysql://127.0.0.1:3306/mydb?serverTimezone=UTC"
 	p:username="scott" 
-	p:password="tiger"
-	></bean>
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
-		p:dataSource-ref="dataSource"
-		p:mapperLocations="classpath:/mapper/*.xml"
-	/>
+	p:password="tiger"></bean>
+	
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean"
+	p:dataSource-ref="dataSource"
+	p:mapperLocations="classpath:/mapper.xml"/>
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
-	</bean>
+		<constructor-arg ref="sqlSessionFactoryBean"></constructor-arg>
 	
-	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
-  p:order="0" />
-  
-
-	<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" id="jsonView">
-  		<property name="contentType" value="application/json; charset=UTF-8" />
 	</bean>
-
-
-
 
 </beans>
