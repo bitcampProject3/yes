@@ -171,5 +171,3 @@ select * from branch_info a inner join branch_address b on a.id=b.id where a.id=
 =======
 
 
-
->>>>>>> master

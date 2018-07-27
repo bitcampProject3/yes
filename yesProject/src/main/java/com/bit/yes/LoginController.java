@@ -19,8 +19,10 @@ import com.bit.yes.model.entity.UserVo;
 @Controller
 public class LoginController {
 
+	
 	@Autowired
 	SqlSession sqlSession;
+	
 	
 	@RequestMapping("/login.yes")
 	public String login() {
@@ -58,7 +60,7 @@ public class LoginController {
 			model.addAttribute("id", id);
 			model.addAttribute("result", pw);
 		}else {
-			model.addAttribute("err","ê³ ê°ë‹˜ì˜ ì •ë³´ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”");
+			model.addAttribute("err","°í°´´ÔÀÇ Á¤º¸¸¦ È®ÀÎÇØÁÖ¼¼¿ä");
 		}
 		return "findPw";
 	}	
@@ -66,12 +68,12 @@ public class LoginController {
 	@RequestMapping(value="/pwUpdate", method=RequestMethod.POST)
 	public String pwUpdate(String id,String password,Model model) throws SQLException {
 		sqlSession.getMapper(UserDao.class).updatePw(password,id);
-		model.addAttribute("result", "ìˆ˜ì •ì™„ë£Œ");
+		model.addAttribute("result", "¼öÁ¤¿Ï·á");
 		
 		return "login";
 	}
 	
-	//ë¡œê·¸ì¸
+	//·Î±×ÀÎ
 	@RequestMapping(value="/check",method=RequestMethod.POST)
 	public String loginCheck(String id,String password,HttpSession session,Model model) throws SQLException {
 		
@@ -79,12 +81,13 @@ public class LoginController {
 		UserVo bean=sqlSession.getMapper(UserDao.class).loginCheck(id,password);
 
 		if(bean!=null)
-		{ //ë¡œê·¸ì¸ ì„±ê³µ
+		{ //·Î±×ÀÎ ¼º°ø
 			session.setAttribute("member", bean);
 			return "redirect:/";
 		}
 		else
 		{
+			
 			return "redirect:/login.yes";
 		}
 	}

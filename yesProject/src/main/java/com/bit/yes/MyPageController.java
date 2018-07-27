@@ -36,7 +36,7 @@ public class MyPageController {
 	}
 	
 	
-	//-------------ë‚´ì •ë³´------------------
+	//-------------³»Á¤º¸------------------
 	@RequestMapping("/myInfo.yes")
 	public String myInfo(HttpSession session,Model model) throws SQLException {
 		UserVo user=(UserVo) session.getAttribute("member");
@@ -57,27 +57,27 @@ public class MyPageController {
 		}
 		else
 		{
-			System.out.println("ì‹¤íŒ¨"); 
-			//ì‹¤íŒ¨ ê²½ë¡œ ì•„ë§ˆ í‹€ë¦´ê±°ì„!
+			System.out.println("½ÇÆĞ"); 
+			//½ÇÆĞ °æ·Î ¾Æ¸¶ Æ²¸±°ÅÀÓ!
 			return "redirect:../myInfo.yes";
 		}
 	
 	}
-	//------------ì˜ˆì•½ í˜„í™©-----------
+	//------------¿¹¾à ÇöÈ²-----------
 	@RequestMapping("/reservation.yes")
 	public String reservation(HttpSession session,Model model) throws SQLException {
 		String id=((UserVo)session.getAttribute("member")).getId();
 		service.listPage(model,id);
 		return "mypage/myReserve";
 	}
-	//---------ë§ˆì´í˜ì´ì§€ ë‹¬ë ¥-----------
+	//---------¸¶ÀÌÆäÀÌÁö ´Ş·Â-----------
 	@ResponseBody
 	@RequestMapping(value="/loadReserve",method=RequestMethod.POST)
 	public List<ReserveListVo> loadReserve(HttpSession session,Model model) throws SQLException {
 		String id=((UserVo)session.getAttribute("member")).getId();
 		UserVo user=sqlSession.getMapper(UserDao.class).login(id);
 		List<ReserveListVo> list;
-		if(Integer.parseInt(user.getRegistNum())==0)//ê³ ê°
+		if(Integer.parseInt(user.getRegistNum())==0)//°í°´
 		{
 			list=service.listPage(model, id);
 			return list;
@@ -90,7 +90,7 @@ public class MyPageController {
 
 
 
-	//----------ì˜ˆì•½í•œ ê°€ê²Œì˜ ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°----------
+	//----------¿¹¾àÇÑ °¡°ÔÀÇ Á¤º¸ ºÒ·¯¿À±â----------
 	@ResponseBody
 	@RequestMapping(value="/branchInfo",method=RequestMethod.POST)
 	public BranchVo reservation2(String id,Model model) throws SQLException {
@@ -98,7 +98,7 @@ public class MyPageController {
 		return bean;
 	}
 	
-	//-----------ì˜ˆì•½ ì·¨ì†Œí•˜ê¸°---------------
+	//-----------¿¹¾à Ãë¼ÒÇÏ±â---------------
 	@ResponseBody
 	@RequestMapping(value="/delreserve",method=RequestMethod.POST)
 	public String delReserve(String time,HttpSession session) throws SQLException{
@@ -112,23 +112,23 @@ public class MyPageController {
 	
 	
 	
-	//------------------ì‚¬ì—…ì mypage-----------------
+	//------------------»ç¾÷ÀÚ mypage-----------------
 	
 	@RequestMapping("/branchReserve.yes")
 	public String branchReserve(HttpSession session,Model model) throws SQLException{
 		UserVo bean=(UserVo) session.getAttribute("member");
 		String id=bean.getId();
-		//ì˜ˆì•½ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
+		//¿¹¾à ¸®½ºÆ® ºÒ·¯¿À±â
 		service.reserveAll(model,id);
 		return "mypage/branchReserve";
 	}
 	
-	//-------------------ì‚¬ì—…ì ë§¤ì¥ì •ë³´-----------------
+	//-------------------»ç¾÷ÀÚ ¸ÅÀåÁ¤º¸-----------------
 	@RequestMapping("/branchInfo.yes")
 	public String branchInfo() {
 		return "mypage/branchInfo";
 	}
-	//----------------ë§¤ì¥ê´€ë¦¬(í…Œì´ë¸” ê´€ë¦¬)----------------------
+	//----------------¸ÅÀå°ü¸®(Å×ÀÌºí °ü¸®)----------------------
 	@RequestMapping("/branchManage.yes")
 	public String branchManage(HttpSession session,Model model) throws SQLException{
 		String id=((UserVo) session.getAttribute("member")).getId();
@@ -138,7 +138,7 @@ public class MyPageController {
 	}
 	
 	
-	// --------ì‹¤ì‹œê°„ stateì „ì†¡(ì¢Œì„ê´€ë¦¬)-----------
+	// --------½Ç½Ã°£ stateÀü¼Û(ÁÂ¼®°ü¸®)-----------
 	@ResponseBody
 	@RequestMapping(value="/manageTable",method=RequestMethod.POST)
 	public String manageTable(String state,String entry,String entryR,String end,HttpSession session) throws SQLException{
@@ -147,28 +147,28 @@ public class MyPageController {
 		bean.setTableState(Integer.parseInt(state));
 		service.updateState(bean);
 		int count=0;
-		count=service.loadTicket(id);//ëŒ€ê¸°í•˜ëŠ” ì‚¬ëŒ ëª‡ëª…ì¸ì§€..
+		count=service.loadTicket(id);//´ë±âÇÏ´Â »ç¶÷ ¸î¸íÀÎÁö..
 		System.out.println(count);
 		if(count>0)
 		{
-			//í˜„ì¬ ì…ì¥ ë²ˆí˜¸ ì €ì¥í•˜ê¸°--- ì €ì¥ ok
+			//ÇöÀç ÀÔÀå ¹øÈ£ ÀúÀåÇÏ±â--- ÀúÀå ok
 			if(Integer.parseInt(entry)>0)
 			{
 			bean.setWaitingNum(Integer.parseInt(entry));
 			service.updateWaiting(bean);
 			if(entryR!=null) {
-				System.out.println("í˜„ì¬ ì…ì¥ë²ˆí˜¸:"+entry);
-				//ticketingì—ì„œ ì‚­ì œí•˜ê¸°---(í˜„ì¬ì…ì¥ë²ˆí˜¸)
-				service.deleteTicket(Integer.parseInt(entry)); //ì‚­ì œ ok
-				//í˜„ì¬ ì…ì¥ ë²ˆí˜¸ì˜ ticketë²ˆí˜¸ë¥¼ ì‚­ì œí•¨!
-				count=service.loadTicket(id);//ëŒ€ê¸°í•˜ëŠ” ì‚¬ëŒ ëª‡ëª…ì¸ì§€..
+				System.out.println("ÇöÀç ÀÔÀå¹øÈ£:"+entry);
+				//ticketing¿¡¼­ »èÁ¦ÇÏ±â---(ÇöÀçÀÔÀå¹øÈ£)
+				service.deleteTicket(Integer.parseInt(entry)); //»èÁ¦ ok
+				//ÇöÀç ÀÔÀå ¹øÈ£ÀÇ ticket¹øÈ£¸¦ »èÁ¦ÇÔ!
+				count=service.loadTicket(id);//´ë±âÇÏ´Â »ç¶÷ ¸î¸íÀÎÁö..
 			}
 			}
 			
 		}
 		
 		if(end!=null) {
-			//ì˜ì—…ì¢…ë£Œ
+			//¿µ¾÷Á¾·á
 			bean.setWaitingNum(Integer.parseInt(entry));
 			service.updateWaiting(bean);
 			service.end(id);
@@ -177,8 +177,8 @@ public class MyPageController {
 	}
 	
 	
-	//---------------ì‹¤ì‹œê°„ ëŒ€ê¸°ì¸ì›count----------------
-	// --------ì‹¤ì‹œê°„ stateì „ì†¡(ì¢Œì„ê´€ë¦¬)-----------
+	//---------------½Ç½Ã°£ ´ë±âÀÎ¿øcount----------------
+	// --------½Ç½Ã°£ stateÀü¼Û(ÁÂ¼®°ü¸®)-----------
 	@ResponseBody
 	@RequestMapping(value="/count",method=RequestMethod.POST,produces="application/text; charset=utf8")
 	public String count(HttpSession session,String registNum) {
@@ -189,19 +189,19 @@ public class MyPageController {
 			
 			if(id!=null) {
 				int count=0;
-				if(Integer.parseInt(registNum)>0) { //ì‚¬ì—…ì
-					count=service.loadTicket(id);//ëŒ€ê¸°í•˜ëŠ” ì‚¬ëŒ ëª‡ëª…ì¸ì§€..
-					return "ì‚¬ì—…"+count+"ëª…";
+				if(Integer.parseInt(registNum)>0) { //»ç¾÷ÀÚ
+					count=service.loadTicket(id);//´ë±âÇÏ´Â »ç¶÷ ¸î¸íÀÎÁö..
+					return "»ç¾÷"+count+"¸í";
 				}
-				else{ //ê³ ê°ì¼ ê²½ìš°...ìì‹ ì˜ ëŒ€ê¸°ë²ˆí˜¸
+				else{ //°í°´ÀÏ °æ¿ì...ÀÚ½ÅÀÇ ´ë±â¹øÈ£
 					count=service.getNum(id);
 					
 					if(count>0) {
 					int state=service.getState(id);
-					return "ê³ ê°"+count+"ë²ˆ/"+state+"ë²ˆ";
+					return "°í°´"+count+"¹ø/"+state+"¹ø";
 					
 					}
-					return "ëŒ€ê¸° ì¤‘ì¸ ê°€ê²Œê°€ ì—†ìŠµë‹ˆë‹¤";
+					return "´ë±â ÁßÀÎ °¡°Ô°¡ ¾ø½À´Ï´Ù";
 					}
 				}
 			
