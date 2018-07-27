@@ -8,13 +8,13 @@
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/selectDesign.css">
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mapStyle.css?ver=2">
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css">
-	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/clndrstyle.css?ver=3">
+	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/clndrstyle.css"> 
 	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	    <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
     </head>
  <body>
        
-       <jsp:include page="./layout/header.jsp?ver=2"/>
+       <jsp:include page="./layout/header.jsp"/>
         
         <div class="page" id="page" style="z-index:0;position:relative;">
             <script type="text/javascript">
@@ -816,11 +816,7 @@
     });
     
     </script>
-    <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>--%>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-    <script src="/js/clndr.min.js"></script>
-    <script src="/js/demo.js?ver=3"></script>
+	<script src="./js/clndr3.js"></script>
+    <script src="./js/demo.js"></script>
     </body>
 </html>

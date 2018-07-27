@@ -119,10 +119,10 @@ public class BranchController {
 	@ResponseBody
 	@RequestMapping(value = "reservepreview", method = RequestMethod.POST)
 	public void reservePreviewDate(@RequestBody Map<String, Object> map){
-		List<ReserveListVo> reserveList = reserveListService.reserveDatePreview(map);
-		List<BranchVo> branchTimeList = branchService.reserveInfoPreview((map.get("id")).toString());
-		System.out.println(branchTimeList.get(0).getOpTime());
-		System.out.println(reserveList.get(0).getReserveTime());
+	//	List<ReserveListVo> reserveList = reserveListService.reserveDatePreview(map);
+	//	List<BranchVo> branchTimeList = branchService.reserveInfoPreview((map.get("id")).toString());
+	//	System.out.println(branchTimeList.get(0).getOpTime());
+	//	System.out.println(reserveList.get(0).getReserveTime());
 	}
 
 }

@@ -28,7 +28,7 @@ jQuery(document).ready( function() {
     // previousYear, nextInterval, previousInterval, or today. Then
     // onMonthChange (if the month changed), inIntervalChange if the interval
     // has changed, and finally onYearChange (if the year changed).
-    calendars.clndr1 = jQuery('#calendar').clndr({
+    calendars.clndr3 = jQuery('#calendar').clndr3({
         clickEvents: {
             click: function (target) {
                 console.log('Cal-1 clicked: ', target);

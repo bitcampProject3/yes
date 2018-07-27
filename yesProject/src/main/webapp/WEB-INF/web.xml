@@ -48,7 +48,7 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<!-- Method delete,put 사용할 경우 사용 -->
+	<!-- Method delete,put ?ъ슜??寃쎌슦 ?ъ슜 -->
 	<filter>
 	    <filter-name>httpMethodFilter</filter-name>
 	    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>

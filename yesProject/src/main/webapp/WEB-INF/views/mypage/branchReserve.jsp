@@ -5,27 +5,8 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <%--<link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">--%>
-        <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
-        <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">--%>
-        <%--<link rel="stylesheet" href="./css/selectDesign.css">--%>
-        <%--<link rel="stylesheet" href="./css/mapStyle.css">--%>
-        <%--<link rel="stylesheet" href="./css/mainStyle.css">--%>
-        <%----%>
-	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-  		<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
-  		<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
+	   <!--  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> -->
 
-        <%--<!-- jQuery Modal -->--%>
-        <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>--%>
-        <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />--%>
-
-		<!-- jQuery Calander -->
-		<%--<link rel="stylesheet" href="./css/clndr.css?ver=1">--%>
-		<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>--%>
-        <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>--%>
-		<%--<script src="/js/clndr.js?ver=4"></script>--%>
-		<%--<script src="/js/moment.js"></script>--%>
 	    
 	 
 	<style>
@@ -130,9 +111,6 @@
 						
 		</div>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-    <script src="/js/clndr.js?ver=5"></script>
     <script type="text/javascript">
     	
     	

@@ -11,7 +11,6 @@
 	<title>Title</title>
 </head>
 <body>
-	<jsp:include page="../layout/header.jsp?ver=1" flush="false"/>
 	<form name="fileForm" action="requestupload2" method="post" enctype="multipart/form-data">
 	<table>
 		<tr>
