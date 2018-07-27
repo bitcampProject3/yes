@@ -2,6 +2,10 @@
 <<<<<<<=HEAD
 >>>>>>>=master
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/main/java/com/bit/yes/model/entity/UserVo.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/review_list.jsp=UTF-8
 encoding//src/main/webapp/resources/css/mapStyle.css=UTF-8
+=======
+encoding/<project>=UTF-8
+>>>>>>> master

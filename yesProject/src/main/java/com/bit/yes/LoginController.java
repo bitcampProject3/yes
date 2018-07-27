@@ -8,11 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.yes.model.UserDao;
@@ -21,10 +19,8 @@ import com.bit.yes.model.entity.UserVo;
 @Controller
 public class LoginController {
 
-	
 	@Autowired
 	SqlSession sqlSession;
-	
 	
 	@RequestMapping("/login.yes")
 	public String login() {
@@ -62,7 +58,7 @@ public class LoginController {
 			model.addAttribute("id", id);
 			model.addAttribute("result", pw);
 		}else {
-			model.addAttribute("err","°í°´´ÔÀÇ Á¤º¸¸¦ È®ÀÎÇØÁÖ¼¼¿ä");
+			model.addAttribute("err","ê³ ê°ë‹˜ì˜ ì •ë³´ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”");
 		}
 		return "findPw";
 	}	
@@ -70,12 +66,12 @@ public class LoginController {
 	@RequestMapping(value="/pwUpdate", method=RequestMethod.POST)
 	public String pwUpdate(String id,String password,Model model) throws SQLException {
 		sqlSession.getMapper(UserDao.class).updatePw(password,id);
-		model.addAttribute("result", "¼öÁ¤¿Ï·á");
+		model.addAttribute("result", "ìˆ˜ì •ì™„ë£Œ");
 		
 		return "login";
 	}
 	
-	//·Î±×ÀÎ
+	//ë¡œê·¸ì¸
 	@RequestMapping(value="/check",method=RequestMethod.POST)
 	public String loginCheck(String id,String password,HttpSession session,Model model) throws SQLException {
 		
@@ -83,7 +79,7 @@ public class LoginController {
 		UserVo bean=sqlSession.getMapper(UserDao.class).loginCheck(id,password);
 
 		if(bean!=null)
-		{ //·Î±×ÀÎ ¼º°ø
+		{ //ë¡œê·¸ì¸ ì„±ê³µ
 			session.setAttribute("member", bean);
 			return "redirect:/";
 		}

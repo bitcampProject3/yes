@@ -109,7 +109,7 @@ border-top-left-radius: 10px;
  font-size: 40px; color: white; width: 310px; height: 100%; padding-left: 10px; line-height: 100px; display: inline-block; float: left;}
 
 
- textarea{
+ #joinT{
  	overflow-y:scroll;
  	overflow-x: hidden;
     margin-left: 30px;
@@ -535,7 +535,7 @@ border-top-left-radius: 10px;
 	            </div> 
     	
     	<div id="step1">
-    	<textarea cols="80px" rows="10px" readonly="readonly" ></textarea>
+    	<textarea id="joinT" cols="80px" rows="10px" readonly="readonly" ></textarea>
 
 		<div id="radioGroup">
 		  <input type="radio" name="assent" id="okbtn" value="ok" /> 동의

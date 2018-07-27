@@ -17,6 +17,7 @@
                 }
             });
         })
+
     </script>
 </head>
 <body>
@@ -25,6 +26,7 @@
         <img id="footerImg" src="./imgs/arrow.png">
     </div>
     <div class="footerDivCopy">
+
     </div>
 </div>
 </body>
