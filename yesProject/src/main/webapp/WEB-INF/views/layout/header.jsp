@@ -16,11 +16,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/insertstyle.css?ver=2">
     
 	<!-- jQuery Calander -->
-	<link rel="stylesheet" href="./css/clndr.css?ver=1">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-	<script src="./js/clndr.js?ver=4"></script>
-	<script src="./js/clndr2.js"></script>
+	
 	<!-- Website Font style -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 	
@@ -158,144 +154,140 @@ border-top-left-radius: 10px;
 </style>
 
     <script>
-        $.noConflict();
-        $(document).ready(function(){
-            
-            $('#slide').animate(
-                {right:-300},'slow'
-                );
+        // $.noConflict();
+   
     //새로고침 (오류나면 지우기)
     var member='${member.registNum}';
     if(member>=0){
            window.setInterval("count()",10000);}
-   	
- 	function count(){
- 	
-    	$.ajax({
- 			url:'./count',
- 			method:'POST',
- 			data:{'registNum':member},
- 			success:function(data){
- 				//대기인원을 추가해야함
- 				if(data.slice(0,2)=='사업'){
- 					var tmp=data.slice(2,4);
- 					console.log(tmp);
- 					$('#slide-menu4 h2').empty().append("대기인원:"+tmp);
- 					}
- 				else if(data.slice(0,2)=='고객'){
- 					var tmp2=data.slice(2);
- 					var tmp3=tmp2.split('/');
- 					$('#slide-menu2 h2').empty().append("대기번호:"+tmp3[0]+"<br/>"+"현재번호:"+tmp3[1]);
- 					
- 					}
- 				else{
- 					$('#slide-menu2 h2').empty().append(data);
- 				}
- 					
- 				
- 			}
- 		}); 
- 	}
- 	
- 	//-----------------------------//
+      
+    function count(){
+    
+       $.ajax({
+          url:'./count',
+          method:'POST',
+          data:{'registNum':member},
+          success:function(data){
+             //대기인원을 추가해야함
+             if(data.slice(0,2)=='사업'){
+                var tmp=data.slice(2,4);
+                console.log(tmp);
+                $('#slide-menu4 h2').empty().append("대기인원:"+tmp);
+                }
+             else if(data.slice(0,2)=='고객'){
+                var tmp2=data.slice(2);
+                var tmp3=tmp2.split('/');
+                $('#slide-menu2 h2').empty().append("대기번호:"+tmp3[0]+"<br/>"+"현재번호:"+tmp3[1]);
+                
+                }
+             else{
+                $('#slide-menu2 h2').empty().append(data);
+             }
+             
+             
+          }
+       });
+    }
+    
+    //-----------------------------//
     
     
- 	
-	    var state=false;
-	    
     
-		var calendars = {};
-		var days=new Array();
+       var state=false;
+       
+    
+      var calendars = {};
+      var days=new Array();
         jQuery(document).ready(function(){
-			
-        	
-        	
+         
+           
+           
             $('#slide').animate(
                     {right:-300},'slow'
                     );
-        	$('#mypage').click(function(){
-        		count();
-        		//클릭할 때 마다 비동기통신
+           $('#mypage').click(function(){
+              count();
+              //클릭할 때 마다 비동기통신
                 $('#slide').css({"display":"inline-block"});
                 $('#slide').animate(
                  {right:0,},'slow');
                 
-       		 $.ajax({
- 				url:'./loadReserve',
- 				method:'POST',
- 				success:function(list){
-					
- 					
- 					if(list.length==0)
- 						{
- 						calendars.clndr2 = $('.cal2').clndr2({
-					        clickEvents: {
-					            onMonthChange: function () {
-					            	console.log('monthChange');
-					            },
-					            onYearChange: function () {
-					            	console.log('yearChange');
-					            }
-					        },
-					        multiDayEvents: {
-					            singleDay: 'date',
-					            endDate: 'endDate',
-					            startDate: 'startDate'
-					        },
-					    });
- 						
- 						
- 						
- 						}//if문끝
- 					
-					
- 					for (var i = 0; i < list.length; i++) {
-						var day=(list[i].reserveTime).slice(0,10);
-						days.push(day); 
-						$('.calendar2-day-'+day+'').css({'background-color':'#FFA7A7',
-														'border-radius':'50%'});
-					   
-						calendars.clndr2 = $('.cal2').clndr2({
-					        clickEvents: {
-					            onMonthChange: function () {
-					            	for (var i = 0; i < list.length; i++) {
-					            	var day=(list[i].reserveTime).slice(0,10);
-									$('.calendar2-day-'+day+'').css({'background-color':'#FFA7A7',
-										'border-radius':'50%'});
-					            	}
-					            },
-					            onYearChange: function () {
-					                console.log('Cal-1 year changed');
-					            }
-					        },
-					        multiDayEvents: {
-					            singleDay: 'date',
-					            endDate: 'endDate',
-					            startDate: 'startDate'
-					        },
-					        showAdjacentMonths: true,
-					        adjacentDaysChangeMonth: false
-					    });
- 					
-						
- 					}//for end...
- 					
- 				}//success end
- 				}); 
+              $.ajax({
+             url:'./loadReserve',
+             method:'POST',
+             success:function(list){
+               
                 
+                if(list.length==0)
+                   {
+                   calendars.clndr2 = $('.cal2').clndr2({
+                       clickEvents: {
+                           onMonthChange: function () {
+                              console.log('monthChange');
+                           },
+                           onYearChange: function () {
+                              console.log('yearChange');
+                           }
+                       },
+                       multiDayEvents: {
+                           singleDay: 'date',
+                           endDate: 'endDate',
+                           startDate: 'startDate'
+                       },
+                   });
+                   
+                   
+                   
+                   }//if문끝
                 
+               
+                for (var i = 0; i < list.length; i++) {
+                  var day=(list[i].reserveTime).slice(0,10);
+                  days.push(day);
+                  $('.calendar2-day-'+day+'').css({'background-color':'#FFA7A7',
+                                          'border-radius':'50%'});
+                  
+                  calendars.clndr2 = $('.cal2').clndr2({
+                       clickEvents: {
+                           onMonthChange: function () {
+                              for (var i = 0; i < list.length; i++) {
+                              var day=(list[i].reserveTime).slice(0,10);
+                           $('.calendar2-day-'+day+'').css({'background-color':'#FFA7A7',
+                              'border-radius':'50%'});
+                              }
+                           },
+                           onYearChange: function () {
+                               console.log('Cal-1 year changed');
+                           }
+                       },
+                       multiDayEvents: {
+                           singleDay: 'date',
+                           endDate: 'endDate',
+                           startDate: 'startDate'
+                       },
+                       showAdjacentMonths: true,
+                       adjacentDaysChangeMonth: false
+                   });
                 
+                  
+                }//for end...
+                
+             }//success end
+             });
+             
+             
+             
             });
              $('#close').click(function(){
                 $('#slide').animate(
                 {right:-300},'slow'
-                ); 
+                );
                 
              });
-        	
-        	
+           
+           
             $("#logout").click(function(){
-            	$.ajax({
+               $.ajax({
                     type : "POST",
                     dataType : 'text',
                     url : "http://nid.naver.com/nidlogin.logout",
@@ -308,63 +300,13 @@ border-top-left-radius: 10px;
                  }).fail(function(xhr, textStatus, errorThrown) {
                     $('#logout').submit();
                  });
-          	  
+               
             });
             
             
             //지도
             
-            
-            $(".dropdownSelect img.flag").addClass("flagvisibility");
-            $(".dropdownSelect dt a").click(function() {
-                $(".dropdownSelect dd ul").toggle();
-            });
-            $(".dropdownSelect dd ul li a").click(function() {
-                var text = $(this).html();
-                $(".dropdownSelect dt a span").html(text);
-                $(".dropdownSelect dd ul").hide();
-                /* $("#result").html("Selected value is: " + getSelectedValue("sample"));*/
-            });
-            $(".dropdownSelect2 img.flag").addClass("flagvisibility");
-            $(".dropdownSelect2 dt a").click(function() {
-                $(".dropdownSelect2 dd ul").toggle();
-            });
-            $(".dropdownSelect2 dd ul li a").click(function() {
-                var text = $(this).html();
-                $(".dropdownSelect2 dt a span").html(text);
-                $(".dropdownSelect2 dd ul").hide();
-                /* $("#result").html("Selected value is: " + getSelectedValue("sample"));*/
-            });
-            $(".dropdownSelect3 img.flag").addClass("flagvisibility");
-            $(".dropdownSelect3 dt a").click(function() {
-                $(".dropdownSelect3 dd ul").toggle();
-            });
-            $(".dropdownSelect3 dd ul li a").click(function() {
-                var text = $(this).html();
-                $(".dropdownSelect3 dt a span").html(text);
-                $(".dropdownSelect3 dd ul").hide();
-                /* $("#result").html("Selected value is: " + getSelectedValue("sample"));*/
-            });
-            $(".dropdownSelect4 img.flag").addClass("flagvisibility");
-            $(".dropdownSelect4 dt a").click(function() {
-                $(".dropdownSelect4 dd ul").toggle();
-            });
-            $(".dropdownSelect4 dd ul li a").click(function() {
-                var text = $(this).html();
-                $(".dropdownSelect4 dt a span").html(text);
-                $(".dropdownSelect4 dd ul").hide();
-                /* $("#result").html("Selected value is: " + getSelectedValue("sample"));*/
-            });
-            $(".dropdownSelect5 img.flag").addClass("flagvisibility");
-            $(".dropdownSelect5 dt a").click(function() {
-                $(".dropdownSelect5 dd ul").toggle();
-            });
-            $(".dropdownSelect5 dd ul li a").click(function() {
-                var text = $(this).html();
-                $(".dropdownSelect5 dt a span").html(text);
-                $(".dropdownSelect5 dd ul").hide();
-                /* $("#result").html("Selected value is: " + getSelectedValue("sample"));*/
-            });
+
             $("#searchBox").slideToggle('slow', function(){});
             // searchBox open / close
             $('#searchIcon1').click(function() {
@@ -389,8 +331,6 @@ border-top-left-radius: 10px;
                 $(".dropdownSelect dd ul").hide();
         });
         $(".dropdownSelect img.flag").toggleClass("flagvisibility");
-        
-        
     </script>
 </head>
 <body>
@@ -1082,5 +1022,10 @@ border-top-left-radius: 10px;
         
     }
 	</script>
+	<link rel="stylesheet" href="./css/clndr.css?ver=1">
+	<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>--%>
+    <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>--%>
+	<%--<script src="./js/clndr.js?ver=5"></script>--%>
+	<%--<script src="./js/clndr2.js"></script>--%>
 </body>
 </html>

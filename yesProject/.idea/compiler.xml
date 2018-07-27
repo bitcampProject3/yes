@@ -9,11 +9,8 @@
         <module name="yes" />
       </profile>
     </annotationProcessing>
-<<<<<<< HEAD
     <bytecodeTargetLevel>
       <module name="yes" target="7" />
     </bytecodeTargetLevel>
-=======
->>>>>>> master
   </component>
 </project>

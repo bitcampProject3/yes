@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=EUC-KR"
          pageEncoding="EUC-KR"%>
 <!Doctype html>
 <html>
@@ -8,16 +9,15 @@
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mapStyle.css?ver=2">
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css">
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/clndrstyle.css?ver=3">
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	    <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
     </head>
  <body>
        
-       <jsp:include page="./layout/header.jsp?ver=1" flush="false"/>
+       <jsp:include page="./layout/header.jsp?ver=2"/>
         
         <div class="page" id="page" style="z-index:0;position:relative;">
             <script type="text/javascript">
-	        
-	           
             function mapResize() {
                 var mapResize = document.getElementById('page');
                 mapResize.style.width = window.innerWidth;
@@ -224,7 +224,7 @@
 
 		        <c:forEach items="${alist}" var="articleList">
 		        geocoder.addressSearch('${articleList.roadAddress}', function (result, status) {
-
+					
 			        // 정상적으로 검색이 완료됐으면
 			        if (status === daum.maps.services.Status.OK) {
 
@@ -267,6 +267,7 @@
 								// });
 							},
 							error: function () {
+								alert('latlng error');
 							}
 					    });
 				        }
@@ -763,7 +764,7 @@
 	            </div>
             </div>
     <script>
-    // $.noConflict();
+    $.noConflict();
     $(document).ready(function () {
     	$('.popup-gallery').magnificPopup({
 			delegate: 'a',

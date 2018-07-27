@@ -5,24 +5,29 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/selectDesign.css">
-        <link rel="stylesheet" href="./css/mapStyle.css">
-        <link rel="stylesheet" href="./css/mainStyle.css">
-        
-  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <%--<link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">--%>
+        <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
+        <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">--%>
+        <%--<link rel="stylesheet" href="./css/selectDesign.css">--%>
+        <%--<link rel="stylesheet" href="./css/mapStyle.css">--%>
+        <%--<link rel="stylesheet" href="./css/mainStyle.css">--%>
+        <%----%>
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+  		<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
+  		<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
 
-        <!-- jQuery Modal -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-		<script src="./js/jquery.avgrund.min.js"></script>
+        <%--<!-- jQuery Modal -->--%>
+        <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>--%>
+        <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />--%>
 
 		<!-- jQuery Calander -->
-
-		<script src="./js/moment.js"></script>
+		<%--<link rel="stylesheet" href="./css/clndr.css?ver=1">--%>
+		<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>--%>
+        <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>--%>
+		<%--<script src="/js/clndr.js?ver=4"></script>--%>
+		<%--<script src="/js/moment.js"></script>--%>
+	    
+	 
 	<style>
 	
 	.table-label{
@@ -83,7 +88,52 @@
 	
 	</style>
 
-    	<script type="text/javascript">
+    
+	
+    </head>
+    <body style="overflow:auto; z-index:0; positio:relative;">
+    
+    
+       <jsp:include page="../layout/header.jsp"></jsp:include>
+        <div class="container" style=" border-bottom: 1px solid #CCCCCC;">
+           
+           <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
+               border-bottom-color: #e04f5f; margin-top:30px;">
+                
+              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px;  ">
+                  <h1 style="padding: 5px; margin-bottom: 20px; ">
+                      <a href="#" style="color: black;">예약 현황</a>
+                  </h1>
+
+              </div>
+            </div>
+            
+            <div class="cal1"></div>
+
+		</div>
+		<div id="ex1" class="modal" style="width:1000px; height:300px; ">
+			<h1 style="border-bottom:1px solid red; ">예약현황 리스트</h1>
+			<table class="table">
+				<thead>
+				<tr id="table-header" >
+					<th>고객이름</th>
+					<th>예약 시간</th>
+					<th>인원</th>
+					<th>요청사항</th>
+					<th>이용완료</th>
+				</tr>
+				
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+						
+		</div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="/js/clndr.js?ver=5"></script>
+    <script type="text/javascript">
     	
     	
           	var target;
@@ -101,12 +151,12 @@
 
 				var time=nalja.slice(11,16);
 				$('.'+time+'').remove();
-  				
+  		
 				
 				var client=new Object();
   				client.day=nalja.slice(0,10);
   				client.clientID='${bean.clientID}';
-				client.name='${bean.name}';		
+				client.name='${bean.name}';
 				client.personel='${bean.personel}';
 				client.request='${bean.request}';
 				client.time=time;
@@ -144,7 +194,7 @@
 						target='calendar-day-'+array[i].day.slice(0,10);
 						console.log(i);
 						$('.calendar-day-'+array[i].day+'').children().append('<div class="time">'+array[i].time+'</div>');
- 						
+ 					
 						
 						$('.table tbody').append('<tr class="tr'+i+'">');
 						$('.table tbody .tr'+i).append('<td style="width:15%">'+array[i].name+'</td>');
@@ -160,14 +210,14 @@
 				
 				$('.'+target+'').click(function(){
 					$('#ex1').modal('show');
-				}); 
+				});
 				
 				
 				
   			}
     	
 	        var calendars = {};
-	        $(document).ready( function() {
+	        jQuery(document).ready(function() {
 	            if(changeMonth>9){
 	            	
 	            	compare=changeYear+'-'+changeMonth;
@@ -176,8 +226,7 @@
 	            }
 	            
 	            // Events to load into calendar
-	            var eventArray = [
-	            ];
+	            var eventArray = [];
 	            
 	        	var array=dataload();
 				for (var i = 0; i < array.length; i++) {
@@ -191,7 +240,7 @@
 						$('.table tbody .tr'+i).append('<td>'+array[i].personel+'</td>');
 						$('.table tbody .tr'+i).append('<td style="width:60%; text-overflow:ellipsis;  font-size:10pt;">'+array[i].request+'</td>');
 						$('.table tbody .tr'+i).append('<td>'+array[i].useState+'</td>');
-						$('.table tbody').append('</tr>') 
+						$('.table tbody').append('</tr>')
 					}
 
 	            calendars.clndr1 = $('.cal1').clndr({
@@ -234,54 +283,14 @@
 	            });
 
 				
-				}	        	
+				}
 				
 				$('.'+target+'').click(function(){
 					$('#ex1').modal('show');
-				}); 
-	          	
+				});
+	        
 	        });//end
 	        
           </script>
-	
-    </head>
-    <body style="overflow:auto; z-index:0; positio:relative;">
-    
-    
-       <jsp:include page="../layout/header.jsp"></jsp:include>
-        <div class="container" style=" border-bottom: 1px solid #CCCCCC;">
-           
-           <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
-               border-bottom-color: #e04f5f; margin-top:30px;">
-                
-              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px;  ">
-                  <h1 style="padding: 5px; margin-bottom: 20px; ">
-                      <a href="#" style="color: black;">예약 현황</a>
-                  </h1>
-
-              </div>
-            </div>
-            
-            <div class="cal1"></div>
-
-		</div>
-		<div id="ex1" class="modal" style="width:1000px; height:300px; ">
-			<h1 style="border-bottom:1px solid red; ">예약현황 리스트</h1>
-			<table class="table">
-				<thead>
-				<tr id="table-header" >
-					<th>고객이름</th>
-					<th>예약 시간</th>
-					<th>인원</th>
-					<th>요청사항</th>
-					<th>이용완료</th>
-				</tr>
-				
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-						
-		</div>
     </body>
 </html>
