@@ -17,7 +17,6 @@
 	p:username="scott" 
 	p:password="tiger"
 	></bean>
-	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="dataSource"
 		p:mapperLocations="classpath:/mapper/*.xml"

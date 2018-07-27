@@ -16,7 +16,7 @@ create table user_info(
 
 );
 
-select * from branch_image;
+select * from user_info;
 
 
 create table branch_info(

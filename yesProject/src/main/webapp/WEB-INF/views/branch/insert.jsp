@@ -11,9 +11,8 @@
 	<title>Title</title>
 </head>
 <body>
-	<a href="../"><h1>Hello world</h1></a>
-	<a href="./list"><h1>리스트로 이동</h1></a>
-	<form action="./add" method="get">
+	<jsp:include page="../layout/header.jsp?ver=1" flush="false"/>
+	<form name="fileForm" action="requestupload2" method="post" enctype="multipart/form-data">
 	<table>
 		<tr>
 			<td>아이디</td>
@@ -32,17 +31,40 @@
 			<td><input name="opDate" id="opDate" type="text"/></td>
 		</tr>
 		<tr>
-			<td>대표메뉴1</td>
-			<td><input name="menu1" id="menu1" type="text"/></td>
+			<td>연락처</td>
+			<td><input name="phoneNum" id="phoneNum" type="text"/></td>
 		</tr>
 		<tr>
-			<td>대표메뉴2</td>
-			<td><input name="menu2" id="menu2" type="text"/></td>
+			<td>상태</td>
+			<td><input name="state" id="state" type="text"/></td>
 		</tr>
 		<tr>
-			<td>대표메뉴3</td>
-			<td><input name="menu3" id="menu3" type="text"/></td>
+			<td>상호명</td>
+			<td><input name="branchName" id="branchName" type="text"/></td>
 		</tr>
+		<tr>
+			<td>카테고리</td>
+			<td><input name="category" id="category" type="text"/></td>
+		</tr>
+		<tr>
+			<td>매장 설명</td>
+			<td><input name="branchExplain" id="branchExplain" type="text"/></td>
+		</tr>
+		<tr>
+			<td>-------------------------------</td>
+		</tr>
+		<%--<tr>--%>
+			<%--<td>대표메뉴1</td>--%>
+			<%--<td><input name="menu1" id="menu1" type="text"/></td>--%>
+		<%--</tr>--%>
+		<%--<tr>--%>
+			<%--<td>대표메뉴2</td>--%>
+			<%--<td><input name="menu2" id="menu2" type="text"/></td>--%>
+		<%--</tr>--%>
+		<%--<tr>--%>
+			<%--<td>대표메뉴3</td>--%>
+			<%--<td><input name="menu3" id="menu3" type="text"/></td>--%>
+		<%--</tr>--%>
 		<tr>
 			<td>도로명주소</td>
 			<td><input type="text" name="address" id="address" placeholder="도로명주소"></td>
@@ -60,9 +82,9 @@
 			<td><input name="addressDetail" id="addressDetail" type="text"/></td>
 		</tr>
 		<tr>
-			<td>연락처</td>
-			<td><input name="phoneNum" id="phoneNum" type="text"/></td>
+			<td>-------------------------------</td>
 		</tr>
+		
 		<%--<tr>--%>
 			<%--<td>이미지1</td>--%>
 			<%--<td><input name="image1" id="image1" type="text"/></td>--%>
@@ -79,19 +101,16 @@
 			<%--<td>평점</td>--%>
 			<%--<td><input name="score" id="score" type="text"/></td>--%>
 		<%--</tr>--%>
-		<tr>
-			<td>상태</td>
-			<td><input name="state" id="state" type="text"/></td>
-		</tr>
-		<tr>
-			<td>상호명</td>
-			<td><input name="branchName" id="branchName" type="text"/></td>
-		</tr>
+		
 		<tr>
 			<td><button type="submit">입력</button></td>
 			<td></td>
 		</tr>
 	</table>
+		<input multiple="multiple" type="file" name="file" />
+		<input multiple="multiple" type="file" name="file" />
+        <input type="text" name="src" />
+        <input type="submit" value="전송" />
 		<span id="guide" style="color:#999"></span>
 	</form>
 	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>

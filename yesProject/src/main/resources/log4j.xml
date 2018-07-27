@@ -9,7 +9,7 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-	
+
 	<!-- Application Loggers -->
 	<logger name="com.bit.yes">
 		<level value="info" />
@@ -31,7 +31,6 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
-
 	<!-- Root Logger -->
 	<root>
 		<priority value="info" />

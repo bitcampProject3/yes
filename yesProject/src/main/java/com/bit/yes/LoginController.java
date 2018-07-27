@@ -66,7 +66,7 @@ public class LoginController {
 	@RequestMapping(value="/pwUpdate", method=RequestMethod.POST)
 	public String pwUpdate(String id,String pw,Model model) throws SQLException {
 		sqlSession.getMapper(UserDao.class).updatePw(pw,id);
-		model.addAttribute("result", "¼öÁ¤¿Ï·á");
+		model.addAttribute("result", "ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½");
 		
 		return "login";
 	}
@@ -79,7 +79,7 @@ public class LoginController {
 		UserVo bean=sqlSession.getMapper(UserDao.class).loginCheck(id,password);
 
 		if(bean!=null)
-		{ //·Î±×ÀÎ ¼º°ø
+		{
 			session.setAttribute("member", bean);
 			return "redirect:/";
 		}
