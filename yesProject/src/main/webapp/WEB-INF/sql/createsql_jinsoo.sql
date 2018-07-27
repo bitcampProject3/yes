@@ -28,8 +28,14 @@ create table branch_info(
 	address varchar(20) not null,
 	phoneNum varchar(20) not null,
 	image varchar(20) not null,
-	score decimal(2,1) not null
-
+	score decimal(2,1) not null,
+	
+	
+	maxTable int not null,
+	tableState int not null,
+	acceptState varchar(10) not null,
+	waitingNum int not null
+	/*내가 추가한 부분*/
 );
 
 
@@ -128,6 +134,16 @@ alter table branch_info add jibunaddress varchar(20) NOT NULL;
 alter table branch_info add addressdetail varchar(40) NOT NULL;
 alter table branch_info add image2 varchar(20) NOT NULL;
 alter table branch_info add image3 varchar(20) NOT NULL;
+alter table branch_info add maxTable int NOT NULL;
+alter table branch_info add tableState int NOT NULL;
+alter table branch_info add acceptState varchar(10) NOT NULL;
+alter table branch_info add waitingNum int NOT NULL;
+
+
+
+
+
+
 
 
 alter table branch_info change menu menu1 varchar(20) not null;
@@ -197,7 +213,8 @@ create table branch_image(
   constraint fk_img_id foreign key (id) references branch_info (id) on delete cascade
 );
 
-insert into branch_info values('branch01','매장8','09:00~23:05','14:00~15:05','매주 금요일 휴무','010-2131-4136','1.6','적당');
+delete from branch_info where id='branch01';
+insert into branch_info values('branch01','매장8','09:00~23:05','14:00~15:05','매주 금요일 휴무','010-2131-4136','1.6','적당','8','0','false','0');
 insert into branch_info values('branch02','매장9','09:00~23:06','14:00~15:06','매주 토요일 휴무','010-2131-4137','1.7','혼잡');
 insert into branch_info values('branch03','매장3','09:00~23:00','14:00~15:00','매주 일요일 휴무','010-2131-4131','1.1','혼잡');
 insert into branch_info values('branch04','매장4','09:00~23:01','14:00~15:01','매주 월요일 휴무','010-2131-4132','1.2','한산');

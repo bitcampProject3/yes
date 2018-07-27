@@ -14,5 +14,43 @@
 	select * from branch_info a inner join branch_address b on a.id=b.id where a.id=#{param1}
 </select>
 
+<select id="deleteReserve" parameterType="com.bit.yes.model.entity.ReserveListVo">
+	delete from reserve_list where clientID=#{clientID} and reserveTime=#{reserveTime}
+</select>
+
+<select id="b_reserveList" parameterType="string" resultType="com.bit.yes.model.entity.ReserveListVo">
+	select * from reserve_list a inner join user_info b on a.clientID=b.id where branchID=#{param1} 
+</select>
+
+<select id="selectBranch" parameterType="string" resultType="com.bit.yes.model.entity.BranchVo">
+	select * from branch_info where id=#{param1}
+</select>
+
+<update id="updateState" parameterType="com.bit.yes.model.entity.BranchVo">
+	update branch_info set tableState=#{tableState}  where id=#{id};
+</update>
+
+<select id="countTicket" parameterType="string" resultType="int">
+	select count(*) as num from ticketing where branchID=#{id}
+</select>
+
+<update id="updateWaiting" parameterType="com.bit.yes.model.entity.BranchVo">
+	update branch_info set waitingNum=#{waitingNum}  where id=#{id}
+</update>
+
+<delete id="deleteTicket" parameterType="int">
+	delete from ticketing where waitingNum=#{param1}
+</delete>
+<delete id="end" parameterType="string">
+	delete from ticketing where branchID=#{param1}
+</delete>
+
+<select id="getNum" parameterType="string" resultType="int">
+	select waitingNum from ticketing where clientID=#{param1}
+</select>
+
+<select id="getState" parameterType="string" resultType="int">
+	select a.waitingNum from branch_info a inner join ticketing b on a.id=b.branchID where b.clientID=#{param1} 
+</select>
 
 </mapper>

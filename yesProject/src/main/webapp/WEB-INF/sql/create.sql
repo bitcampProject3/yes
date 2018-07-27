@@ -26,13 +26,14 @@ create table branch_info(
 	address varchar(20) not null,
 	phoneNum varchar(20) not null,
 	image varchar(20) not null,
-	score decimal(2,1) not null
+	score decimal(2,1) not null,
+
 
 );
 
 
 create table ticketing(
-	brnachID varchar(20) primary key,
+	branchID varchar(20) ,
 	clientID varchar(20) ,
 	ticketingTime datetime not null,
 	waitingNum int not null
@@ -126,17 +127,42 @@ select * from user_info;
 ----reserve_list > 이용 여부 컬럼 추가(혜원)// 2018-07-18----------
 alter table reserve_list add useState varchar(10) NOT NULL;
 
-drop table reserve_list;
+drop table ticketing;
 
 
 select * from branch_info;
 select * from reserve_list;
 insert into reserve_list values ('branch01','hyewon','2018-12-25-18:00',CURRENT_TIMESTAMP,2,'아이가 먹을거예요','N');
 insert into reserve_list values ('branch02','hyewon','2018-12-24-17:00',CURRENT_TIMESTAMP,2,'아이가 먹을거예요','N');
+
 insert into reserve_list values ('branch01','wonywony93','2018-12-25-16:00',CURRENT_TIMESTAMP,3,'아이가 먹을거예요','N');
+insert into reserve_list values ('branch01','wonywony93','2018-07-19-16:00',CURRENT_TIMESTAMP,3,'와사비 빼주세요','Y');
+insert into reserve_list values ('branch01','wonywony93','2018-07-19-17:00',CURRENT_TIMESTAMP,4,'밥 많이 주세요','Y');
+insert into reserve_list values ('branch01','wonywony93','2018-07-19-18:00',CURRENT_TIMESTAMP,4,'국물조금만주세요','N');
+insert into reserve_list values ('branch01','wonywony93','2018-07-19-19:00',CURRENT_TIMESTAMP,2,'4인분 같은 2인분 주시면 감사하겠습니다......^^ 번창하세요','N');
+insert into reserve_list values ('branch01','wonywony93','2018-07-19-19:00',CURRENT_TIMESTAMP,2,'4인분 같은 2인분 주시면 감사하겠습니다......^^ 번창하세요........','N');
+
+
+
+insert into ticketing values('branch01','wonywony93',now(),'1');
+insert into ticketing values('branch01','wonywony83',now(),'2');
+
 
 select branchID,branchName,clientID,reserveTime,personel,request,useState from reserve_list a inner join branch_info b on a.branchID=b.id where clientID='hyewon';
-select * from branch_info;
+select * from branch_info where 'branch01';
+
+delete from user_info where id='branch01';
+select * from ticketing;
+select * from ticketing where clientID='wonywony93';
+select * from user_info;
 
 
+select * from user_info;
+
+select waitingNum from ticketing where clientID='wonywony93';
+
+select a.waitingNum from branch_info a inner join ticketing b on a.id=b.branchID where b.clientID='wonywony93';
+select tableState,waitingNum from branch_info where id='branch01';
+select * from user_info;
+select * from reserve_list a inner join user_info b on a.clientID=b.id where branchID='branch01'; 
 select * from branch_info a inner join branch_address b on a.id=b.id where a.id='branch01';

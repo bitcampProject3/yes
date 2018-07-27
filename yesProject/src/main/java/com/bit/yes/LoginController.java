@@ -58,20 +58,24 @@ public class LoginController {
 	@RequestMapping(value="/find2",method=RequestMethod.POST)
 	public String find2(String id,String name, String email,String birth, String answer,Model model) throws SQLException {
 		String pw=sqlSession.getMapper(UserDao.class).findPw(id, name, birth, email, answer);
-		model.addAttribute("id", id);
-		model.addAttribute("result", pw);
+		if(pw!=null) {
+			model.addAttribute("id", id);
+			model.addAttribute("result", pw);
+		}else {
+			model.addAttribute("err","고객님의 정보를 확인해주세요");
+		}
 		return "findPw";
 	}	
 	
 	@RequestMapping(value="/pwUpdate", method=RequestMethod.POST)
-	public String pwUpdate(String id,String pw,Model model) throws SQLException {
-		sqlSession.getMapper(UserDao.class).updatePw(pw,id);
+	public String pwUpdate(String id,String password,Model model) throws SQLException {
+		sqlSession.getMapper(UserDao.class).updatePw(password,id);
 		model.addAttribute("result", "수정완료");
 		
 		return "login";
 	}
 	
-	
+	//로그인
 	@RequestMapping(value="/check",method=RequestMethod.POST)
 	public String loginCheck(String id,String password,HttpSession session,Model model) throws SQLException {
 		

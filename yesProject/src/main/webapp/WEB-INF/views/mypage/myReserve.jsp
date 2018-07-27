@@ -59,6 +59,15 @@
 	height:500px;
 	overflow:visible;
 	}
+	#deletebtn{
+	
+	width:400px;
+	height:100px;
+	overflow:visible;
+	}
+	#deletebtn a{
+	 float:right;
+	}
 	
 	.table a{
 	
@@ -70,8 +79,22 @@
 	</style>
 	
 	<script>
-	
-	
+	 
+	function del(e){
+		 
+		 $('#del').click(function(){
+			 $.ajax({
+					url:'./delreserve',
+					method:'POST',
+					data:{'time':e},
+					success:function(data){
+						location.href='.'+data;
+					}
+					}); 
+		 });
+	 } 
+	 
+	 
 	function detail(e,e2)
 	{
 			$('#branchName').empty();
@@ -164,7 +187,7 @@
                     	<a style="margin-left:20px; font-size: 12px;" class="btn btn-default" >리뷰작성</a>
                     	</c:if>
                      	<c:if test="${bean.useState eq 'N' }">
-                    	<a href="#" style="margin-left:20px; font-size: 12px; color:red"  >예약취소</a>
+                    	<a id="modal" href="#deletebtn" rel="modal:open" style="margin-left:20px; font-size: 12px; color:red" onclick="javascript:del('${bean.reserveTime}');"  >예약취소</a>
                     	</c:if>
                     	</td>
                     	</tr>
@@ -174,10 +197,11 @@
                    </table>
                    
                    
-                   
-                   
-                   
-                   
+                   	 <div id="deletebtn" class="modal">
+                   	 <p>예약을 취소하시겠습니까?</p>
+			          <a href="#" class="btn btn-default" rel="modal:close">아니오</a>
+                   	  <a href="#" class="btn btn-default" id="del" >예</a>
+			        </div>
                    
                    
                    </article>

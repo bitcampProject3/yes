@@ -31,6 +31,8 @@
 		width:100%;
 		height:50px;
 	}
+	.table-content{
+	}
 	
 	 input.error
 
@@ -49,6 +51,14 @@
 	</style>
 	<script>
 	 	$(document).ready(function(){
+	 		
+	 		
+	 		
+	 		$('#add').click(function(){
+				$('#form').css('display','inline-block');
+				$('#first').css('display','none');
+	 		});
+	 		
 	 		
 	 		
 			$('#updateform').validate({
@@ -127,7 +137,7 @@
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px;  ">
                   <h1 style="padding: 5px; margin-bottom: 20px; ">
-                      <a href="" style="color: black;">내정보</a>
+                      <a href="" style="color: black;">매장정보</a>
                   </h1>
 
               </div>
@@ -137,58 +147,67 @@
 		  
 		<table class="table" style="width:50%; margin:50px auto; border:1px solid gray; ">
   
-			<tbody>
+			<tbody id="form"style="display:none;">
+			
 			<tr>
-			<td class="table-label">이름</td>
-			<td>${user.name }
-			<input type="hidden" class="form-control" id="id" name="id" value="${user.id }"/>
+			<td class="table-label">사업자 등록번호</td>
+			<td class="table-content"><input type="text" class="form-control" id="registNum" name="registNum" value="${bean.registNum }"/>
 			</td>
 			</tr>
 			<tr>
-			<td class="table-label">비밀번호</td>
-			<td><input type="text" class="form-control" id="pw" name="password" value="${user.password }"/>
+			<td class="table-label">상호명</td>
+			<td><input type="text" class="form-control" id="branchName" name="branchName" value="${bean.branchName }"/>
 			<p></p>
 			</td>
 			
 			</tr>
 			<tr>
-			<td class="table-label">닉네임</td>
-			<td><input type="text" class="form-control" id="nickName" name="nickName" value="${user.nickName }"/>
+			<td class="table-label">주소</td>
+			<td><input type="text" class="form-control" id="roadAddress" name="roadAddress" value="${bean.roadAddress}"/>
 			<p></p>
 			</td>
 			</tr>
 			<tr>
-			<td class="table-label">이메일</td>
-			<td><input type="text" class="form-control" id="email" name="email" value="${user.email }"/>
+			<td class="table-label">영업시간</td>
+			<td><input type="text" class="form-control" id="opDate" name="opDate" value="${bean.opDate }"/>
+			<p></p>
+			</td>
+			</tr>
+			<tr>
+			<td class="table-label">메뉴</td>
+			<td><input type="text" class="form-control" id="menu" name="menu" value="${bean.menu }"/>
 			<p></p>
 			</td>
 			</tr>
 			<tr>
 			<td class="table-label">연락처</td>
-			<td><input type="text" class="form-control" id="phoneNum" name="phoneNum" value="${user.phoneNum }"/>
+			<td><input type="text" class="form-control" id="phoneNum" name="phoneNum" value="${bean.phoneNum }"/></td>
+			</tr>
+			<tr>
+			<td class="table-label">카테고리</td>
+			<td><input type="text" class="form-control" id="zoneCode" name="zoneCode" value="${bean.zoneCode }"/>
 			<p></p>
 			</td>
 			</tr>
-			<tr>
-			<td class="table-label">생년월일</td>
-			<td>${user.birthDate }</td>
-			</tr>
-			<c:if test="${user.registNum != 0 }"> 
-			<tr>
-			<td class="table-label">사업자 등록 번호</td>
-			<td><input type="text" class="form-control" id="registNum" name="registNum" value="${user.registNum }"/>
-			<p></p>
-			</td>
-			</tr>
-			</c:if> 
 			<tr>
 			<td colspan="2">
-			<input type="hidden" id="registNum" name="registNum" value="0"/>
+			
 		<button type="submit" class="btn btn-primary" style="margin:0px auto; width:100%;" >수정</button>
 			</td>
 			
 			</tr>
 		
+			
+			 <c:if test="${bean ==null }"> 
+			<tbody id="first">
+			<tr>
+			<td colspan="2">등록된 매장이 없습니다</td>
+			</tr>
+			<tr>
+			<td colspan="2" ><a id="add" class="btn btn-default" role="btn">등록하기</a></td>
+			</tr>			
+			</tbody>
+			 </c:if> 
 			
 			</tbody>
 		
