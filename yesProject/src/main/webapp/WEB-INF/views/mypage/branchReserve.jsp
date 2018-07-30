@@ -5,10 +5,7 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-	   <!--  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> -->
-
 	    
-	 
 	<style>
 	
 	.table-label{
@@ -121,12 +118,13 @@
             var compare;
             
   			function dataload(){
-  				
   				var array=new Array();
+  				
+  				
   				<c:forEach items="${alist }" var="bean" varStatus="status" >
 				var nalja='${bean.reserveTime}';
 				var day='calendar-day-'+nalja.slice(0,10);
-
+				
 				var time=nalja.slice(11,16);
 				$('.'+time+'').remove();
   		
@@ -195,7 +193,11 @@
   			}
     	
 	        var calendars = {};
+	        
+	        
 	        jQuery(document).ready(function() {
+	        	
+
 	            if(changeMonth>9){
 	            	
 	            	compare=changeYear+'-'+changeMonth;
@@ -207,65 +209,71 @@
 	            var eventArray = [];
 	            
 	        	var array=dataload();
-				for (var i = 0; i < array.length; i++) {
-					var day=array[i].day.slice(0,7);
-					if(day==compare){
-						target='calendar-day-'+array[i].day.slice(0,10);
-						$('.calendar-day-'+array[i].day+'').children().append('<div class="time">'+array[i].time+'</div>');
- 						$('.table tbody').append('<tr class="tr'+i+'">');
-						$('.table tbody .tr'+i).append('<td style="width:15%">'+array[i].name+'</td>');
-						$('.table tbody .tr'+i).append('<td>'+array[i].time+'</td>');
-						$('.table tbody .tr'+i).append('<td>'+array[i].personel+'</td>');
-						$('.table tbody .tr'+i).append('<td style="width:60%; text-overflow:ellipsis;  font-size:10pt;">'+array[i].request+'</td>');
-						$('.table tbody .tr'+i).append('<td>'+array[i].useState+'</td>');
-						$('.table tbody').append('</tr>')
+				if(array.length!=0){
+					for (var i = 0; i < array.length; i++) {
+						var day=array[i].day.slice(0,7);
+						if(day==compare){
+							target='calendar-day-'+array[i].day.slice(0,10);
+							$('.calendar-day-'+array[i].day+'').children().append('<div class="time">'+array[i].time+'</div>');
+	 						$('.table tbody').append('<tr class="tr'+i+'">');
+							$('.table tbody .tr'+i).append('<td style="width:15%">'+array[i].name+'</td>');
+							$('.table tbody .tr'+i).append('<td>'+array[i].time+'</td>');
+							$('.table tbody .tr'+i).append('<td>'+array[i].personel+'</td>');
+							$('.table tbody .tr'+i).append('<td style="width:60%; text-overflow:ellipsis;  font-size:10pt;">'+array[i].request+'</td>');
+							$('.table tbody .tr'+i).append('<td>'+array[i].useState+'</td>');
+							$('.table tbody').append('</tr>')
+						}
+
+		            calendars.clndr1 = jQuery('.cal1').clndr({
+		                events: eventArray,
+		                clickEvents: {
+		                    click: function (target) {
+		                        console.log('Cal-1 clicked: ', target);
+		                    },
+		                    nextMonth:function(){
+								changeMonth=changeMonth+1;
+		                    },
+		                    previousMonth:function(){
+		                    	changeMonth=changeMonth-1;
+		                    },
+		                    onMonthChange: function () {
+		                    	array=dataload();
+		                    	modal(array);
+		                    },
+		                    nextYear: function () {
+		                    	changeYear=changeYear+1;
+		                    },
+		                    previousYear: function () {
+		                    	changeYear=changeYear-1;
+		                    },
+		                    onYearChange: function () {
+		                    	array=dataload();
+		                    	modal(array);
+		                    }
+		                },
+		                multiDayEvents: {
+		                    singleDay: 'date',
+		                    endDate: 'endDate',
+		                    startDate: 'startDate'
+		                },
+		                showAdjacentMonths: true,
+		                adjacentDaysChangeMonth: false
+		            });
+
+					
 					}
-
-	            calendars.clndr1 = $('.cal1').clndr({
-	                events: eventArray,
-	                clickEvents: {
-	                    click: function (target) {
-	                        console.log('Cal-1 clicked: ', target);
-	                    },
-	                    today: function () {
-	                        console.log('Cal-1 today');
-	                    },
-	                    nextMonth:function(){
-							changeMonth=changeMonth+1;
-	                    },
-	                    previousMonth:function(){
-	                    	changeMonth=changeMonth-1;
-	                    },
-	                    onMonthChange: function () {
-	                    	array=dataload();
-	                    	modal(array);
-	                    },
-	                    nextYear: function () {
-	                    	changeYear=changeYear+1;
-	                    },
-	                    previousYear: function () {
-	                    	changeYear=changeYear-1;
-	                    },
-	                    onYearChange: function () {
-	                    	array=dataload();
-	                    	modal(array);
-	                    }
-	                },
-	                multiDayEvents: {
-	                    singleDay: 'date',
-	                    endDate: 'endDate',
-	                    startDate: 'startDate'
-	                },
-	                showAdjacentMonths: true,
-	                adjacentDaysChangeMonth: false
-	            });
-
-				
+					
+					$('.'+target+'').click(function(){
+						$('#ex1').modal('show');
+					});
+					
 				}
-				
-				$('.'+target+'').click(function(){
-					$('#ex1').modal('show');
-				});
+				else{
+					 calendars.clndr1 = jQuery('.cal1').clndr({});
+					 
+					
+				}
+
 	        
 	        });//end
 	        

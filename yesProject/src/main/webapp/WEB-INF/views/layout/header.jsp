@@ -24,7 +24,14 @@
 	<script src="./js/clndr.js"></script>
 	<script src="./js/clndr2.js"></script>
 	
+	<!-- jQuery tooltip -->
+	<script src="//code.jqeury.com/ui/1.11.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
 	
+	<!-- jQuery validate -->
+	<script src="./js/jquery.validate.js"></script>
+	<script src="./js/additional-methods.min.js"></script>
+	<script src="./js/messages_ko.min.js"></script>
 	
 	<!-- Website Font style -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -32,6 +39,12 @@
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	
+	<!-- naverLogin -->
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+	
+	
 	<style>
     #slide *{
         font-family: 'Jua', sans-serif;
@@ -112,11 +125,11 @@ border-top-left-radius: 10px;
  	
  }
  #radioGroup{
- 	width: 150px;
+ 	    width: 25%;
 
     margin: 30px auto;
  }
- .detailModalTopTitle{
+ .joinTitle{
  font-family: 'Jua', sans-serif;
  font-size: 40px; color: white; width: 310px; height: 100%; padding-left: 10px; line-height: 100px; display: inline-block; float: left;}
 
@@ -129,6 +142,7 @@ border-top-left-radius: 10px;
     border: none;
     background-color: #ebebeb;
     border-radius: 5px;
+    width: 90%;
  }
 
 #choice{
@@ -144,6 +158,7 @@ border-top-left-radius: 10px;
 
 }
 
+
 #step2{
 	width:640px;
 	height:400px;
@@ -151,19 +166,39 @@ border-top-left-radius: 10px;
 	overflow-y:auto;
 }
 
-
+#loginForm{
+	width:640px;
+	height:400px;
+	margin-top:100px;
+}
 .form-horizontal{
     width: 500px;
     height: 400px;
     margin: 30px auto;
 }
 
-.modal a .close-modal {top: 12px;right: 12px;background-image: url("/imgs/cancel.png");}
+.modal a .close-modal {top: 12px;right: 12px;
+background-image: url("./imgs/cancel.png");
+}
+
+			input.error, textarea.error
+
+			{
+			        border: 1px solid red
+			}
+
+			label.error
+			
+			{
+			        display:block;
+			        color:red;
+			}
+
+
 
 </style>
 
     <script>
-        // $.noConflict();
    
     //새로고침 (오류나면 지우기)
     var member='${member.registNum}';
@@ -209,7 +244,7 @@ border-top-left-radius: 10px;
 		var days=new Array();
         jQuery(document).ready(function(){
 			
-        	
+        
         	
             $('#slide').animate(
                     {right:-300},'slow'
@@ -225,10 +260,9 @@ border-top-left-radius: 10px;
  				url:'./loadReserve',
  				method:'POST',
  				success:function(list){
-					
  					if(list.length==0) //예약한 내역이 없을 때 처리...
  						{
- 						calendars.clndr2 = $('.cal2').clndr2({
+ 						calendars.clndr2 = jQuery('.cal2').clndr2({
 					        clickEvents: {
 					            onMonthChange: function () {
 					            	console.log('monthChange');
@@ -411,7 +445,7 @@ border-top-left-radius: 10px;
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                 <c:if test="${member==null}">
-                    <li><a href="login.yes">로그인</a></li>
+                    <li><a id="modal" href="#login" rel="modal:open">로그인</a></li>
                     <li><a id="modal" href="#joinForm" rel="modal:open" >회원가입</a></li>
                 </c:if>
                 <c:if test="${member!=null }">
@@ -432,11 +466,12 @@ border-top-left-radius: 10px;
       <script>
       
       
-      		function menu(data){
-      			console.log(data);
-      		}
       		
         	$(function(){
+        		
+        		
+
+        		
         		
         		$('.quiz').click(function(e){
         			
@@ -456,7 +491,7 @@ border-top-left-radius: 10px;
         		});
         		
 				$('#choice a').click(function(e){
-        		
+        			
         			
             		if($('#okbtn').is(':checked')===false)
         			{
@@ -470,6 +505,7 @@ border-top-left-radius: 10px;
                 			$('#step2').css('display','inline-block');
                 			$('#registNum input').val('0');
 							$('#registNum').css('display','none');                			
+	
     					}
                 		else if(e.target.textContent='가맹점')
                 		{
@@ -477,6 +513,32 @@ border-top-left-radius: 10px;
                 			$('#step2').css('display','inline-block');
                 		}
                 		
+                		jQuery("#joinForm2").validate({
+                			rules:{
+                				password:{required:true,minlength:4}
+                			},
+                  			messages:{
+                				password:{
+                					required:"필수정보입니다",
+                					minlength:"최소 4자 이상 입력하세요"
+                				}
+                  			},
+                			errorPlacement:function(error,element){
+                				if(element.is(".form-control"))
+                					{
+                					error.appendTo(element.next());
+                					}
+                				else{
+                					
+                				}
+                			},
+                			submitHandler:function(){
+                				$.css({cursor:"wait"});
+                				$('#joinForm2').submit();
+                			},
+                			success:function(element){
+                			}
+                		});
 
             		}
 
@@ -488,7 +550,7 @@ border-top-left-radius: 10px;
     
     <div id="joinForm" class="modal">
     			<div class="detailModalTop">
-    				<div class="detailModalTopTitle">
+    				<div class="joinTitle">
 	               	회원가입
     				</div>
 	            </div> 
@@ -511,14 +573,14 @@ border-top-left-radius: 10px;
     	
    <!-- 가맹점 회원가입 --> 	
 		<div id="step2">
-		<form class="form-horizontal" method="post" action="add">
+		<form id="joinForm2" class="form-horizontal" method="post" action="add">
 						
 		<div class="form-group">
 		<label for="id" class="cols-sm-2 control-label">아이디</label>
 				<div class="cols-sm-10">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-						<input type="text" class="form-control" name="id" id="id"  placeholder="아이디를 입력해주세요"/>
+						<input type="text" class="form-control" name="id" id="id"  placeholder="아이디를 입력해주세요" style="width:493px; height:34px;"/>
 					</div>
 				</div>
 		</div>
@@ -528,7 +590,7 @@ border-top-left-radius: 10px;
 				<div class="cols-sm-10">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-						<input type="password" class="form-control" name="password" id="password"  placeholder="비밀번호를 입력해주세요"/>
+						<input type="password" class="form-control" name="password" id="password"  placeholder="비밀번호를 입력해주세요"  />
 					</div>
 				</div>
 		</div>
@@ -657,6 +719,126 @@ border-top-left-radius: 10px;
     
     
 </div>
+
+<!-- 로그인 modal -->
+
+<div id="login" class="modal">
+    			<div class="detailModalTop">
+    				<div class="joinTitle">
+					로그인
+    				</div>
+	            </div>
+	<div id="loginForm">
+	<form action="check" method="post" style="width: 70%; margin: 0px auto; padding-top:50px;">
+	<div class="form-group">
+		<label for="id" class="cols-sm-2 control-label">아이디</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+						<input type="text" class="form-control" name="id" id="id"  placeholder="아이디를 입력해주세요" style="width:411px; height:34px;"/>
+					</div>
+				</div>
+	</div>	
+
+		<div class="form-group">
+		<label for="password" class="cols-sm-2 control-label">비밀번호</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+						<input type="password" class="form-control" name="password" id="password"  placeholder="비밀번호를 입력해주세요"  />
+					</div>
+				</div>
+		</div>	
+	 <button type="submit" class="btn btn-primary" style="padding-left:10px; width:100%; font-size: 20px; margin-top: 30px; ">로그인</button>
+	</form>
+	
+	
+	
+	<div style="width:90%; margin-top:20px; " >
+            
+            <div style="display: inline-block; position:relative; bottom: 20px; margin-left:100px; ">
+                
+                <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+                <div id="naver_id_login" ></div>
+
+                  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+                  <script type="text/javascript">
+                  
+                  
+                    var naver_id_login = new naver_id_login("urGoHBK2Hl9eBQpjZEMD", "http://localhost:8090/yes/callback");
+                    var state = naver_id_login.getUniqState();
+                    naver_id_login.setButton("green", 3,47);
+                    naver_id_login.setDomain("http://localhost:8090/");
+                    naver_id_login.setState(state);
+                    naver_id_login.setPopup(false);
+                    naver_id_login.init_naver_id_login(); //초기화 
+                    
+                  </script>
+
+                
+            </div>
+            <div style="display: inline-block;  ">
+                
+                
+                <a id="kakao-login-btn" ></a>
+				<a href="http://developers.kakao.com/logout"></a>
+				</div>
+				
+				
+ 	<script type="text/javascript">
+      // 사용할 앱의 JavaScript 키를 설정해 주세요.
+      Kakao.init('630e98d8425188c04dae0728c65822bb');
+      // 카카오 로그인 버튼을 생성합니다.
+      Kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function(authObj) {
+          // 로그인 성공시, API를 호출합니다.
+          Kakao.API.request({
+            url: '/v2/user/me',
+            success: function(res) {
+              console.log(JSON.stringify(res.properties.profile_image));
+              console.log(JSON.stringify(res.properties.nickname));
+              var name=JSON.stringify(res.properties.nickname);
+              $.ajax({
+                 	type:"POST",
+                	url:"./kakaologin",
+                	data:{
+                		"name":name
+                	},
+                	success:function(data){
+                	} 
+              });
+              $(location).attr("href","http://localhost:8090/yes/");
+              
+            },
+            fail: function(error) {
+              alert(JSON.stringify(error));
+            }
+          });
+        },
+        fail: function(err) {
+          alert(JSON.stringify(err));
+        }
+      });
+		</script>				
+				
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	</div>
+
+	 
+
+</div>
+
+
+
+
 <div id="modal2" class="modal">
     <div class="detailModalTop">
         <div class="detailModalTopTitle">

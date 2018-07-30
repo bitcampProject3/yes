@@ -171,6 +171,5 @@ select tableState,waitingNum from branch_info where id='branch01';
 select * from user_info;
 select * from reserve_list a inner join user_info b on a.clientID=b.id where branchID='branch01'; 
 select * from branch_info a inner join branch_address b on a.id=b.id where a.id='branch01';
-=======
 
 

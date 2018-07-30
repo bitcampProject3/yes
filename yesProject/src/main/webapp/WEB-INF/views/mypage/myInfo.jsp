@@ -133,7 +133,7 @@
               </div>
             </div>
          
-        <form id="updateform"action="mypageUpdate" method="POST" class="form-horizontal" >
+        <form id="updateform"action="mypageUpdate" method="POST" class="form-horizontal" style="width:100%">
 		  
 		<table class="table" style="width:50%; margin:50px auto; border:1px solid gray; ">
   
