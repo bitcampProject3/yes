@@ -138,6 +138,13 @@
     	
 
  	<script type="text/javascript">
+ 	
+ 	  $(function(){
+ 		  if('${errMsg != null}')
+ 			  {
+ 			  alert('${errMsg}');
+ 			  }
+ 	  });
       // 사용할 앱의 JavaScript 키를 설정해 주세요.
       Kakao.init('630e98d8425188c04dae0728c65822bb');
       // 카카오 로그인 버튼을 생성합니다.

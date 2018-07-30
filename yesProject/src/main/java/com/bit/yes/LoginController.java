@@ -60,7 +60,7 @@ public class LoginController {
          model.addAttribute("id", id);
          model.addAttribute("result", pw);
       }else {
-         model.addAttribute("err","고객님의 정보를 확인해주세요");
+         model.addAttribute("err","怨좉컼�떂�쓽 �젙蹂대�� �솗�씤�빐二쇱꽭�슂");
       }
       return "findPw";
    }
@@ -68,7 +68,7 @@ public class LoginController {
    @RequestMapping(value="/pwUpdate", method=RequestMethod.POST)
    public String pwUpdate(String id,String password,Model model) throws SQLException {
       sqlSession.getMapper(UserDao.class).updatePw(password,id);
-      model.addAttribute("result", "수정완료");
+      model.addAttribute("result", "�닔�젙�셿猷�");
 
       return "login";
    }
@@ -87,8 +87,7 @@ public class LoginController {
       }
       else
       {
-
-         return "redirect:/login.yes";
+         return "redirect:/";
       }
    }
 
