@@ -79,7 +79,8 @@ public class ReserveListDaoImpl implements ReserveListDao {
 
    @Override
    public List<ReserveListVo> reserveDatePreview(Map<String, Object> map) {
-      return sqlSession.selectList("reserveList.reserveDatePreview", map);
+      System.out.println(sqlSession.selectList("reserveList.reserveDatePreview", map));
+      return null;
 
    }
 }

@@ -59,14 +59,14 @@ public class JoinController {
 	@ResponseBody
     @RequestMapping(value = "/test/remote", method = RequestMethod.POST)
     public  String remoteTest(String id,Model model,HttpServletRequest req) throws SQLException, IOException {
-        // queryStringÀ» ÆÄ½ÌÇÏ¿© ÀûÀıÇÑ Ã³¸®..
-        // queryStringÀº id=testID&mode=view&entry=10 ÀÌ·± Çü½ÄÀÇ ¹®ÀÚ¿­·Î ³Ñ¾î¿È
+        // queryStringì„ íŒŒì‹±í•˜ì—¬ ì ì ˆí•œ ì²˜ë¦¬..
+        // queryStringì€ id=testID&mode=view&entry=10 ì´ëŸ° í˜•ì‹ì˜ ë¬¸ìì—´ë¡œ ë„˜ì–´ì˜´
     	
     	//String ref=req.getHeader("Referer").substring(26);
     	UserVo user=sqlSession.getMapper(UserDao.class).login(id);
     	
     	if(user!=null) {
-    		return "false";	// true ¶Ç´Â false¸¦ ¹®ÀÚ¿­·Î return
+    		return "false";	// true ë˜ëŠ” falseë¥¼ ë¬¸ìì—´ë¡œ return
     	}
     	else {
     		return "true";

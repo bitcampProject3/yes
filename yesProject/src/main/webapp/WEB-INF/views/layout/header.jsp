@@ -6,36 +6,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/clndr.css">
-    
-    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	
-	<!-- jQuery Modal -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-	
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainStyle.css?ver=6">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/insertstyle.css?ver=2">
-    
-	<!-- jQuery Calander -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> 
-	<script src="./js/clndr.js"></script>
-	<script src="./js/clndr2.js"></script>
-	
-	<!-- jQuery tooltip -->
-	<script src="//code.jqeury.com/ui/1.11.1/jquery-ui.js"></script>
-	<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
-	
-	<!-- jQuery validate -->
-	<script src="./js/jquery.validate.js"></script>
-	<script src="./js/additional-methods.min.js"></script>
-	<script src="./js/messages_ko.min.js"></script>
-	
+
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainStyle.css?ver=7">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/insertstyle.css?ver=3">
+  
+
 	<!-- Website Font style -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-	
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
@@ -44,8 +24,25 @@
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	
+  <!-- jQuery Modal -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    
+	<!-- jQuery Calander -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> 
+	<script src="./js/clndr.js"></script>
+	<script src="./js/clndr2.js"></script>
+	
+
+	
+	<!-- jQuery validate -->
+	<script src="./js/jquery.validate.js"></script>
+	<script src="./js/additional-methods.min.js"></script>
+	<script src="./js/messages_ko.min.js"></script>
 	
 	<style>
+	
     #slide *{
         font-family: 'Jua', sans-serif;
     }
@@ -194,7 +191,7 @@ background-image: url("./imgs/cancel.png");
 			        color:red;
 			}
 
-
+	
 
 </style>
 
@@ -242,6 +239,7 @@ background-image: url("./imgs/cancel.png");
     
 		var calendars = {};
 		var days=new Array();
+		
         jQuery(document).ready(function(){
 			
         
@@ -260,7 +258,7 @@ background-image: url("./imgs/cancel.png");
  				url:'./loadReserve',
  				method:'POST',
  				success:function(list){
- 					if(list.length==0) //예약한 내역이 없을 때 처리...
+ 					if(list.length==0) //예약한 내역이 없을 때 처리..
  						{
  						calendars.clndr2 = jQuery('.cal2').clndr2({
 					        clickEvents: {
@@ -275,12 +273,9 @@ background-image: url("./imgs/cancel.png");
 					            singleDay: 'date',
 					            endDate: 'endDate',
 					            startDate: 'startDate'
-					        },
+					        }
 					    });
- 						
- 						
- 						
- 						}//if문끝
+                    }//if문끝
  					
 					
  					for (var i = 0; i < list.length; i++) {
@@ -315,15 +310,15 @@ background-image: url("./imgs/cancel.png");
  					}//for end...
  					
  				}//success end
- 				}); 
-                
-                
-                
+ 				});
+            
+            
+            
             });
              $('#close').click(function(){
                 $('#slide').animate(
                 {right:-300},'slow'
-                ); 
+                );
                 
              });
         	
@@ -861,12 +856,12 @@ background-image: url("./imgs/cancel.png");
     
     
     
-      var loadFile = function(event) {
+    var loadFile = function(event) {
         var tempmsg = event.target.id.slice(10,11);
         var outputs = 'output'+tempmsg;
         var output = document.getElementById(outputs);
         output.src = URL.createObjectURL(event.target.files[0]);
-      };
+    };
     </script>
     </div>
 </div>
@@ -1155,6 +1150,11 @@ background-image: url("./imgs/cancel.png");
     </script>
     <span id="guide" style="color:#999"></span>
     <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+	<!-- jQuery Calander -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+	<script src="./js/clndr.js"></script>
+	<script src="./js/clndr2.js"></script>
 	<script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
