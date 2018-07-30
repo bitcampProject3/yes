@@ -8,7 +8,7 @@
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/selectDesign.css">
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mapStyle.css?ver=2">
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css">
-	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/clndrstyle.css"> 
+	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/clndrstyle.css?ver=1">
 	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	    <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
     </head>
@@ -18,6 +18,7 @@
         
         <div class="page" id="page" style="z-index:0;position:relative;">
             <script type="text/javascript">
+	           
             function mapResize() {
                 var mapResize = document.getElementById('page');
                 mapResize.style.width = window.innerWidth;

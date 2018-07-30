@@ -21,14 +21,14 @@
 		p:dataSource-ref="dataSource"
 		p:mapperLocations="classpath:/mapper/*.xml"
 	/>
-	
+
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
 	</bean>
-	
+
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
   p:order="0" />
-  
+
 
 	<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" id="jsonView">
   		<property name="contentType" value="application/json; charset=UTF-8" />

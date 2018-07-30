@@ -113,3 +113,6 @@ html,body {height:100%; margin:0; padding:0;overflow-y: hidden; overflow-x: hidd
     line-height: 100px;
     margin-left: 20px;
 }
+.modalContent{
+    display: inline-block;
+}

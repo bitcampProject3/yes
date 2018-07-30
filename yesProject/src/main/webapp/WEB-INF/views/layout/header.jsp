@@ -6,33 +6,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/clndr.css">
-    
-    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	
 	<!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-	
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainStyle.css?ver=6">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/insertstyle.css?ver=2">
-    
-	<!-- jQuery Calander -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> 
-	<script src="./js/clndr.js"></script>
-	<script src="./js/clndr2.js"></script>
-	
-	
-	
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainStyle.css?ver=7">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/insertstyle.css?ver=3">
 	<!-- Website Font style -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-	
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 	<style>
+	
     #slide *{
         font-family: 'Jua', sans-serif;
     }
@@ -47,123 +34,121 @@
 		position:absolute;
 		right:0;
 		overflow-y:hidden;
-
-}
-#slide * {
-	font-family: 'Jua', sans-serif;
-}
-
-#slide h1 {
-	margin: 60px 0px;
-	text-align:center;
-}
-
-#slide a {
-	color: black;
-	margin-bottom: 40px;
-	font-size:27px;
-	padding-left:18px;
-}
-
-#slide-menu {
-	width: 100%;
-	overflow:hidden;
-}
-
-#slide-menu li {
-	list-style: none;
-	margin-left: 0px;
 	}
-
-#slide-menu2 , #slide-menu4{
-	border-top: 1px solid #e04f5f;
-	width: 100%;
+	#slide * {
+		font-family: 'Jua', sans-serif;
+	}
+	
+	#slide h1 {
+		margin: 60px 0px;
+		text-align:center;
+	}
+	
+	#slide a {
+		color: black;
+		margin-bottom: 40px;
+		font-size:27px;
+		padding-left:18px;
+	}
+	
+	#slide-menu {
+		width: 100%;
+		overflow:hidden;
+	}
+	
+	#slide-menu li {
+		list-style: none;
+		margin-left: 0px;
+		}
+	
+	#slide-menu2 , #slide-menu4{
+		border-top: 1px solid #e04f5f;
+		width: 100%;
+		height: 100px;
+		margin: 10px auto;
+	}
+	
+	#slide-menu3 {
+		border-top: 1px solid #e04f5f;
+		width: 100%;
+		margin-bottom: 20px;
+		height: 200px;
+	}
+	
+	#slide-menu4 h2,#slide-menu2 h2{
+		margin-left:20px;
+	}
+	
+	
+	
+	#joinForm{
+	height: 500px; max-height: 500px; max-width: 640px; width: 640px; margin: auto; overflow: visible; border-radius: 10px; padding: 0px;}
+	.detailModalTop{width: 640px;
 	height: 100px;
-	margin: 10px auto;
-}
-
-#slide-menu3 {
-	border-top: 1px solid #e04f5f;
-	width: 100%;
-	margin-bottom: 20px;
-	height: 200px;
-}
-
-#slide-menu4 h2,#slide-menu2 h2{
-	margin-left:20px;
-}
-
-
-
-#joinForm{
-height: 500px; max-height: 500px; max-width: 640px; width: 640px; margin: auto; overflow: visible; border-radius: 10px; padding: 0px;}
-.detailModalTop{width: 640px; 
-height: 100px; 
-border-top-left-radius: 10px;
- border-top-right-radius: 10px; 
- background-color: #e04f5f;
- float:left;
- color:white;
- 
- }
- 
- #joinForm h3{
- 	margin-top:5px;
- 	
- }
- #radioGroup{
- 	width: 150px;
-
-    margin: 30px auto;
- }
- .detailModalTopTitle{
- font-family: 'Jua', sans-serif;
- font-size: 40px; color: white; width: 310px; height: 100%; padding-left: 10px; line-height: 100px; display: inline-block; float: left;}
-
-
- #joinT{
- 	overflow-y:scroll;
- 	overflow-x: hidden;
-    margin-left: 30px;
-    margin-top: 30px;
-    border: none;
-    background-color: #ebebeb;
-    border-radius: 5px;
- }
-
-#choice{
-	width:300px;
-	margin:0px auto;
-}
-
-#step1{
-
-	width: 640px;
-    height: 400px;
-    display: inline-block;
-
-}
-
-#step2{
-	width:640px;
-	height:400px;
-	display:none;
-	overflow-y:auto;
-}
-
-
-.form-horizontal{
-    width: 500px;
-    height: 400px;
-    margin: 30px auto;
-}
-
-.modal a .close-modal {top: 12px;right: 12px;background-image: url("/imgs/cancel.png");}
-
+	border-top-left-radius: 10px;
+	 border-top-right-radius: 10px;
+	 background-color: #e04f5f;
+	 float:left;
+	 color:white;
+	 
+	 }
+	 
+	 #joinForm h3{
+	 	margin-top:5px;
+	 	
+	 }
+	 #radioGroup{
+	 	width: 25%;
+	    margin: 30px auto;
+	 }
+	 .joinTitle{
+	 font-family: 'Jua', sans-serif;
+	 font-size: 40px; color: white; width: 310px; height: 100%; padding-left: 10px; line-height: 100px; display: inline-block; float: left;}
+	
+	
+	 #joinT{
+	 	overflow-y:scroll;
+	 	overflow-x: hidden;
+	    margin-left: 30px;
+	    margin-top: 30px;
+	    border: none;
+		width: 90%;
+	    background-color: #ebebeb;
+	    border-radius: 5px;
+	 }
+	
+	#choice{
+		width:300px;
+		margin:0px auto;
+	}
+	
+	#step1{
+	
+		width: 640px;
+	    height: 400px;
+	    display: inline-block;
+	
+	}
+	
+	#step2{
+		width:640px;
+		height:400px;
+		display:none;
+		overflow-y:auto;
+	}
+	
+	
+	.form-horizontal{
+	    width: 500px;
+	    height: 400px;
+	    margin: 30px auto;
+	}
+	
+	.modal a .close-modal {top: 12px;right: 12px;background-image: url("/imgs/cancel.png");}
+	
 </style>
 
     <script>
-        // $.noConflict();
    
     //새로고침 (오류나면 지우기)
     var member='${member.registNum}';
@@ -207,6 +192,7 @@ border-top-left-radius: 10px;
     
 		var calendars = {};
 		var days=new Array();
+		
         jQuery(document).ready(function(){
 			
         	
@@ -227,8 +213,8 @@ border-top-left-radius: 10px;
  				success:function(list){
 					
  					if(list.length==0) //예약한 내역이 없을 때 처리...
- 						{
- 						calendars.clndr2 = $('.cal2').clndr2({
+                    {
+ 						calendars.clndr2 = jQuery('.cal2').clndr2({
 					        clickEvents: {
 					            onMonthChange: function () {
 					            	console.log('monthChange');
@@ -241,12 +227,9 @@ border-top-left-radius: 10px;
 					            singleDay: 'date',
 					            endDate: 'endDate',
 					            startDate: 'startDate'
-					        },
+					        }
 					    });
- 						
- 						
- 						
- 						}//if문끝
+                    }//if문끝
  					
 					
  					for (var i = 0; i < list.length; i++) {
@@ -281,15 +264,15 @@ border-top-left-radius: 10px;
  					}//for end...
  					
  				}//success end
- 				}); 
-                
-                
-                
+ 				});
+            
+            
+            
             });
              $('#close').click(function(){
                 $('#slide').animate(
                 {right:-300},'slow'
-                ); 
+                );
                 
              });
         	
@@ -488,7 +471,7 @@ border-top-left-radius: 10px;
     
     <div id="joinForm" class="modal">
     			<div class="detailModalTop">
-    				<div class="detailModalTopTitle">
+    				<div class="joinTitle">
 	               	회원가입
     				</div>
 	            </div> 
@@ -679,12 +662,12 @@ border-top-left-radius: 10px;
     
     
     
-      var loadFile = function(event) {
+    var loadFile = function(event) {
         var tempmsg = event.target.id.slice(10,11);
         var outputs = 'output'+tempmsg;
         var output = document.getElementById(outputs);
         output.src = URL.createObjectURL(event.target.files[0]);
-      };
+    };
     </script>
     </div>
 </div>
@@ -973,6 +956,11 @@ border-top-left-radius: 10px;
     </script>
     <span id="guide" style="color:#999"></span>
     <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+	<!-- jQuery Calander -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+	<script src="./js/clndr.js"></script>
+	<script src="./js/clndr2.js"></script>
 	<script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
