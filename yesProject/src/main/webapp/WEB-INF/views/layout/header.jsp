@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="./css/clndr.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+	<!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainStyle.css?ver=7">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/insertstyle.css?ver=3">
@@ -24,9 +26,7 @@
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	
-  <!-- jQuery Modal -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+ 
     
 	<!-- jQuery Calander -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
@@ -107,10 +107,10 @@
 
 #joinForm{
 height: 500px; max-height: 500px; max-width: 640px; width: 640px; margin: auto; overflow: visible; border-radius: 10px; padding: 0px;}
-.detailModalTop{width: 640px; 
-height: 100px; 
+.detailModalTop{width: 640px;
+height: 100px;
 border-top-left-radius: 10px;
- border-top-right-radius: 10px; 
+ border-top-right-radius: 10px;
  background-color: #e04f5f;
  float:left;
  color:white;
