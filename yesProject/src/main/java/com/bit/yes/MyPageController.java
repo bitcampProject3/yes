@@ -36,7 +36,7 @@ public class MyPageController {
 	}
 	
 	
-	//-------------³»Á¤º¸------------------
+	//-------------ë‚´ì •ë³´------------------
 	@RequestMapping("/myInfo.yes")
 	public String myInfo(HttpSession session,Model model) throws SQLException {
 		UserVo user=(UserVo) session.getAttribute("member");
@@ -47,37 +47,40 @@ public class MyPageController {
 	
 	@RequestMapping(value="mypageUpdate",method=RequestMethod.POST)
 	public String update(HttpSession session,@ModelAttribute UserVo bean,Model model) throws SQLException {
-		
+		if(bean.getRegistNum()==null)
+		{
+			bean.setRegistNum("0");
+		}
 		int result=sqlSession.getMapper(UserDao.class).updateInfo(bean);
 		UserVo user=sqlSession.getMapper(UserDao.class).login(bean.getId());
-    	if(result>0)
+		if(result>0)
 		{
 			model.addAttribute("user", user);
 			return "mypage/myInfo";
 		}
 		else
 		{
-			System.out.println("½ÇÆĞ"); 
-			//½ÇÆĞ °æ·Î ¾Æ¸¶ Æ²¸±°ÅÀÓ!
+			System.out.println("ì‹¤íŒ¨"); 
+			//ì‹¤íŒ¨ ê²½ë¡œ ì•„ë§ˆ í‹€ë¦´ê±°ì„!
 			return "redirect:../myInfo.yes";
 		}
 	
 	}
-	//------------¿¹¾à ÇöÈ²-----------
+	//------------ì˜ˆì•½ í˜„í™©-----------
 	@RequestMapping("/reservation.yes")
 	public String reservation(HttpSession session,Model model) throws SQLException {
 		String id=((UserVo)session.getAttribute("member")).getId();
 		service.listPage(model,id);
 		return "mypage/myReserve";
 	}
-	//---------¸¶ÀÌÆäÀÌÁö ´Ş·Â-----------
+	//---------ë§ˆì´í˜ì´ì§€ ë‹¬ë ¥-----------
 	@ResponseBody
 	@RequestMapping(value="/loadReserve",method=RequestMethod.POST)
 	public List<ReserveListVo> loadReserve(HttpSession session,Model model) throws SQLException {
 		String id=((UserVo)session.getAttribute("member")).getId();
 		UserVo user=sqlSession.getMapper(UserDao.class).login(id);
 		List<ReserveListVo> list;
-		if(Integer.parseInt(user.getRegistNum())==0)//°í°´
+		if(Integer.parseInt(user.getRegistNum())==0)//ê³ ê°
 		{
 			list=service.listPage(model, id);
 			return list;
@@ -90,7 +93,7 @@ public class MyPageController {
 
 
 
-	//----------¿¹¾àÇÑ °¡°ÔÀÇ Á¤º¸ ºÒ·¯¿À±â----------
+	//----------ì˜ˆì•½í•œ ê°€ê²Œì˜ ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°----------
 	@ResponseBody
 	@RequestMapping(value="/branchInfo",method=RequestMethod.POST)
 	public BranchVo reservation2(String id,Model model) throws SQLException {
@@ -98,7 +101,7 @@ public class MyPageController {
 		return bean;
 	}
 	
-	//-----------¿¹¾à Ãë¼ÒÇÏ±â---------------
+	//-----------ì˜ˆì•½ ì·¨ì†Œí•˜ê¸°---------------
 	@ResponseBody
 	@RequestMapping(value="/delreserve",method=RequestMethod.POST)
 	public String delReserve(String time,HttpSession session) throws SQLException{
@@ -112,23 +115,23 @@ public class MyPageController {
 	
 	
 	
-	//------------------»ç¾÷ÀÚ mypage-----------------
+	//------------------ì‚¬ì—…ì mypage-----------------
 	
 	@RequestMapping("/branchReserve.yes")
 	public String branchReserve(HttpSession session,Model model) throws SQLException{
 		UserVo bean=(UserVo) session.getAttribute("member");
 		String id=bean.getId();
-		//¿¹¾à ¸®½ºÆ® ºÒ·¯¿À±â
+		//ì˜ˆì•½ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
 		service.reserveAll(model,id);
 		return "mypage/branchReserve";
 	}
 	
-	//-------------------»ç¾÷ÀÚ ¸ÅÀåÁ¤º¸-----------------
+	//-------------------ì‚¬ì—…ì ë§¤ì¥ì •ë³´-----------------
 	@RequestMapping("/branchInfo.yes")
 	public String branchInfo() {
 		return "mypage/branchInfo";
 	}
-	//----------------¸ÅÀå°ü¸®(Å×ÀÌºí °ü¸®)----------------------
+	//----------------ë§¤ì¥ê´€ë¦¬(í…Œì´ë¸” ê´€ë¦¬)----------------------
 	@RequestMapping("/branchManage.yes")
 	public String branchManage(HttpSession session,Model model) throws SQLException{
 		String id=((UserVo) session.getAttribute("member")).getId();
@@ -138,7 +141,7 @@ public class MyPageController {
 	}
 	
 	
-	// --------½Ç½Ã°£ stateÀü¼Û(ÁÂ¼®°ü¸®)-----------
+	// --------ì‹¤ì‹œê°„ stateì „ì†¡(ì¢Œì„ê´€ë¦¬)-----------
 	@ResponseBody
 	@RequestMapping(value="/manageTable",method=RequestMethod.POST)
 	public String manageTable(String state,String entry,String entryR,String end,HttpSession session) throws SQLException{
@@ -147,28 +150,28 @@ public class MyPageController {
 		bean.setTableState(Integer.parseInt(state));
 		service.updateState(bean);
 		int count=0;
-		count=service.loadTicket(id);//´ë±âÇÏ´Â »ç¶÷ ¸î¸íÀÎÁö..
+		count=service.loadTicket(id);//ëŒ€ê¸°í•˜ëŠ” ì‚¬ëŒ ëª‡ëª…ì¸ì§€..
 		System.out.println(count);
 		if(count>0)
 		{
-			//ÇöÀç ÀÔÀå ¹øÈ£ ÀúÀåÇÏ±â--- ÀúÀå ok
+			//í˜„ì¬ ì…ì¥ ë²ˆí˜¸ ì €ì¥í•˜ê¸°--- ì €ì¥ ok
 			if(Integer.parseInt(entry)>0)
 			{
 			bean.setWaitingNum(Integer.parseInt(entry));
 			service.updateWaiting(bean);
 			if(entryR!=null) {
-				System.out.println("ÇöÀç ÀÔÀå¹øÈ£:"+entry);
-				//ticketing¿¡¼­ »èÁ¦ÇÏ±â---(ÇöÀçÀÔÀå¹øÈ£)
-				service.deleteTicket(Integer.parseInt(entry)); //»èÁ¦ ok
-				//ÇöÀç ÀÔÀå ¹øÈ£ÀÇ ticket¹øÈ£¸¦ »èÁ¦ÇÔ!
-				count=service.loadTicket(id);//´ë±âÇÏ´Â »ç¶÷ ¸î¸íÀÎÁö..
+				System.out.println("í˜„ì¬ ì…ì¥ë²ˆí˜¸:"+entry);
+				//ticketingì—ì„œ ì‚­ì œí•˜ê¸°---(í˜„ì¬ì…ì¥ë²ˆí˜¸)
+				service.deleteTicket(Integer.parseInt(entry)); //ì‚­ì œ ok
+				//í˜„ì¬ ì…ì¥ ë²ˆí˜¸ì˜ ticketë²ˆí˜¸ë¥¼ ì‚­ì œí•¨!
+				count=service.loadTicket(id);//ëŒ€ê¸°í•˜ëŠ” ì‚¬ëŒ ëª‡ëª…ì¸ì§€..
 			}
 			}
 			
 		}
 		
 		if(end!=null) {
-			//¿µ¾÷Á¾·á
+			//ì˜ì—…ì¢…ë£Œ
 			bean.setWaitingNum(Integer.parseInt(entry));
 			service.updateWaiting(bean);
 			service.end(id);
@@ -177,8 +180,8 @@ public class MyPageController {
 	}
 	
 	
-	//---------------½Ç½Ã°£ ´ë±âÀÎ¿øcount----------------
-	// --------½Ç½Ã°£ stateÀü¼Û(ÁÂ¼®°ü¸®)-----------
+	//---------------ì‹¤ì‹œê°„ ëŒ€ê¸°ì¸ì›count----------------
+	// --------ì‹¤ì‹œê°„ stateì „ì†¡(ì¢Œì„ê´€ë¦¬)-----------
 	@ResponseBody
 	@RequestMapping(value="/count",method=RequestMethod.POST,produces="application/text; charset=utf8")
 	public String count(HttpSession session,String registNum) {
@@ -189,19 +192,19 @@ public class MyPageController {
 			
 			if(id!=null) {
 				int count=0;
-				if(Integer.parseInt(registNum)>0) { //»ç¾÷ÀÚ
-					count=service.loadTicket(id);//´ë±âÇÏ´Â »ç¶÷ ¸î¸íÀÎÁö..
-					return "»ç¾÷"+count+"¸í";
+				if(Integer.parseInt(registNum)>0) { //ì‚¬ì—…ì
+					count=service.loadTicket(id);//ëŒ€ê¸°í•˜ëŠ” ì‚¬ëŒ ëª‡ëª…ì¸ì§€..
+					return "ì‚¬ì—…"+count+"ëª…";
 				}
-				else{ //°í°´ÀÏ °æ¿ì...ÀÚ½ÅÀÇ ´ë±â¹øÈ£
+				else{ //ê³ ê°ì¼ ê²½ìš°...ìì‹ ì˜ ëŒ€ê¸°ë²ˆí˜¸
 					count=service.getNum(id);
 					
 					if(count>0) {
 					int state=service.getState(id);
-					return "°í°´"+count+"¹ø/"+state+"¹ø";
+					return "ê³ ê°"+count+"ë²ˆ/"+state+"ë²ˆ";
 					
 					}
-					return "´ë±â ÁßÀÎ °¡°Ô°¡ ¾ø½À´Ï´Ù";
+					return "ëŒ€ê¸° ì¤‘ì¸ ê°€ê²Œê°€ ì—†ìŠµë‹ˆë‹¤";
 					}
 				}
 			

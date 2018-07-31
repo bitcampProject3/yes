@@ -29,6 +29,6 @@
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10485760"></beans:property>
 	</beans:bean>
-	
 	<context:component-scan base-package="com.bit.yes" />
+	
 </beans:beans>

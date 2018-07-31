@@ -19,7 +19,7 @@
 </select>
 
 <select id="b_reserveList" parameterType="string" resultType="com.bit.yes.model.entity.ReserveListVo">
-	select * from reserve_list a inner join user_info b on a.clientID=b.id where branchID=#{param1} 
+	select * from reserve_list a inner join user_info b on a.clientID=b.id where branchID=#{param1}
 </select>
 
 <select id="selectBranch" parameterType="string" resultType="com.bit.yes.model.entity.BranchVo">
@@ -50,7 +50,10 @@
 </select>
 
 <select id="getState" parameterType="string" resultType="int">
-	select a.waitingNum from branch_info a inner join ticketing b on a.id=b.branchID where b.clientID=#{param1} 
+	select a.waitingNum from branch_info a inner join ticketing b on a.id=b.branchID where b.clientID=#{param1}
 </select>
 
+<select id="reserveDatePreview" parameterType="Map" resultType="com.bit.yes.model.entity.ReserveListVo">
+	select * from reserve_list where branchID = #{id} and reserveTime like concat(#{date},'%');
+</select>
 </mapper>

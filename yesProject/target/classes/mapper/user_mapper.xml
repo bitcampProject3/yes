@@ -7,11 +7,7 @@
   
 	  <select id="insertOne" parameterType="com.bit.yes.model.entity.UserVo">
 	 	insert into user_info(id,password,name,nickname,email,phoneNum,pwQuestion,birthDate,registNum) values(#{id},#{password},#{name},#{nickName},#{email},
-<<<<<<< HEAD
 	  	#{phoneNum},#{pwQuestion},#{birthDate},#{registNum})
-=======
-	  	#{phoneNum},#{pwQuestion},#{birthDate},#{registNum}) 
->>>>>>> master
 	  </select>
 	  
 	  
