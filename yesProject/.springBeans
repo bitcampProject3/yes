@@ -8,10 +8,6 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/resources/applicationContext.xml</config>
-<<<<<<< HEAD
-		<config>src/main/resources/mapper/reserveList_mapper.xml</config>
-=======
->>>>>>> master
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>

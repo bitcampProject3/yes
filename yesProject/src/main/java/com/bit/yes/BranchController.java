@@ -125,7 +125,6 @@ public class BranchController {
 		System.out.println(reserveList);
 //		System.out.println(reserveList.get(0).getReserveTime());
 
-		// case1 : reserveList ---> null일 경우 예약 되어있는게 없으므로 전부 예약 가능
 
 	}
 
