@@ -30,4 +30,6 @@ public interface C_CsDao {
 	List<ImageVo> c_counselSubImage(int index) throws SQLException;
 	
 	int c_counselImgUpload(ImageVo bean) throws SQLException;
+	
+	UserVo user_selcetOne(String id) throws SQLException;
 }

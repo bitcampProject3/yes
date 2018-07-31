@@ -94,4 +94,10 @@ public class C_CsDaoImpl01 implements C_CsDao {
 		return sqlSession.selectOne("yes.c_selectAddress", id);
 	}
 
+	@Override
+	public UserVo user_selcetOne(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("yes.user_selectOne", id);
+	}
+
 }

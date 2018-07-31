@@ -226,15 +226,14 @@
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
                         <li><a href="../yesnotice/">공지사항</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="../yesC_cs/">고객 상담</a></li>
-                        <li><a href="../yesS_cs/">사업자 상담</a></li>
+
                       </ul>
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">로그인</a></li>
                     <li><a href="#">회원가입</a></li>
+                    <li><a href="../admin/">관리자</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -248,7 +247,7 @@
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
                   <h1 style="padding: 5px; margin-bottom: 20px;">
-                      <a href="" style="color: black;">1:1문의-고객</a>
+                      <a href="./" style="color: black;">1:1문의-고객</a>
                   </h1>
 
               </div>
@@ -270,7 +269,7 @@
                         	</c:when>
                         	<c:otherwise>
                         		<c:forEach var="beans" items="${beans }">
-								    <b>예약내역 : <span>주소:[${road }-${jibun }] - 상호명: ${beans.branchname } </span></b>
+								    <b>예약내역 : <span>주소:[<b>(${zonecode })</b>${road }(${jibun }), ${detailaddress }] - 상호명: ${beans.branchname } </span></b>
     		                    </c:forEach>
                         	</c:otherwise>
                         	</c:choose>

@@ -291,15 +291,14 @@
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
                         <li><a href="../yesnotice/">공지사항</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="../yesC_cs/">고객 상담</a></li>
-                        <li><a href="../yesS_cs/">사업자 상담</a></li>
+
                       </ul>
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">로그인</a></li>
                     <li><a href="#">회원가입</a></li>
+                    <li><a href="../admin/">관리자</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -397,7 +396,7 @@
                 
  	<c:choose>
 		<c:when test="${cpaging.numberOfRecords ne NULL and cpaging.numberOfRecords ne '' and cpaging.numberOfRecords ne 0}">
-		<div id="cpaginationUI" class="text-center" style="margin-left: 37px">
+		<div id="paginationUI" class="text-center" style="margin-left: 37px">
 			<ul class="pagination pagination-lg">
 				<c:if test="${cpaging.currentPageNo gt 5}">  											  <!-- 현재 페이지가 5보다 크다면(즉, 6페이지 이상이라면) -->
 					<li><a href="javascript:cgoPage(${cpaging.prevPageNo}, ${cpaging.maxPost})">이전</a></li> <!-- 이전페이지 표시 -->

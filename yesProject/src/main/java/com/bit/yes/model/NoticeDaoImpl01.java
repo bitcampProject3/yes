@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.NoticeVo;
+import com.bit.yes.model.entity.UserVo;
 
 @Repository
 public class NoticeDaoImpl01 implements NoticeDao {
@@ -93,6 +94,12 @@ public class NoticeDaoImpl01 implements NoticeDao {
 	public int noticeImgUpload(ImageVo bean) throws SQLException {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("yes.noticeImgUpload", bean);
+	}
+
+	@Override
+	public UserVo user_selcetOne(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("yes.user_selectOne", id);
 	}
 	
 

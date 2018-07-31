@@ -194,7 +194,13 @@
                         <li><a href="../yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="../yesC_cs/">고객 상담</a></li>
+                        <c:choose>
+                        <c:when test="${(registNum eq '0' ) or (registNum eq null) or (registNum eq ' ')}">
+                        </c:when>
+                        <c:otherwise>
                         <li><a href="../yesS_cs/">사업자 상담</a></li>
+                        </c:otherwise>
+                        </c:choose>
                       </ul>
                     </li>
                   </ul>
@@ -210,38 +216,65 @@
            
            <div class="container" style=" border: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
                border-bottom-color: #e04f5f">
-                
-              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
-                  <h1 style="padding: 5px; margin-bottom: 20px;">나의 문의내역(고객)</h1>
-                <div class="row" >
-                  <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray; cursor: pointer;" 
-                     onclick="location.href='../yesnotice/'">
-                      <h4>
-                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              공지사항
-                          </p>
-                      </h4>
-                  </div>
-                  <div id="cube" class="col-xs-6 col-sm-4" style=" 
-                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;  
-                       color:white; background-color: #e04f5f; cursor: pointer;" 
-                       onclick="location.href='../yesC_cs/'">                                          
-                      <h4>
-                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              고객 상담
-                          </p>
-                      </h4>
-                  </div>
-                   <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray;
-                     cursor: pointer;" onclick="location.href='../yesS_cs/'">
-                      <h4>
-                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              사업자 상담
-                          </p>
-                      </h4>
-                  </div>
-                </div>
-              </div>
+              <c:choose>
+              <c:when test="${(registNum eq '0' ) or (registNum eq null) or (registNum eq ' ')}">
+	              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
+	                  <h1 style="padding: 5px; margin-bottom: 20px;">나의 문의내역(고객)</h1>
+	                <div class="row" >
+	                  <div id="cube" class="col-xs-6 col-sm-6" style=" border-top: 1px solid darkgray; cursor: pointer;"
+	                   onclick="location.href='../yesnotice/'">
+	                      <h4>
+	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
+	                              공지사항
+	                          </p>
+	                      </h4>
+	                  </div>
+	                  <div id="cube" class="col-xs-6 col-sm-6" style=" 
+	                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;
+	                        cursor: pointer;background-color: #e04f5f;color: white; " 
+	                        onclick="location.href='../yesC_cs/'">                                          
+	                      <h4>
+	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
+	                              고객 상담
+	                          </p>
+	                      </h4>
+	                  </div>
+	                </div>
+	              </div>
+              	</c:when>
+              	<c:otherwise>
+              		<div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
+	                  <h1 style="padding: 5px; margin-bottom: 20px;">나의 문의내역(고객)</h1>
+	                <div class="row" >
+	                  <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray;cursor: pointer;" onclick="location.href='../yesnotice/'">
+	                      <h4>
+	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
+	                              공지사항
+	                          </p>
+	                      </h4>
+	                  </div>
+	                  <div id="cube" class="col-xs-6 col-sm-4" style=" 
+	                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;
+	                        cursor: pointer;background-color: #e04f5f;color: white; " 
+	                        onclick="location.href='../yesC_cs/'">                                          
+	                      <h4>
+	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
+	                              고객 상담
+	                          </p>
+	                      </h4>
+	                  </div>
+	                   <div id="cube" class="col-xs-6 col-sm-4" style=" 
+	                   border-top: 1px solid darkgray ;cursor: pointer;" onclick="location.href='../yesS_cs/'">
+	                      <h4>
+	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
+	                              사업자 상담
+	                          </p>
+	                      </h4>
+	                  </div>
+	                </div>
+	              </div>	
+              	</c:otherwise>
+              </c:choose>  
             </div>
             
             <div class="container" style="margin-top: 10px;">

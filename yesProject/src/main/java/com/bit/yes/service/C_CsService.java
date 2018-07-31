@@ -60,4 +60,8 @@ public class C_CsService {
 	public branch_addressVo c_selectAddress(String id) throws SQLException{
 		return csDao.c_selectAddress(id);
 	}
+	
+	public UserVo user_selectOne(String id) throws SQLException {
+		return csDao.user_selcetOne(id);
+	}
 }

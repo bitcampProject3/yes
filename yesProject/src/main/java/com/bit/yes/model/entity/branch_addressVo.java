@@ -8,7 +8,7 @@ public class branch_addressVo {
 	  private String detailAddress;
 	  private String sido;
 	  private String sigungu;
-	  private String bname;
+	  private String bname1;
 	  private String bname2;
 	  private String latlngx;
 	  private String latlngy;
@@ -73,12 +73,12 @@ public class branch_addressVo {
 		this.sigungu = sigungu;
 	}
 
-	public String getBname() {
-		return bname;
+	public String getBname1() {
+		return bname1;
 	}
 
-	public void setBname(String bname) {
-		this.bname = bname;
+	public void setBname1(String bname1) {
+		this.bname1 = bname1;
 	}
 
 	public String getBname2() {
@@ -109,7 +109,7 @@ public class branch_addressVo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bname == null) ? 0 : bname.hashCode());
+		result = prime * result + ((bname1 == null) ? 0 : bname1.hashCode());
 		result = prime * result + ((bname2 == null) ? 0 : bname2.hashCode());
 		result = prime * result + ((detailAddress == null) ? 0 : detailAddress.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -132,10 +132,10 @@ public class branch_addressVo {
 		if (getClass() != obj.getClass())
 			return false;
 		branch_addressVo other = (branch_addressVo) obj;
-		if (bname == null) {
-			if (other.bname != null)
+		if (bname1 == null) {
+			if (other.bname1 != null)
 				return false;
-		} else if (!bname.equals(other.bname))
+		} else if (!bname1.equals(other.bname1))
 			return false;
 		if (bname2 == null) {
 			if (other.bname2 != null)
@@ -194,12 +194,12 @@ public class branch_addressVo {
 	public String toString() {
 		return "branch_addressVo [id=" + id + ", zoneCode=" + zoneCode + ", roadAddress=" + roadAddress
 				+ ", jibunAddress=" + jibunAddress + ", detailAddress=" + detailAddress + ", sido=" + sido
-				+ ", sigungu=" + sigungu + ", bname=" + bname + ", bname2=" + bname2 + ", latlngx=" + latlngx
+				+ ", sigungu=" + sigungu + ", bname1=" + bname1 + ", bname2=" + bname2 + ", latlngx=" + latlngx
 				+ ", latlngy=" + latlngy + "]";
 	}
 
 	public branch_addressVo(String id, String zoneCode, String roadAddress, String jibunAddress, String detailAddress,
-			String sido, String sigungu, String bname, String bname2, String latlngx, String latlngy) {
+			String sido, String sigungu, String bname1, String bname2, String latlngx, String latlngy) {
 		super();
 		this.id = id;
 		this.zoneCode = zoneCode;
@@ -208,11 +208,12 @@ public class branch_addressVo {
 		this.detailAddress = detailAddress;
 		this.sido = sido;
 		this.sigungu = sigungu;
-		this.bname = bname;
+		this.bname1 = bname1;
 		this.bname2 = bname2;
 		this.latlngx = latlngx;
 		this.latlngy = latlngy;
 	}
+	  
 	  
 	  
 }

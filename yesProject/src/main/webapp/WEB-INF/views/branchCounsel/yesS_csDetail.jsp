@@ -248,7 +248,7 @@
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
                   <h1 style="padding: 5px; margin-bottom: 20px;">
-                      <a href="" style="color: black;">1:1문의-가맹점</a>
+                      <a href="./" style="color: black;">1:1문의-가맹점</a>
                   </h1>
 
               </div>
@@ -271,7 +271,7 @@
                     <tr>
                         <td>${bean.calendar }</td>
                         <td>&nbsp;|&nbsp;</td>
-                        <td>${userInfo.nickName }</td>
+                        <td>${userInfo.nickname }</td>
                     </tr>  
                    </article>
                    </section>

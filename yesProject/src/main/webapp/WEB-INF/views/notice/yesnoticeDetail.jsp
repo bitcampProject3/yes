@@ -237,8 +237,22 @@
                       <ul class="dropdown-menu" id="dropdown">
                         <li><a href="../yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="../yesC_cs/">고객 상담</a></li>
-                        <li><a href="../yesS_cs/">사업자 상담</a></li>
+                        
+                        <c:choose>
+	                        <c:when test="${id eq 'admin'}"> 
+	                        </c:when>
+	                        <c:otherwise>
+	                        	<li><a href="../yesC_cs/">고객 상담</a></li>
+	                        </c:otherwise>
+                        </c:choose>
+                        
+                        <c:choose>
+	                        <c:when test="${(registNum eq '0' ) or (registNum eq null) or (registNum eq ' ')}">
+	                        </c:when>
+	                        <c:otherwise>
+	                      	  	<li><a href="../yesS_cs/">사업자 상담</a></li>
+	                        </c:otherwise>
+                        </c:choose>
                       </ul>
                     </li>
                   </ul>
@@ -258,7 +272,7 @@
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
                   <h1 style="padding: 5px; margin-bottom: 20px;">
-                      <a href="" style="color: black;">공지사항</a>
+                      <a href="./" style="color: black;">공지사항</a>
                   </h1>
 
               </div>

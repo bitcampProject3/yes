@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>   
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -11,7 +12,31 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-         <script>
+        <script type="text/javascript">
+			$(function(){
+				$("input").hide();
+				$("#del").submit(function(e){
+					//e.preventDefault();
+					var result=window.confirm("µÓ∑œ√Îº“«œΩ√∞⁄Ω¿¥œ±Ó?");
+					console.log(result);
+					if(result) return true;
+					return false;
+				});
+			});
+		</script>
+        <script type="text/javascript">
+			$(function(){
+				$("input").hide();
+				$("#upd").submit(function(e){
+					//e.preventDefault();
+					var result=window.confirm("µÓ∑œ«œΩ√∞⁄Ω¿¥œ±Ó?");
+					console.log(result);
+					if(result) return true;
+					return false;
+				});
+			});
+		</script>
+		<script>
 		function doImgPop(img){ 
 			 img1= new Image(); 
 			 img1.src=(img); 
@@ -31,16 +56,17 @@
 			function viewImage(img){ 
 			 W=img1.width; 
 			 H=img1.height;
-			 var popupX = (window.screen.width / 2)-(200 / 2);
-			 var popupY= (window.screen.height /2)-(300 / 2);
+			 var popupX = (window.screen.width / 2) - (200 / 2);
+			 var popupY= (window.screen.height /2) - (300 / 2);
 			 O="width="+W+",height="+H+",left="+popupX+", top="+popupY+",scrollbars=yes"; 
 			 imgWin=window.open("","",O); 
-			 imgWin.document.write("<html><head><title>    Ïù¥ÎØ∏ÏßÄÏÉÅÏÑ∏Î≥¥Í∏∞    </title></head>");
+			 imgWin.document.write("<html><head><title>    ¿ÃπÃ¡ˆªÛºº∫∏±‚    </title></head>");
 			 imgWin.document.write("<body topmargin=0 leftmargin=0>");
-			 imgWin.document.write("<img src="+img+" onclick='self.close()' style='cursor:pointer;' title ='ÌÅ¥Î¶≠ÌïòÏãúÎ©¥ Ï∞ΩÏù¥ Îã´ÌûôÎãàÎã§.'>");
+			 imgWin.document.write("<img src="+img+" onclick='self.close()' style='cursor:pointer;' title ='≈¨∏Ø«œΩ√∏È √¢¿Ã ¥›»¸¥œ¥Ÿ.'>");
 			 imgWin.document.close();
 			}
 		</script>
+        
         <style>
             *{
                 font-family: 'Nanum Gothic', sans-serif;
@@ -152,7 +178,7 @@
                     display: block;
                     clear: both;
                 }
-                /*Ï∂ïÏÜåÌôîÏãú Î©îÎâ¥ ÏàòÏ†ï*/
+                /*√‡º“»≠Ω√ ∏ﬁ¥∫ ºˆ¡§*/
 /*
                 .navbar-collapse{
                     width: 200px;
@@ -177,19 +203,16 @@
                 .col-xs-6 {
                     width: 100%;
                 }
-                .answerA{
-                    width:20%;
-                }
-            }
-            @media all and (min-width: 768px) {
-                .answerA{
-                    width:15%;
-                }
             }
             .pagination>.active>a, .pagination>.active>a:hover, .pagination>.active>a:visited, .pagination>.active>a:link{
             background-color: #e04f5f;
             border-color: #e04f5f;
             color: white;
+            }
+            
+            a:hover,a:link,a:visited{
+            	text-decoration: none; color:black;
+
             }
         </style>
         
@@ -220,174 +243,210 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li><a href="#" class="menuBtn">ÏòàÏïΩ<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">ÏÇ¨Ïö©Ïûê Î¶¨Î∑∞</a></li>
+                    <li><a href="#" class="menuBtn">øπæ‡<span class="sr-only"></span></a></li>
+                    <li><a href="#" class="menuBtn">ªÁøÎ¿⁄ ∏Æ∫‰</a></li>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Í≥†Í∞ùÏÑºÌÑ∞<span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">∞Ì∞¥ºæ≈Õ<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="../yesnotice/">Í≥µÏßÄÏÇ¨Ìï≠</a></li>
-
+                        <li><a href="../yesnotice/">∞¯¡ˆªÁ«◊</a></li>
                       </ul>
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Î°úÍ∑∏Ïù∏</a></li>
-                    <li><a href="#">ÌöåÏõêÍ∞ÄÏûÖ</a></li>
-                    <li><a href="../admin/">Í¥ÄÎ¶¨Ïûê</a></li>
+                    <li><a href="#">∑Œ±◊¿Œ</a></li>
+                    <li><a href="#">»∏ø¯∞°¿‘</a></li>
+                    <li><a href="../admin/">∞¸∏Æ¿⁄</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
             </nav>
             </div>
            
-            <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left: 0px; padding-right: 0px;">
+        <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left: 0px; padding-right: 0px;">
            
            <div class="container" style=" border-bottom: 1px solid; padding-left:0px; padding-right:0px; 
                border-bottom-color: #e04f5f">
-                
-              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
-                  <h1 style="padding: 5px; margin-bottom: 20px;">
-                      <a href="./" style="color: black;">1:1Î¨∏Ïùò-Í∞ÄÎßπÏ†ê</a>
-                  </h1>
-
-              </div>
+                  <div class="col-md-6">
+					<h1 style="padding: 5px; margin-bottom: 20px; display: inline-block;">
+                        <a href="./userList" style="color: black;">»∏ø¯ ¡§∫∏</a>
+                    </h1>
+                   </div>
+   				
+                  <div class="col-md-6">
+                  	<h1 style="padding: 5px; margin-bottom: 20px; display: inline-block;">
+                      <a href="./branchList" style="color: black;">ªÁæ˜¿⁄ ¡§∫∏</a>
+                  	</h1>
+                  </div>
+   
             </div>
-            <div style="padding-left: 40px; padding-right: 40px;">
-            	<c:set var="titles" value="${fn:replace(bean.title, crcn,br) }"/>
-				<c:set var="titles" value="${fn:replace(titles,cr,br) }"/>
-                <c:set var="titles" value="${fn:replace(titles,cn,br) }"/>
-                <c:set var="titles" value="${fn:replace(titles,' ',sp) }"/>
-                <header style="padding-top: 15px"><h4><b><c:out value="${titles }" escapeXml="false"/></b></h4></header>
+            <div>
+                
+            <div class="col-md-6" style="padding-left: 40px; padding-right: 40px;">
+                <header style="padding-top: 15px">
+                    <h4><b>¿Ã∏ß : ${bean.name}</b></h4></header>
+                    <br/>
                 <div>
                    <section style="width: 100%; padding-bottom: 30px">
                    <article>     
                     <tr>
                         <td>
-                            <b>Î¨∏ÏùòÏú†Ìòï : <span> ${bean.questionSelect  } </span></b>
+                            <b>¥–≥◊¿” : <span>${bean.nickname}</span></b>
                         </td>
                     </tr>
-                    <br>
+                    <br/>
+                    <br/>
                     <tr>
-                        <td>${bean.calendar }</td>
-                        <td>&nbsp;|&nbsp;</td>
-                        <td>${userInfo.nickname }</td>
-                    </tr>  
+                        <td>
+                            <b>æ∆¿Ãµ : <span>${bean.id}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>¿Ã∏ﬁ¿œ : <span>${bean.email}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>«⁄µÂ∆˘ π¯»£ : <span>${bean.phoneNum}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>∫Òπ–π¯»£ ¡˙πÆ : <span>${bean.pwQuestion}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>ª˝≥‚ø˘¿œ : <span>${bean.birthDate}</span></b>
+                        </td>
+                    </tr>        
                    </article>
                    </section>
-                    <div style="padding-bottom: 30px">
-                    	<c:set var="cmt" value="${fn:replace(bean.content, crcn,br) }"/>
-                    	<c:set var="cmt" value="${fn:replace(cmt,cr,br) }"/>
-                    	<c:set var="cmt" value="${fn:replace(cmt,cn,br) }"/>
-                    	<c:set var="cmt" value="${fn:replace(cmt,' ',sp) }"/>
-                    	
-                    	<c:out value="${cmt }" escapeXml="false"/>
-                    
-                    </div>
-                    <c:forEach items="${subImages }" var="subImage" begin="0" end="0">
-                    <c:choose>
-					<c:when test="${subImage.imageName eq '0' or subImage.imageName eq null }">
-					<div><h4><b>Ï≤®Î∂Ä ÌååÏùºÏù¥ ÏóÜÏäµÎãàÎã§. </b></h4></div>
-					</c:when>
-					
-                    <c:when test="${subImage.imageName ne '0' }">
-                    <div><h4><b>Ï≤®Î∂Ä ÌååÏùº : ÌÅ¨Í≤å Î≥¥ÏãúÎ†§Î©¥ ÌôïÎåÄÌïòÏÑ∏Ïöî </b></h4></div>
-                    <div>
-                    <c:forEach items="${subImages }" var="subImage">
-						<div>
-							<img src="../resources/s_counsel_imgs/${subImage.imageName }"
-								style="width: 10%; cursor:pointer;" data-src="" id="image" 
-								onclick="doImgPop('../resources/s_counsel_imgs/${subImage.imageName }')">
-						</div>
-					</c:forEach>
-                    
-                    </div>
-                    </c:when>
-                    </c:choose>
-                    </c:forEach>
-                    
                 </div>
             </div>
-            <div style="border-top: 1px solid #ccc; padding-bottom: 5px"></div>
-            <!-- ÎãµÎ≥Ä ÏòÅÏó≠ -->
-			<c:choose>
-			  <c:when test = "${bean.comment ne null}">
-            	<div style="padding-bottom: 50px;">
-                <table style="width: 100%"> 
-                    <td class="answerA" style="text-align: center;">
-                        <h2 style="color: #e04f5f">A</h2>
-                    </td>
-                    <td style="width:auto">
-                        <div>
-                            <section>
-                                <header style="padding-bottom: 30px;">
-                                    <span style="color:#e04f5f"><h3 style="margin-top: 45px;"><b>ÎãµÎ≥Ä</b></h3></span>
-                                    <b>[Í≥†Í∞ùÏÑºÌÑ∞ÏóêÏÑú ÎãµÎ≥ÄÎìúÎ¶ΩÎãàÎã§.]</b>
-                                </header>
-                                <article style="width: auto; height: auto; padding-bottom: 40px;">
-                                    <c:set var="comments" value="${fn:replace(bean.comment, crcn,br) }"/>
-			                    	<c:set var="comments" value="${fn:replace(comments,cr,br) }"/>
-			                    	<c:set var="comments" value="${fn:replace(comments,cn,br) }"/>
-			                    	<c:set var="comments" value="${fn:replace(comments,' ',sp) }"/>
-			                    	
-			                    	<c:out value="${comments }" escapeXml="false"/>
-                                    
-                                </article>
-                                <footer>
-                                    <ul>
-                                        <li style="margin-bottom: 15px">Ï∂îÍ∞ÄÎ°ú ÌïÑÏöîÌïú ÎÇ¥Ïö©Ïù¥ ÏûàÏúºÏãúÎ©¥ Ïñ∏Ï†úÎì†ÏßÄ 
-                                        Í≥†Í∞ùÏÑºÌÑ∞Î°ú(1588-4763)<br>
-                                        ÎòêÎäî, 1:1Î¨∏ÏùòÎ•º ÌÜµÌï¥ ÏöîÏ≤≠Ìï¥ Ï£ºÏãúÎ©¥
-                                        Í∞êÏÇ¨ÌïòÍ≤†ÏäµÎãàÎã§.
-                                        </li>
-                                        <li>Î¨∏ÏùòÎ•º ÌÜµÌï¥ Ï†úÍ≥µÎêú ÎÇ¥Ïö©ÏùÄ Î™®Îëê Ï†ÄÏû•Ïù¥ Îê®ÏùÑ ÏïåÎ†§ÎìúÎ¶ΩÎãàÎã§.</li>
-                                        
-                                    </ul>
-                                    
-                                </footer>
-                            </section>
-                        </div>
-                    </td>
-                </table>   
+            <div class="col-md-6" style="padding-left: 40px; padding-right: 40px;">
+                <header style="padding-top: 15px">
+                    <h4><b>ªÛ»£∏Ì : ${branchinfo.branchname}</b></h4></header>
+                    <br/>
+                <div>
+                   <section style="width: 100%; padding-bottom: 30px">
+                   <article>     
+                    <tr>
+                        <td>
+                            <b>øµæ˜¿œ : <span>${branchinfo.opDate}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>øµæ˜ Ω√∞£ : <span>${branchinfo.opTime}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>Ω¨¥¬ Ω√∞£ : <span>${branchinfo.breakTime}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>∞°∞‘ ¿¸»≠π¯»£ : <span>${branchinfo.phoneNum}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>ƒ´≈◊∞Ì∏Æ : <span>${branchinfo.category}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>√÷¥Î ≈◊¿Ã∫Ì : <span>${branchinfo.maxTable}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>∆Ú¡° : <span>${branchinfo.score}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>«ˆ¿ÁªÛ≈¬ : <span>${branchinfo.state}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>¡÷º“ : <span>(${branchaddress.zoneCode })${branchaddress.roadAddress}(${branchaddress.jibunAddress}), ${branchaddress.detailAddress}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>µÓ∑œªÛ≈¬ : 
+                            <span>
+                            	<c:if test="${branchinfo.acceptState eq '0' }">
+									πÃµÓ∑œ                            	
+                            	</c:if>
+                            </span>
+                            </b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    
+       
+                   </article>
+                   </section>
+                </div>
+                
             </div>
-			</c:when>
-            
- 			<c:when test="${bean.comment eq null }">
-
-            <div>
-               <form method="post">
-               <table style="width: 100%">    
-                <tr>
-                    <td style="width: 10%;text-align: center;"><h4>Í¥ÄÎ¶¨Ïûê</h4></td>
-                    <td style="width: 80%;">
-	                    <textarea style="width: 100%;" name="comment" id="comment"></textarea>
-	                    <input type="hidden" value="${bean.index }" name="index" value="index"/>
-                    </td>
-                    <td style="width: 10%;text-align: center;">
-                        <button class="btn btn-normal" type="submit" style="width: 70%; height: 41px;" >
-                           <span>ÎãµÎ≥Ä</span>
-                        </button>
-                        
-                    </td>
-
-                </tr>    
-               </table>
-               </form>   
-            </div>
-            <div style="padding-bottom: 5px"></div>
-            </c:when>
-			</c:choose>
-            <!-- ÎãµÎ≥ÄÏûëÏÑ± ÌïòÎäî Í≥≥ ÏòÅÏó≠ -->    
-            
+            </div> 
             </div>      
                 
             <div class="container" style="margin-top: 10px;">
               
                 <div class="huge-top">
-                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;" onclick="history.back(1)"  >
-                       <span>Î™©Î°ùÏúºÎ°ú</span>
+                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;margin-left:10px;" onclick="history.back(1)" >
+                       <span>∏Ò∑œ¿∏∑Œ</span>
                     </button>
+
+                    <form method="post" id="del" style="display:inline;" action="../admin/managedetail/${bean.id }">
+						<input type="hidden" name="_method" value="delete"/>
+						<input type="hidden" name="id" value="${bean.id }"/>
+                    <button class="btn btn-normal pull-right delete" style="margin-bottom: 10px" type="submit" >
+                       <span>πÃµÓ∑œ</span>
+                    </button>
+                    </form>
                     
-                </div>
+                    <form method="post" id="upd" style="display:inline;" action="../admin/managedetail/${bean.id }">
+						<input type="hidden" name="_method" value="put"/>
+						<input type="hidden" name="id" value="${bean.id }"/>
+                    <button class="btn btn-normal pull-right update" style="margin-bottom: 10px;margin-right:10px" type="submit" >
+                       <span>µÓ∑œ</span>
+                    </button>
+                    </form>
                 
             </div>
 

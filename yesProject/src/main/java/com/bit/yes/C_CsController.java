@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,8 +40,10 @@ public class C_CsController {
 			int currentPageNo = 1;
 			int maxPost = 10;
 			
-			// 로그인하여 들어오는 로그인 아이디 값을 넣어주면 clientid에 해당하는 게시글만 보임
-			String clientID = "ghdlf"; 
+			// 로그인 했을 경우 들어오는 세션 id값 
+			// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
+			// admin이 관리자이여야함
+			String clientID = "ghdlf22"; 
 
 			
 			if(req.getParameter("pages") != null)
@@ -57,7 +58,8 @@ public class C_CsController {
 			paging.setNumberOfRecords(csService.writeGetCount(clientID));
 			
 			paging.makePaging();
-			
+			String registNum = csService.user_selectOne(clientID).getRegistNum();
+			model.addAttribute("registNum", registNum);
 			model.addAttribute("page", page);
 			model.addAttribute("paging",paging);
 			
@@ -67,18 +69,36 @@ public class C_CsController {
 		@RequestMapping(value="/yesC_cs/{idx}", method=RequestMethod.GET)
 		public String detail(@PathVariable int idx, Model model) throws SQLException { 
 			
+			// 로그인 했을 경우 들어오는 세션 id값 
+			// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
+			// id값을 통해서 id에 해당하는 게시글만 출력
+			// admin이 관리자이여야함
+			String clientID = "ghdlf22"; 
+			
+			
+			String registNum = csService.user_selectOne(clientID).getRegistNum();
+			
 			String id = (csService.selectPage(idx)).getBranchID(); // 가맹점 아이디 얻어오기
+			
 			if(id.equals("해당 없음")) {
 				model.addAttribute("id",id);
 				model.addAttribute("beans", csService.reserveOne(id)); //branch_info 값
 				model.addAttribute("bean", csService.selectPage(idx));
 				model.addAttribute("subImages", csService.c_counselSubImage(idx));
+				model.addAttribute("registNum",registNum);
+				
 			}else {
 				branch_addressVo address = csService.c_selectAddress(id);
 				String road = address.getRoadAddress();
 				String jibun = address.getJibunAddress();
+				String detailaddress = address.getDetailAddress();
+				String zonecode = address.getZoneCode();
+				
+				model.addAttribute("registNum",registNum);
 				model.addAttribute("road", road );
 				model.addAttribute("jibun", jibun);
+				model.addAttribute("detailaddress", detailaddress);
+				model.addAttribute("zonecode", zonecode);
 				model.addAttribute("id",id);
 				model.addAttribute("beans", csService.reserveOne(id)); //branch_info 값
 				model.addAttribute("bean", csService.selectPage(idx));
@@ -91,23 +111,35 @@ public class C_CsController {
 		@RequestMapping("/yesC_cs/yesC_csInsert")
 		public String insertpage(String id, UserVo nickName, Model model) throws SQLException {
 
-			// 로그인할 경우 들어오는 id 값
-			id="ghdlf"; 
-
+			// 로그인 했을 경우 들어오는 세션 id값 
+			// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
+			// admin이 관리자이여야함
+			id="ghdlf22"; 
+			
+			String registNum = csService.user_selectOne(id).getRegistNum();
+			
 			nickName=csService.selectNick(id);
-
+				
 			int i=0;
 			String branchID = null;
 			String ids[] = new String[csService.reserveList(id).size()];
 			String ids2[] = new String[csService.reserveList(id).size()];
+			String ids3[] = new String[csService.reserveList(id).size()];
+			String ids4[] = new String[csService.reserveList(id).size()];
 			for(i=0; i<csService.reserveList(id).size(); i++) {
 				branchID= csService.reserveList(id).get(i).getId();
 				branch_addressVo address = csService.c_selectAddress(branchID);
 				ids[i] = address.getRoadAddress();
 				ids2[i] = address.getJibunAddress();
+				ids3[i] = address.getDetailAddress();
+				ids4[i] = address.getZoneCode();
 			}
+			
+			model.addAttribute("registNum",registNum);
 			model.addAttribute("road",ids );
 			model.addAttribute("jibun", ids2);
+			model.addAttribute("detailaddress", ids3);
+			model.addAttribute("zonecode", ids4);
 			model.addAttribute("clientID", id);
 			model.addAttribute("userInfo",nickName);
 			model.addAttribute("bean", csService.reserveList(id));

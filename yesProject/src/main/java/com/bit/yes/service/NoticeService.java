@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import com.bit.yes.model.NoticeDao;
 import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.NoticeVo;
+import com.bit.yes.model.entity.UserVo;
 
 @Service
 public class NoticeService {
@@ -62,6 +63,10 @@ public class NoticeService {
 
 	public List<ImageVo> noticeSubImage(int index) throws SQLException {
 		return noticeDao.noticeSubImage(index);
+	}
+	
+	public UserVo user_selectOne(String id) throws SQLException {
+		return noticeDao.user_selcetOne(id);
 	}
 	
 }

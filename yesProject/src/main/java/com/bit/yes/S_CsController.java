@@ -41,8 +41,10 @@ public class S_CsController {
 			int currentPageNo = 1;
 			int maxPost = 10;
 			
-			// 이것도 로그인해서 들어온 사용자의 id값을 넣어주면 id에 해당하는 게시글 목록만 출력
-			String writer = "ghdlf2"; 
+			// 로그인 했을 경우 들어오는 세션 id값 
+			// id값을 통해서 해당 id에 해당하는 게시판 글 출력
+			// admin이 관리자이여야함
+			String writer = "ghdlf22"; 
 
 			
 			if(req.getParameter("pages") != null)
@@ -87,8 +89,10 @@ public class S_CsController {
 		@RequestMapping("/yesS_cs/yesS_csInsert")
 		public String insertpage(String id, UserVo nickName,Model model) throws SQLException {
 			
-			// 로그인 해서 들어온 해당 고객의 아이디 입력 
-			id="ghdlf2"; 
+			// 로그인 했을 경우 들어오는 세션 id값 
+			// id값을 통해서 해당 id에 해당하는 게시판 글 출력
+			// admin이 관리자이여야함
+			id="ghdlf22"; 
 			
 			nickName=scsService.selectNick(id);
 			model.addAttribute("userInfo",nickName);

@@ -14,33 +14,20 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
-	function visit(select){
-	        var url = select.options[select.selectedIndex].getAttribute('value');
-	        if(url) location.href = url;
-	}
-	</script>
-
-	<script type="text/javascript">
 		function content_view(id){
 		var userID= id;
 		var form = document.createElement("form");
 		form.setAttribute("method", "post");
-		window.name = "/yes/admin/userAllList";
-		form.target = "/yes/admin/userAllList";
-		form.setAttribute("action", "/yes/admin/AllListDetail");
+		window.name = "/yes/admin/management";
+		form.target = "/yes/admin/management";
+		form.setAttribute("action", "/yes/admin/managedetail");
 		 
 		var Field = document.createElement("input");
 		Field.setAttribute("type", "hidden");
 		Field.setAttribute("name", "userID");
 		Field.setAttribute("value", userID);
-		var Listchoice = document.createElement("input");
-		Listchoice.setAttribute("type", "hidden");
-		Listchoice.setAttribute("name", "choice");
-		Listchoice.setAttribute("value", "userAllList");
-		
+
 		form.appendChild(Field);
-		form.appendChild(Listchoice);
-		
 		document.body.appendChild(form);
 		form.submit();
 			
@@ -241,53 +228,26 @@
             </nav>
             </div>
             
-            <div class="container" style="margin-top: 10px;">
-             <div><h2>회원 리스트</h2>
-             <div style=" height:30px;">
-             <select onchange="visit(this)" style="float:left;">
-             	<option value="" disabled selected>이동할 리스트를 선택해주세요</option>
-			    <option value="./userAllList"><b>&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;모든 회원 리스트</b></option> <!-- 상대경로 -->
-			    <option value="./userList"><b>&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;고객 리스트</b></option> <!-- 상대경로 -->
-			    <option value="./branchList"><b>&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;사업자 리스트</b></option> <!-- 상대경로 -->
-			    <option><b>이동 없음</b></option>
-			</select>
-            </div> 
-             </div>
-             
+            
+            <div class="container"> 
+            
+              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; border-left:1px solid #CCCCCC;border-right:1px solid #cccccc;border-top:1px solid #cccccc">
+	                  <h1 style="padding: 5px; margin-bottom: 20px;">관리자 (매장등록)</h1>
+	                <div class="row" >
+	                  <div id="cube" class="col-xs-9 col-sm-9" style=" width:100%;background-color: #e04f5f;
+	                    color: white; cursor: pointer;" onclick="location.href='./management'">
+	                      <h4>
+	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
+	                              매장등록 및 해지
+	                          </p>
+	                      </h4>
+	                  </div>
+	                </div>
+	              </div>
+
             
            
-                <div class="row" style="margin-right:0px; margin-left:0px; " >
-                <div id="cube" class="col-md-4" style=" 
-                     border-top:1px solid darkgray; border-left:1px solid darkgray;  
-                       color:white; background-color: #e04f5f; cursor: pointer;" 
-                       onclick="location.href='./userAllList'">  
-                      <h4>
-                          <p class="text-center" style="padding-top: 5px; padding-bottom: 5px;">
-                              모든 회원 리스트
-                          </p>
-                      </h4>
-                  </div>
-                  <div id="cube" class="col-md-4" style=" border-top: 1px solid darkgray; cursor: pointer;
-                  border-right:1px solid darkgray;" 
-                     onclick="location.href='./userList'">                                        
-                      <h4>
-                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              고객 리스트
-                          </p>
-                      </h4>
-                  </div>
-                   <div id="cube" class="col-md-4" style=" border-top: 1px solid darkgray;
-                     cursor: pointer;border-right:1px solid darkgray;" 
-                     onclick="location.href='./branchList'">
-                      <h4>
-                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              사업자 리스트
-                          </p>
-                      </h4>
-                  </div>
-                </div>
-					
-                <table class="table table-board table table-hover" style="border-top: 1px solid #e04f5f;border-bottom: 2px solid #ddd">
+                <table class="table table-board table table-hover" style="border-top: 1px solid #e04f5f;border-bottom: 2px solid #ddd;">
                     <colgroup>
                         <col width="15%">
                         <col width="*">
@@ -296,37 +256,35 @@
                     </colgroup>
                     <thead>
                         <tr>
-                        	<th style="text-align:center">이름</th>
-                            <th style="text-align: center">닉네임</th>
-                            <th style="text-align: center">이메일</th>
-                            <th style="text-align: center">생년월일</th>
+                        	<th style="text-align:center">상호명</th>
+                            <th style="text-align: center">주소</th>
+                            <th style="text-align: center">분류</th>
+                            <th style="text-align: center">등록상태</th>
                         </tr>
                     </thead> 
                     
-                        <c:forEach var="bean" items="${page}">
-						<c:set var="nicknames" value="${fn:replace(bean.nickname, crcn,br) }"/>
-						<c:set var="nicknames" value="${fn:replace(nicknames,cr,br) }"/>
-                		<c:set var="nicknames" value="${fn:replace(nicknames,cn,br) }"/>
-               			<c:set var="nicknames" value="${fn:replace(nicknames,' ',sp) }"/>
-						<tr>
-							
+                        <c:forEach var="bean" items="${page}" varStatus="status">
+						<tr>			
 							<td class="text-center" style = "cursor:pointer;" onclick="javascript:content_view('${bean.id}')">
-							${bean.name}
+							${bean.branchname}
 							</td>
 							<td class="text-center" style = "cursor:pointer;" onclick="javascript:content_view('${bean.id}')">
-							<c:out value="${nicknames }" escapeXml="false"/>
+							주소:[<b>(${zonecode[status.index] })</b>${road[status.index] }(${jibun[status.index] }), ${detailaddress[status.index]}]
 							</td>
 							<td class="text-center" style = "cursor:pointer;" onclick="javascript:content_view('${bean.id}')">
-							${bean.email}
+							${bean.category }
 							</td>
-							<td class="text-center" style = "cursor:pointer;" onclick="javascript:content_view('${bean.id}')">
-							${bean.birthDate}
-							</td>
-						</tr>
-						
+							<c:choose>
+							<c:when test="${bean.acceptState eq '0' }">
+								<td class="text-center" style = "cursor:pointer;" onclick="javascript:content_view('${bean.id}')">
+								미등록
+								</td>
+							</c:when>
+							</c:choose>
+						</tr>	
 						</c:forEach>
+						
                 </table>
-
                 
  	<c:choose>
 		<c:when test="${paging.numberOfRecords ne NULL and paging.numberOfRecords ne '' and paging.numberOfRecords ne 0}">
@@ -380,9 +338,8 @@
 			</div>
 			<!-- /.col-lg-6 -->
 		</div>
-
-
-	</div>   
+	</div> 
+	  
                
     </body>
 </html>

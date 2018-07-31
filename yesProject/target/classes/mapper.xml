@@ -38,10 +38,26 @@
 	<result property="birthDate" column="BIRTHDATE"/>
 	<result property="registNum" column="REGISTNUM"/>
 </resultMap>
+<resultMap id="branch_infoVo" type="com.bit.yes.model.entity.branch_infoVo">
+	<result property="id" column="ID"/>
+	<result property="branchname" column="BRANCHNAME"/>
+	<result property="opTime" column="OPTIME"/>
+	<result property="breakTime" column="BREAKTIME"/>
+	<result property="opDate" column="OPDATE"/>
+	<result property="phoneNum" column="PHONENUM"/>
+	<result property="score" column="SCORE"/>
+	<result property="state" column="STATE"/>
+	<result property="category" column="CATEGORY"/>
+	<result property="branchExplain" column="BRANCHEXPLAIN"/>
+	<result property="maxTable" column="MAXTABLE"/>
+	<result property="tableState" column="TABLESTATE"/>
+	<result property="acceptState" column="ACCEPTSTATE"/>
+	<result property="waitingNum" column="WAITINGNUM"/>
+</resultMap>
 
 	<!-- 전체 회원리스트 쿼리문 -->
 	
-	<!-- 전체 레코드 개수 조회 -->
+	<!-- 전체 레코드 개수 조회 --> <!-- 전체 -->
 	  	<select id ="all_writeGetCount" resultType="int">
 	  		select count(*) from mydb.user_info 
 	  	</select>
@@ -50,6 +66,29 @@
   			select * from mydb.user_info order by NAME,BIRTHDATE ASC limit #{alloffset}, #{allnoOfRecords}
   		</select>
   		<select id ="all_writeInfoList" resultMap = "UserVo">
+  			select * from mydb.user_info where info = 1 order by user_info.name,user_info.birthDate ASC
+  		</select>
+	<!-- 전체 레코드 개수 조회 --> <!-- 고객만 -->
+	  	<select id ="user_writeGetCount" resultType="int">
+	  		select count(*) from mydb.user_info where registNum is null
+	  	</select>
+	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
+  		<select id="user_writeList" parameterType="hashmap" resultMap="UserVo">
+  			select * from mydb.user_info where registNum is null order by NAME,BIRTHDATE ASC limit #{useroffset}, #{usernoOfRecords}
+  		</select>
+  		<select id ="user_writeInfoList" resultMap = "UserVo">
+  			select * from mydb.user_info where info = 1 order by user_info.name,user_info.birthDate ASC
+  		</select>
+  		
+	<!-- 전체 레코드 개수 조회 --> <!-- 사업자만 -->
+	  	<select id ="branch_writeGetCount" resultType="int">
+	  		select count(*) from mydb.user_info where registNum is not null 
+	  	</select>
+	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
+  		<select id="branch_writeList" parameterType="hashmap" resultMap="UserVo">
+  			select * from mydb.user_info where registNum is not null order by NAME,BIRTHDATE ASC limit #{branchoffset}, #{branchnoOfRecords}
+  		</select>
+  		<select id ="branch_writeInfoList" resultMap = "UserVo">
   			select * from mydb.user_info where info = 1 order by user_info.name,user_info.birthDate ASC
   		</select>
   		
@@ -318,6 +357,35 @@
 		<select id="s_counselSubImage" resultType="com.bit.yes.model.entity.ImageVo">
 		  	select * from mydb.s_counsel_images where s_counsel_images.index = #{index}
 		</select>
+  		
+<!-- 관리자용 mapper --> <!-- 관리자용 mapper --> <!-- 관리자용 mapper --> <!-- 관리자용 mapper --> <!-- 관리자용 mapper -->
+  		
+  		<!-- 전체 레코드 개수 조회 --> <!-- 전체 -->
+	  	<select id ="management_writeGetCount" resultType="int">
+	  		select count(*) from mydb.branch_info where acceptState = 0 
+	  	</select>
+	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
+  		<select id="management_writeList" parameterType="hashmap" resultMap="branch_infoVo">
+  			select * from mydb.branch_info where acceptState = 0 order by id ASC limit #{offset}, #{noOfRecords}
+  		</select>
+  		<select id ="management_writeInfoList" resultMap = "branch_infoVo">
+  			select * from mydb.branch_info where info = 1 order by branch_info.id ASC
+  		</select>
+  		  	<!-- branch_address로 db가 따로 있으므로 이것도 가져가서 출력 -->	
+  		<select id="management_address" resultType="com.bit.yes.model.entity.branch_addressVo">
+  			select * from mydb.branch_address where id = #{id}
+  		</select>
+  		
+  		<update id="manage_update" parameterType="java.lang.String">
+  			UPDATE branch_info SET acceptState=1 WHERE branch_info.id = #{id}
+  		</update>
+  		<update id="manage_registNum" parameterType="java.lang.String">
+  			UPDATE user_info SET registNum=1 WHERE user_info.id = #{id}
+  		</update>
+  		
+	  	<delete id="manage_delete" parameterType="java.lang.String">
+	  		DELETE branch_info, branch_address FROM branch_info INNER JOIN branch_address WHERE branch_info.id=branch_address.id AND branch_address.id=#{id};
+	  	</delete>
   		
   			
   </mapper>

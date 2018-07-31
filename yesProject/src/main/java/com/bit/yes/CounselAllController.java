@@ -109,8 +109,12 @@ public class CounselAllController {
 					branch_addressVo address = caService.c_selectAddress(id);
 					String road = address.getRoadAddress();
 					String jibun = address.getJibunAddress();
+					String detailaddress = address.getDetailAddress();
+					String zonecode = address.getZoneCode();
 					model.addAttribute("road", road );
 					model.addAttribute("jibun", jibun);
+					model.addAttribute("detailaddress", detailaddress);
+					model.addAttribute("zonecode", zonecode);
 					model.addAttribute("id",id);
 					model.addAttribute("beans", caService.creserveOne(id)); //branch_info °ª
 					model.addAttribute("bean", caService.cselectPage(idx));

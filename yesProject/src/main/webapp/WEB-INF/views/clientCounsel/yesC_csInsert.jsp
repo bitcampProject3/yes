@@ -196,8 +196,21 @@
                       <ul class="dropdown-menu" id="dropdown">
                         <li><a href="../yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="../yesC_cs/">고객 상담</a></li>
-                        <li><a href="../yesS_cs/">사업자 상담</a></li>
+                        <c:choose>
+	                        <c:when test="${id eq 'admin'}"> 
+	                        </c:when>
+	                        <c:otherwise>
+	                        	<li><a href="../yesC_cs/">고객 상담</a></li>
+	                        </c:otherwise>
+                        </c:choose>
+                        
+                        <c:choose>
+	                        <c:when test="${(registNum eq '0' ) or (registNum eq null) or (registNum eq ' ')}">
+	                        </c:when>
+	                        <c:otherwise>
+	                      	  	<li><a href="../yesS_cs/">사업자 상담</a></li>
+	                        </c:otherwise>
+                        </c:choose>
                       </ul>
                     </li>
                   </ul>
@@ -262,7 +275,7 @@
                         <option value="" disabled selected>예약 내역을 선택해주세요</option>   
                         <option value="해당 없음">- 해당 없음(기타)</option>
                         <c:forEach var="bean" items="${bean}" varStatus="status">
-                        <option value="${bean.id}">주소:[${road[status.index] }-${jibun[status.index]}] - 상호명: ${bean.branchname }
+                        <option value="${bean.id}">주소:[<b>(${zonecode[status.index] })</b>${road[status.index] }(${jibun[status.index] }), ${detailaddress[status.index]}] - 상호명: ${bean.branchname }
                         </option>
                         </c:forEach>
                     </select>       

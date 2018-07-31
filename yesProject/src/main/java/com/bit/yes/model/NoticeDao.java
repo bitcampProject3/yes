@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.NoticeVo;
+import com.bit.yes.model.entity.UserVo;
 
 public interface NoticeDao {
 	
@@ -29,4 +30,6 @@ public interface NoticeDao {
 	List<ImageVo> noticeSubImage(int index) throws SQLException;
 	
 	int noticeImgUpload(ImageVo bean) throws SQLException;
+	
+	UserVo user_selcetOne(String id) throws SQLException;
 }

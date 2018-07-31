@@ -38,8 +38,10 @@ public class NoticeBbsController {
 		int currentPageNo = 1;
 		int maxPost = 10;
 		
-		// 로그인 했을 경우 들어오는 id값
-		String id = "admin";
+		// 로그인 했을 경우 들어오는 세션 id값 
+		// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
+		// admin이 관리자이여야함
+		String id = "ghdlf22";
 		
 		if(req.getParameter("pages") != null)
 			currentPageNo = Integer.parseInt(req.getParameter("pages"));
@@ -54,20 +56,47 @@ public class NoticeBbsController {
 		
 		paging.makePaging();
 		
-		model.addAttribute("id",id);
-		model.addAttribute("page", page);
-		model.addAttribute("paging",paging);
+		if(id == "admin") {
+			model.addAttribute("id",id);
+			model.addAttribute("page", page);
+			model.addAttribute("paging",paging);
+			
+		}else{
+			String registNum = noticeService.user_selectOne(id).getRegistNum();
+			model.addAttribute("registNum",registNum);
+			model.addAttribute("id",id);
+			model.addAttribute("page", page);
+			model.addAttribute("paging",paging);
+		}
 		
 		return "./notice/yesnotice";
 	}
 	
 	@RequestMapping("/yesnotice/yesnoticeInsert")
 	public String insertpage(Model model) throws SQLException {
+		
+		// 로그인 했을 경우 들어오는 세션 id값 
+		// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
+		// admin이 관리자이여야함
+		String id = "ghdlf22";
+		
+		String registNum = noticeService.user_selectOne(id).getRegistNum();
+		model.addAttribute("registNum",registNum);
+		model.addAttribute("id",id);
 		return "./notice/yesnoticeInsert";
 	}
 	
 	@RequestMapping(value="/yesnotice/yesnoticeUpdate/{idx}",method=RequestMethod.GET)
 	public String updatepage(@PathVariable int idx,Model model) throws SQLException {
+		
+		// 로그인 했을 경우 들어오는 세션 id값 
+		// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
+		// admin이 관리자이여야함
+		String id = "ghdlf22";
+				
+		String registNum = noticeService.user_selectOne(id).getRegistNum();
+		model.addAttribute("registNum",registNum);
+		model.addAttribute("id",id);
 		model.addAttribute("bean", noticeService.selectPage(idx));
 		return "./notice/yesnoticeUpdate";
 	}
@@ -115,9 +144,14 @@ public class NoticeBbsController {
 	// 상세보기
 	@RequestMapping(value="/yesnotice/{idx}",method=RequestMethod.GET )
 	public String detail(@PathVariable int idx,Model model) throws SQLException {
-		// 로그인 했을 경우 들어오는 id값
-		String id = "admin";
 		
+		// 로그인 했을 경우 들어오는 세션 id값 
+		// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
+		// admin이 관리자이여야함
+		String id = "ghdlf22";
+		
+		String registNum = noticeService.user_selectOne(id).getRegistNum();
+		model.addAttribute("registNum",registNum);
 		model.addAttribute("id", id);
 		model.addAttribute("bean", noticeService.selectPage(idx));
 		model.addAttribute("subImages", noticeService.noticeSubImage(idx));

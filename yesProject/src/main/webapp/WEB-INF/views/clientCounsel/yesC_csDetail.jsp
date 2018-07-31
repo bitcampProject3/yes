@@ -227,8 +227,21 @@
                       <ul class="dropdown-menu" id="dropdown">
                         <li><a href="../yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="../yesC_cs/">고객 상담</a></li>
-                        <li><a href="../yesS_cs/">사업자 상담</a></li>
+                        <c:choose>
+	                        <c:when test="${id eq 'admin'}"> 
+	                        </c:when>
+	                        <c:otherwise>
+	                        	<li><a href="../yesC_cs/">고객 상담</a></li>
+	                        </c:otherwise>
+                        </c:choose>
+                        
+                        <c:choose>
+	                        <c:when test="${(registNum eq '0' ) or (registNum eq null) or (registNum eq ' ')}">
+	                        </c:when>
+	                        <c:otherwise>
+	                      	  	<li><a href="../yesS_cs/">사업자 상담</a></li>
+	                        </c:otherwise>
+                        </c:choose>
                       </ul>
                     </li>
                   </ul>
@@ -248,7 +261,7 @@
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
                   <h1 style="padding: 5px; margin-bottom: 20px;">
-                      <a href="" style="color: black;">1:1문의-고객</a>
+                      <a href="./" style="color: black;">1:1문의-고객</a>
                   </h1>
 
               </div>
@@ -270,7 +283,7 @@
                         	</c:when>
                         	<c:otherwise>
                         		<c:forEach var="beans" items="${beans }">
-								    <b>예약내역 : <span>주소:[${road }-${jibun }] - 상호명: ${beans.branchname } </span></b>
+								    <b>예약내역 : <span>주소:[<strong>(${zonecode })</strong>${road }(${jibun }), ${detailaddress }] - 상호명: ${beans.branchname } </span></b>
     		                    </c:forEach>
                         	</c:otherwise>
                         	</c:choose>

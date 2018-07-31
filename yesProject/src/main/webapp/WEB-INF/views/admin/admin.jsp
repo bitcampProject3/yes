@@ -202,15 +202,14 @@
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
                         <li><a href="../yesnotice/">공지사항</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="../yesC_cs/">고객 상담</a></li>
-                        <li><a href="../yesS_cs/">사업자 상담</a></li>
+
                       </ul>
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">로그인</a></li>
                     <li><a href="#">회원가입</a></li>
+                    <li><a href="../admin/">관리자</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -256,9 +255,9 @@
             <div class="col-sm" id="cube" 
             style="text-align: center;padding-top: 50px;padding-bottom: 50px;cursor: pointer;
                border-bottom: 1px solid #CCCCCC;"
-            onclick="location.href='#'">
+            onclick="location.href='./management'">
             
-                <h2 style="margin-top:0px;margin-bottom: 0px;">매장 등록(승인), 매장 정보 수정, 해지(승인)</h2>          
+                <h2 style="margin-top:0px;margin-bottom: 0px;">매장 등록(승인 및 해지), 매장 정보 수정 </h2>          
            
             </div>   
             </div>
