@@ -1,19 +1,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+
+	request.setCharacterEncoding("UTF-8");
+%>
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/clndr.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	
 	<!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainStyle.css?ver=7">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/insertstyle.css?ver=3">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/insertstyle.css?ver=4">
   
 
 	<!-- Website Font style -->
@@ -42,160 +49,12 @@
 	<script src="./js/messages_ko.min.js"></script>
 	
 	<style>
-	
-    #slide *{
-        font-family: 'Jua', sans-serif;
-    }
-	#slide{
-		float:right;
-		border:1px solid #e04f5f;
-		width:250px;
-		height: 100%;
-		background-color:white;
-		display: none ;
-		z-index: 30;
-		position:absolute;
-		right:0;
-		overflow-y:hidden;
-
-}
-#slide * {
-	font-family: 'Jua', sans-serif;
-}
-
-#slide h1 {
-	margin: 60px 0px;
-	text-align:center;
-}
-
-#slide a {
-	color: black;
-	margin-bottom: 40px;
-	font-size:27px;
-	padding-left:18px;
-}
-
-#slide-menu {
-	width: 100%;
-	overflow:hidden;
-}
-
-#slide-menu li {
-	list-style: none;
-	margin-left: 0px;
-	}
-
-#slide-menu2 , #slide-menu4{
-	border-top: 1px solid #e04f5f;
-	width: 100%;
-	height: 100px;
-	margin: 10px auto;
-}
-
-#slide-menu3 {
-	border-top: 1px solid #e04f5f;
-	width: 100%;
-	margin-bottom: 20px;
-	height: 200px;
-}
-
-#slide-menu4 h2,#slide-menu2 h2{
-	margin-left:20px;
-}
 
 
-
-#joinForm{
-height: 500px; max-height: 500px; max-width: 640px; width: 640px; margin: auto; overflow: visible; border-radius: 10px; padding: 0px;}
-.detailModalTop{width: 640px;
-height: 100px;
-border-top-left-radius: 10px;
- border-top-right-radius: 10px;
- background-color: #e04f5f;
- float:left;
- color:white;
- 
- }
- 
- #joinForm h3{
- 	margin-top:5px;
- 	
- }
- #radioGroup{
- 	    width: 25%;
-
-    margin: 30px auto;
- }
- .joinTitle{
- font-family: 'Jua', sans-serif;
- font-size: 40px; color: white; width: 310px; height: 100%; padding-left: 10px; line-height: 100px; display: inline-block; float: left;}
-
-
- #joinT{
- 	overflow-y:scroll;
- 	overflow-x: hidden;
-    margin-left: 30px;
-    margin-top: 30px;
-    border: none;
-    background-color: #ebebeb;
-    border-radius: 5px;
-    width: 90%;
- }
-
-#choice{
-	width:300px;
-	margin:0px auto;
-}
-
-#step1{
-
-	width: 640px;
-    height: 400px;
-    display: inline-block;
-
-}
-
-
-#step2{
-	width:640px;
-	height:400px;
-	display:none;
-	overflow-y:auto;
-}
-
-#loginForm{
-	width:640px;
-	height:400px;
-	margin-top:100px;
-}
-.form-horizontal{
-    width: 500px;
-    height: 400px;
-    margin: 30px auto;
-}
-
-.modal a .close-modal {top: 12px;right: 12px;
-background-image: url("./imgs/cancel.png");
-}
-
-			input.error, textarea.error
-
-			{
-			        border: 1px solid red
-			}
-
-			label.error
-			
-			{
-			        display:block;
-			        color:red;
-			}
-
-	
 
 </style>
 
-    <script>
+     <script>
    
     //새로고침 (오류나면 지우기)
     var member='${member.registNum}';
@@ -371,7 +230,7 @@ background-image: url("./imgs/cancel.png");
     </script>
 </head>
 <body>
-        <div id="slide" style="">
+        <div id="slide" >
             <a id="close" style="float: right; color: black; font-size: 25px;">X</a>
           
             <h1>마이 페이지</h1>
@@ -456,39 +315,31 @@ background-image: url("./imgs/cancel.png");
  <!-- 회원가입 Modal -->   
     <!-- Modal -->
     
-    
-    
       <script>
       
-      
-      		
+        	      		
         	$(function(){
-        		
-        		
-
-        		
         		
         		$('.quiz').click(function(e){
         			
-        			var qc=$('#quizChoice').text().trim();
-        			$('#quizChoice').text(e.target.text);
+        			var qc=$('.quizChoice').text().trim();
+        			$('.quizChoice').text(e.target.text);
         			e.target.text=qc;
         			
-        			console.log(e.target.text);
         			
         		});
         		
-        		$('#back').click(function(){
+        		$('#backJoin').click(function(){
 
-        			$('#step2').css('display','none');
-        			$('#step1').css('display','inline-block');        			
+        			$('.step2').css('display','none');
+        			$('.step1').css('display','inline-block');        			
         			
         		});
         		
-				$('#choice a').click(function(e){
+				$('.choice a').click(function(e){
         			
         			
-            		if($('#okbtn').is(':checked')===false)
+            		if($('.okbtn').is(':checked')===false)
         			{
         			alert('동의해주세요');
 					e.preventDefault();
@@ -496,32 +347,93 @@ background-image: url("./imgs/cancel.png");
             		else{
                 		if(e.target.textContent=='고객')
     					{
-                			$('#step1').css('display','none');
-                			$('#step2').css('display','inline-block');
+                			$('.step1').css('display','none');
+                			$('.step2').css('display','inline-block');
                 			$('#registNum input').val('0');
 							$('#registNum').css('display','none');                			
 	
     					}
                 		else if(e.target.textContent='가맹점')
                 		{
-                			$('#step1').css('display','none');
-                			$('#step2').css('display','inline-block');
+                			$('.step1').css('display','none');
+                			$('.step2').css('display','block');
                 		}
                 		
                 		jQuery("#joinForm2").validate({
                 			rules:{
-                				password:{required:true,minlength:4}
+                				id:{required:true,
+                					minlength:4,
+                 	                remote: {
+                	                    	url:"./test/remote",
+                	                    	type:"POST",
+                	                        data: {
+                	                            id: function() {
+                	                               return $("#id").val();    
+                	                            }
+                	                       } 
+                	                       }
+
+                				},
+                				password:{required:true,minlength:4},
+                				confirm:{required:true,equalTo:"#password"},
+                				name:{required:true,minlength:2},
+                				nickName:{required:true,minlength:2},
+                				birthDate:{required:true},
+                				phoneNum:{required:true,
+          					      number:true,
+          					      minlength:11,
+          					      maxlength:11},
+          						email:{required:true,
+          						email:true},
+          						registNum:{required:true},
+          						pwQuestion:{required:true}
                 			},
                   			messages:{
+                				id:{
+                					required:"필수정보입니다",
+                					minlength:"최소 4자 이상 입력하세요",
+                					remote:"중복된 아이디입니다"
+                				},
                 				password:{
                 					required:"필수정보입니다",
                 					minlength:"최소 4자 이상 입력하세요"
+                				},
+                				confirm:{
+                					required:"필수정보입니다",
+                					equalTo:"비밀번호가 일치하지 않습니다"
+                				},
+                				name:{
+                					required:"필수정보입니다",
+                					minlength:"최소 2자 이상 입력하세요"
+                				},
+                				nickName:{
+                					required:"필수정보입니다",
+                					minlength:"최소 2자 이상 입력하세요"
+                				},
+                				birthDate:{
+                					required:"필수정보입니다"
+                				},
+                				phoneNum:{
+                					required:"필수정보입니다",
+                					number:"올바른 값을 입력해주세요",
+                					minlength:"",
+                					maxlength:""
+                					},
+                				email:{
+                					required:"필수정보입니다",
+                					email:"이메일 주소를 입력해주세요"
+                				},
+                				reigstNum:{
+                					required:"필수정보입니다"
+                				},
+                				pwQuestion:{
+                					required:"필수정보입니다"
                 				}
                   			},
                 			errorPlacement:function(error,element){
                 				if(element.is(".form-control"))
                 					{
-                					error.appendTo(element.next());
+                					error.appendTo(element.parent().parent());
                 					}
                 				else{
                 					
@@ -534,11 +446,19 @@ background-image: url("./imgs/cancel.png");
                 			success:function(element){
                 			}
                 		});
-
             		}
-
         		});
-				
+        	
+        	
+				$('#findID').click(function(){
+					$('#loginForm').css('display','none');
+					$('#login-findID').css('display','inline-block');
+				});
+				$('#findPW').click(function(){
+					$('#loginForm').css('display','none');
+					$('#login-findPW').css('display','inline-block');
+				});
+        	
         	});
         
         </script>
@@ -550,15 +470,15 @@ background-image: url("./imgs/cancel.png");
     				</div>
 	            </div> 
     	
-    	<div id="step1">
+    	<div class="step1">
     	<textarea id="joinT" cols="80px" rows="10px" readonly="readonly" ></textarea>
 
 		<div id="radioGroup">
-		  <input type="radio" name="assent" id="okbtn" value="ok" /> 동의
+		  <input type="radio" name="assent" class="okbtn" value="ok" /> 동의
 		  <input type="radio" name="assent" value="no" /> 동의하지않음
 		</div>
 		
-		<div id="choice">
+		<div class="choice">
 			<a id="custom" href="#"  class="btn-gradient red block"role="button">고객</a>
    			<a id="branch" href="#" class="btn-gradient gray block" role="button">가맹점</a>
 		
@@ -567,7 +487,7 @@ background-image: url("./imgs/cancel.png");
     	
     	
    <!-- 가맹점 회원가입 --> 	
-		<div id="step2">
+		<div class="step2">
 		<form id="joinForm2" class="form-horizontal" method="post" action="add">
 						
 		<div class="form-group">
@@ -671,7 +591,7 @@ background-image: url("./imgs/cancel.png");
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
 						        <div class="dropdown">
-									  <button id="quizChoice" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 100%">
+									  <button id="quizChoice" class="btn btn-default dropdown-toggle quizChoice" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 100%">
 									    학창시절 기억에 남는 선생님은?
 									    <span class="caret"></span>
 									  </button>
@@ -701,7 +621,7 @@ background-image: url("./imgs/cancel.png");
 			<input type="submit" class="btn btn-primary btn-lg btn-block login-button" value="Register"/>
 		</div>
 		<div class="login-register" >
-			<a id="back" >뒤로가기</a>
+			<a id="backJoin" >뒤로가기</a>
 		</div>
 		</form>
 		
@@ -710,8 +630,6 @@ background-image: url("./imgs/cancel.png");
 
     <a href="#" class="close-modal" rel="modal:close">Close</a>
     </div>
-    
-    
     
 </div>
 
@@ -724,13 +642,13 @@ background-image: url("./imgs/cancel.png");
     				</div>
 	            </div>
 	<div id="loginForm">
-	<form action="check" method="post" style="width: 70%; margin: 0px auto; padding-top:50px;">
+	<form  style="width: 70%; margin: 0px auto; padding-top:50px;">
 	<div class="form-group">
 		<label for="id" class="cols-sm-2 control-label">아이디</label>
 				<div class="cols-sm-10">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-						<input type="text" class="form-control" name="id" id="id"  placeholder="아이디를 입력해주세요" style="width:411px; height:34px;"/>
+						<input type="text" class="form-control id" name="id"  placeholder="아이디를 입력해주세요" style="width:411px; height:34px;"/>
 					</div>
 				</div>
 	</div>	
@@ -740,11 +658,11 @@ background-image: url("./imgs/cancel.png");
 				<div class="cols-sm-10">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-						<input type="password" class="form-control" name="password" id="password"  placeholder="비밀번호를 입력해주세요"  />
+						<input type="password" class="form-control password" name="password"   placeholder="비밀번호를 입력해주세요"  />
 					</div>
 				</div>
 		</div>	
-	 <button type="submit" class="btn btn-primary" style="padding-left:10px; width:100%; font-size: 20px; margin-top: 30px; ">로그인</button>
+	 <input type="button" id="loginCheck" class="btn btn-primary" style="padding-left:10px; width:100%; font-size: 20px; margin-top: 30px; "value="로그인"/>
 	</form>
 	
 	
@@ -778,9 +696,45 @@ background-image: url("./imgs/cancel.png");
                 <a id="kakao-login-btn" ></a>
 				<a href="http://developers.kakao.com/logout"></a>
 				</div>
-				
+	<div id="footerLogin">
+	<a id="findID">아이디 찾기</a>
+	<a id="findPW">비밀번호찾기</a>
+	<a id="login-join">회원가입</a>
+	</div>	
 				
  	<script type="text/javascript">
+ 	
+ 	$('#login-join').click(function(){
+ 		$('#loginForm').css('display','none');
+ 		$('.step1').clone(true).appendTo('#login');
+ 		$('.step2').clone(true).appendTo('#login');
+			
+ 	});
+ 	
+ 	
+ 	$('#loginCheck').click(function(){
+ 		
+ 		var id=$('.id').val();
+ 		var pw=$('.password').val();
+ 		$.ajax({
+         	type:"POST",
+        	url:"./check",
+        	data:{"id":id,
+        		"password":pw
+        	},
+        	success:function(data){
+        		var result=data.slice(0,2);
+        		if(result=='성공'){
+        			
+        			location.href="/yes/";
+        		}
+        		else{
+        			alert(data.slice(3));
+        		}
+        	} 
+      });
+ 	});
+ 	
       // 사용할 앱의 JavaScript 키를 설정해 주세요.
       Kakao.init('630e98d8425188c04dae0728c65822bb');
       // 카카오 로그인 버튼을 생성합니다.
@@ -821,17 +775,266 @@ background-image: url("./imgs/cancel.png");
 	
 	
 	
+	</div>
+	
+	<!-- 아이디찾기 -->
+	<div id="login-findID">
 	
 	
+		<form class="form-horizontal" >
+						
+		<div class="form-group">
+		<label for="name" class="cols-sm-2 control-label">이름</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+						<input type="text" class="form-control name" name="name"  placeholder="이름을 입력해주세요"/>
+					</div>
+				</div>
+		</div>
+		  
+		<div class="form-group">
+		<%--@declare id="birth"--%><label for="birth" class="cols-sm-2 control-label">생년월일</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+						<input type="date" class="form-control birth" name="birthDate"  placeholder="생년월일을 입력해주세요"/>
+					</div>
+				</div>
+		</div>
+
+
+								
+		<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">이메일</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+						<input type="text" class="form-control email" name="email"   placeholder="이메일 주소를 입력해주세요"/>
+					</div>
+				</div>
+		</div>
+		  <div class="form-group" >
+		  <input type="button" id="findID_btn" class="btn btn-default" value="아이디찾기"/>
+		  </div>
+		  <a onclick="loginBack();">뒤로가기</a>
+		</form>
+			
+
+	</div>
+	
+	<!-- 비밀번호 찾기 -->
+
+
+	<div id="login-findPW" style="display:none;width:640px;height:400px;overflow-y:scroll;">
 	
 	
+		<form class="form-horizontal" >
+		<div class="form-group">
+		<label for="id" class="cols-sm-2 control-label">아이디</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+						<input type="text" class="form-control id2" name="id"  placeholder="아이디를 입력해주세요"/>
+					</div>
+				</div>
+		</div>						
+		<div class="form-group">
+		<label for="name" class="cols-sm-2 control-label">이름</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+						<input type="text" class="form-control name2" name="name"  placeholder="이름을 입력해주세요"/>
+					</div>
+				</div>
+		</div>
+		  
+		<div class="form-group">
+		<%--@declare id="birth"--%><label for="birth" class="cols-sm-2 control-label">생년월일</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+						<input type="date" class="form-control birth2" name="birthDate"   placeholder="생년월일을 입력해주세요"/>
+					</div>
+				</div>
+		</div>
+
+
+								
+		<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">이메일</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+						<input type="text" class="form-control email2" name="email"  placeholder="이메일 주소를 입력해주세요"/>
+					</div>
+				</div>
+		</div>
+		
+		<div class="form-group" >
+		<%--@declare id="quiz"--%><label for=quiz class="cols-sm-2 control-label">비밀번호 찾기 문제</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+						        <div class="dropdown">
+									  <button class="btn btn-default dropdown-toggle quizChoice" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 100%">
+									    학창시절 기억에 남는 선생님은?
+									    <span class="caret"></span>
+									  </button>
+									  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+									    <li><a class="quiz" href="#" >당신의 별명은?</a></li>
+									    <li><a class="quiz" href="#" >좋아하는 운동은?</a></li>
+									    <li><a class="quiz" href="#">가장 친한 친구는?</a></li>
+									    <li><a class="quiz" href="#">당신의 보물 1호는?</a></li>
+									  </ul>
+								</div>
+					</div>
+				</div>
+		</div>
+		<div class="form-group" >
+		<label for=pwQuestion class="cols-sm-2 control-label">정답</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
+						<input type="text" class="form-control pwQuestion" name="pwQuestion"   placeholder="정답을 입력해주세요"/>
+					</div>
+				</div>
+		</div>
+		
+		  <div class="form-group" >
+		  <input type="button" id="findPW_btn" class="btn btn-default" value="비밀번호찾기"/>
+		  </div>
+		  <a onclick="loginBack();">뒤로가기</a>
+		</form>
+			
+
 	</div>
 
-	 
+<!-- 비밀번호 수정하기 -->
+	<div id="login-findPW2" style="display:none;width:640px;overflow-y:hidden;">
+		<form class="form-horizontal" >
+		
+		
+		<div class="form-group">
+		<label for="password" class="cols-sm-2 control-label">비밀번호</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+						<input type="password" class="form-control pw" name="password"   placeholder="비밀번호를 입력해주세요"  />
+					</div>
+				</div>
+		</div>
 
+		<div class="form-group">
+		<label for="confirm" class="cols-sm-2 control-label">비밀번호 확인</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+						<input type="password" class="form-control confirm" name="confirm"   placeholder="비밀번호를 한번 더 입력해주세요"/>
+					</div>
+				</div>
+		</div>
+		
+		
+		<input id="updatePW" type="button" class="btn btn-default" value="비밀번호 수정"/>
+		
+		</form>
+
+	</div>
 </div>
+<script>
+
+function loginBack(){
+	$('#login-findID').css('display','none');
+	$('#login-findPW').css('display','none');
+	$('#loginForm').css('display','block');
+}
 
 
+$('#findID_btn').click(function(){
+		var name=$('.name').val();
+		var birth=$('.birth').val();
+		var email=$('.email').val();
+		
+		$.ajax({
+         	type:"POST",
+        	url:"./find",
+        	data:{"name":name,
+        		"birth":birth,
+        		"email":email
+        	},
+        	success:function(data){
+				var result=data.slice(0,2);
+				if(result=='에러'){
+					alert(data.slice(3));
+				}else{
+					alert('찾으시는 아이디는'+data+'입니다');
+					$('#login-findID').css('display','none');
+					$('#loginForm').css('display','block');
+				}
+        	} 
+      });
+
+});
+
+var id;
+$('#findPW_btn').click(function(){
+	id=$('.id2').val();
+	var name=$('.name2').val();
+	var birth=$('.birth2').val();
+	var email=$('.email2').val();
+	var answer=$('.pwQuestion').val();
+	$.ajax({
+     	type:"POST",
+    	url:"./find2",
+    	data:{
+    		"id":id,
+    		"name":name,
+    		"birth":birth,
+    		"email":email,
+    		"answer":answer
+    	},
+    	success:function(data){
+			var result=data.slice(0,2);
+			if(result=='에러'){
+				alert(data.slice(3));
+			}else{
+				$('#login-findPW').css('display','none');
+				$('#login-findPW2').css('display','block');
+			}
+    	} 
+  });
+	
+});
+
+$('#updatePW').click(function(){
+	var pw=$('.pw').val();
+	
+	 $.ajax({
+     	type:"POST",
+    	url:"./pwUpdate",
+    	data:{
+    		"id":id,
+    		"password":pw,
+    	},
+    	success:function(data){
+    		console.log(data);
+			if(data=='성공'){
+				alert('비밀번호 변경 성공');
+				$('#login-findPW2').css('display','none');
+				$('#loginForm').css('display','block');
+			}
+			else{
+				alert('비밀변호 변경 실패');
+			}
+    	} 
+		
+	}); 
+});
+
+
+
+</script>
 
 
 <div id="modal2" class="modal">

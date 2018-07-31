@@ -26,9 +26,9 @@
   	  	select password from user_info where id=#{param1} and name=#{param2} and birthDate=#{param3} and email=#{param4} and pwQuestion=#{param5}
   	  </select>
   	  
-  	  <select id="updatePw"  parameterType="String" >
+  	  <update id="updatePw"  parameterType="String" >
   	  	update user_info set password=#{param1} where id=#{param2}
-  	  </select>
+  	  </update>
   	  
   	   <update id="updateInfo" parameterType="com.bit.yes.model.entity.UserVo" >
   	  	update user_info set password=#{password},nickname=#{nickName},email=#{email},phoneNum=#{phoneNum},registNum=#{registNum} where id=#{id}

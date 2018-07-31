@@ -2,7 +2,7 @@
 -- USE mydb;
 
 
-/*»ç¾÷ÀÚ ³Ñ¹ö Ãß°¡*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ ï¿½ß°ï¿½*/
 
 create table user_info(
 	id varchar(30) primary key,
@@ -12,7 +12,7 @@ create table user_info(
 	phoneNum varchar(30) not null,
 	pwQuestion varchar(100) not null,
 	birthDate date not null,
-	registNum varchar(30)/*»ç¾÷ÀÚ µî·Ï¹øÈ£*/
+	registNum varchar(30)/*ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¹ï¿½È£*/
 
 );
 
@@ -59,7 +59,7 @@ create table br_accept(
 );
 
 
---reserveTime >¿¹¾à ½Ã°£ , checkTime ¿¹¾àÇßÀ»¶§½Ã°£--
+--reserveTime >ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ , checkTime ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½--
 create table reserve_list(
 	branchID varchar(20) not null,
 	clientID varchar(20) not null,
@@ -129,7 +129,7 @@ drop table user_info;
 select * from user_info;
 
 
-----reserve_list > ÀÌ¿ë ¿©ºÎ ÄÃ·³ Ãß°¡(Çý¿ø)// 2018-07-18----------
+----reserve_list > ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ ï¿½ß°ï¿½(ï¿½ï¿½ï¿½ï¿½)// 2018-07-18----------
 alter table reserve_list add useState varchar(10) NOT NULL;
 
 drop table ticketing;
@@ -137,15 +137,15 @@ drop table ticketing;
 
 select * from branch_info;
 select * from reserve_list;
-insert into reserve_list values ('branch01','hyewon','2018-12-25-18:00',CURRENT_TIMESTAMP,2,'¾ÆÀÌ°¡ ¸ÔÀ»°Å¿¹¿ä','N');
-insert into reserve_list values ('branch02','hyewon','2018-12-24-17:00',CURRENT_TIMESTAMP,2,'¾ÆÀÌ°¡ ¸ÔÀ»°Å¿¹¿ä','N');
+insert into reserve_list values ('branch01','hyewon','2018-12-25-18:00',CURRENT_TIMESTAMP,2,'ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å¿ï¿½ï¿½ï¿½','N');
+insert into reserve_list values ('branch02','hyewon','2018-12-24-17:00',CURRENT_TIMESTAMP,2,'ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å¿ï¿½ï¿½ï¿½','N');
 
-insert into reserve_list values ('branch01','wonywony93','2018-12-25-16:00',CURRENT_TIMESTAMP,3,'¾ÆÀÌ°¡ ¸ÔÀ»°Å¿¹¿ä','N');
-insert into reserve_list values ('branch01','wonywony93','2018-07-19-16:00',CURRENT_TIMESTAMP,3,'¿Í»çºñ »©ÁÖ¼¼¿ä','Y');
-insert into reserve_list values ('branch01','wonywony93','2018-07-19-17:00',CURRENT_TIMESTAMP,4,'¹ä ¸¹ÀÌ ÁÖ¼¼¿ä','Y');
-insert into reserve_list values ('branch01','wonywony93','2018-07-19-18:00',CURRENT_TIMESTAMP,4,'±¹¹°Á¶±Ý¸¸ÁÖ¼¼¿ä','N');
-insert into reserve_list values ('branch01','wonywony93','2018-07-19-19:00',CURRENT_TIMESTAMP,2,'4ÀÎºÐ °°Àº 2ÀÎºÐ ÁÖ½Ã¸é °¨»çÇÏ°Ú½À´Ï´Ù......^^ ¹øÃ¢ÇÏ¼¼¿ä','N');
-insert into reserve_list values ('branch01','wonywony93','2018-07-19-19:00',CURRENT_TIMESTAMP,2,'4ÀÎºÐ °°Àº 2ÀÎºÐ ÁÖ½Ã¸é °¨»çÇÏ°Ú½À´Ï´Ù......^^ ¹øÃ¢ÇÏ¼¼¿ä........','N');
+insert into reserve_list values ('branch01','wonywony93','2018-12-25-16:00',CURRENT_TIMESTAMP,3,'ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å¿ï¿½ï¿½ï¿½','N');
+insert into reserve_list values ('branch01','wonywony93','2018-07-19-16:00',CURRENT_TIMESTAMP,3,'ï¿½Í»ï¿½ï¿½ ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½','Y');
+insert into reserve_list values ('branch01','wonywony93','2018-07-19-17:00',CURRENT_TIMESTAMP,4,'ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ï¿½ï¿½','Y');
+insert into reserve_list values ('branch01','wonywony93','2018-07-19-18:00',CURRENT_TIMESTAMP,4,'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½','N');
+insert into reserve_list values ('branch01','wonywony93','2018-07-19-19:00',CURRENT_TIMESTAMP,2,'4ï¿½Îºï¿½ ï¿½ï¿½ï¿½ï¿½ 2ï¿½Îºï¿½ ï¿½Ö½Ã¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Ú½ï¿½ï¿½Ï´ï¿½......^^ ï¿½ï¿½Ã¢ï¿½Ï¼ï¿½ï¿½ï¿½','N');
+insert into reserve_list values ('branch01','wonywony93','2018-07-19-19:00',CURRENT_TIMESTAMP,2,'4ï¿½Îºï¿½ ï¿½ï¿½ï¿½ï¿½ 2ï¿½Îºï¿½ ï¿½Ö½Ã¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Ú½ï¿½ï¿½Ï´ï¿½......^^ ï¿½ï¿½Ã¢ï¿½Ï¼ï¿½ï¿½ï¿½........','N');
 
 
 
@@ -164,6 +164,8 @@ select * from user_info;
 
 select * from user_info;
 
+update user_info set registNum='1002' where id='branch01';
+
 select waitingNum from ticketing where clientID='wonywony93';
 
 select a.waitingNum from branch_info a inner join ticketing b on a.id=b.branchID where b.clientID='wonywony93';
@@ -171,5 +173,7 @@ select tableState,waitingNum from branch_info where id='branch01';
 select * from user_info;
 select * from reserve_list a inner join user_info b on a.clientID=b.id where branchID='branch01'; 
 select * from branch_info a inner join branch_address b on a.id=b.id where a.id='branch01';
+
+delete from user_info where id='branch02';
 
 

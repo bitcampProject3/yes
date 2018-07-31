@@ -35,59 +35,59 @@ public class LoginController {
       return "redirect:/";
    }
 
-   @RequestMapping(value="/findId.yes",method=RequestMethod.GET)
-   public String findId() {
-      return "findId";
-   }
 
-
-   @RequestMapping(value="/find",method=RequestMethod.POST)
-   public String find(String name, String email,String birth, Model model) throws SQLException {
+   @ResponseBody
+   @RequestMapping(value="/find",method=RequestMethod.POST,produces="application/text; charset=utf8")
+   public String find(String name, String email,String birth) throws SQLException {
       String id=sqlSession.getMapper(UserDao.class).findId(name, email,birth);
-      model.addAttribute("result", id);
-      return "findId";
+      if(id!=null)
+    	  return id;
+      else
+    	  return "에러:일치하는 아이디가 없습니다.";
    }
+   
    @RequestMapping(value="/findPw.yes",method=RequestMethod.GET)
    public String findPw() {
       return "findPw";
    }
 
 
-   @RequestMapping(value="/find2",method=RequestMethod.POST)
-   public String find2(String id,String name, String email,String birth, String answer,Model model) throws SQLException {
+   @ResponseBody
+   @RequestMapping(value="/find2",method=RequestMethod.POST,produces="application/text; charset=utf8")
+   public String find2(String id,String name, String email,String birth, String answer) throws SQLException {
       String pw=sqlSession.getMapper(UserDao.class).findPw(id, name, birth, email, answer);
       if(pw!=null) {
-         model.addAttribute("id", id);
-         model.addAttribute("result", pw);
+         return "성공";
       }else {
-         model.addAttribute("err","怨좉컼�떂�쓽 �젙蹂대�� �솗�씤�빐二쇱꽭�슂");
+         return "에러:일치하는 정보가 없습니다";
       }
-      return "findPw";
    }
 
-   @RequestMapping(value="/pwUpdate", method=RequestMethod.POST)
-   public String pwUpdate(String id,String password,Model model) throws SQLException {
-      sqlSession.getMapper(UserDao.class).updatePw(password,id);
-      model.addAttribute("result", "�닔�젙�셿猷�");
-
-      return "login";
+   @ResponseBody
+   @RequestMapping(value="/pwUpdate", method=RequestMethod.POST,produces="application/text; charset=utf8")
+   public String pwUpdate(String id,String password) throws SQLException {
+      int result=sqlSession.getMapper(UserDao.class).updatePw(password,id);
+      if(result>0)
+    	  return "성공";
+      else
+    	  return "에러";
    }
 
    //로그인
-   @RequestMapping(value="/check",method=RequestMethod.POST)
-   public String loginCheck(String id,String password,HttpSession session,Model model) throws SQLException {
+   @ResponseBody
+   @RequestMapping(value="/check",method=RequestMethod.POST,produces="application/text; charset=utf8")
+   public String loginCheck(String id,String password,HttpSession session) throws SQLException {
 
+     UserVo bean=sqlSession.getMapper(UserDao.class).loginCheck(id,password);
 
-      UserVo bean=sqlSession.getMapper(UserDao.class).loginCheck(id,password);
-
-      if(bean!=null)
+     if(bean!=null)
       { //로그인 성공
          session.setAttribute("member", bean);
-         return "redirect:/";
+         return "성공";
       }
       else
       {
-         return "redirect:/";
+    	  return "에러:아이디/비밀번호를 확인해주세요";
       }
    }
 
@@ -103,7 +103,6 @@ public class LoginController {
    @ResponseBody
    @RequestMapping(value = "/kakaologin", method = RequestMethod.POST)
    public String kakaologin(@RequestBody String name,HttpSession session,Model model) {
-      //System.out.println(name);
       session.setAttribute("member", name);
       return "redirect:/";
    }
