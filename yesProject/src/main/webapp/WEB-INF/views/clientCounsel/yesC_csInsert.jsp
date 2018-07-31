@@ -155,6 +155,7 @@
                 
                 #writeCancel{
                     margin-top: 10px;
+                    width:98.7%;
                 }
                 
                 #writeReset{
@@ -314,9 +315,9 @@
                 </div> 
 				</form>
                 <button class="btn btn-default pull-right" id="writeCancel" onclick="history.back(1)" style="margin-right: 5px;">
-                       <span>
+                          	 <span>
                           	 목록으로
-                       </span>
+                          	 </span>
                 </button> 
 
                 </div> 

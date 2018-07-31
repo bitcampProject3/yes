@@ -154,6 +154,7 @@
                 
                 #writeCancel{
                     margin-top: 10px;
+                    width:98.7%;
                 }
                 
                 #writeReset{

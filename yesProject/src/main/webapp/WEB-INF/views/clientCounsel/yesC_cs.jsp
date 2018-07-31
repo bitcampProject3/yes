@@ -217,7 +217,7 @@
            <div class="container" style=" border: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
                border-bottom-color: #e04f5f">
               <c:choose>
-              <c:when test="${(registNum eq '0' ) or (registNum eq null) or (registNum eq ' ')}">
+              <c:when test="${(registNum eq '0' ) or (registNum eq null) or (registNum eq '')}">
 	              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
 	                  <h1 style="padding: 5px; margin-bottom: 20px;">나의 문의내역(고객)</h1>
 	                <div class="row" >
