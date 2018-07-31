@@ -201,8 +201,8 @@ public class AdminController {
 		// ½Â³«
 		@RequestMapping(value="/admin/managedetail/{id}",method=RequestMethod.PUT )
 		public String edit(String id) throws SQLException {
-			adminService.manage_update(id);
 			adminService.manage_registNum(id);
+			adminService.manage_update(id);
 			return "redirect:/admin/management";
 		}
 		
@@ -265,8 +265,8 @@ public class AdminController {
 		// ÇØÁö
 		@RequestMapping(value="/admin/managedeldetail/{id}",method=RequestMethod.PUT)
 		public String deldelete(@PathVariable String id) throws SQLException {
-			adminService.manage_delregistNum(id);
 			adminService.manage_deldelete(id);
+			adminService.manage_delregistNum(id);
 			
 			return "redirect:/admin/managementdel";
 		}
