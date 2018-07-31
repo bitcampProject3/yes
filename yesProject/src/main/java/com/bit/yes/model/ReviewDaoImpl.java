@@ -9,7 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.bit.yes.model.entity.CommentVo;
 import com.bit.yes.model.entity.ImageVo;
+import com.bit.yes.model.entity.LikeVo;
 import com.bit.yes.model.entity.ReviewVo;
 
 @Repository
@@ -57,6 +59,12 @@ public class ReviewDaoImpl implements ReviewDao {
 		return sqlSession.delete("review.reviewDelete", index);
 	}
 	
+	@Override
+	public int reviewDeleteComment(CommentVo bean) throws SQLException {
+		
+		return sqlSession.delete("review.reviewDeleteComment", bean);
+	}
+	
 	
 	public int reviewDeleteFile(int index) throws SQLException {
 		return sqlSession.delete("review.reviewDeleteFile", index);
@@ -68,6 +76,21 @@ public class ReviewDaoImpl implements ReviewDao {
 		return sqlSession.insert("review.reviewWrite", bean);
 	
 	}
+	
+	
+	public int reviewAddComment(CommentVo bean) throws SQLException {
+		
+		return sqlSession.insert("review.reviewAddComment", bean);
+	}
+	
+	@Override
+	public List<CommentVo> reiviewCommentList(int review_idx) throws SQLException {
+		
+		return sqlSession.selectList("review.reviewCommentList", review_idx);
+	}
+	
+	
+	
 
 	@Override
 	public int reviewImgUpload(ImageVo bean) throws SQLException {
@@ -108,6 +131,52 @@ public class ReviewDaoImpl implements ReviewDao {
 		return sqlSession.selectOne("writeGetCount", params);
 		
 	}
+
+	@Override
+	public int reviewClickLike(LikeVo bean) throws SQLException {
+		
+		return sqlSession.insert("review.reviewLikeClick", bean);
+	}
+
+
+//	public int reviewChangeLike(LikeVo bean) throws SQLException {
+//		
+//		return sqlSession.update("review.reviewChangeLike", bean);
+//	}
+	public int reviewChangeLike(HashMap<String, Object> params) throws SQLException {
+		
+		return sqlSession.update("review.reviewChangeLike", params);
+	}
+
+	@Override
+	public int reviewCountLike(LikeVo bean) throws SQLException {
+		
+		return sqlSession.selectOne("review.reviewCountLike", bean);
+	}
+	
+	@Override
+	public LikeVo reviewCheckLike(LikeVo bean) throws SQLException {
+		return sqlSession.selectOne("review.reviewCheckLike", bean);
+	}
+
+//	public LikeVo reviewIsExistLike(LikeVo bean) throws SQLException {
+//		
+//		return sqlSession.selectOne("review.reviewIsExistLike", bean);
+//		
+//	}
+
+	@Override
+	public int reviewNewLike(LikeVo bean) throws SQLException {
+		
+		return sqlSession.insert("review.reviewNewLike", bean);
+	}
+
+	@Override
+	public int reviewDeleteLike(LikeVo bean) throws SQLException {
+
+		return sqlSession.delete("review.reviewDeleteLike", bean);
+	}
+
 	
 	// 검색 리스트 페이징
 	

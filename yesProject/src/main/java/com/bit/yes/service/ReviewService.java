@@ -1,6 +1,7 @@
 package com.bit.yes.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.bit.yes.model.ReviewDao;
+import com.bit.yes.model.entity.CommentVo;
 import com.bit.yes.model.entity.ImageVo;
+import com.bit.yes.model.entity.LikeVo;
 import com.bit.yes.model.entity.ReviewVo;
 
 @Service
@@ -40,6 +43,14 @@ public class ReviewService {
 	
 	public void reviewWrite(ReviewVo bean) throws SQLException {
 		reviewDao.reviewWrite(bean);
+	}
+	
+	public void reviewAddComment(CommentVo bean) throws SQLException {
+		reviewDao.reviewAddComment(bean);
+	}
+	
+	public ArrayList<CommentVo> reviewCommentList(int review_idx) throws SQLException {
+		return (ArrayList<CommentVo>) reviewDao.reiviewCommentList(review_idx); 
 	}
 	
 	public void reviewImgUpload(ImageVo bean) throws SQLException {
@@ -77,10 +88,48 @@ public class ReviewService {
 		return reviewDao.reviewDeleteFile(index);
 	}
 	
+	public int deleteComment(CommentVo bean) throws SQLException {
+		return reviewDao.reviewDeleteComment(bean);
+	}
+	
 	public void editOne(ReviewVo bean) throws SQLException {
 		
 		reviewDao.reviewEdit(bean);
 		
+	}
+	
+	public void reviewClickLike(LikeVo bean) throws SQLException {
+		
+		reviewDao.reviewClickLike(bean);
+		
+	}
+	
+	public int reviewCountLike(LikeVo bean) throws SQLException {
+		return reviewDao.reviewCountLike(bean);
+	}
+	
+	public LikeVo reviewCheckLike(LikeVo bean) throws SQLException {
+		return reviewDao.reviewCheckLike(bean);
+	}
+	
+//	public void reviewChangeLike(LikeVo bean) throws SQLException {
+//		reviewDao.reviewChangeLike(bean);
+//	}
+	
+	public void reviewChangeLike(HashMap<String, Object> params) throws SQLException {
+		reviewDao.reviewChangeLike(params);
+	}
+	
+//	public LikeVo reviewIsExistLike(LikeVo bean) throws SQLException {
+//		return reviewDao.reviewIsExistLike(bean);
+//	}
+	
+	public void reviewNewLike(LikeVo bean) throws SQLException {
+		reviewDao.reviewNewLike(bean);
+	}
+	
+	public int reviewDeleteLike(LikeVo bean) throws SQLException {
+		return reviewDao.reviewDeleteLike(bean);
 	}
 	
 	

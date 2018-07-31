@@ -13,16 +13,25 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.bit.yes.model.entity.CommentVo;
 import com.bit.yes.model.entity.ImageVo;
+import com.bit.yes.model.entity.LikeVo;
 import com.bit.yes.model.entity.ReviewVo;
 import com.bit.yes.model.paging.Paging;
 import com.bit.yes.service.ReviewService;
@@ -34,21 +43,22 @@ public class ReviewListController {
 	ReviewService service;
 	Date today = new Date();
 	SimpleDateFormat sdf = new SimpleDateFormat("");
+	int detailIndex;
 	
 	public void setService(ReviewService service) {
 		this.service = service;
 	}
 
 	@RequestMapping(value = "/review_list")
-	public String reviewList(Model listModel, Model imageModel, HttpServletRequest req) throws Exception {
+	public String reviewList(Model listModel, Model imageModel, HttpServletRequest request) throws Exception {
 
 		System.out.println("list(get)");
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		int currentPageNo = 1;
 		int maxPost = 10;
 		
-		String category = req.getParameter("category");
-		String keyword = req.getParameter("keyword");
+		String category = request.getParameter("category");
+		String keyword = request.getParameter("keyword");
 		
 		System.out.println("category : " + category);
 		System.out.println("keyword : " + keyword);
@@ -57,9 +67,9 @@ public class ReviewListController {
 			System.out.println("category and keyword is null");
 		}
 		
-		if(req.getParameter("pages") != null) {
+		if(request.getParameter("pages") != null) {
 			System.out.println("pages is null");
-			currentPageNo = Integer.parseInt(req.getParameter("pages"));
+			currentPageNo = Integer.parseInt(request.getParameter("pages"));
 		}
 		
 
@@ -96,21 +106,21 @@ public class ReviewListController {
 //	@RequestMapping(value= {"/review_list/location/{words}", "/review_list/store/{words}", "/review_list/menu/{words}"}, method=RequestMethod.POST)
 //	@RequestMapping(value= "/review_search", method=RequestMethod.POST)
 	@RequestMapping(value= "/review_search")
-	public String reviewSearchList(Model listModel, Model imageModel, HttpServletRequest req) throws Exception {
+	public String reviewSearchList(Model listModel, Model imageModel, HttpServletRequest request) throws Exception {
 		
 		
-		HttpSession session = req.getSession();
+		HttpSession session = request.getSession();
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		System.out.println("list(post)");
 		int currentPageNo = 1;
 		int maxPost = 10;
 		
-		String category = req.getParameter("category");
-		String keyword = req.getParameter("keyword");
+		String category = request.getParameter("category");
+		String keyword = request.getParameter("keyword");
 		
-		if(req.getParameter("pages") != null) {
+		if(request.getParameter("pages") != null) {
 			System.out.println("pages is null");
-			currentPageNo = Integer.parseInt(req.getParameter("pages"));
+			currentPageNo = Integer.parseInt(request.getParameter("pages"));
 		}
 		
 		if(category == null && keyword == null) {
@@ -209,9 +219,9 @@ public class ReviewListController {
 		String root_path=mtfRequest.getSession().getServletContext().getRealPath("/");
 		
 		
-		File dirFile = new File(root_path + "resources/review_imgs/");
+/*		File dirFile = new File(root_path + "resources/review_imgs/");
 		
-/*		File[] fileList = dirFile.listFiles();
+		File[] fileList = dirFile.listFiles();
 		
 		for(File tempFile : fileList) {
 			System.out.println("file name : " + tempFile.getName());
@@ -247,6 +257,7 @@ public class ReviewListController {
 	@RequestMapping(value = "/review_list/{index}", method = RequestMethod.GET)
 	public String reviewDetail(@PathVariable int index, Model detailModel, Model mainModel, Model subModel) throws SQLException {
 
+		detailIndex = index;
 		detailModel.addAttribute("bean", service.selectPage(index));
 		mainModel.addAttribute("mainImage", service.reviewMainImage(index));
 		subModel.addAttribute("subImages", service.reviewSubImage(index));
@@ -265,6 +276,189 @@ public class ReviewListController {
 
 		return "redirect:/review_list";
 	}
+	
+	
+	@RequestMapping(value="/review_list/addComment", method=RequestMethod.POST)
+	@ResponseBody
+	public String reviewAddComment(@ModelAttribute("commentVo") CommentVo commentVo, HttpServletRequest request) throws SQLException {
+		
+		HttpSession session = request.getSession();
+		
+		System.out.println("reviewAddComment");
+		
+		System.out.println("content : " + commentVo.getComment());
+		System.out.println("review_idx : " + commentVo.getReview_idx());
+		
+		commentVo.setWriter("jaeseon");
+		service.reviewAddComment(commentVo);
+		
+		return "success";
+	}
+	
+	
+	@RequestMapping(value="/review_list/deleteComment", method=RequestMethod.POST)
+	@ResponseBody
+	public String reviewDeleteComment(@ModelAttribute("commentVo") CommentVo commentVo, HttpServletRequest request) throws SQLException {		
+		
+		HttpSession session = request.getSession();
+		
+		
+		commentVo.setWriter("jaeseon");
+		
+		service.deleteComment(commentVo);
+		
+		System.out.println("reviewDeleteComment");
+		
+		System.out.println("review_idx(delete) : " + commentVo.getReview_idx());
+		System.out.println("comment_idx(delete) : " + commentVo.getComment_idx());
+		
+		return "success";
+	}
+	
+	
+	@RequestMapping(value="/review_list/commentList", produces="application/json; charset=utf-8")
+	@ResponseBody
+	public ResponseEntity<String> commentList(@ModelAttribute("commentVo") CommentVo commentVo, HttpServletRequest request) throws SQLException {
+		
+		
+		System.out.println("commentList(get)");
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		ArrayList<HashMap> commentList = new ArrayList<HashMap>();
+		HashMap<String, Object> temp = new HashMap<String, Object>();
+		
+		List<CommentVo> selectList = service.reviewCommentList(commentVo.getReview_idx());
+		
+		if(selectList.size() > 0) {
+			
+			temp = new HashMap<String, Object>();
+			
+			temp.put("comment_idx", null);
+			
+			commentList.add(temp);
+			
+			for(CommentVo bean : selectList) {
+				
+				temp = new HashMap<String, Object>();
+				
+				temp.put("comment_idx", bean.getComment_idx());
+				temp.put("comment", bean.getComment());
+				temp.put("writer", bean.getWriter());
+				
+				commentList.add(temp);
+				
+			}
+			
+		}
+		
+		
+		
+		JSONArray json = new JSONArray(commentList);
+		
+		return new ResponseEntity<String>(json.toString(), responseHeaders, HttpStatus.CREATED);
+	}
+	
+	
+	@RequestMapping(value="/review_list/clickLike", method=RequestMethod.POST)
+	@ResponseBody
+	public String reviewClickLike(@ModelAttribute("likeVo") LikeVo likeVo, HttpServletRequest request) throws SQLException {
+		
+		HttpSession session = request.getSession();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		LikeVo isExist;
+		
+		System.out.println("reviewClickLike(post)");
+		
+		System.out.println("review idx(click) : " + likeVo.getReview_idx());
+		System.out.println("review writer(click) : " + likeVo.getWriter());
+		System.out.println("before review checked(click) : " + likeVo.isChecked());
+		
+		params.put("checked", likeVo.isChecked());
+		params.put("bean", likeVo);
+		
+		isExist = service.reviewCheckLike(likeVo);
+		
+		if(isExist == null) {
+			System.out.println("not exist!!!");
+			service.reviewNewLike(likeVo);
+			
+		} else {
+			System.out.println("exist!!!");
+			service.reviewDeleteLike(likeVo);
+//			service.reviewChangeLike(params);
+			
+		}
+//		service.reviewChangeLike(likeVo); 
+		
+		
+		System.out.println("--------------------------");
+		
+		
+		
+		
+//		System.out.println("content : " + commentVo.getComment());
+//		System.out.println("review_idx : " + commentVo.getReview_idx());
+//		
+//		commentVo.setWriter("jaeseon");
+//		service.reviewAddComment(commentVo);
+		
+		return "success";
+	}
+	
+	
+	@RequestMapping(value="/review_list/reviewLike", produces="application/json; charset=utf-8")
+	@ResponseBody
+	public ResponseEntity<String> review_like(HttpServletRequest request) throws SQLException {
+//	public ResponseEntity<String> review_like(@ModelAttribute("likeVo") LikeVo likeVo, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		LikeVo bean = new LikeVo();
+		LikeVo checkBean = new LikeVo();
+		String id;
+		int likeCount;
+		boolean likeChecked;
+		
+		id = "jaeseon3";
+		
+//		id = session.getAttribute("id");  // session에서 id를 받아서 초기화
+		
+		System.out.println("reviewLike(get)");
+		
+		System.out.println("review idx(like) : " + detailIndex);
+		
+		bean.setReview_idx(detailIndex);
+		bean.setWriter(id);
+		
+		likeCount = service.reviewCountLike(bean);
+		System.out.println("likeCount : " + likeCount);
+		
+		checkBean = service.reviewCheckLike(bean);
+		
+		if(checkBean == null) {
+			System.out.println("bean is null!!");
+			bean.setChecked(false);
+		} else {
+			System.out.println("bean is not null!!");
+			bean.setChecked(checkBean.isChecked());
+		}
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		ArrayList<HashMap<String, Object>> likeList = new ArrayList<HashMap<String, Object>>();
+		HashMap<String, Object> temp = new HashMap<String, Object>();
+		
+		temp.put("likeCount", likeCount);
+		temp.put("checked", bean.isChecked());
+		
+		likeList.add(temp);
+		
+		JSONArray json = new JSONArray(likeList);
+		
+		return new ResponseEntity<String>(json.toString(), responseHeaders, HttpStatus.CREATED);
+	}
+	
+
 
 //	@RequestMapping(value = "multiRequest")
 //	public String reviewMultiUpload(MultipartHttpServletRequest mtfRequest) throws SQLException {

@@ -4,7 +4,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import com.bit.yes.model.entity.CommentVo;
 import com.bit.yes.model.entity.ImageVo;
+import com.bit.yes.model.entity.LikeVo;
 import com.bit.yes.model.entity.ReviewVo;
 
 public interface ReviewDao {
@@ -20,6 +22,18 @@ public interface ReviewDao {
 	int reviewWrite(ReviewVo bean) throws SQLException;
 	int reviewImgUpload(ImageVo bean) throws SQLException;
 	int reviewEdit(ReviewVo bean) throws SQLException;
+	int reviewAddComment(CommentVo bean) throws SQLException;
+	List<CommentVo> reiviewCommentList(int review_idx) throws SQLException;
+	int reviewDeleteComment(CommentVo bean) throws SQLException;
+	int reviewClickLike(LikeVo bean) throws SQLException;
+	int reviewChangeLike(HashMap<String, Object> params) throws SQLException;
+//	int reviewChangeLike(LikeVo bean) throws SQLException;
+	int reviewCountLike(LikeVo bean) throws SQLException;
+	LikeVo reviewCheckLike(LikeVo bean) throws SQLException;
+//	LikeVo reviewIsExistLike(LikeVo bean) throws SQLException;
+	int reviewNewLike(LikeVo bean) throws SQLException;
+	int reviewDeleteLike(LikeVo bean) throws SQLException;
+	
 	
 	
 //	-------------------------------- paging
