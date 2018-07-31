@@ -18,9 +18,9 @@
 		var userID= id;
 		var form = document.createElement("form");
 		form.setAttribute("method", "post");
-		window.name = "/yes/admin/management";
-		form.target = "/yes/admin/management";
-		form.setAttribute("action", "/yes/admin/managedetail");
+		window.name = "/yes/admin/managementdel";
+		form.target = "/yes/admin/managementdel";
+		form.setAttribute("action", "/yes/admin/managedeldetail");
 		 
 		var Field = document.createElement("input");
 		Field.setAttribute("type", "hidden");
@@ -234,8 +234,8 @@
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px;border-top:1px solid #cccccc;border-left:1px solid #cccccc;border-right:1px solid #cccccc; ">
 	                  <h1 style="padding: 5px; margin-bottom: 20px;">매장 관리(관리자)</h1>
 	                <div class="row" >
-	                  <div id="cube" class="col-xs-6 col-sm-6" style=" border-top: 1px solid darkgray; background-color: #e04f5f;
-	                    color: white; cursor: pointer;" onclick="location.href='./management'">
+	                  <div id="cube" class="col-xs-6 col-sm-6" style=" border-top: 1px solid darkgray; cursor: pointer;" 
+	                  onclick="location.href='./management'">
 	                      <h4>
 	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
 	                              매장 등록 및 미등록
@@ -244,7 +244,8 @@
 	                  </div>
 	                  <div id="cube" class="col-xs-6 col-sm-6" style=" 
 	                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;
-	                        cursor: pointer;" onclick="location.href='./managementdel'">                                          
+	                        cursor: pointer;background-color: #e04f5f; color: white;" 
+	                    onclick="location.href='./managementdel'">                                          
 	                      <h4>
 	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
 	                              매장 해지
@@ -284,11 +285,16 @@
 							${bean.category }
 							</td>
 							<c:choose>
-							<c:when test="${bean.acceptState eq '0' }">
+							<c:when test="${(bean.acceptState eq '0') or (bean.acceptState eq null) or (bean.acceptState eq '') }">
 								<td class="text-center" style = "cursor:pointer;" onclick="javascript:content_view('${bean.id}')">
 								미등록
 								</td>
 							</c:when>
+							<c:otherwise>
+								<td class="text-center" style = "cursor:pointer;" onclick="javascript:content_view('${bean.id}')">
+								등록
+								</td>
+							</c:otherwise>
 							</c:choose>
 						</tr>	
 						</c:forEach>

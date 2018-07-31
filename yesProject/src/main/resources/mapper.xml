@@ -386,6 +386,26 @@
 	  	<delete id="manage_delete" parameterType="java.lang.String">
 	  		DELETE branch_info, branch_address FROM branch_info INNER JOIN branch_address WHERE branch_info.id=branch_address.id AND branch_address.id=#{id};
 	  	</delete>
+	  	
+	  	<!-- 전체 레코드 개수 조회 --> <!-- 전체 -->
+	  	<select id ="managementdel_writeGetCount" resultType="int">
+	  		select count(*) from mydb.branch_info where acceptState = 1
+	  	</select>
+	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
+  		<select id="managementdel_writeList" parameterType="hashmap" resultMap="branch_infoVo">
+  			select * from mydb.branch_info where acceptState = 1 order by id ASC limit #{offset}, #{noOfRecords}
+  		</select>
+  		<select id ="managementdel_writeInfoList" resultMap = "branch_infoVo">
+  			select * from mydb.branch_info where info = 1 order by branch_info.id ASC
+  		</select>
+	  	
+  		<update id="manage_delregistNum" parameterType="java.lang.String">
+  			UPDATE user_info SET registNum = null WHERE user_info.id = #{id}
+  		</update>
+  		
+	  	<delete id="manage_deldelete" parameterType="java.lang.String">
+	  		DELETE branch_info, branch_address FROM branch_info INNER JOIN branch_address WHERE branch_info.id=branch_address.id AND branch_address.id=#{id};
+	  	</delete>
   		
   			
   </mapper>

@@ -194,7 +194,6 @@ public class AdminController {
 		// 삭제
 		@RequestMapping(value="/admin/managedetail/{id}",method=RequestMethod.DELETE)
 		public String delete(@PathVariable String id) throws SQLException {
-			System.out.println(id);
 			adminService.manage_delete(id);
 			return "redirect:/admin/management";
 		}
@@ -205,5 +204,70 @@ public class AdminController {
 			adminService.manage_update(id);
 			adminService.manage_registNum(id);
 			return "redirect:/admin/management";
+		}
+		
+		// 고객 리스트 페이지
+		@RequestMapping("/admin/managementdel")
+		public String managedelpage(Model model, HttpServletRequest req) throws Exception {
+			int currentPageNo = 1;
+			int maxPost = 10;
+			
+			if(req.getParameter("pages") != null)
+				currentPageNo = Integer.parseInt(req.getParameter("pages"));
+			
+			Paging paging = new Paging(currentPageNo, maxPost);
+			
+			int offset = (paging.getCurrentPageNo() -1) * paging.getMaxPost();
+			
+			ArrayList<branch_infoVo> page = new ArrayList<branch_infoVo>();
+			page = (ArrayList<branch_infoVo>) adminService.managementdel_writeList(offset, paging.getMaxPost());
+			paging.setNumberOfRecords(adminService.managementdel_writeGetCount());
+			
+			paging.makePaging();
+			
+			
+			int i=0;
+			String branchID = null;
+			String ids[] = new String[page.size()];
+			String ids2[] = new String[page.size()];
+			String ids3[] = new String[page.size()];
+			String ids4[] = new String[page.size()];
+			for(i=0; i<page.size(); i++) {
+				branchID= page.get(i).getId();
+				branch_addressVo address = adminService.management_address(branchID);
+				ids[i] = address.getRoadAddress();
+				ids2[i] = address.getJibunAddress();
+				ids3[i] = address.getDetailAddress();
+				ids4[i] = address.getZoneCode();
+			}
+			
+			model.addAttribute("road",ids );
+			model.addAttribute("jibun", ids2);
+			model.addAttribute("detailaddress", ids3);
+			model.addAttribute("zonecode", ids4);
+			model.addAttribute("page", page);
+			model.addAttribute("paging",paging);
+			
+			return "./admin/managementdel";
+		}
+		
+		// 디테일 페이지로 이동
+		@RequestMapping(value="/admin/managedeldetail" ,method=RequestMethod.POST)
+		public String managedelDetailpage(String userID, Model model) throws Exception {
+			
+			model.addAttribute("bean", adminService.user_selectPage(userID));
+			model.addAttribute("branchinfo",adminService.user_branch_selectOne(userID));
+			model.addAttribute("branchaddress", adminService.user_branch_selectOne_address(userID));
+			
+			return "./admin/managedeldetail";
+		}
+		
+		// 해지
+		@RequestMapping(value="/admin/managedeldetail/{id}",method=RequestMethod.PUT)
+		public String deldelete(@PathVariable String id) throws SQLException {
+			adminService.manage_delregistNum(id);
+			adminService.manage_deldelete(id);
+			
+			return "redirect:/admin/managementdel";
 		}
 }

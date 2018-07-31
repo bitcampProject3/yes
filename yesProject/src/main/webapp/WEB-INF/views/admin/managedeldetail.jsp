@@ -2,8 +2,8 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>   
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -12,29 +12,19 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-	<script type="text/javascript">
-		function content_view(id){
-		var userID= id;
-		var form = document.createElement("form");
-		form.setAttribute("method", "post");
-		window.name = "/yes/admin/management";
-		form.target = "/yes/admin/management";
-		form.setAttribute("action", "/yes/admin/managedetail");
-		 
-		var Field = document.createElement("input");
-		Field.setAttribute("type", "hidden");
-		Field.setAttribute("name", "userID");
-		Field.setAttribute("value", userID);
-
-		form.appendChild(Field);
-		document.body.appendChild(form);
-		form.submit();
-			
-		}
-	
-	</script>
-
+        <script type="text/javascript">
+			$(function(){
+				$("input").hide();
+				$("#del").submit(function(e){
+					//e.preventDefault();
+					var result=window.confirm("해지 하시겠습니까?");
+					console.log(result);
+					if(result) return true;
+					return false;
+				});
+			});
+		</script>
+        
         <style>
             *{
                 font-family: 'Nanum Gothic', sans-serif;
@@ -178,10 +168,12 @@
             color: white;
             }
             
-            .ui-datepicker select.ui-datepicker-month {
-                width: auto;
+            a:hover,a:link,a:visited{
+            	text-decoration: none; color:black;
+
             }
         </style>
+        
         <%
         pageContext.setAttribute("cr", "\r");
         pageContext.setAttribute("cn", "\n");
@@ -189,6 +181,7 @@
         pageContext.setAttribute("sp", "&nbsp;");
         pageContext.setAttribute("br", "<br/>");
         %>
+        
     </head>
     <body>
         <div>
@@ -214,7 +207,6 @@
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
                         <li><a href="../yesnotice/">공지사항</a></li>
-
                       </ul>
                     </li>
                   </ul>
@@ -227,128 +219,186 @@
               </div><!-- /.container-fluid -->
             </nav>
             </div>
-            
-            
-            <div class="container"> 
-            
-              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px;border-top:1px solid #cccccc;border-left:1px solid #cccccc;border-right:1px solid #cccccc; ">
-	                  <h1 style="padding: 5px; margin-bottom: 20px;">매장 관리(관리자)</h1>
-	                <div class="row" >
-	                  <div id="cube" class="col-xs-6 col-sm-6" style=" border-top: 1px solid darkgray; background-color: #e04f5f;
-	                    color: white; cursor: pointer;" onclick="location.href='./management'">
-	                      <h4>
-	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-	                              매장 등록 및 미등록
-	                          </p>
-	                      </h4>
-	                  </div>
-	                  <div id="cube" class="col-xs-6 col-sm-6" style=" 
-	                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;
-	                        cursor: pointer;" onclick="location.href='./managementdel'">                                          
-	                      <h4>
-	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-	                              매장 해지
-	                          </p>
-	                      </h4>
-	                  </div>
-	                </div>
-	              </div>
-
-            
            
-                <table class="table table-board table table-hover" style="border-top: 1px solid #e04f5f;border-bottom: 2px solid #ddd;">
-                    <colgroup>
-                        <col width="15%">
-                        <col width="*">
-                        <col width="15%">
-                        <col width="15%">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                        	<th style="text-align:center">상호명</th>
-                            <th style="text-align: center">주소</th>
-                            <th style="text-align: center">분류</th>
-                            <th style="text-align: center">등록상태</th>
-                        </tr>
-                    </thead> 
-                    
-                        <c:forEach var="bean" items="${page}" varStatus="status">
-						<tr>			
-							<td class="text-center" style = "cursor:pointer;" onclick="javascript:content_view('${bean.id}')">
-							${bean.branchname}
-							</td>
-							<td class="text-center" style = "cursor:pointer;" onclick="javascript:content_view('${bean.id}')">
-							주소:[<b>(${zonecode[status.index] })</b>${road[status.index] }(${jibun[status.index] }), ${detailaddress[status.index]}]
-							</td>
-							<td class="text-center" style = "cursor:pointer;" onclick="javascript:content_view('${bean.id}')">
-							${bean.category }
-							</td>
-							<c:choose>
-							<c:when test="${bean.acceptState eq '0' }">
-								<td class="text-center" style = "cursor:pointer;" onclick="javascript:content_view('${bean.id}')">
-								미등록
-								</td>
-							</c:when>
-							</c:choose>
-						</tr>	
-						</c:forEach>
-						
-                </table>
+        <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left: 0px; padding-right: 0px;">
+           
+           <div class="container" style=" border-bottom: 1px solid; padding-left:0px; padding-right:0px; 
+               border-bottom-color: #e04f5f">
+                  <div class="col-md-6">
+					<h1 style="padding: 5px; margin-bottom: 20px; display: inline-block;">
+                        <a href="./userList" style="color: black;">회원 정보</a>
+                    </h1>
+                   </div>
+   				
+                  <div class="col-md-6">
+                  	<h1 style="padding: 5px; margin-bottom: 20px; display: inline-block;">
+                      <a href="./branchList" style="color: black;">사업자 정보</a>
+                  	</h1>
+                  </div>
+   
+            </div>
+            <div>
                 
- 	<c:choose>
-		<c:when test="${paging.numberOfRecords ne NULL and paging.numberOfRecords ne '' and paging.numberOfRecords ne 0}">
-		<div id="paginationUI" class="text-center" style="margin-left: 37px">
-			<ul class="pagination pagination-lg">
-				<c:if test="${paging.currentPageNo gt 5}">  											  <!-- 현재 페이지가 5보다 크다면(즉, 6페이지 이상이라면) -->
-					<li><a href="javascript:goPage(${paging.prevPageNo}, ${paging.maxPost})">이전</a></li> <!-- 이전페이지 표시 -->
-				</c:if>
-				<!-- 다른 페이지를 클릭하였을 시, 그 페이지의 내용 및 하단의 페이징 버튼을 생성하는 조건문-->
-					<c:forEach var="i" begin="${paging.startPageNo}" end="${paging.endPageNo}" step="1"> 
-		            <c:choose>
-		                <c:when test="${i eq paging.currentPageNo}"> 
-		                      <li class="active"><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> <!-- 1페이지부터 10개씩 뽑아내고, 1,2,3페이지순으로 나타내라-->
-		                </c:when>
-		                	<c:otherwise>
-		                    <li><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> 
-							</c:otherwise>
-					</c:choose>
-					</c:forEach>
-			
-				<!-- 소수점 제거 =>-->
-				<fmt:parseNumber var="currentPage" integerOnly="true" value="${(paging.currentPageNo-1)/5}"/>
-				<fmt:parseNumber var="finalPage" integerOnly="true" value="${(paging.finalPageNo-1)/5}"/>
-					
-				<c:if test="${currentPage < finalPage}"> <!-- 현재 페이지가 마지막 페이지보다 작으면 '다음'을 표시한다. -->
-					<li><a href="javascript:goPage(${paging.nextPageNo}, ${paging.maxPost})">다음</a></li>
-				</c:if> 
-			</ul>
-		</div>
-		</c:when>
-		</c:choose>
+            <div class="col-md-6" style="padding-left: 40px; padding-right: 40px;">
+                <header style="padding-top: 15px">
+                    <h4><b>이름 : ${bean.name}</b></h4></header>
+                    <br/>
+                <div>
+                   <section style="width: 100%; padding-bottom: 30px">
+                   <article>     
+                    <tr>
+                        <td>
+                            <b>닉네임 : <span>${bean.nickname}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>아이디 : <span>${bean.id}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>이메일 : <span>${bean.email}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>핸드폰 번호 : <span>${bean.phoneNum}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>비밀번호 질문 : <span>${bean.pwQuestion}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>생년월일 : <span>${bean.birthDate}</span></b>
+                        </td>
+                    </tr>        
+                   </article>
+                   </section>
+                </div>
+            </div>
+            <div class="col-md-6" style="padding-left: 40px; padding-right: 40px;">
+                <header style="padding-top: 15px">
+                    <h4><b>상호명 : ${branchinfo.branchname}</b></h4></header>
+                    <br/>
+                <div>
+                   <section style="width: 100%; padding-bottom: 30px">
+                   <article>     
+                    <tr>
+                        <td>
+                            <b>영업일 : <span>${branchinfo.opDate}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>영업 시간 : <span>${branchinfo.opTime}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>쉬는 시간 : <span>${branchinfo.breakTime}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>가게 전화번호 : <span>${branchinfo.phoneNum}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>카테고리 : <span>${branchinfo.category}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>최대 테이블 : <span>${branchinfo.maxTable}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>평점 : <span>${branchinfo.score}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>현재상태 : <span>${branchinfo.state}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>주소 : <span>(${branchaddress.zoneCode })${branchaddress.roadAddress}(${branchaddress.jibunAddress}), ${branchaddress.detailAddress}</span></b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td>
+                            <b>등록상태 : 
+                            <span>
+                            	<c:if test="${(branchinfo.acceptState ne '0') or (branchinfo.acceptState ne null) or (branchinfo.accept ne '') }">
+									등록                            	
+                            	</c:if>
+                            </span>
+                            </b>
+                        </td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    
+       
+                   </article>
+                   </section>
+                </div>
+                
+            </div>
+            </div> 
+            </div>      
+                
+            <div class="container" style="margin-top: 10px;">
+              
+                <div class="huge-top">
+                    <button class="btn btn-normal pull-right" style="margin-bottom: 10px;margin-left:10px;" onclick="history.back(1)" >
+                       <span>목록으로</span>
+                    </button>
 
-		<script>
-			function goPage(pages, lines) {
-				location.href = '?' + "pages=" + pages;
-			}
-		</script>
-		<div class="text-center">
-			<div class="col-lg-4"
-				style="float: none; margin: auto; width: 373px;">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="검색어를 입력하세요">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button"
-							style="color: #e04f5f">
-							<span class="glyphicon glyphicon-search"> </span>
-						</button>
-					</span>
-				</div>
-				<!-- /input-group -->
-			</div>
-			<!-- /.col-lg-6 -->
-		</div>
-	</div> 
-	  
-               
+                    <form method="post" id="del" style="display:inline;" action="../admin/managedeldetail/${bean.id }">
+						<input type="hidden" name="_method" value="put"/>
+						<input type="hidden" name="id" value="${bean.id }"/>
+                    <button class="btn btn-normal pull-right delete" style="margin-bottom: 10px" type="submit" >
+                       <span>해지</span>
+                    </button>
+                    </form>
+                
+            </div>
+
     </body>
 </html>

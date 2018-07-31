@@ -68,6 +68,14 @@ public class AdminService {
 		return adminDao.management_address(id);
 	}
 	
+	// ∆‰¿Ã¬° √≥∏Æ
+		public List<branch_infoVo> managementdel_writeList(int offset, int noOfRecords) throws SQLException {
+			return adminDao.managementdel_writeList(offset, noOfRecords);
+		}
+		
+		public int managementdel_writeGetCount() throws Exception {
+			return adminDao.managementdel_writeGetCount();
+		}
 	//
 	public void manage_update(String id) throws SQLException {
 		adminDao.manage_update(id);
@@ -77,6 +85,13 @@ public class AdminService {
 	}
 	public void manage_delete(String id) throws SQLException {
 		adminDao.manage_delete(id);
+	}
+	
+	public void manage_delregistNum(String id) throws SQLException {
+		adminDao.manage_delregistNum(id);
+	}
+	public void manage_deldelete(String id) throws SQLException {
+		adminDao.manage_deldelete(id);
 	}
 	
 	

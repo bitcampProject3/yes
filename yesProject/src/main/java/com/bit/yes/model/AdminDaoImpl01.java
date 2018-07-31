@@ -153,4 +153,37 @@ public class AdminDaoImpl01 implements AdminDao {
 		return sqlSession.update("yes.manage_registNum", id);
 	}
 
+	@Override
+	public int manage_delregistNum(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.update("yes.manage_delregistNum", id);
+	}
+
+	@Override
+	public int manage_deldelete(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("yes.manage_deldelete", id);
+	}
+
+	@Override
+	public List<branch_infoVo> managementdel_writeList(int offset, int noOfRecords) throws SQLException {
+		List<branch_infoVo> managementdel_writeList = new ArrayList<branch_infoVo>();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", offset);
+		params.put("noOfRecords", noOfRecords);
+		
+		managementdel_writeList = sqlSession.selectList("managementdel_writeList", params);
+		this.noOfRecords = sqlSession.selectOne("managementdel_writeGetCount");
+		
+		return managementdel_writeList;
+	}
+
+	@Override
+	public int managementdel_writeGetCount() throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("yes.managementdel_writeGetCount");
+	}
+
 }

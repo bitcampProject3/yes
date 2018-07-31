@@ -257,7 +257,7 @@
                border-bottom: 1px solid #CCCCCC;"
             onclick="location.href='./management'">
             
-                <h2 style="margin-top:0px;margin-bottom: 0px;">매장 등록(승인 및 해지), 매장 정보 수정 </h2>          
+                <h2 style="margin-top:0px;margin-bottom: 0px;">매장 등록(승인 및 해지) </h2>          
            
             </div>   
             </div>
