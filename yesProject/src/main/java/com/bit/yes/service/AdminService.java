@@ -1,13 +1,13 @@
 package com.bit.yes.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.yes.model.AdminDao;
-import com.bit.yes.model.entity.NoticeVo;
 import com.bit.yes.model.entity.UserVo;
 import com.bit.yes.model.entity.branch_addressVo;
 import com.bit.yes.model.entity.branch_infoVo;
@@ -31,31 +31,45 @@ public class AdminService {
 	}
 	
 	
-	// ÆäÀÌÂ¡ Ã³¸®
-	public List<UserVo> allwriteList(int alloffset, int allnoOfRecords) throws SQLException {
-		return adminDao.allwriteList(alloffset, allnoOfRecords);
+	// ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
+	public List<UserVo> allwriteList(HashMap<String, Object> params) throws SQLException {
+		return adminDao.allwriteList(params);
 	}
 	
 	public int allwriteGetCount() throws Exception {
 		return adminDao.allwriteGetCount();
 	}
-	// ÆäÀÌÂ¡ Ã³¸®
-	public List<UserVo> userwriteList(int useroffset, int usernoOfRecords) throws SQLException {
-		return adminDao.userwriteList(useroffset, usernoOfRecords);
+	public int allwriteGetCount(HashMap<String, Object> params) throws Exception {
+		return adminDao.allwriteGetCount(params);
+	}
+	// ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
+//	int useroffset, int usernoOfRecords
+	public List<UserVo> userwriteList(HashMap<String, Object> params) throws SQLException {
+		return adminDao.userwriteList(params);
 	}
 	
 	public int userwriteGetCount() throws Exception {
 		return adminDao.userwriteGetCount();
 	}
-	// ÆäÀÌÂ¡ Ã³¸®
-	public List<UserVo> branchwriteList(int branchoffset, int branchnoOfRecords) throws SQLException {
-		return adminDao.branchwriteList(branchoffset, branchnoOfRecords);
+	
+	public int userwriteGetCount(HashMap<String, Object> params) throws SQLException {
+		return adminDao.userwriteGetCount(params);
+	}
+	// ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
+//	int branchoffset, int branchnoOfRecords
+	public List<UserVo> branchwriteList(HashMap<String, Object> params) throws SQLException {
+		return adminDao.branchwriteList(params);
 	}
 	
 	public int branchwriteGetCount() throws Exception {
 		return adminDao.branchwriteGetCount();
 	}
-	// ÆäÀÌÂ¡ Ã³¸®
+	
+	public int branchwriteGetCount(HashMap<String, Object> params) throws SQLException {
+		return adminDao.branchwriteGetCount(params);
+	}
+	
+	// ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
 	public List<branch_infoVo> management_writeList(int offset, int noOfRecords) throws SQLException {
 		return adminDao.management_writeList(offset, noOfRecords);
 	}
@@ -68,7 +82,7 @@ public class AdminService {
 		return adminDao.management_address(id);
 	}
 	
-	// ÆäÀÌÂ¡ Ã³¸®
+	// ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
 		public List<branch_infoVo> managementdel_writeList(int offset, int noOfRecords) throws SQLException {
 			return adminDao.managementdel_writeList(offset, noOfRecords);
 		}

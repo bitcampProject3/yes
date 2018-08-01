@@ -72,7 +72,7 @@
                     color: black;
                 }
             }
-            @media (max-width: 1110px) {
+            @media (max-width: 1190px) {
                 li > a{
                     font-size: 20px;
                 }

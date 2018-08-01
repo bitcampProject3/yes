@@ -200,7 +200,6 @@
 	                        <c:when test="${id eq 'admin'}"> 
 	                        </c:when>
 	                        <c:otherwise>
-	                        	<li><a href="../yesC_cs/">고객 상담</a></li>
 	                        </c:otherwise>
                         </c:choose>
                         

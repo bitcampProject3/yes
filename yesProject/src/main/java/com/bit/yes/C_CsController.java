@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,10 +42,12 @@ public class C_CsController {
 			int currentPageNo = 1;
 			int maxPost = 10;
 			
+			HashMap<String, Object> params = new HashMap<String, Object>();
+			
 			// 로그인 했을 경우 들어오는 세션 id값 
 			// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
 			// admin이 관리자이여야함
-			String clientID = "ghdlf22"; 
+			String clientID = "ghdlf2"; 
 
 			
 			if(req.getParameter("pages") != null)
@@ -54,12 +58,72 @@ public class C_CsController {
 			int offset = (paging.getCurrentPageNo() -1) * paging.getMaxPost();
 			
 			ArrayList<C_CsVo> page = new ArrayList<C_CsVo>();
-			page = (ArrayList<C_CsVo>) csService.writeList(offset, paging.getMaxPost(), clientID);
-			paging.setNumberOfRecords(csService.writeGetCount(clientID));
+			params.put("offset", offset);
+			params.put("noOfRecords", paging.getMaxPost());
+			params.put("clientID", clientID);
+			
+			page = (ArrayList<C_CsVo>) csService.writeList(params);
+			paging.setNumberOfRecords(csService.writeGetCount(params));
 			
 			paging.makePaging();
+			
 			String registNum = csService.user_selectOne(clientID).getRegistNum();
 			model.addAttribute("registNum", registNum);
+			model.addAttribute("page", page);
+			model.addAttribute("paging",paging);
+			
+			return "./clientCounsel/yesC_cs";
+
+		}
+		
+		@RequestMapping(value="/C_Cs_search")
+		public String C_CsSearchList(Model model, HttpServletRequest request) throws Exception {
+			
+			HttpSession session = request.getSession();
+			HashMap<String, Object> params = new HashMap<String, Object>();
+			System.out.println("list(post)");
+			// 로그인 했을 경우 들어오는 세션 id값 
+			// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
+			// admin이 관리자이여야함
+			String clientID = "ghdlf2"; 
+			
+			int currentPageNo = 1;
+			int maxPost = 10;
+			
+			String category = request.getParameter("category");
+			String keyword = request.getParameter("keyword");
+			
+			
+			if(request.getParameter("pages") != null) {
+				System.out.println("pages is null");
+				currentPageNo = Integer.parseInt(request.getParameter("pages"));
+			}
+			
+			if(category == null && keyword == null) {
+				category = (String) session.getAttribute("category");
+				keyword = (String) session.getAttribute("keyword");
+			} else {
+				/*req.setAttribute("category", category);
+				req.setAttribute("keyword", keyword);*/
+				session.setAttribute("category", category);
+				session.setAttribute("keyword", keyword);
+			}
+			
+			Paging paging = new Paging(currentPageNo, maxPost);
+			int offset = (paging.getCurrentPageNo() -1) * paging.getMaxPost();
+			ArrayList<C_CsVo> page = new ArrayList<C_CsVo>();
+			
+			params.put("offset", offset);
+			params.put("noOfRecords", paging.getMaxPost());
+			params.put("keyword", keyword);
+			params.put("category", category);
+			params.put("clientID", clientID);
+			
+			page = (ArrayList<C_CsVo>) csService.writeList(params);
+			paging.setNumberOfRecords(csService.writeGetCount(params));
+			
+			paging.makePaging();
+			model.addAttribute("id",clientID);
 			model.addAttribute("page", page);
 			model.addAttribute("paging",paging);
 			
@@ -73,7 +137,7 @@ public class C_CsController {
 			// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
 			// id값을 통해서 id에 해당하는 게시글만 출력
 			// admin이 관리자이여야함
-			String clientID = "ghdlf22"; 
+			String clientID = "ghdlf2"; 
 			
 			
 			String registNum = csService.user_selectOne(clientID).getRegistNum();
@@ -114,7 +178,7 @@ public class C_CsController {
 			// 로그인 했을 경우 들어오는 세션 id값 
 			// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
 			// admin이 관리자이여야함
-			id="ghdlf22"; 
+			id="ghdlf2"; 
 			
 			String registNum = csService.user_selectOne(id).getRegistNum();
 			

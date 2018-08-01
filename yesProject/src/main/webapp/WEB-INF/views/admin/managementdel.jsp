@@ -84,7 +84,7 @@
                     color: black;
                 }
             }
-            @media (max-width: 1110px) {
+            @media (max-width: 1190px) {
                 li > a{
                     font-size: 20px;
                 }
@@ -337,22 +337,6 @@
 				location.href = '?' + "pages=" + pages;
 			}
 		</script>
-		<div class="text-center">
-			<div class="col-lg-4"
-				style="float: none; margin: auto; width: 373px;">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="검색어를 입력하세요">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button"
-							style="color: #e04f5f">
-							<span class="glyphicon glyphicon-search"> </span>
-						</button>
-					</span>
-				</div>
-				<!-- /input-group -->
-			</div>
-			<!-- /.col-lg-6 -->
-		</div>
 	</div> 
 	  
                

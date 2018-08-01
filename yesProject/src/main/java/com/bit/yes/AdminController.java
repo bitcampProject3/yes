@@ -2,8 +2,10 @@ package com.bit.yes;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,26 +30,34 @@ public class AdminController {
 	}
 		@RequestMapping("/admin/")
 		public String adminpage() {
-			
 			return "./admin/admin";
 		}
 	
-	// ¸Ç Ã³À½ µé¾î¿Ã ¶§ ¸ðµç È¸¿ø ¸®½ºÆ® ÆäÀÌÁö
-	@RequestMapping("/admin/userAllList")
+	// ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	@RequestMapping(value="/admin/userAllList")
 	public String userAllListpage(Model model, HttpServletRequest req) throws Exception {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
 		int currentPageNo = 1;
 		int maxPost = 10;
+//		
+
 		
-		if(req.getParameter("allpages") != null)
-			currentPageNo = Integer.parseInt(req.getParameter("allpages"));
+		if(req.getParameter("allPages") != null)
+			currentPageNo = Integer.parseInt(req.getParameter("allPages"));
 		
 		Paging allpaging = new Paging(currentPageNo, maxPost);
 		
 		int alloffset = (allpaging.getCurrentPageNo() -1) * allpaging.getMaxPost();
 		
+		params.put("alloffset", alloffset);
+		params.put("allnoOfRecords", allpaging.getMaxPost());
+//		params.put("category", category);
+//		params.put("keyword", keyword);
+		
 		ArrayList<UserVo> allpage = new ArrayList<UserVo>();
-		allpage = (ArrayList<UserVo>) adminService.allwriteList(alloffset, allpaging.getMaxPost());
-		allpaging.setNumberOfRecords(adminService.allwriteGetCount());
+		allpage = (ArrayList<UserVo>) adminService.allwriteList(params);
+		allpaging.setNumberOfRecords(adminService.allwriteGetCount(params));
 		
 		allpaging.makePaging();
 		
@@ -57,22 +67,79 @@ public class AdminController {
 		return "./admin/userAllList";
 	}
 	
-	// °í°´ ¸®½ºÆ® ÆäÀÌÁö
-	@RequestMapping("/admin/userList")
-	public String userpage(Model model, HttpServletRequest req) throws Exception {
+	@RequestMapping(value="/admin/user_all_Search")
+	public String userAllSearchpage(Model model, HttpServletRequest req) throws Exception {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		HttpSession session = req.getSession();
 		int currentPageNo = 1;
 		int maxPost = 10;
 		
-		if(req.getParameter("userpages") != null)
-			currentPageNo = Integer.parseInt(req.getParameter("userpages"));
+		String category = req.getParameter("category");
+		String keyword = req.getParameter("keyword");
+		
+		System.out.println("category : " + category);
+		System.out.println("keyword : " + keyword);
+
+		
+		if(req.getParameter("allPages") != null)
+			currentPageNo = Integer.parseInt(req.getParameter("allPages"));
+		
+	      if(category == null && keyword == null) {
+	          category = (String) session.getAttribute("category");
+	          keyword = (String) session.getAttribute("keyword");
+	       } else {
+	          /*req.setAttribute("category", category);
+	          req.setAttribute("keyword", keyword);*/
+	          session.setAttribute("category", category);
+	          session.setAttribute("keyword", keyword);
+	       }
+		
+		Paging allpaging = new Paging(currentPageNo, maxPost);
+		
+		int alloffset = (allpaging.getCurrentPageNo() -1) * allpaging.getMaxPost();
+		
+		params.put("alloffset", alloffset);
+		params.put("allnoOfRecords", allpaging.getMaxPost());
+		params.put("category", category);
+		params.put("keyword", keyword);
+		
+		ArrayList<UserVo> allpage = new ArrayList<UserVo>();
+		allpage = (ArrayList<UserVo>) adminService.allwriteList(params);
+		allpaging.setNumberOfRecords(adminService.allwriteGetCount(params));
+		
+		allpaging.makePaging();
+		
+		model.addAttribute("page", allpage);
+		model.addAttribute("paging",allpaging);
+		
+		return "./admin/userAllList";
+	}
+	
+	
+	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	@RequestMapping("/admin/userList")
+	public String userpage(Model model, HttpServletRequest req) throws Exception {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		int currentPageNo = 1;
+		int maxPost = 10;
+		
+		
+		if(req.getParameter("userPages") != null)
+			currentPageNo = Integer.parseInt(req.getParameter("userPages"));
 		
 		Paging userpaging = new Paging(currentPageNo, maxPost);
 		
 		int useroffset = (userpaging.getCurrentPageNo() -1) * userpaging.getMaxPost();
 		
+		
 		ArrayList<UserVo> userpage = new ArrayList<UserVo>();
-		userpage = (ArrayList<UserVo>) adminService.userwriteList(useroffset, userpaging.getMaxPost());
-		userpaging.setNumberOfRecords(adminService.userwriteGetCount());
+		
+		params.put("useroffset", useroffset);
+		params.put("usernoOfRecords", userpaging.getMaxPost());
+		userpage = (ArrayList<UserVo>) adminService.userwriteList(params);
+		userpaging.setNumberOfRecords(adminService.userwriteGetCount(params));
 		
 		userpaging.makePaging();
 		
@@ -81,22 +148,77 @@ public class AdminController {
 		
 		return "./admin/userList";
 	}
-	// »ç¾÷ÀÚ(°í°´) ¸®½ºÆ® ÆäÀÌÁö
-	@RequestMapping("/admin/branchList")
-	public String branchpage(Model model, HttpServletRequest req) throws Exception {
+	
+	@RequestMapping(value="/admin/user_search")
+	public String userSearchpage(Model model, HttpServletRequest req) throws Exception {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		HttpSession session = req.getSession();
 		int currentPageNo = 1;
 		int maxPost = 10;
 		
-		if(req.getParameter("branchpages") != null)
-			currentPageNo = Integer.parseInt(req.getParameter("branchpages"));
+		String category = req.getParameter("category");
+		String keyword = req.getParameter("keyword");
+		
+		System.out.println("category : " + category);
+		System.out.println("keyword : " + keyword);
+
+		
+		if(req.getParameter("userPages") != null)
+			currentPageNo = Integer.parseInt(req.getParameter("userPages"));
+		
+	      if(category == null && keyword == null) {
+	          category = (String) session.getAttribute("category");
+	          keyword = (String) session.getAttribute("keyword");
+	       } else {
+	          /*req.setAttribute("category", category);
+	          req.setAttribute("keyword", keyword);*/
+	          session.setAttribute("category", category);
+	          session.setAttribute("keyword", keyword);
+	       }
+		
+		Paging allpaging = new Paging(currentPageNo, maxPost);
+		
+		int alloffset = (allpaging.getCurrentPageNo() -1) * allpaging.getMaxPost();
+		
+		params.put("useroffset", alloffset);
+		params.put("usernoOfRecords", allpaging.getMaxPost());
+		params.put("category", category);
+		params.put("keyword", keyword);
+		
+		ArrayList<UserVo> allpage = new ArrayList<UserVo>();
+		allpage = (ArrayList<UserVo>) adminService.userwriteList(params);
+		allpaging.setNumberOfRecords(adminService.userwriteGetCount(params));
+		
+		allpaging.makePaging();
+		
+		model.addAttribute("page", allpage);
+		model.addAttribute("paging",allpaging);
+		
+		return "./admin/userList";
+	}
+	
+	
+	// ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	@RequestMapping("/admin/branchList")
+	public String branchpage(Model model, HttpServletRequest req) throws Exception {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		int currentPageNo = 1;
+		int maxPost = 10;
+		System.out.println(req.getParameter("branchpages"));
+		if(req.getParameter("branchPages") != null)
+			currentPageNo = Integer.parseInt(req.getParameter("branchPages"));
 		
 		Paging branchpaging = new Paging(currentPageNo, maxPost);
 		
 		int branchoffset = (branchpaging.getCurrentPageNo() -1) * branchpaging.getMaxPost();
 		
+		params.put("branchoffset", branchoffset);
+		params.put("branchnoOfRecords", branchpaging.getMaxPost());
 		ArrayList<UserVo> branchpage = new ArrayList<UserVo>();
-		branchpage = (ArrayList<UserVo>) adminService.branchwriteList(branchoffset, branchpaging.getMaxPost());
-		branchpaging.setNumberOfRecords(adminService.branchwriteGetCount());
+		branchpage = (ArrayList<UserVo>) adminService.branchwriteList(params);
+		branchpaging.setNumberOfRecords(adminService.branchwriteGetCount(params));
 		
 		branchpaging.makePaging();
 		
@@ -106,8 +228,58 @@ public class AdminController {
 		return "./admin/branchList";
 	}
 	
-	//¸ðµç È¸¿ø ¸®½ºÆ®¿¡¼­ ÇØ´ç È¸¿ø Å¬¸¯½Ã Detail·Î ÀÌµ¿ µé¾î¿À´Â °ª POST 
-	//¿©±â¼­ registNumÀ» ÅëÇØ¼­ À¯ÀúÀÎÁö À¯Àú(°¡¸ÍÁ¡)ÀÎÁö ÆÇº°ÇØ¼­ ¼­·Î´Ù¸¥ °ªÀ» º¸³¿
+	
+	@RequestMapping(value="/admin/branch_search")
+	public String branchSearchpage(Model model, HttpServletRequest req) throws Exception {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		HttpSession session = req.getSession();
+		int currentPageNo = 1;
+		int maxPost = 10;
+		
+		String category = req.getParameter("category");
+		String keyword = req.getParameter("keyword");
+		
+		System.out.println("category : " + category);
+		System.out.println("keyword : " + keyword);
+
+		
+		if(req.getParameter("branchPages") != null)
+			currentPageNo = Integer.parseInt(req.getParameter("branchPages"));
+		
+	      if(category == null && keyword == null) {
+	          category = (String) session.getAttribute("category");
+	          keyword = (String) session.getAttribute("keyword");
+	       } else {
+	          /*req.setAttribute("category", category);
+	          req.setAttribute("keyword", keyword);*/
+	          session.setAttribute("category", category);
+	          session.setAttribute("keyword", keyword);
+	       }
+		
+		Paging allpaging = new Paging(currentPageNo, maxPost);
+		
+		int alloffset = (allpaging.getCurrentPageNo() -1) * allpaging.getMaxPost();
+		
+		params.put("branchoffset", alloffset);
+		params.put("branchnoOfRecords", allpaging.getMaxPost());
+		params.put("category", category);
+		params.put("keyword", keyword);
+		
+		ArrayList<UserVo> allpage = new ArrayList<UserVo>();
+		allpage = (ArrayList<UserVo>) adminService.branchwriteList(params);
+		allpaging.setNumberOfRecords(adminService.branchwriteGetCount(params));
+		
+		allpaging.makePaging();
+		
+		model.addAttribute("page", allpage);
+		model.addAttribute("paging",allpaging);
+		
+		return "./admin/branchList";
+	}
+	
+	//ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ È¸ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ Detailï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ POST 
+	//ï¿½ï¿½ï¿½â¼­ registNumï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ ï¿½Çºï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½Î´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value="/admin/AllListDetail" ,method=RequestMethod.POST)
 	public String userAllListDetailpage(String choice, String userID, Model model) throws Exception {
 		
@@ -135,7 +307,7 @@ public class AdminController {
 		return "./admin/AllListDetail";
 	}
 
-	// °ü¸®ÀÚ ¸ÅÀå ¸®½ºÆ® ÆäÀÌÁö
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		@RequestMapping("/admin/management")
 		public String managementpage(Model model, HttpServletRequest req) throws Exception {
 			int currentPageNo = 1;
@@ -180,7 +352,7 @@ public class AdminController {
 			return "./admin/management";
 		}
 		
-		// µðÅ×ÀÏ ÆäÀÌÁö·Î ÀÌµ¿
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 		@RequestMapping(value="/admin/managedetail" ,method=RequestMethod.POST)
 		public String manageDetailpage(String userID, Model model) throws Exception {
 			
@@ -191,14 +363,14 @@ public class AdminController {
 			return "./admin/managedetail";
 		}
 		
-		// »èÁ¦
+		// ï¿½ï¿½ï¿½ï¿½
 		@RequestMapping(value="/admin/managedetail/{id}",method=RequestMethod.DELETE)
 		public String delete(@PathVariable String id) throws SQLException {
 			adminService.manage_delete(id);
 			return "redirect:/admin/management";
 		}
 		
-		// ½Â³«
+		// ï¿½Â³ï¿½
 		@RequestMapping(value="/admin/managedetail/{id}",method=RequestMethod.PUT )
 		public String edit(String id) throws SQLException {
 			adminService.manage_registNum(id);
@@ -206,7 +378,7 @@ public class AdminController {
 			return "redirect:/admin/management";
 		}
 		
-		// °í°´ ¸®½ºÆ® ÆäÀÌÁö
+		// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		@RequestMapping("/admin/managementdel")
 		public String managedelpage(Model model, HttpServletRequest req) throws Exception {
 			int currentPageNo = 1;
@@ -251,7 +423,7 @@ public class AdminController {
 			return "./admin/managementdel";
 		}
 		
-		// µðÅ×ÀÏ ÆäÀÌÁö·Î ÀÌµ¿
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 		@RequestMapping(value="/admin/managedeldetail" ,method=RequestMethod.POST)
 		public String managedelDetailpage(String userID, Model model) throws Exception {
 			
@@ -262,7 +434,7 @@ public class AdminController {
 			return "./admin/managedeldetail";
 		}
 		
-		// ÇØÁö
+		// ï¿½ï¿½ï¿½ï¿½
 		@RequestMapping(value="/admin/managedeldetail/{id}",method=RequestMethod.PUT)
 		public String deldelete(@PathVariable String id) throws SQLException {
 			adminService.manage_deldelete(id);

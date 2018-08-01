@@ -1,6 +1,7 @@
 package com.bit.yes.model;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import com.bit.yes.model.entity.ImageVo;
@@ -23,10 +24,13 @@ public interface NoticeDao {
 	
 	int deleteOne(int index) throws SQLException;
 	
-	List<NoticeVo> writeList(int offset, int noOfRecords) throws SQLException;
+	List<NoticeVo> writeList(HashMap<String, Object> params) throws SQLException;
+	//List<NoticeVo> writeList(int offset, int noOfRecords) throws SQLException;
 	
 	int writeGetCount() throws SQLException;
 
+	int writeGetCount(HashMap<String, Object> params) throws SQLException;
+	
 	List<ImageVo> noticeSubImage(int index) throws SQLException;
 	
 	int noticeImgUpload(ImageVo bean) throws SQLException;

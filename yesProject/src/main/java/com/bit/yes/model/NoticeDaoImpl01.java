@@ -61,25 +61,42 @@ public class NoticeDaoImpl01 implements NoticeDao {
 	}
 
 	@Override
-	public List<NoticeVo> writeList(int offset, int noOfRecords) throws SQLException {
+	public List<NoticeVo> writeList(HashMap<String, Object> params) throws SQLException {
+		
 		List<NoticeVo> writeList = new ArrayList<NoticeVo>();
 		
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		
-		params.put("offset", offset);
-		params.put("noOfRecords", noOfRecords);
-		
 		writeList = sqlSession.selectList("writeList", params);
+		
 		this.noOfRecords = sqlSession.selectOne("writeGetCount");
 		
 		return writeList;
 	}
+	
+//	@Override
+//	public List<NoticeVo> writeList(int offset, int noOfRecords) throws SQLException {
+//		List<NoticeVo> writeList = new ArrayList<NoticeVo>();
+//		
+//		HashMap<String, Object> params = new HashMap<String, Object>();
+//		
+//		params.put("offset", offset);
+//		params.put("noOfRecords", noOfRecords);
+//		
+//		writeList = sqlSession.selectList("writeList", params);
+//		this.noOfRecords = sqlSession.selectOne("writeGetCount");
+//		
+//		return writeList;
+//	}
 
 	@Override
 	public int writeGetCount() throws SQLException {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("writeGetCount");
 		
+	}
+	
+	public int writeGetCount(HashMap<String, Object> params) throws SQLException {
+		
+		return sqlSession.selectOne("writeGetCount", params);
 	}
 	
 	///////////////¾÷·Îµå

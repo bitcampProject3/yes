@@ -1,6 +1,7 @@
 package com.bit.yes.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +49,20 @@ public class NoticeService {
 	}
 	
 	// 其捞隆 贸府
-	public List<NoticeVo> writeList(int offset, int noOfRecords) throws SQLException {
-		return noticeDao.writeList(offset, noOfRecords);
+	public List<NoticeVo> writeList(HashMap<String, Object> params) throws SQLException {
+		return noticeDao.writeList(params);
 	}
+	
+//	public List<NoticeVo> writeList(int offset, int noOfRecords) throws SQLException {
+//		return noticeDao.writeList(offset, noOfRecords);
+//	}
 	
 	public int writeGetCount() throws Exception {
 		return noticeDao.writeGetCount();
+	}
+	
+	public int writeGetCount(HashMap<String, Object> params) throws Exception {
+		return noticeDao.writeGetCount(params);
 	}
 	
 	// 诀肺靛 贸府

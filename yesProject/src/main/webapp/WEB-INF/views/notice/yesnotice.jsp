@@ -173,7 +173,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="../"><img src="../resources/imgs/logo_top2.png"/></a>
+                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="/yes/"><img src="/yes/resources/imgs/logo_top2.png"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -184,13 +184,13 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="../yesnotice/">공지사항</a></li>
+                        <li><a href="/yes/yesnotice/">공지사항</a></li>
                         <li role="separator" class="divider"></li>
                         <c:choose>
 	                        <c:when test="${id eq 'admin'}"> 
 	                        </c:when>
 	                        <c:otherwise>
-	                        	<li><a href="../yesC_cs/">고객 상담</a></li>
+	                        	<li><a href="/yes/yesC_cs/">고객 상담</a></li>
 	                        </c:otherwise>
                         </c:choose>
                         
@@ -198,7 +198,7 @@
 	                        <c:when test="${(registNum eq '0' ) or (registNum eq null) or (registNum eq ' ')}">
 	                        </c:when>
 	                        <c:otherwise>
-	                      	  	<li><a href="../yesS_cs/">사업자 상담</a></li>
+	                      	  	<li><a href="/yes/yesS_cs/">사업자 상담</a></li>
 	                        </c:otherwise>
                         </c:choose>
                       </ul>
@@ -222,7 +222,7 @@
 	                  <h1 style="padding: 5px; margin-bottom: 20px;">공지사항</h1>
 	                <div class="row" >
 	                  <div id="cube" class="col-xs-9 col-sm-9" style=" width:100%;border-top: 1px solid darkgray; background-color: #e04f5f;
-	                    color: white; cursor: pointer;" onclick="location.href='../yesnotice/'">
+	                    color: white; cursor: pointer;" onclick="location.href='/yes/yesnotice/'">
 	                      <h4>
 	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
 	                              공지사항
@@ -237,7 +237,7 @@
 	                  <h1 style="padding: 5px; margin-bottom: 20px;">공지사항</h1>
 	                <div class="row" >
 	                  <div id="cube" class="col-xs-6 col-sm-6" style=" border-top: 1px solid darkgray; background-color: #e04f5f;
-	                    color: white; cursor: pointer;" onclick="location.href='../yesnotice/'">
+	                    color: white; cursor: pointer;" onclick="location.href='/yes/yesnotice/'">
 	                      <h4>
 	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
 	                              공지사항
@@ -246,7 +246,7 @@
 	                  </div>
 	                  <div id="cube" class="col-xs-6 col-sm-6" style=" 
 	                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;
-	                        cursor: pointer;" onclick="location.href='../yesC_cs/'">                                          
+	                        cursor: pointer;" onclick="location.href='/yes/yesC_cs/'">                                          
 	                      <h4>
 	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
 	                              고객 상담
@@ -261,7 +261,7 @@
 	                  <h1 style="padding: 5px; margin-bottom: 20px;">공지사항</h1>
 	                <div class="row" >
 	                  <div id="cube" class="col-xs-6 col-sm-4" style=" border-top: 1px solid darkgray; background-color: #e04f5f;
-	                    color: white; cursor: pointer;" onclick="location.href='../yesnotice/'">
+	                    color: white; cursor: pointer;" onclick="location.href='/yes/yesnotice/'">
 	                      <h4>
 	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
 	                              공지사항
@@ -270,7 +270,7 @@
 	                  </div>
 	                  <div id="cube" class="col-xs-6 col-sm-4" style=" 
 	                     border-top:1px solid darkgray; border-right:1px solid darkgray; border-left:1px solid darkgray;
-	                        cursor: pointer;" onclick="location.href='../yesC_cs/'">                                          
+	                        cursor: pointer;" onclick="location.href='/yes/yesC_cs/'">                                          
 	                      <h4>
 	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
 	                              고객 상담
@@ -278,7 +278,7 @@
 	                      </h4>
 	                  </div>
 	                   <div id="cube" class="col-xs-6 col-sm-4" style=" 
-	                   border-top: 1px solid darkgray ;cursor: pointer;" onclick="location.href='../yesS_cs/'">
+	                   border-top: 1px solid darkgray ;cursor: pointer;" onclick="location.href='/yes/yesS_cs/'">
 	                      <h4>
 	                          <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
 	                              사업자 상담
@@ -310,13 +310,13 @@
                     <c:forEach var="bean" items="${page}">
 
 						<tr>
-							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
+							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='/yes/yesnotice/${bean.index }' ">
 							${bean.index}</td>
-							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
+							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='/yes/yesnotice/${bean.index }' ">
 							${bean.title}</td>
-							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
+							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='/yes/yesnotice/${bean.index }' ">
 							${bean.writer}</td>
-							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='./${bean.index }' ">
+							<td class="text-center" style = "cursor:pointer;" onClick = " location.href='/yes/yesnotice/${bean.index }' ">
 							${bean.calendar}</td>
 						</tr>
 		
@@ -369,27 +369,41 @@
 		</c:when>
 		</c:choose>
 
-<script>
-function goPage(pages, lines) {
-    location.href = '?' + "pages=" + pages;
-}
-</script> 
+			<script>
+			function goPage(pages, lines) {
+				location.href = '?' + "pages=" + pages;
+			}
+			</script> 
  
  
-            <div class="text-center">
-                
-            <div class="col-lg-4" style="float: none;margin: auto; width: 373px;">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="검색어를 입력하세요">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="color: #e04f5f">
-                    <span class="glyphicon glyphicon-search">
-                    </span>
-                    </button>
-                  </span>
-                </div><!-- /input-group -->
-            </div><!-- /.col-lg-6 -->
-            </div>
+            <div class="text-center" style="display:block;">
+
+			<div
+				style="float: none; margin: auto; width: 420px;">
+				<form method="post" action="/yes/notice_search">
+				<div style="padding-left:0px;padding-right:0px;float:left;width:22%">
+					<select class="form-control" name="category">
+						<option value="total">전체</option>
+						<option value="title">제목</option>
+						<option value="writer">글쓴이</option>
+					</select> 
+				</div>
+				<div style="padding-left:0px;padding-right:0px;float:left;width:58%">
+					<input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요">
+				</div>
+				<div>
+					<span class="input-group-btn" style="float:left;">
+						<button class="btn btn-default" type="submit"
+							style="color: #e04f5f;width:auto;padding-bottom:9px; padding-top:9px;">
+							<span class="glyphicon glyphicon-search"> </span>
+						</button>
+					</span>
+				</div>	
+				</form>
+				<!-- /input-group -->
+			</div>
+			<!-- /.col-lg-6 -->
+		</div>
             </div>      
       
                 

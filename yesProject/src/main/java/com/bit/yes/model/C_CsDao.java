@@ -1,6 +1,7 @@
 package com.bit.yes.model;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import com.bit.yes.model.entity.C_CsVo;
@@ -15,13 +16,16 @@ public interface C_CsDao {
 	
 	int insertOne(C_CsVo bean) throws SQLException;
 	
-	List<C_CsVo> writeList(int offset, int noOfRecords,String clientID) throws SQLException;
+	//List<C_CsVo> writeList(int offset, int noOfRecords,String clientID) throws SQLException;
+	List<C_CsVo> writeList(HashMap<String, Object> params) throws SQLException;
 	
 	branch_addressVo c_selectAddress(String id) throws SQLException;
 	
 	List<branch_infoVo> reserveList(String id) throws SQLException;
 
 	List<branch_infoVo> reserveOne(String id) throws SQLException;
+	
+	int writeGetCount(HashMap<String, Object> params) throws SQLException;
 	
 	int writeGetCount(String clientID) throws SQLException;
 	

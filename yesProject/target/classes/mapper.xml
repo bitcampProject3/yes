@@ -58,35 +58,108 @@
 	<!-- 전체 회원리스트 쿼리문 -->
 	
 	<!-- 전체 레코드 개수 조회 --> <!-- 전체 -->
-	  	<select id ="all_writeGetCount" resultType="int">
+	  	<select id ="all_writeGetCount" parameterType="hashmap" resultType="int">
 	  		select count(*) from mydb.user_info 
+	  		  <choose>
+	  			<when test="category == 'name'">
+	  				where name like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "nickname"'>
+	  				where nickname like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "email"'>
+	  				where email like '%${keyword}%'
+	  			</when>
+	  		</choose>
 	  	</select>
 	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
   		<select id="all_writeList" parameterType="hashmap" resultMap="UserVo">
-  			select * from mydb.user_info order by NAME,BIRTHDATE ASC limit #{alloffset}, #{allnoOfRecords}
+  			select * from mydb.user_info
+  			<choose>
+	  			<when test="category == 'name'">
+	  				where name like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "nickname"'>
+	  				where nickname like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "email"'>
+	  				where email like '%${keyword}%'
+	  			</when>
+	  		</choose>
+  			 order by NAME,BIRTHDATE ASC limit #{alloffset}, #{allnoOfRecords}
   		</select>
   		<select id ="all_writeInfoList" resultMap = "UserVo">
   			select * from mydb.user_info where info = 1 order by user_info.name,user_info.birthDate ASC
   		</select>
+  		
+  		
 	<!-- 전체 레코드 개수 조회 --> <!-- 고객만 -->
-	  	<select id ="user_writeGetCount" resultType="int">
-	  		select count(*) from mydb.user_info where registNum is null
+	  	<select id ="user_writeGetCount" parameterType="hashmap" resultType="int">
+	  		select count(*) from mydb.user_info where registNum = 0  		  
+	  		<choose>
+	  			<when test="category == 'name'">
+	  				and name like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "nickname"'>
+	  				and nickname like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "email"'>
+	  				and email like '%${keyword}%'
+	  			</when>
+	  		</choose> 
+	  		
 	  	</select>
 	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
   		<select id="user_writeList" parameterType="hashmap" resultMap="UserVo">
-  			select * from mydb.user_info where registNum is null order by NAME,BIRTHDATE ASC limit #{useroffset}, #{usernoOfRecords}
+  			select * from mydb.user_info where registNum = 0
+  			<choose>
+	  			<when test="category == 'name'">
+	  				and name like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "nickname"'>
+	  				and nickname like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "email"'>
+	  				and email like '%${keyword}%'
+	  			</when>
+	  		</choose>
+  			  order by NAME,BIRTHDATE ASC limit #{useroffset}, #{usernoOfRecords}
   		</select>
   		<select id ="user_writeInfoList" resultMap = "UserVo">
   			select * from mydb.user_info where info = 1 order by user_info.name,user_info.birthDate ASC
   		</select>
   		
+  		
 	<!-- 전체 레코드 개수 조회 --> <!-- 사업자만 -->
-	  	<select id ="branch_writeGetCount" resultType="int">
-	  		select count(*) from mydb.user_info where registNum is not null 
+	  	<select id ="branch_writeGetCount" parameterType="hashmap" resultType="int">
+	  		select count(*) from mydb.user_info where not registNum = 0
+	  		  <choose>
+	  			<when test="category == 'name'">
+	  				and name like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "nickname"'>
+	  				and nickname like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "email"'>
+	  				and email like '%${keyword}%'
+	  			</when>
+	  		</choose>
 	  	</select>
 	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
   		<select id="branch_writeList" parameterType="hashmap" resultMap="UserVo">
-  			select * from mydb.user_info where registNum is not null order by NAME,BIRTHDATE ASC limit #{branchoffset}, #{branchnoOfRecords}
+  			select * from mydb.user_info where not registNum = 0
+  			  <choose>
+	  			<when test="category == 'name'">
+	  				and name like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "nickname"'>
+	  				and nickname like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "email"'>
+	  				and email like '%${keyword}%'
+	  			</when>
+	  		</choose>
+  			order by NAME,BIRTHDATE ASC limit #{branchoffset}, #{branchnoOfRecords}
   		</select>
   		<select id ="branch_writeInfoList" resultMap = "UserVo">
   			select * from mydb.user_info where info = 1 order by user_info.name,user_info.birthDate ASC
@@ -135,19 +208,60 @@
   			UPDATE NOTICE SET TITLE=#{title}, CONTENT=#{content} WHERE notice.index = #{index}
   	</update>
   
-  	<!-- 페이징 처리 -->
+  	<!-- notice_paging 페이징 처리 -->
   	<!-- 전체 레코드 개수 조회 -->
+	  	<select id ="writeGetCount" parameterType="hashmap" resultType="int">
+	  		select count(*) from mydb.notice
+	  		<choose>
+	  			<when test="category == 'title'">
+	  				where title like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "writer"'>
+	  				where writer like '%${keyword}%'
+	  			</when>
+	  		</choose>
+	  	</select>
+	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
+  		<select id="writeList" parameterType="hashmap" resultMap="NoticeVo">
+  			select * from mydb.notice
+  			
+  			<choose>
+	  			<when test="category == 'title'">
+	  				where title like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "writer"'>
+	  				where writer like '%${keyword}%'
+	  			</when>
+	  		</choose>
+  			 order by notice.index DESC limit #{offset}, #{noOfRecords}
+  		</select>
+  		
+  		<select id ="writeInfoList" resultMap = "NoticeVo">
+  			select * from mydb.notice where info = 1 
+  			<choose>
+	  			<when test="category == 'title'">
+	  				and title like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "writer"'>
+	  				and writer like '%${keyword}%'
+	  			</when>
+	  		</choose>
+  			order by notice.index DESC
+  		</select>
+  		
+<!--   		  	페이징 처리
+  	전체 레코드 개수 조회
 	  	<select id ="writeGetCount" resultType="int">
 	  		select count(*) from mydb.notice
 	  	</select>
-	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
+	게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력)  	
   		<select id="writeList" parameterType="hashmap" resultMap="NoticeVo">
   			select * from mydb.notice order by notice.index DESC limit #{offset}, #{noOfRecords}
   		</select>
   		
   		<select id ="writeInfoList" resultMap = "NoticeVo">
   			select * from mydb.notice where info = 1 order by notice.index DESC
-  		</select>
+  		</select> -->
   		
   		
   		
@@ -174,19 +288,51 @@
   			INSERT INTO client_Counsel VALUES (#{branchID},#{clientID},#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d"),null)
   	</insert>
   	
-  	<!-- 페이징 처리 -->
+  	<!-- client_paging 페이징 처리 -->
   	<!-- 전체 레코드 개수 조회 -->
-	  	<select id ="c_writeGetCount" resultType="int">
+  	
+	  	<select id ="c_writeGetCount" parameterType="hashmap" resultType="int">
 	  		select count(*) from mydb.client_Counsel where clientID = #{clientID}
+	  		
+	  		<choose>
+	  			<when test="category == 'title'">
+	  				and title like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "writer"'>
+	  				and writer like '%${keyword}%'
+	  			</when>
+	  		</choose>
 	  	</select>
 	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
+  		<select id="c_writeList" parameterType="hashmap" resultMap="C_CsVo">
+  			select * from mydb.client_Counsel where clientID=#{clientID} 
+  				<choose>
+	  			<when test="category == 'title'">
+	  				and title like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "writer"'>
+	  				and writer like '%${keyword}%'
+	  			</when>
+	  		</choose>
+  			
+  			order by client_Counsel.index DESC limit #{offset}, #{noOfRecords}
+  		</select>
+  		
+  		<select id ="c_writeInfoList" resultMap = "C_CsVo">
+  			select * from mydb.client_Counsel where info = 1 order by client_Counsel.index DESC
+  		</select>
+  		
+<!-- 	  	<select id ="c_writeGetCount" resultType="int">
+	  		select count(*) from mydb.client_Counsel where clientID = #{clientID}
+	  	</select>
+	게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력)  	
   		<select id="c_writeList" parameterType="hashmap" resultMap="C_CsVo">
   			select * from mydb.client_Counsel where clientID=#{clientID} order by client_Counsel.index DESC limit #{offset}, #{noOfRecords}
   		</select>
   		
   		<select id ="c_writeInfoList" resultMap = "C_CsVo">
   			select * from mydb.client_Counsel where info = 1 order by client_Counsel.index DESC
-  		</select>
+  		</select> -->
   		
   		<select id="reserveselectAll" resultType="com.bit.yes.model.entity.branch_infoVo" >
   			SELECT * FROM mydb.branch_info WHERE id = ANY(SELECT branchID FROM mydb.reserve_list WHERE clientID = #{id})
@@ -211,19 +357,49 @@
   	<select id="s_selectnickname" resultType="com.bit.yes.model.entity.UserVo">
   			SELECT * FROM user_info where id = #{id} 
   	</select>
+  	
   	<!-- 페이징 처리 -->
   	<!-- 전체 레코드 개수 조회 -->
-	  	<select id ="s_writeGetCount" resultType="int">
-	  		select count(*) from mydb.branch_Counsel where writer = #{writer}
+	  	<select id ="s_writeGetCount" parameterType="hashmap" resultType="int">
+	  		select count(*) from mydb.branch_Counsel <!-- where writer = #{writer} -->
+	  		  <choose>
+	  			<when test="category == 'title'">
+	  				where title like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "writer"'>
+	  				where writer like '%${keyword}%'
+	  			</when>
+	  		</choose>
 	  	</select>
 	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
+  		<select id="s_writeList" parameterType="hashmap" resultMap="S_CsVo">
+  			select * from mydb.branch_Counsel <!-- where writer=#{writer} -->
+  			  <choose>
+	  			<when test="category == 'title'">
+	  				<!-- and --> where title like '%${keyword}%'
+	  			</when>
+	  			<when test='category == "writer"'>
+	  				<!-- and --> where writer in (select writer from user_info where nickname like '%${keyword}%' and not registNum = 0) 
+	  			</when>
+	  		</choose>
+  			 order by branch_Counsel.index DESC limit #{offset}, #{noOfRecords}
+  		</select>
+  		
+  		<select id ="s_writeInfoList" resultMap = "S_CsVo">
+  			select * from mydb.branch_Counsel where info = 1 order by branch_Counsel.index DESC
+  		</select>
+  		
+<!-- 	  	<select id ="s_writeGetCount" resultType="int">
+	  		select count(*) from mydb.branch_Counsel where writer = #{writer}
+	  	</select>
+	게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력)  	
   		<select id="s_writeList" parameterType="hashmap" resultMap="S_CsVo">
   			select * from mydb.branch_Counsel where writer=#{writer} order by branch_Counsel.index DESC limit #{offset}, #{noOfRecords}
   		</select>
   		
   		<select id ="s_writeInfoList" resultMap = "S_CsVo">
   			select * from mydb.branch_Counsel where info = 1 order by branch_Counsel.index DESC
-  		</select>
+  		</select> -->
   		
   		
   		
@@ -374,38 +550,40 @@
   		  	<!-- branch_address로 db가 따로 있으므로 이것도 가져가서 출력 -->	
   		<select id="management_address" resultType="com.bit.yes.model.entity.branch_addressVo">
   			select * from mydb.branch_address where id = #{id}
-  		</select>
+  		</select>	
   		
+  		
+  <!-- 추가 한 내용 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  -->
   		<update id="manage_update" parameterType="java.lang.String">
-  			UPDATE branch_info SET acceptState=1 WHERE branch_info.id = #{id}
+  			UPDATE branch_info SET acceptState=1 WHERE branch_info.id = #{id} 
   		</update>
-  		<update id="manage_registNum" parameterType="java.lang.String">
-  			UPDATE user_info SET registNum=1 WHERE user_info.id = #{id}
-  		</update>
-  		
-	  	<delete id="manage_delete" parameterType="java.lang.String">
-	  		DELETE branch_info, branch_address FROM branch_info INNER JOIN branch_address WHERE branch_info.id=branch_address.id AND branch_address.id=#{id};
-	  	</delete>
-	  	
-	  	<!-- 전체 레코드 개수 조회 --> <!-- 전체 -->
-	  	<select id ="managementdel_writeGetCount" resultType="int">
-	  		select count(*) from mydb.branch_info where acceptState = 1
-	  	</select>
-	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
-  		<select id="managementdel_writeList" parameterType="hashmap" resultMap="branch_infoVo">
-  			select * from mydb.branch_info where acceptState = 1 order by id ASC limit #{offset}, #{noOfRecords}
-  		</select>
-  		<select id ="managementdel_writeInfoList" resultMap = "branch_infoVo">
-  			select * from mydb.branch_info where info = 1 order by branch_info.id ASC
-  		</select>
-	  	
-  		<update id="manage_delregistNum" parameterType="java.lang.String">
-  			UPDATE user_info SET registNum = null WHERE user_info.id = #{id}
-  		</update>
-  		
-	  	<delete id="manage_deldelete" parameterType="java.lang.String">
-	  		DELETE branch_info, branch_address FROM branch_info INNER JOIN branch_address WHERE branch_info.id=branch_address.id AND branch_address.id=#{id};
-	  	</delete>
-  		
-  			
+		<update id="manage_registNum" parameterType="java.lang.String"> 
+			UPDATE user_info SET registNum=1 WHERE user_info.id = #{id} 
+		</update>
+		<delete id="manage_delete" parameterType="java.lang.String"> 
+			DELETE branch_info, branch_address FROM branch_info INNER JOIN branch_address WHERE branch_info.id=branch_address.id AND branch_address.id=#{id}; 
+		</delete>
+
+	<!-- 전체 레코드 개수 조회 -->
+	<!-- 전체 -->
+		<select id="managementdel_writeGetCount" resultType="int">
+			select count(*) from mydb.branch_info where acceptState = 1 
+		</select>
+
+<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->
+		<select id="managementdel_writeList" resultMap="branch_infoVo" parameterType="hashmap"> 
+			select * from mydb.branch_info where acceptState = 1 order by id ASC limit #{offset}, #{noOfRecords} 
+		</select>
+		<select id="managementdel_writeInfoList" resultMap="branch_infoVo"> 
+			select * from mydb.branch_info where info = 1 order by branch_info.id ASC 
+		</select>
+		<update id="manage_delregistNum" parameterType="java.lang.String"> 
+			UPDATE user_info SET registNum = 0 WHERE user_info.id = #{id} 
+		</update>
+		<delete id="manage_deldelete" parameterType="java.lang.String">
+			DELETE branch_info, branch_address FROM branch_info INNER JOIN branch_address WHERE branch_info.id=branch_address.id AND branch_address.id=#{id}; 
+		</delete>
+  
+  
+  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  -->		
   </mapper>

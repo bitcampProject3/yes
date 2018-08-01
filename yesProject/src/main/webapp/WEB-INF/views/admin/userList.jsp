@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
@@ -97,7 +97,7 @@
                     color: black;
                 }
             }
-            @media (max-width: 1110px) {
+            @media (max-width: 1190px) {
                 li > a{
                     font-size: 20px;
                 }
@@ -159,7 +159,7 @@
                     display: block;
                     clear: both;
                 }
-                /*Ãà¼ÒÈ­½Ã ¸Þ´º ¼öÁ¤*/
+                /*ì¶•ì†Œí™”ì‹œ ë©”ë‰´ ìˆ˜ì •*/
 /*
                 .navbar-collapse{
                     width: 200px;
@@ -221,20 +221,20 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li><a href="#" class="menuBtn">¿¹¾à<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">»ç¿ëÀÚ ¸®ºä</a></li>
+                    <li><a href="#" class="menuBtn">ì˜ˆì•½<span class="sr-only"></span></a></li>
+                    <li><a href="#" class="menuBtn">ì‚¬ìš©ìž ë¦¬ë·°</a></li>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">°í°´¼¾ÅÍ<span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ê³ ê°ì„¼í„°<span class="caret"></span></a>
                       <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="../yesnotice/">°øÁö»çÇ×</a></li>
+                        <li><a href="/yes/yesnotice/">ê³µì§€ì‚¬í•­</a></li>
 
                       </ul>
                     </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">·Î±×ÀÎ</a></li>
-                    <li><a href="#">È¸¿ø°¡ÀÔ</a></li>
-                    <li><a href="../admin/">°ü¸®ÀÚ</a></li>
+                    <li><a href="#">ë¡œê·¸ì¸</a></li>
+                    <li><a href="#">íšŒì›ê°€ìž…</a></li>
+                    <li><a href="/yes/admin/">ê´€ë¦¬ìž</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -242,14 +242,14 @@
             </div>
             
             <div class="container" style="margin-top: 10px;">
-             <div><h2>È¸¿ø ¸®½ºÆ®</h2>
+             <div><h2>íšŒì› ë¦¬ìŠ¤íŠ¸</h2>
              <div style=" height:30px;">
              <select onchange="visit(this)" style="float:left;">
-             	<option value="" disabled selected>ÀÌµ¿ÇÒ ¸®½ºÆ®¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä</option>
-			    <option value="./userAllList"><b>&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;¸ðµç È¸¿ø ¸®½ºÆ®</b></option> <!-- »ó´ë°æ·Î -->
-			    <option value="./userList"><b>&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;°í°´ ¸®½ºÆ®</b></option> <!-- »ó´ë°æ·Î -->
-			    <option value="./branchList"><b>&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;»ç¾÷ÀÚ ¸®½ºÆ®</b></option> <!-- »ó´ë°æ·Î -->
-			    <option><b>ÀÌµ¿ ¾øÀ½</b></option>
+             	<option value="" disabled selected>ì´ë™í•  ë¦¬ìŠ¤íŠ¸ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”</option>
+			    <option value="/yes/admin/userAllList"><b>&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;ëª¨ë“  íšŒì› ë¦¬ìŠ¤íŠ¸</b></option> <!-- ìƒëŒ€ê²½ë¡œ -->
+			    <option value="/yes/admin/userList"><b>&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;ê³ ê° ë¦¬ìŠ¤íŠ¸</b></option> <!-- ìƒëŒ€ê²½ë¡œ -->
+			    <option value="/yes/admin/branchList"><b>&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;ì‚¬ì—…ìž ë¦¬ìŠ¤íŠ¸</b></option> <!-- ìƒëŒ€ê²½ë¡œ -->
+			    <option><b>ì´ë™ ì—†ìŒ</b></option>
 			</select>
             </div> 
              </div>
@@ -260,7 +260,7 @@
                      onclick="location.href='./userAllList'">                                        
                       <h4>
                           <p class="text-center" style="padding-top: 5px; padding-bottom: 5px;">
-                              ¸ðµç È¸¿ø ¸®½ºÆ®
+                              ëª¨ë“  íšŒì› ë¦¬ìŠ¤íŠ¸
                           </p>
                       </h4>
                   </div>
@@ -270,7 +270,7 @@
                        onclick="location.href='./userList'">  
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              °í°´ ¸®½ºÆ®
+                              ê³ ê° ë¦¬ìŠ¤íŠ¸
                           </p>
                       </h4>
                   </div>
@@ -279,7 +279,7 @@
                      onclick="location.href='./branchList'">
                       <h4>
                           <p class="text-center" style="padding-top: 5px;padding-bottom: 5px;">
-                              »ç¾÷ÀÚ ¸®½ºÆ®
+                              ì‚¬ì—…ìž ë¦¬ìŠ¤íŠ¸
                           </p>
                       </h4>
                   </div>
@@ -294,10 +294,10 @@
                     </colgroup>
                     <thead>
                         <tr>
-                        	<th style="text-align:center">ÀÌ¸§</th>
-                            <th style="text-align: center">´Ð³×ÀÓ</th>
-                            <th style="text-align: center">ÀÌ¸ÞÀÏ</th>
-                            <th style="text-align: center">»ý³â¿ùÀÏ</th>
+                        	<th style="text-align:center">ì´ë¦„</th>
+                            <th style="text-align: center">ë‹‰ë„¤ìž„</th>
+                            <th style="text-align: center">ì´ë©”ì¼</th>
+                            <th style="text-align: center">ìƒë…„ì›”ì¼</th>
                         </tr>
                     </thead> 
                     
@@ -326,19 +326,18 @@
 						</c:forEach>
                 </table>
 
-                
  	<c:choose>
 		<c:when test="${paging.numberOfRecords ne NULL and paging.numberOfRecords ne '' and paging.numberOfRecords ne 0}">
 		<div id="paginationUI" class="text-center" style="margin-left: 37px">
 			<ul class="pagination pagination-lg">
-				<c:if test="${paging.currentPageNo gt 5}">  											  <!-- ÇöÀç ÆäÀÌÁö°¡ 5º¸´Ù Å©´Ù¸é(Áï, 6ÆäÀÌÁö ÀÌ»óÀÌ¶ó¸é) -->
-					<li><a href="javascript:goPage(${paging.prevPageNo}, ${paging.maxPost})">ÀÌÀü</a></li> <!-- ÀÌÀüÆäÀÌÁö Ç¥½Ã -->
+				<c:if test="${paging.currentPageNo gt 5}">  											  <!-- í˜„ìž¬ íŽ˜ì´ì§€ê°€ 5ë³´ë‹¤ í¬ë‹¤ë©´(ì¦‰, 6íŽ˜ì´ì§€ ì´ìƒì´ë¼ë©´) -->
+					<li><a href="javascript:goPage(${paging.prevPageNo}, ${paging.maxPost})">ì´ì „</a></li> <!-- ì´ì „íŽ˜ì´ì§€ í‘œì‹œ -->
 				</c:if>
-				<!-- ´Ù¸¥ ÆäÀÌÁö¸¦ Å¬¸¯ÇÏ¿´À» ½Ã, ±× ÆäÀÌÁöÀÇ ³»¿ë ¹× ÇÏ´ÜÀÇ ÆäÀÌÂ¡ ¹öÆ°À» »ý¼ºÇÏ´Â Á¶°Ç¹®-->
+				<!-- ë‹¤ë¥¸ íŽ˜ì´ì§€ë¥¼ í´ë¦­í•˜ì˜€ì„ ì‹œ, ê·¸ íŽ˜ì´ì§€ì˜ ë‚´ìš© ë° í•˜ë‹¨ì˜ íŽ˜ì´ì§• ë²„íŠ¼ì„ ìƒì„±í•˜ëŠ” ì¡°ê±´ë¬¸-->
 					<c:forEach var="i" begin="${paging.startPageNo}" end="${paging.endPageNo}" step="1"> 
 		            <c:choose>
 		                <c:when test="${i eq paging.currentPageNo}"> 
-		                      <li class="active"><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> <!-- 1ÆäÀÌÁöºÎÅÍ 10°³¾¿ »Ì¾Æ³»°í, 1,2,3ÆäÀÌÁö¼øÀ¸·Î ³ªÅ¸³»¶ó-->
+		                      <li class="active"><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> <!-- 1íŽ˜ì´ì§€ë¶€í„° 10ê°œì”© ë½‘ì•„ë‚´ê³ , 1,2,3íŽ˜ì´ì§€ìˆœìœ¼ë¡œ ë‚˜íƒ€ë‚´ë¼-->
 		                </c:when>
 		                	<c:otherwise>
 		                    <li><a href="javascript:goPage(${i}, ${paging.maxPost})">${i}</a></li> 
@@ -346,12 +345,12 @@
 					</c:choose>
 					</c:forEach>
 			
-				<!-- ¼Ò¼öÁ¡ Á¦°Å =>-->
+				<!-- ì†Œìˆ˜ì  ì œê±° =>-->
 				<fmt:parseNumber var="currentPage" integerOnly="true" value="${(paging.currentPageNo-1)/5}"/>
 				<fmt:parseNumber var="finalPage" integerOnly="true" value="${(paging.finalPageNo-1)/5}"/>
 					
-				<c:if test="${currentPage < finalPage}"> <!-- ÇöÀç ÆäÀÌÁö°¡ ¸¶Áö¸· ÆäÀÌÁöº¸´Ù ÀÛÀ¸¸é '´ÙÀ½'À» Ç¥½ÃÇÑ´Ù. -->
-					<li><a href="javascript:goPage(${paging.nextPageNo}, ${paging.maxPost})">´ÙÀ½</a></li>
+				<c:if test="${currentPage < finalPage}"> <!-- í˜„ìž¬ íŽ˜ì´ì§€ê°€ ë§ˆì§€ë§‰ íŽ˜ì´ì§€ë³´ë‹¤ ìž‘ìœ¼ë©´ 'ë‹¤ìŒ'ì„ í‘œì‹œí•œë‹¤. -->
+					<li><a href="javascript:goPage(${paging.nextPageNo}, ${paging.maxPost})">ë‹¤ìŒ</a></li>
 				</c:if> 
 			</ul>
 		</div>
@@ -360,26 +359,37 @@
 
 		<script>
 			function goPage(pages, lines) {
-				location.href = '?' + "pages=" + pages;
+				location.href = '?' + "userPages=" + pages;
 			}
 		</script>
-		<div class="text-center">
-			<div class="col-lg-4"
-				style="float: none; margin: auto; width: 373px;">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="°Ë»ö¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button"
-							style="color: #e04f5f">
+		<div class="text-center" style="display:block;">
+			<div
+				style="float: none; margin: auto; width: 420px;">
+				<form method="post" action="/yes/admin/user_search">
+				<div style="padding-left:0px;padding-right:0px;float:left;width:22%">
+					<select class="form-control" name="category">
+						<option value="total">ì „ì²´</option>
+						<option value="name">ì´ë¦„</option>
+						<option value="nickname">ë‹‰ë„¤ìž„</option>
+						<option value="email">ì´ë©”ì¼</option>
+					</select> 
+				</div>
+				<div style="padding-left:0px;padding-right:0px;float:left;width:58%">
+					<input type="text" name="keyword" class="form-control" placeholder="ê²€ìƒ‰ì–´ë¥¼ ìž…ë ¥í•˜ì„¸ìš”">
+				</div>
+				<div>
+					<span class="input-group-btn" style="float:left;">
+						<button class="btn btn-default" type="submit"
+							style="color: #e04f5f;width:auto;padding-bottom:9px; padding-top:9px;">
 							<span class="glyphicon glyphicon-search"> </span>
 						</button>
 					</span>
-				</div>
+				</div>	
+				</form>
 				<!-- /input-group -->
 			</div>
 			<!-- /.col-lg-6 -->
 		</div>
-
 
 	</div>   
                

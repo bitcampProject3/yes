@@ -35,15 +35,25 @@ public class C_CsDaoImpl01 implements C_CsDao {
 		
 	}
 
+//	@Override
+//	public List<C_CsVo> writeList(int offset, int noOfRecords,String clientID) throws SQLException {
+//		List<C_CsVo> writeList = new ArrayList<C_CsVo>();
+//		
+//		HashMap<String, Object> params = new HashMap<String, Object>();
+//		
+//		params.put("offset", offset);
+//		params.put("noOfRecords", noOfRecords);
+//		params.put("clientID", clientID);
+//		
+//		writeList = sqlSession.selectList("c_writeList", params);
+//		this.noOfRecords = sqlSession.selectOne("c_writeGetCount");
+//		
+//		return writeList;
+//	}
 	@Override
-	public List<C_CsVo> writeList(int offset, int noOfRecords,String clientID) throws SQLException {
+	public List<C_CsVo> writeList(HashMap<String, Object> params) throws SQLException {
 		List<C_CsVo> writeList = new ArrayList<C_CsVo>();
-		
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		
-		params.put("offset", offset);
-		params.put("noOfRecords", noOfRecords);
-		params.put("clientID", clientID);
+
 		
 		writeList = sqlSession.selectList("c_writeList", params);
 		this.noOfRecords = sqlSession.selectOne("c_writeGetCount");
@@ -51,6 +61,13 @@ public class C_CsDaoImpl01 implements C_CsDao {
 		return writeList;
 	}
 
+	@Override
+	public int writeGetCount(HashMap<String, Object> params) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("c_writeGetCount",params);
+		
+	}
+	
 	@Override
 	public int writeGetCount(String clientID) throws SQLException {
 		// TODO Auto-generated method stub

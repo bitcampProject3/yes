@@ -27,17 +27,15 @@ public class AdminDaoImpl01 implements AdminDao {
 	int offset;
 	int noOfRecords;
 	
+	
+//	int alloffset, int allnoOfRecords
 	@Override
-	public List<UserVo> allwriteList(int alloffset, int allnoOfRecords) throws SQLException {
+	public List<UserVo> allwriteList(HashMap<String, Object> params) throws SQLException {
+		
 		List<UserVo> allwriteList = new ArrayList<UserVo>();
 		
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		
-		params.put("alloffset", alloffset);
-		params.put("allnoOfRecords", allnoOfRecords);
-		
 		allwriteList = sqlSession.selectList("all_writeList", params);
-		this.allnoOfRecords = sqlSession.selectOne("all_writeGetCount");
+		this.allnoOfRecords = sqlSession.selectOne("all_writeGetCount", params);
 		
 		return allwriteList;
 	}
@@ -46,6 +44,12 @@ public class AdminDaoImpl01 implements AdminDao {
 	public int allwriteGetCount() throws SQLException {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("all_writeGetCount");
+	}
+	
+	@Override
+	public int allwriteGetCount(HashMap<String, Object> params) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("all_writeGetCount", params);
 	}
 
 	@Override
@@ -67,13 +71,13 @@ public class AdminDaoImpl01 implements AdminDao {
 	}
 
 	@Override
-	public List<UserVo> userwriteList(int useroffset, int usernoOfRecords) throws SQLException {
+	public List<UserVo> userwriteList(HashMap<String, Object> params) throws SQLException {
 		List<UserVo> userwriteList = new ArrayList<UserVo>();
 		
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		
-		params.put("useroffset", useroffset);
-		params.put("usernoOfRecords", usernoOfRecords);
+//		HashMap<String, Object> params = new HashMap<String, Object>();
+//		
+//		params.put("useroffset", useroffset);
+//		params.put("usernoOfRecords", usernoOfRecords);
 		
 		userwriteList = sqlSession.selectList("user_writeList", params);
 		this.usernoOfRecords = sqlSession.selectOne("user_writeGetCount");
@@ -82,13 +86,13 @@ public class AdminDaoImpl01 implements AdminDao {
 	}
 
 	@Override
-	public List<UserVo> branchwriteList(int branchoffset, int branchnoOfRecords) throws SQLException {
+	public List<UserVo> branchwriteList(HashMap<String, Object> params) throws SQLException {
 		List<UserVo> branchwriteList = new ArrayList<UserVo>();
 		
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		
-		params.put("branchoffset", branchoffset);
-		params.put("branchnoOfRecords", branchnoOfRecords);
+//		HashMap<String, Object> params = new HashMap<String, Object>();
+//		
+//		params.put("branchoffset", branchoffset);
+//		params.put("branchnoOfRecords", branchnoOfRecords);
 		
 		branchwriteList = sqlSession.selectList("branch_writeList", params);
 		this.branchnoOfRecords = sqlSession.selectOne("branch_writeGetCount");
@@ -101,11 +105,22 @@ public class AdminDaoImpl01 implements AdminDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("user_writeGetCount");
 	}
+	
+	@Override
+	public int userwriteGetCount(HashMap<String, Object> params) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("user_writeGetCount", params);
+	}
 
 	@Override
 	public int branchwriteGetCount() throws SQLException {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("branch_writeGetCount");
+	}
+	
+	@Override
+	public int branchwriteGetCount(HashMap<String, Object> params) throws SQLException {
+		return sqlSession.selectOne("branch_writeGetCount", params);
 	}
 
 	@Override
@@ -174,8 +189,8 @@ public class AdminDaoImpl01 implements AdminDao {
 		params.put("offset", offset);
 		params.put("noOfRecords", noOfRecords);
 		
-		managementdel_writeList = sqlSession.selectList("managementdel_writeList", params);
-		this.noOfRecords = sqlSession.selectOne("managementdel_writeGetCount");
+		managementdel_writeList = sqlSession.selectList("yes.managementdel_writeList", params);
+		this.noOfRecords = sqlSession.selectOne("yes.managementdel_writeGetCount");
 		
 		return managementdel_writeList;
 	}
@@ -185,5 +200,9 @@ public class AdminDaoImpl01 implements AdminDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("yes.managementdel_writeGetCount");
 	}
+
+
+
+
 
 }

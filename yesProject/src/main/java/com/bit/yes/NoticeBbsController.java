@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,14 +36,14 @@ public class NoticeBbsController {
 	// 화면 출력
 	@RequestMapping("/yesnotice/")
 	public String list(Model model, HttpServletRequest req) throws Exception {
-		
+		HashMap<String, Object> params = new HashMap<String, Object>();
 		int currentPageNo = 1;
 		int maxPost = 10;
 		
 		// 로그인 했을 경우 들어오는 세션 id값 
 		// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
 		// admin이 관리자이여야함
-		String id = "ghdlf22";
+		String id = "ghdlf2";
 		
 		if(req.getParameter("pages") != null)
 			currentPageNo = Integer.parseInt(req.getParameter("pages"));
@@ -50,8 +52,11 @@ public class NoticeBbsController {
 		
 		int offset = (paging.getCurrentPageNo() -1) * paging.getMaxPost();
 		
+		params.put("offset", offset);
+		params.put("noOfRecords", paging.getMaxPost());
+		
 		ArrayList<NoticeVo> page = new ArrayList<NoticeVo>();
-		page = (ArrayList<NoticeVo>) noticeService.writeList(offset, paging.getMaxPost());
+		page = (ArrayList<NoticeVo>) noticeService.writeList(params);
 		paging.setNumberOfRecords(noticeService.writeGetCount());
 		
 		paging.makePaging();
@@ -78,7 +83,7 @@ public class NoticeBbsController {
 		// 로그인 했을 경우 들어오는 세션 id값 
 		// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
 		// admin이 관리자이여야함
-		String id = "ghdlf22";
+		String id = "ghdlf2";
 		
 		String registNum = noticeService.user_selectOne(id).getRegistNum();
 		model.addAttribute("registNum",registNum);
@@ -92,7 +97,7 @@ public class NoticeBbsController {
 		// 로그인 했을 경우 들어오는 세션 id값 
 		// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
 		// admin이 관리자이여야함
-		String id = "ghdlf22";
+		String id = "ghdlf2";
 				
 		String registNum = noticeService.user_selectOne(id).getRegistNum();
 		model.addAttribute("registNum",registNum);
@@ -148,7 +153,7 @@ public class NoticeBbsController {
 		// 로그인 했을 경우 들어오는 세션 id값 
 		// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
 		// admin이 관리자이여야함
-		String id = "ghdlf22";
+		String id = "ghdlf2";
 		
 		String registNum = noticeService.user_selectOne(id).getRegistNum();
 		model.addAttribute("registNum",registNum);
@@ -208,5 +213,70 @@ public class NoticeBbsController {
 		return "redirect:/yesnotice/";
 	}
 
-
+	// 검색
+	@RequestMapping(value="/notice_search")
+	public String noticeSearchList(Model model, HttpServletRequest request) throws Exception {
+		
+		System.out.println("searchList(post)");
+		
+		HttpSession session = request.getSession();
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		System.out.println("list(post)");
+		// 로그인 했을 경우 들어오는 세션 id값 
+		// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
+		// admin이 관리자이여야함
+		String id = "ghdlf2";
+		
+		int currentPageNo = 1;
+		int maxPost = 10;
+		
+		String category = request.getParameter("category");
+		String keyword = request.getParameter("keyword");
+		
+		
+		if(request.getParameter("pages") != null) {
+			System.out.println("pages is null");
+			currentPageNo = Integer.parseInt(request.getParameter("pages"));
+		}
+		
+		if(category == null && keyword == null) {
+			category = (String) session.getAttribute("category");
+			keyword = (String) session.getAttribute("keyword");
+		} else {
+			/*req.setAttribute("category", category);
+			req.setAttribute("keyword", keyword);*/
+			session.setAttribute("category", category);
+			session.setAttribute("keyword", keyword);
+		}
+		
+		System.out.println("current page(post) : " + currentPageNo);
+		Paging paging = new Paging(currentPageNo, maxPost);
+		System.out.println("처음페이징"+paging);
+		int offset = (paging.getCurrentPageNo() -1) * paging.getMaxPost();
+		params.put("offset", offset);
+		params.put("noOfRecords", paging.getMaxPost());
+		
+		ArrayList<NoticeVo> page = new ArrayList<NoticeVo>();
+		params.put("keyword", keyword);
+		params.put("category", category);
+		page = (ArrayList<NoticeVo>) noticeService.writeList(params);
+		paging.setNumberOfRecords(noticeService.writeGetCount(params));
+		
+		paging.makePaging();
+		if(id == "admin") {
+			model.addAttribute("id",id);
+			model.addAttribute("page", page);
+			model.addAttribute("paging",paging);
+			
+		}else{
+			String registNum = noticeService.user_selectOne(id).getRegistNum();
+			model.addAttribute("registNum",registNum);
+			model.addAttribute("id",id);
+			model.addAttribute("page", page);
+			model.addAttribute("paging",paging);
+		}
+		
+		return "./notice/yesnotice";
+	}
+	
 }

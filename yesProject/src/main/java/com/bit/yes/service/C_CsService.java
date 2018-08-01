@@ -1,6 +1,7 @@
 package com.bit.yes.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +37,23 @@ public class C_CsService {
 	}
 	
 	// 其捞隆 贸府
-	public List<C_CsVo> writeList(int offset, int noOfRecords,String clientID) throws SQLException {
-		return csDao.writeList(offset, noOfRecords, clientID);
-	}
-	
-	public int writeGetCount(String clientID) throws Exception {
-		return csDao.writeGetCount(clientID);
-	}
+//	public List<C_CsVo> writeList(int offset, int noOfRecords,String clientID) throws SQLException {
+//		return csDao.writeList(offset, noOfRecords, clientID);
+//	}
+//	
+//	public int writeGetCount(String clientID) throws Exception {
+//		return csDao.writeGetCount(clientID);
+//	}
 
 	public UserVo selectNick(String id) throws SQLException{
 		return csDao.c_selectnickname(id);
+	}
+	public List<C_CsVo> writeList(HashMap<String, Object> params) throws SQLException {
+		return csDao.writeList(params);
+	}
+	
+	public int writeGetCount(HashMap<String, Object> params) throws Exception {
+		return csDao.writeGetCount(params);
 	}
 	
 	// 诀肺靛 贸府

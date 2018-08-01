@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,8 +46,10 @@ public class S_CsController {
 			// 로그인 했을 경우 들어오는 세션 id값 
 			// id값을 통해서 해당 id에 해당하는 게시판 글 출력
 			// admin이 관리자이여야함
-			String writer = "ghdlf22"; 
+			String writer = "ghdlf2"; 
 
+			
+			HashMap<String, Object> params = new HashMap<String, Object>();
 			
 			if(req.getParameter("pages") != null)
 				currentPageNo = Integer.parseInt(req.getParameter("pages"));
@@ -53,13 +57,18 @@ public class S_CsController {
 			Paging paging = new Paging(currentPageNo, maxPost);
 			
 			int offset = (paging.getCurrentPageNo() -1) * paging.getMaxPost();
+			
+			params.put("offset", offset);
+			params.put("noOfRecords", paging.getMaxPost());
+			params.put("writer", writer);
+			
 			ArrayList<S_CsVo> page = new ArrayList<S_CsVo>();
-			page = (ArrayList<S_CsVo>) scsService.writeList(offset, paging.getMaxPost(), writer);
-			paging.setNumberOfRecords(scsService.writeGetCount(writer));
+			page = (ArrayList<S_CsVo>) scsService.writeList(params);
+			paging.setNumberOfRecords(scsService.writeGetCount(params));
 			
 			paging.makePaging();
 			int i=0;
-			String id = null;
+			String id = "";
 			String ids[] = new String[page.size()];
 			for(i=0; i<page.size(); i++) {
 				id= page.get(i).getWriter();
@@ -67,6 +76,77 @@ public class S_CsController {
 				ids[i] = nickName.getNickname();
 			}
 			model.addAttribute("userNick", ids);
+			model.addAttribute("page", page);
+			model.addAttribute("paging",paging);
+			
+			return "./branchCounsel/yesS_cs";
+		}
+		
+		@RequestMapping(value="/S_Cs_search")
+		public String S_CsSearchList(Model model, HttpServletRequest request) throws Exception {
+			
+			System.out.println("S_CsSearchList(post)");
+			
+			HttpSession session = request.getSession();
+			HashMap<String, Object> params = new HashMap<String, Object>();
+
+			// 로그인 했을 경우 들어오는 세션 id값 
+			// id값을 통해서 해당 id에 해당하는 게시판 글 출력
+			// admin이 관리자이여야함
+			String writer = "ghdlf2"; 
+			int currentPageNo = 1;
+			int maxPost = 10;
+			
+			String category = request.getParameter("category");
+			String keyword = request.getParameter("keyword");
+			
+			
+			if(request.getParameter("pages") != null) {
+				System.out.println("pages is null");
+				currentPageNo = Integer.parseInt(request.getParameter("pages"));
+			}
+			
+			if(category == null && keyword == null) {
+				category = (String) session.getAttribute("category");
+				keyword = (String) session.getAttribute("keyword");
+			} else {
+				/*req.setAttribute("category", category);
+				req.setAttribute("keyword", keyword);*/
+				session.setAttribute("category", category);
+				session.setAttribute("keyword", keyword);
+			}
+			
+			System.out.println("current page(post) : " + currentPageNo);
+			Paging paging = new Paging(currentPageNo, maxPost);
+			
+			
+			ArrayList<S_CsVo> page = new ArrayList<S_CsVo>();
+			
+			int offset = (paging.getCurrentPageNo() -1) * paging.getMaxPost();
+			
+			params.put("offset", offset);
+			params.put("noOfRecords", paging.getMaxPost());
+			params.put("keyword", keyword);
+			params.put("category", category);
+			params.put("writer", writer);
+			
+			page = (ArrayList<S_CsVo>) scsService.writeList(params);
+			paging.setNumberOfRecords(scsService.writeGetCount(params));
+			
+			paging.makePaging();
+			int i=0;
+			String id = "";
+			String ids[] = new String[page.size()];
+			for(i=0; i<page.size(); i++) {
+				id= page.get(i).getWriter();
+				UserVo nickName = scsService.selectNick(id);
+				ids[i] = nickName.getNickname();
+			}
+			
+			System.out.println("category : " + category);
+			System.out.println("keyword : " + keyword);
+			
+			model.addAttribute("userNick",ids);
 			model.addAttribute("page", page);
 			model.addAttribute("paging",paging);
 			
@@ -92,7 +172,7 @@ public class S_CsController {
 			// 로그인 했을 경우 들어오는 세션 id값 
 			// id값을 통해서 해당 id에 해당하는 게시판 글 출력
 			// admin이 관리자이여야함
-			id="ghdlf22"; 
+			id="ghdlf2"; 
 			
 			nickName=scsService.selectNick(id);
 			model.addAttribute("userInfo",nickName);

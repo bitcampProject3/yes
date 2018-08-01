@@ -1,6 +1,7 @@
 package com.bit.yes.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +27,27 @@ public class S_CsService {
 	}
 	
 	// 其捞隆 贸府
-	public List<S_CsVo> writeList(int offset, int noOfRecords,String writer) throws SQLException {
-		return scsDao.writeList(offset, noOfRecords, writer);
-	}
+//	public List<S_CsVo> writeList(int offset, int noOfRecords,String writer) throws SQLException {
+//		return scsDao.writeList(offset, noOfRecords, writer);
+//	}
 	
-	public int writeGetCount(String writer) throws Exception {
-		return scsDao.writeGetCount(writer);
-	}
+//	public int writeGetCount(String writer) throws Exception {
+//		return scsDao.writeGetCount(writer);
+//	}
 	
 	public UserVo selectNick(String id) throws SQLException{
 		return scsDao.s_selectnickname(id);
 	}
 	
+	public List<S_CsVo> writeList(HashMap<String, Object> params) throws SQLException {
+		return scsDao.writeList(params);
+//		return scsDao.writeList(offset, noOfRecords, writer);
+	}
+	
+	public int writeGetCount(HashMap<String, Object> params) throws Exception {
+		return scsDao.writeGetCount(params);
+	}
+
 	// 诀肺靛 贸府
 	public void s_counselImgUpload(ImageVo bean) throws SQLException {
 		scsDao.s_counselImgUpload(bean);
