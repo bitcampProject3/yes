@@ -79,8 +79,13 @@ public class ReserveListDaoImpl implements ReserveListDao {
 
    @Override
    public List<ReserveListVo> reserveDatePreview(Map<String, Object> map) {
-      System.out.println(sqlSession.selectList("reserveList.reserveDatePreview", map));
-      return null;
+      return sqlSession.selectList("reserveList.reserveDatePreview", map);
 
+   }
+
+   @Override
+   public void insertReserve(Map<String, Object> map, String id) {
+      map.put("id", id);
+      sqlSession.insert("reserveList.insertReserve",map);
    }
 }

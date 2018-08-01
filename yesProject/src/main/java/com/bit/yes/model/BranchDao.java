@@ -28,6 +28,11 @@ public interface BranchDao {
 
     List<BranchVo> reserveInfoPreview(String id);
 
+    int waitingList(String id);
+
+    void ticketingStart(String id, String clientId);
+    int ticketingCheck(String id, String clientId);
+
 
 //    void addBranch(BranchVo branchInfoVo);
 }

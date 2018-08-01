@@ -66,4 +66,8 @@ public class ReserveListService {
        return reserveDao.reserveDatePreview(map);
     }
 
+    public void insertReserve(Map<String, Object> map, String id){
+      reserveDao.insertReserve(map, id);
+    }
+
 }

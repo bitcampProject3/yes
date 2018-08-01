@@ -2,18 +2,17 @@ package com.bit.yes;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.CSS;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.bit.yes.model.UserDao;
 import com.bit.yes.model.entity.BranchVo;
@@ -68,7 +67,6 @@ public class MyPageController {
 		}
 	
 	}
-	
 	//-----------회원 탈퇴-----------
 	@ResponseBody
 	@RequestMapping(value="/deleteUser",method=RequestMethod.POST,produces="application/text; charset=utf8")
@@ -119,7 +117,6 @@ public class MyPageController {
 	}
 
 
-
 	//----------예약한 가게의 정보 불러오기----------
 	@ResponseBody
 	@RequestMapping(value="/branchInfo",method=RequestMethod.POST)
@@ -141,19 +138,18 @@ public class MyPageController {
 		return "/reservation.yes";
 	}
 	
-	
-	
 	//------------------사업자 mypage-----------------
-	
 	@RequestMapping("/branchReserve.yes")
 	public String branchReserve(HttpSession session,Model model) throws SQLException{
 		UserVo bean=(UserVo) session.getAttribute("member");
 		String id=bean.getId();
+
 		//예약 리스트 불러오기
 		service.reserveAll(model,id);
 		return "mypage/branchReserve";
 	}
 	
+
 	//-------------------사업자 매장정보-----------------
 	@RequestMapping("/branchInfo.yes")
 	public String branchInfo() {
@@ -240,5 +236,15 @@ public class MyPageController {
 		
 		return null;
 		
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/insertReserve", method = RequestMethod.POST)
+	public void insertReserve(@RequestBody Map<String, Object> map, HttpSession session){
+		System.out.println(map);
+		String id=((UserVo) session.getAttribute("member")).getId();
+
+		service.insertReserve(map, id);
+
 	}
 }

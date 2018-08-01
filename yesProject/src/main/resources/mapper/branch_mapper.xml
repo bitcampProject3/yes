@@ -53,4 +53,19 @@
     select opTime, breakTime from branch_info where id = #{id}
   </select>
 
+    <select id="waitingNum" parameterType="string" resultType="int">
+      select count(*) as num from ticketing where branchID=#{id}
+    </select>
+    <select id="tableState" parameterType="string" resultType="int">
+      select tableState from branch_info where id = #{id}
+    </select>
+    <select id="maxTable" parameterType="string" resultType="int">
+      select maxTable from branch_info where id = #{id}
+    </select>
+    <insert id="ticketingStart" parameterType="map">
+      insert into ticketing values(#{branchId},#{clientId},now(),#{countNum});
+    </insert>
+    <select id="ticketingCheck" parameterType="map" resultType="int">
+      select count(*) as num from ticketing where branchID = #{branchId} and clientID = #{clientId}
+    </select>
   </mapper>

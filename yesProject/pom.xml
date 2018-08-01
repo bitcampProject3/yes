@@ -155,10 +155,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.11</version>
 		</dependency>
-
-		<!-- file upload -->
-
-		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-util</artifactId>
+            <version>6.1.25</version>
+        </dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -177,7 +178,6 @@
 			<version>2.0.4.RELEASE</version>
 			<type>pom</type>
 		</dependency>
-	  <!-- https://mvnrepository.com/artifact/org.json/json -->
       <dependency>
          <groupId>org.json</groupId>
          <artifactId>json</artifactId>
@@ -191,10 +191,7 @@
          <version>2.4</version>
          <classifier>jdk15</classifier>
       </dependency>
-
-
-
-	</dependencies>
+  </dependencies>
 	<build>
 		<plugins>
 			<plugin>
@@ -233,6 +230,4 @@
 			</plugin>
 		</plugins>
 	</build>
-		
-				        
 </project>

@@ -23,4 +23,6 @@ public interface ReserveListDao {
    public int getState(String id);
 
 	public List<ReserveListVo> reserveDatePreview(Map<String,Object> map);
+
+   void insertReserve(Map<String,Object> map, String id);
 }

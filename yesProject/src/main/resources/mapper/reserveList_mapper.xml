@@ -53,7 +53,10 @@
 	select a.waitingNum from branch_info a inner join ticketing b on a.id=b.branchID where b.clientID=#{param1}
 </select>
 
-<select id="reserveDatePreview" parameterType="Map" resultType="com.bit.yes.model.entity.ReserveListVo">
+<select id="reserveDatePreview" parameterType="Map" resultType="Map">
 	select * from reserve_list where branchID = #{id} and reserveTime like concat(#{date},'%');
+</select>
+<select id="insertReserve" parameterType="Map">
+	insert into reserve_list values (#{targetBranch}, #{id}, #{targetDate}, now(), #{targetPersonel}, #{targetRequest}, 'N');
 </select>
 </mapper>

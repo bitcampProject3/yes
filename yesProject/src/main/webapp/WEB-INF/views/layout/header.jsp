@@ -54,11 +54,11 @@
 	
 	<style>
 
+
  .quize{
  font-size:15pt;
  
  }
-
 </style>
 
      <script>
