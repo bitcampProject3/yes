@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="yes">
+  <resultMap id="NoticeVo" type="com.bit.yes.model.entity.NoticeVo">
+	<result property="index" column="INDEX"/>
+	<result property="title" column="TITLE"/>
+	<result property="content" column="CONTENT"/>
+	<result property="writer" column="WRITER"/>
+	<result property="calendar" column="CALENDAR"/>
+	<result property="image" column="IMAGE"/>
+</resultMap>
+  <resultMap id="C_CsVo" type="com.bit.yes.model.entity.C_CsVo">
+	<result property="index" column="INDEX"/>
+	<result property="title" column="TITLE"/>
+	<result property="content" column="CONTENT"/>
+	<result property="writer" column="WRITER"/>
+	<result property="calendar" column="CALENDAR"/>
+	<result property="image" column="IMAGE"/>
+	<result property="comment" column="COMMENT"/>
+</resultMap>
+  <resultMap id="S_CsVo" type="com.bit.yes.model.entity.S_CsVo">
+	<result property="index" column="INDEX"/>
+	<result property="title" column="TITLE"/>
+	<result property="content" column="CONTENT"/>
+	<result property="writer" column="WRITER"/>
+	<result property="calendar" column="CALENDAR"/>
+	<result property="image" column="IMAGE"/>
+	<result property="comment" column="COMMENT"/>
+</resultMap>
+
+
+	<!-- 공지사항 쿼리문 -->
+	<select id="selectAll" resultType="com.bit.yes.model.entity.NoticeVo">
+	  		SELECT * FROM NOTICE ORDER BY NOTICE.INDEX DESC
+
+	</select>
+
+  	<select id="selectOne" resultType="com.bit.yes.model.entity.NoticeVo">
+  			SELECT * FROM NOTICE WHERE NOTICE.INDEX = #{index}
+  	</select>
+
+  	<insert id="insertOne" parameterType="com.bit.yes.model.entity.NoticeVo">
+  			INSERT INTO NOTICE VALUES (#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d"), #{image})
+  	</insert>
+
+  	<delete id="deleteOne" parameterType="int">
+  			DELETE FROM NOTICE WHERE notice.index = #{value}
+  	</delete>
+
+  	<update id="updateOne" parameterType="com.bit.yes.model.entity.NoticeVo">
+  			UPDATE NOTICE SET TITLE=#{title}, CONTENT=#{content}, IMAGE=#{image} WHERE notice.index = #{index}
+  	</update>
+
+  	<!-- 페이징 처리 -->
+  	<!-- 전체 레코드 개수 조회 -->
+	  	<select id ="writeGetCount" resultType="int">
+	  		select count(*) from mydb.notice
+	  	</select>
+	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->
+  		<select id="writeList" parameterType="hashmap" resultMap="NoticeVo">
+  			select * from mydb.notice order by notice.index DESC limit #{offset}, #{noOfRecords}
+  		</select>
+
+  		<select id ="writeInfoList" resultMap = "NoticeVo">
+  			select * from mydb.notice where info = 1 order by notice.index DESC
+  		</select>
+
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  -->
+	<!-- 고객 상담 쿼리문 -->
+	<select id="c_selectAll" resultType="com.bit.yes.model.entity.C_CsVo">
+	  		SELECT * FROM client_Counsel ORDER BY client_Counsel.INDEX DESC
+
+	</select>
+
+  	<select id="c_selectOne" resultType="com.bit.yes.model.entity.C_CsVo">
+  			SELECT * FROM client_Counsel WHERE client_Counsel.INDEX = #{index}
+  	</select>
+
+  	<insert id="c_insertOne" parameterType="com.bit.yes.model.entity.C_CsVo">
+  			INSERT INTO client_Counsel VALUES ('ghdlf2',#{clientID},#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d") , #{image},null,#{reserveList} )
+  	</insert>
+
+  	<!-- 페이징 처리 -->
+  	<!-- 전체 레코드 개수 조회 -->
+	  	<select id ="c_writeGetCount" resultType="int">
+	  		select count(*) from mydb.client_Counsel
+	  	</select>
+	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->
+  		<select id="c_writeList" parameterType="hashmap" resultMap="C_CsVo">
+  			select * from mydb.client_Counsel order by client_Counsel.index DESC limit #{offset}, #{noOfRecords}
+  		</select>
+
+  		<select id ="c_writeInfoList" resultMap = "C_CsVo">
+  			select * from mydb.client_Counsel where info = 1 order by client_Counsel.index DESC
+  		</select>
+
+  		<select id="reserveselectAll" resultType="com.bit.yes.model.entity.branch_infoVo" >
+  			SELECT * FROM mydb.branch_info WHERE id = ANY(SELECT branchID FROM mydb.reserve_list WHERE clientID = #{id})
+  		</select>
+
+  		<select id="reserveOne" resultType="com.bit.yes.model.entity.branch_infoVo" parameterType="java.lang.String">
+  			select * from mydb.branch_info where id = ${id}
+  		</select>
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  -->
+	<!-- 사업자 상담 쿼리문 -->
+  	<select id="s_selectOne" resultType="com.bit.yes.model.entity.S_CsVo">
+  			SELECT * FROM branch_Counsel WHERE branch_Counsel.INDEX = #{index}
+  	</select>
+
+  	<insert id="s_insertOne" parameterType="com.bit.yes.model.entity.S_CsVo">
+  			INSERT INTO branch_Counsel VALUES (#{index}, #{title}, #{content}, #{writer}, date_format(now(),"%Y-%c-%d") , #{image},null,#{reserveList} )
+  	</insert>
+
+  	<!-- 페이징 처리 -->
+  	<!-- 전체 레코드 개수 조회 -->
+	  	<select id ="s_writeGetCount" resultType="int">
+	  		select count(*) from mydb.branch_Counsel
+	  	</select>
+	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->
+  		<select id="s_writeList" parameterType="hashmap" resultMap="S_CsVo">
+  			select * from mydb.branch_Counsel order by branch_Counsel.index DESC limit #{offset}, #{noOfRecords}
+  		</select>
+
+  		<select id ="s_writeInfoList" resultMap = "S_CsVo">
+  			select * from mydb.branch_Counsel where info = 1 order by branch_Counsel.index DESC
+  		</select>
+
+  </mapper>
