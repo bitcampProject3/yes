@@ -191,13 +191,13 @@ public class BranchController {
 	}
 
 	@ResponseBody
-    @RequestMapping(value = "/ticketingStart", method = RequestMethod.POST)
+    @RequestMapping(value = "ticketingStart", method = RequestMethod.POST)
 	public void ticketingStart(@RequestBody String branchID, HttpSession httpSession){
 		String clientId = ((UserVo)httpSession.getAttribute("member")).getId();
 		branchService.ticketingStart(branchID.substring(0, branchID.length()-1), clientId);
 	}
 	@ResponseBody
-    @RequestMapping(value = "/ticketingCheck", method = RequestMethod.POST)
+    @RequestMapping(value = "ticketingCheck", method = RequestMethod.POST)
 	public int ticketingCheck(@RequestBody String branchID, HttpSession httpSession){
 		String clientId = ((UserVo)httpSession.getAttribute("member")).getId();
 		if(clientId == null) return 1;

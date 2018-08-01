@@ -1,3 +1,10 @@
 /.metadata/
 /.metadata/
 /.recommenders/
+/yesProject/.idea
+/yesProject/.classpath
+/yesProject/.project
+/yesProject/.settings
+/yesProject/.springBeans
+/yesProject/out
+/yesProject/target

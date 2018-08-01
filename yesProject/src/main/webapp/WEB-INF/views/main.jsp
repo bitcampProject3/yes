@@ -584,7 +584,7 @@
 			        });
 					$.ajax({
 				        type: 'POST',
-				        url: '/waitingList',
+				        url: 'waitingList',
 				        data: id,
 				        success: function (data) {
 				        	if (data === 100) $('.modalStatus').css('display','none');
@@ -599,7 +599,7 @@
 		            });
 					$.ajax({
 				        type: 'POST',
-				        url: '/ticketingCheck',
+				        url: 'ticketingCheck',
 				        data: id,
 				        success: function (data) {
 				        	alert(data);
