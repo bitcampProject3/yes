@@ -1,9 +1,9 @@
 package com.bit.yes;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -19,6 +19,7 @@ import com.bit.yes.model.UserDao;
 import com.bit.yes.model.entity.BranchVo;
 import com.bit.yes.model.entity.ReserveListVo;
 import com.bit.yes.model.entity.UserVo;
+import com.bit.yes.model.paging.Paging;
 import com.bit.yes.service.ReserveListService;
 
 
@@ -82,10 +83,19 @@ public class MyPageController {
 			return "회원가입실패";
 		}
 	}
-	//------------예약 현황-----------
+	//------------(고객)예약 현황리스트 불러오기-----------
 	@RequestMapping("/reservation.yes")
-	public String reservation(HttpSession session,Model model) throws SQLException {
+	public String reservation(HttpSession session,Model model,HttpServletRequest req) throws SQLException {
 		String id=((UserVo)session.getAttribute("member")).getId();
+		//페이징 처리 전
+		int currentPageNo=1;
+		int maxPost=10;
+		if(req.getParameter("pages")!=null)
+			currentPageNo=Integer.parseInt(req.getParameter("pages"));
+		
+	/*	Paging paging=new Paging(currentPageNo,maxPost);*/
+		
+		
 		service.listPage(model,id);
 		return "mypage/myReserve";
 	}

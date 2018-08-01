@@ -670,12 +670,12 @@
 					</div>
 				</div>
 		</div>	
-	 <input type="button" id="loginCheck" class="btn btn-primary" style="padding-left:10px; width:100%; font-size: 20px; margin-top: 30px; "value="로그인"/>
+	 <input type="button" id="loginCheck" class="btn btn-primary" style="padding-left:10px; width:100%; font-size: 20px; margin-top: 10px; "value="로그인"/>
 	</form>
 	
 	
 	
-	<div style="width:90%; margin-top:20px; " >
+	<div style="width:90%; margin-top:30px; " >
             
             <div style="display: inline-block; position:relative; bottom: 20px; margin-left:100px; ">
                 
