@@ -204,7 +204,6 @@
                  }).fail(function(xhr, textStatus, errorThrown) {
                     $('#logout').submit();
                  });
-          	  
             });
             
             
@@ -724,18 +723,21 @@
 	 	            console.log(JSON.stringify(res.kaccount_email));
 	 	            var id=res.id;
  	 	            var name=JSON.stringify(res.properties.nickname);
+ 	 	            Kakao.Auth.logout();
  	 	            $.ajax({
  	 	               	type:"POST",
  	 	              	url:"./kakaologin",
  	 	              	data:{
  	 	              		"id":id,
  	 	              		"name":name
- 	 	              		
  	 	              	},
  	 	              	success:function(data){
  	 	              		alert(data);
  	 	            		$(location).attr("href","http://localhost:8090/yes/");  
- 	 	              	} 
+ 	 	              	},
+						error:function(request,status,error){
+                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                        }
  	 	            });
         },
         fail: function(err) {
@@ -745,6 +747,24 @@
     } 	
     
       }); }
+      
+      function logoutKakao(){
+	
+	
+			Kakao.API.request({
+				url: '/v1/user/me',
+				success: function(res) {
+					Kakao.Auth.logout(function () {
+						var frm = document.applicationJoinForm;
+						frm.submit();
+					});
+				},
+				fail: function(error) {
+			// console.log(error);
+			
+				}
+			})
+		}
  	
  	 /*  Kakao.init('630e98d8425188c04dae0728c65822bb');
  	    // 카카오 로그인 버튼을 생성합니다.
