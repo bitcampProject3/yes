@@ -6,8 +6,18 @@
   <mapper namespace="com.bit.yes.model.UserDao">
   
 	  <select id="insertOne" parameterType="com.bit.yes.model.entity.UserVo">
+	  
+	  <if test="password !=null">
 	 	insert into user_info(id,password,name,nickname,email,phoneNum,pwQuestion,birthDate,registNum) values(#{id},#{password},#{name},#{nickName},#{email},
 	  	#{phoneNum},#{pwQuestion},#{birthDate},#{registNum})
+	  </if>
+	  <if test="email!=null">
+	  	insert into user_info(id,name,email,birthDate,registNum) values (#{id},#{name},#{email},#{birthDate},#{registNum})
+	  </if>
+	  <if test="email==null">
+	  	insert into user_info(id,name,registNum) values(#{id},#{name},#{registNum})
+	  </if>
+	 
 	  </select>
 	  
 	  
@@ -33,5 +43,9 @@
   	   <update id="updateInfo" parameterType="com.bit.yes.model.entity.UserVo" >
   	  	update user_info set password=#{password},nickname=#{nickName},email=#{email},phoneNum=#{phoneNum},registNum=#{registNum} where id=#{id}
   	  </update>
+  	  
+  	  <delete id="deleteOne" parameterType="string">
+  	  	delete from user_info where id=#{param1}
+  	  </delete>
 
 </mapper>

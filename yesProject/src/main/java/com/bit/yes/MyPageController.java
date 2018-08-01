@@ -1,6 +1,7 @@
 package com.bit.yes;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -66,6 +67,21 @@ public class MyPageController {
 		}
 	
 	}
+	
+	//-----------회원 탈퇴-----------
+	@ResponseBody
+	@RequestMapping(value="/deleteUser",method=RequestMethod.POST,produces="application/text; charset=utf8")
+	public String deleteUser (String id,HttpSession session) throws SQLException {
+		System.out.println(id);
+		int result=sqlSession.getMapper(UserDao.class).deleteOne(id);
+		if(result>0) {
+			session.invalidate();
+			return "성공";
+			}
+		else {
+			return "회원가입실패";
+		}
+	}
 	//------------예약 현황-----------
 	@RequestMapping("/reservation.yes")
 	public String reservation(HttpSession session,Model model) throws SQLException {
@@ -83,6 +99,7 @@ public class MyPageController {
 		if(Integer.parseInt(user.getRegistNum())==0)//고객
 		{
 			list=service.listPage(model, id);
+			System.out.println(list);
 			return list;
 		}
 		else {
@@ -96,8 +113,9 @@ public class MyPageController {
 	//----------예약한 가게의 정보 불러오기----------
 	@ResponseBody
 	@RequestMapping(value="/branchInfo",method=RequestMethod.POST)
-	public BranchVo reservation2(String id,Model model) throws SQLException {
+	public BranchVo reservation2(String id) throws SQLException {
 		BranchVo bean=service.selectOne(id);
+		System.out.println(bean);
 		return bean;
 	}
 	

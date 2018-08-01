@@ -42,25 +42,33 @@
 
 
 	$(document).ready(function(){
-		
 		$('.update').click(function(){
+			 
 			 $('#myInfo_pw').attr('readonly', false); 
 			 $('#myInfo_nickName').attr('readonly', false); 
 			 $('#myInfo_email').attr('readonly', false); 
 			 $('#myInfo_phoneNum').attr('readonly', false); 
 			 $('#myInfo_registNum').attr('readonly', false); 
-			
-
-		
+			 
 		});	
-		$('.delete').click(function(){
+		
+		$('.del').click(function(){
 			var id=$('#myInfo_id').val();
-			alert(id);
+			
 			$.ajax({
-				
+		     type:"POST",
+		     url:"./deleteUser",
+		     data:{"id":id},
+		  	 success:function(data){
+		  		 if(data=='성공')
+		  		 	location.href='/yes/';
+		  		 else
+		  			 alert(data);
+		  	 } 
 				
 			});
 		});
+		
 		
 			$('#updateform').validate({
     			rules:{
@@ -116,7 +124,7 @@
     				$('#updateform').submit();
     			},
     			success:function(element){
-    
+    				$('.update').attr('type','submit');
     			}
     			
     		});
@@ -126,7 +134,7 @@
 	</script>
 
     </head>
-    <body style="overflow:auto; z-index:0; positio:relative;">
+    <body id="body" style="overflow-y:scroll; z-index:0; position:relative;">
        <jsp:include page="../layout/header.jsp"></jsp:include>
         <div class="container">
            
@@ -198,12 +206,20 @@
 		</table>  
 		  
 		  
-         <div style="float:right;">
+        <div style="float:right;">
 		<input type="button" class="btn btn-default update" style="margin:0px auto; " value="수정"/>
-		<input type="button" class="btn btn-danger delete" value="회원탈퇴"/>
+		<a id="modal" href="#deletebtn" rel="modal:open" class="btn btn-danger delete" >회원탈퇴</a>
          </div>
 		</form>
             
        	</div>
+       	
+   		<div id="deletebtn" class="modal modal2" style="display:none;">
+                   	 <p>회원 탈퇴시 개인 정보는 모두 삭제됩니다. 진행하시겠습니까?</p>
+			          <div style="width:100%; text-align:center;">
+                   	  <a href="#" class="btn btn-default del" >예</a>
+			          <a id="closebtn" href="#" class="btn btn-default" rel="modal:close">아니오</a>
+			          </div>
+		</div>
     </body>
 </html>

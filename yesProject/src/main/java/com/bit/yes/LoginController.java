@@ -1,6 +1,8 @@
 package com.bit.yes;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import javax.servlet.http.HttpSession;
 
@@ -94,17 +96,42 @@ public class LoginController {
 
    @ResponseBody
    @RequestMapping(value = "/naverlogin", method = RequestMethod.POST)
-   public String naverlogin(@RequestBody String email,HttpSession session,Model model) {
-      session.setAttribute("member", email);
+   public String naverlogin(String email,String name,String birthDate,HttpSession session) throws ParseException, SQLException {
+	  String[] id=email.split("@");
+
+	  UserVo bean=new UserVo();
+	  bean.setId("naver"+id[0]);
+	  bean.setName(name);
+	  bean.setEmail(email);
+	  bean.setRegistNum("0");
+	  Date date=java.sql.Date.valueOf("0000-"+birthDate);
+	  bean.setBirthDate(date);
+
+	  if(sqlSession.getMapper(UserDao.class).login(bean.getId())==null)
+		  sqlSession.getMapper(UserDao.class).insertOne(bean);
+	  
+	  session.setAttribute("member", bean);
       return "redirect:/";
    }
 
 
    @ResponseBody
-   @RequestMapping(value = "/kakaologin", method = RequestMethod.POST)
-   public String kakaologin(@RequestBody String name,HttpSession session,Model model) {
-      session.setAttribute("member", name);
-      return "redirect:/";
+   @RequestMapping(value = "/kakaologin", method = RequestMethod.POST,produces="application/text; charset=utf8")
+   public String kakaologin(String id,String name,HttpSession session) throws SQLException {
+	   UserVo bean=new UserVo();
+	   
+	   bean.setId("kakao"+id.toString());
+	   bean.setName(name.substring(1, name.length()-1));
+	   bean.setRegistNum("0");
+	   System.out.println(bean);
+	   
+	   if(sqlSession.getMapper(UserDao.class).login(bean.getId())==null)
+		   sqlSession.getMapper(UserDao.class).insertOne(bean); 
+	   
+	   
+	   
+	  session.setAttribute("member", bean);
+      return "내정보 수정 해주세요.";
    }
 
 

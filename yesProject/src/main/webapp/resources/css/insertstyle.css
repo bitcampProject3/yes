@@ -79,10 +79,8 @@
 .fileFormTr{border-bottom: 2px solid gray;margin-left: 100px; margin-right: 100px;}
 .markerImageListDiv{text-align: center; overflow-y: scroll;}
 .markerImageListDiv>img{margin: 5px;}
-    #slide *{
-        font-family: 'Jua', sans-serif;
-    }
-	#slide{
+#slide *{ font-family: 'Jua', sans-serif;}
+#slide{
 		float:right;
 		border:1px solid #e04f5f;
 		width:250px;
@@ -94,9 +92,6 @@
 		right:0;
 		overflow-y:hidden;
 
-}
-#slide * {
-	font-family: 'Jua', sans-serif;
 }
 
 #slide h1 {

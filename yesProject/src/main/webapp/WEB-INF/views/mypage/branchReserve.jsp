@@ -271,7 +271,6 @@
 				else{
 					 calendars.clndr1 = jQuery('.cal1').clndr({});
 					 
-					
 				}
 
 	        
