@@ -15,4 +15,5 @@ public interface UserDao {
 	public String findPw(String id,String name,String birth,String email,String answer) throws SQLException;
 	public int updatePw(String password,String id) throws SQLException;
 	public int updateInfo(UserVo bean) throws SQLException;
+	public int deleteOne(String id)throws SQLException;
 }

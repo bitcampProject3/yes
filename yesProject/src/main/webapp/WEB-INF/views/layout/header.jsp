@@ -7,6 +7,10 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
+	
+	
 	
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -50,7 +54,10 @@
 	
 	<style>
 
-
+ .quize{
+ font-size:15pt;
+ 
+ }
 
 </style>
 
@@ -109,6 +116,7 @@
         	$('#mypage').click(function(){
         		count();
         		//클릭할 때 마다 비동기통신
+        		$('body').css('overflow-y','hidden');
                 $('#slide').css({"display":"inline-block"});
                 $('#slide').animate(
                  {right:0,},'slow');
@@ -178,7 +186,7 @@
                 $('#slide').animate(
                 {right:-300},'slow'
                 );
-                
+                $('body').css('overflow-y','auto');
              });
         	
         	
@@ -319,13 +327,13 @@
       
         	      		
         	$(function(){
-        		
+        		//empty추가하기
         		$('.quiz').click(function(e){
         			
-        			var qc=$('.quizChoice').text().trim();
+        			var array=$('.quizChoice').text().trim().split("?");
+        			var qc=array[0].trim();
         			$('.quizChoice').text(e.target.text);
-        			e.target.text=qc;
-        			
+        			e.target.text=qc+"?";
         			
         		});
         		
@@ -662,12 +670,12 @@
 					</div>
 				</div>
 		</div>	
-	 <input type="button" id="loginCheck" class="btn btn-primary" style="padding-left:10px; width:100%; font-size: 20px; margin-top: 30px; "value="로그인"/>
+	 <input type="button" id="loginCheck" class="btn btn-primary" style="padding-left:10px; width:100%; font-size: 20px; margin-top: 10px; "value="로그인"/>
 	</form>
 	
 	
 	
-	<div style="width:90%; margin-top:20px; " >
+	<div style="width:90%; margin-top:30px; " >
             
             <div style="display: inline-block; position:relative; bottom: 20px; margin-left:100px; ">
                 
@@ -690,12 +698,12 @@
 
                 
             </div>
-            <div style="display: inline-block;  ">
-                
-                
-                <a id="kakao-login-btn" ></a>
-				<a href="http://developers.kakao.com/logout"></a>
-				</div>
+          <div style="display: inline-block; position:relative; bottom: 20px;  ">
+			 <a id="custom-login-btn" href="javascript:loginWithKakao()">
+			<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="225.375px" height="47px"   style="margin-top: 5px;"/>
+			</a>
+          </div>
+          
 	<div id="footerLogin">
 	<a id="findID">아이디 찾기</a>
 	<a id="findPW">비밀번호찾기</a>
@@ -703,6 +711,75 @@
 	</div>	
 				
  	<script type="text/javascript">
+ 	
+    Kakao.init('630e98d8425188c04dae0728c65822bb');
+    
+    function loginWithKakao() {
+      // 로그인 창을 띄웁니다.
+      Kakao.Auth.login({
+        success: function(authObj) {
+	        Kakao.API.request({
+ 	 	          url: '/v1/user/me',
+ 	 	          success: function(res) {
+	 	            console.log(JSON.stringify(res.kaccount_email));
+	 	            var id=res.id;
+ 	 	            var name=JSON.stringify(res.properties.nickname);
+ 	 	            $.ajax({
+ 	 	               	type:"POST",
+ 	 	              	url:"./kakaologin",
+ 	 	              	data:{
+ 	 	              		"id":id,
+ 	 	              		"name":name
+ 	 	              		
+ 	 	              	},
+ 	 	              	success:function(data){
+ 	 	              		alert(data);
+ 	 	            		$(location).attr("href","http://localhost:8090/yes/");  
+ 	 	              	} 
+ 	 	            });
+        },
+        fail: function(err) {
+          alert(JSON.stringify(err));
+        }
+      }); 
+    } 	
+    
+      }); }
+ 	
+ 	 /*  Kakao.init('630e98d8425188c04dae0728c65822bb');
+ 	    // 카카오 로그인 버튼을 생성합니다.
+ 	    Kakao.Auth.createLoginButton({
+ 	      container: '#kakao-login-btn',
+ 	      success: function(authObj) {
+ 	        // 로그인 성공시, API를 호출합니다.
+ 	        Kakao.API.request({
+ 	          url: '/v2/user/me',
+ 	          success: function(res) {
+ 	            console.log(JSON.stringify(res.properties.profile_image));
+ 	            console.log(JSON.stringify(res.properties.nickname));
+ 	            var name=JSON.stringify(res.properties.nickname);
+ 	            $.ajax({
+ 	               	type:"POST",
+ 	              	url:"./kakaologin",
+ 	              	data:{
+ 	              		"name":name
+ 	              	},
+ 	              	success:function(data){
+ 	              	} 
+ 	            });
+ 	            $(location).attr("href","http://localhost:8090/yes/");
+ 	            
+ 	          },
+ 	          fail: function(error) {
+ 	            alert(JSON.stringify(error));
+ 	          }
+ 	        });
+ 	      },
+ 	      fail: function(err) {
+ 	        alert(JSON.stringify(err));
+ 	      }
+ 	    }); */
+    	
  	
  	$('#login-join').click(function(){
  		$('#loginForm').css('display','none');
@@ -735,40 +812,7 @@
       });
  	});
  	
-      // 사용할 앱의 JavaScript 키를 설정해 주세요.
-      Kakao.init('630e98d8425188c04dae0728c65822bb');
-      // 카카오 로그인 버튼을 생성합니다.
-      Kakao.Auth.createLoginButton({
-        container: '#kakao-login-btn',
-        success: function(authObj) {
-          // 로그인 성공시, API를 호출합니다.
-          Kakao.API.request({
-            url: '/v2/user/me',
-            success: function(res) {
-              console.log(JSON.stringify(res.properties.profile_image));
-              console.log(JSON.stringify(res.properties.nickname));
-              var name=JSON.stringify(res.properties.nickname);
-              $.ajax({
-                 	type:"POST",
-                	url:"./kakaologin",
-                	data:{
-                		"name":name
-                	},
-                	success:function(data){
-                	} 
-              });
-              $(location).attr("href","http://localhost:8090/yes/");
-              
-            },
-            fail: function(error) {
-              alert(JSON.stringify(error));
-            }
-          });
-        },
-        fail: function(err) {
-          alert(JSON.stringify(err));
-        }
-      });
+ 
 		</script>				
 				
 	</div>

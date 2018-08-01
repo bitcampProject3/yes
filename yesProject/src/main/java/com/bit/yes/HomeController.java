@@ -25,4 +25,11 @@ public class HomeController {
 		return "main";
 	}
 	
+	//네이버로그인은 고객만 가능하게,,
+	@RequestMapping(value = "/callback", method = RequestMethod.GET)
+	public String callback() {
+	return "callback";
+		
+	}
+	
 }
