@@ -2,17 +2,16 @@ package com.bit.yes;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.CSS;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.bit.yes.model.UserDao;
 import com.bit.yes.model.entity.BranchVo;
@@ -36,7 +35,7 @@ public class MyPageController {
 	}
 	
 	
-	//-------------³»Á¤º¸------------------
+	//-------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½------------------
 	@RequestMapping("/myInfo.yes")
 	public String myInfo(HttpSession session,Model model) throws SQLException {
 		UserVo user=(UserVo) session.getAttribute("member");
@@ -57,27 +56,27 @@ public class MyPageController {
 		}
 		else
 		{
-			System.out.println("½ÇÆÐ"); 
-			//½ÇÆÐ °æ·Î ¾Æ¸¶ Æ²¸±°ÅÀÓ!
+			System.out.println("ï¿½ï¿½ï¿½ï¿½"); 
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Æ¸ï¿½ Æ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!
 			return "redirect:../myInfo.yes";
 		}
 	
 	}
-	//------------¿¹¾à ÇöÈ²-----------
+	//------------ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²-----------
 	@RequestMapping("/reservation.yes")
 	public String reservation(HttpSession session,Model model) throws SQLException {
 		String id=((UserVo)session.getAttribute("member")).getId();
 		service.listPage(model,id);
 		return "mypage/myReserve";
 	}
-	//---------¸¶ÀÌÆäÀÌÁö ´Þ·Â-----------
+	//---------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ·ï¿½-----------
 	@ResponseBody
 	@RequestMapping(value="/loadReserve",method=RequestMethod.POST)
 	public List<ReserveListVo> loadReserve(HttpSession session,Model model) throws SQLException {
 		String id=((UserVo)session.getAttribute("member")).getId();
 		UserVo user=sqlSession.getMapper(UserDao.class).login(id);
 		List<ReserveListVo> list;
-		if(Integer.parseInt(user.getRegistNum())==0)//°í°´
+		if(Integer.parseInt(user.getRegistNum())==0)//ï¿½ï¿½
 		{
 			list=service.listPage(model, id);
 			return list;
@@ -90,7 +89,7 @@ public class MyPageController {
 
 
 
-	//----------¿¹¾àÇÑ °¡°ÔÀÇ Á¤º¸ ºÒ·¯¿À±â----------
+	//----------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½----------
 	@ResponseBody
 	@RequestMapping(value="/branchInfo",method=RequestMethod.POST)
 	public BranchVo reservation2(String id,Model model) throws SQLException {
@@ -98,7 +97,7 @@ public class MyPageController {
 		return bean;
 	}
 	
-	//-----------¿¹¾à Ãë¼ÒÇÏ±â---------------
+	//-----------ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½---------------
 	@ResponseBody
 	@RequestMapping(value="/delreserve",method=RequestMethod.POST)
 	public String delReserve(String time,HttpSession session) throws SQLException{
@@ -112,23 +111,23 @@ public class MyPageController {
 	
 	
 	
-	//------------------»ç¾÷ÀÚ mypage-----------------
+	//------------------ï¿½ï¿½ï¿½ï¿½ï¿½ mypage-----------------
 	
 	@RequestMapping("/branchReserve.yes")
 	public String branchReserve(HttpSession session,Model model) throws SQLException{
 		UserVo bean=(UserVo) session.getAttribute("member");
 		String id=bean.getId();
-		//¿¹¾à ¸®½ºÆ® ºÒ·¯¿À±â
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 		service.reserveAll(model,id);
 		return "mypage/branchReserve";
 	}
 	
-	//-------------------»ç¾÷ÀÚ ¸ÅÀåÁ¤º¸-----------------
+	//-------------------ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-----------------
 	@RequestMapping("/branchInfo.yes")
 	public String branchInfo() {
 		return "mypage/branchInfo";
 	}
-	//----------------¸ÅÀå°ü¸®(Å×ÀÌºí °ü¸®)----------------------
+	//----------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½)----------------------
 	@RequestMapping("/branchManage.yes")
 	public String branchManage(HttpSession session,Model model) throws SQLException{
 		String id=((UserVo) session.getAttribute("member")).getId();
@@ -138,7 +137,7 @@ public class MyPageController {
 	}
 	
 	
-	// --------½Ç½Ã°£ stateÀü¼Û(ÁÂ¼®°ü¸®)-----------
+	// --------ï¿½Ç½Ã°ï¿½ stateï¿½ï¿½ï¿½ï¿½(ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½)-----------
 	@ResponseBody
 	@RequestMapping(value="/manageTable",method=RequestMethod.POST)
 	public String manageTable(String state,String entry,String entryR,String end,HttpSession session) throws SQLException{
@@ -147,28 +146,28 @@ public class MyPageController {
 		bean.setTableState(Integer.parseInt(state));
 		service.updateState(bean);
 		int count=0;
-		count=service.loadTicket(id);//´ë±âÇÏ´Â »ç¶÷ ¸î¸íÀÎÁö..
+		count=service.loadTicket(id);//ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..
 		System.out.println(count);
 		if(count>0)
 		{
-			//ÇöÀç ÀÔÀå ¹øÈ£ ÀúÀåÇÏ±â--- ÀúÀå ok
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½--- ï¿½ï¿½ï¿½ï¿½ ok
 			if(Integer.parseInt(entry)>0)
 			{
 			bean.setWaitingNum(Integer.parseInt(entry));
 			service.updateWaiting(bean);
 			if(entryR!=null) {
-				System.out.println("ÇöÀç ÀÔÀå¹øÈ£:"+entry);
-				//ticketing¿¡¼­ »èÁ¦ÇÏ±â---(ÇöÀçÀÔÀå¹øÈ£)
-				service.deleteTicket(Integer.parseInt(entry)); //»èÁ¦ ok
-				//ÇöÀç ÀÔÀå ¹øÈ£ÀÇ ticket¹øÈ£¸¦ »èÁ¦ÇÔ!
-				count=service.loadTicket(id);//´ë±âÇÏ´Â »ç¶÷ ¸î¸íÀÎÁö..
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½È£:"+entry);
+				//ticketingï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½---(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£)
+				service.deleteTicket(Integer.parseInt(entry)); //ï¿½ï¿½ï¿½ï¿½ ok
+				//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ticketï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!
+				count=service.loadTicket(id);//ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..
 			}
 			}
 			
 		}
 		
 		if(end!=null) {
-			//¿µ¾÷Á¾·á
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			bean.setWaitingNum(Integer.parseInt(entry));
 			service.updateWaiting(bean);
 			service.end(id);
@@ -177,8 +176,8 @@ public class MyPageController {
 	}
 	
 	
-	//---------------½Ç½Ã°£ ´ë±âÀÎ¿øcount----------------
-	// --------½Ç½Ã°£ stateÀü¼Û(ÁÂ¼®°ü¸®)-----------
+	//---------------ï¿½Ç½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½Î¿ï¿½count----------------
+	// --------ï¿½Ç½Ã°ï¿½ stateï¿½ï¿½ï¿½ï¿½(ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½)-----------
 	@ResponseBody
 	@RequestMapping(value="/count",method=RequestMethod.POST,produces="application/text; charset=utf8")
 	public String count(HttpSession session,String registNum) {
@@ -189,19 +188,19 @@ public class MyPageController {
 			
 			if(id!=null) {
 				int count=0;
-				if(Integer.parseInt(registNum)>0) { //»ç¾÷ÀÚ
-					count=service.loadTicket(id);//´ë±âÇÏ´Â »ç¶÷ ¸î¸íÀÎÁö..
-					return "»ç¾÷"+count+"¸í";
+				if(Integer.parseInt(registNum)>0) { //ï¿½ï¿½ï¿½ï¿½ï¿½
+					count=service.loadTicket(id);//ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..
+					return "ï¿½ï¿½ï¿½"+count+"ï¿½ï¿½";
 				}
-				else{ //°í°´ÀÏ °æ¿ì...ÀÚ½ÅÀÇ ´ë±â¹øÈ£
+				else{ //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½...ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È£
 					count=service.getNum(id);
 					
 					if(count>0) {
 					int state=service.getState(id);
-					return "°í°´"+count+"¹ø/"+state+"¹ø";
+					return "ï¿½ï¿½"+count+"ï¿½ï¿½/"+state+"ï¿½ï¿½";
 					
 					}
-					return "´ë±â ÁßÀÎ °¡°Ô°¡ ¾ø½À´Ï´Ù";
+					return "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½";
 					}
 				}
 			
@@ -209,5 +208,15 @@ public class MyPageController {
 		
 		return null;
 		
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/insertReserve", method = RequestMethod.POST)
+	public void insertReserve(@RequestBody Map<String, Object> map, HttpSession session){
+		System.out.println(map);
+		String id=((UserVo) session.getAttribute("member")).getId();
+
+		service.insertReserve(map, id);
+
 	}
 }

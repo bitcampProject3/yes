@@ -1,6 +1,5 @@
 package com.bit.yes;
 
-import com.bit.yes.model.BranchDao;
 import com.bit.yes.model.entity.BranchVo;
 import com.bit.yes.model.entity.ReserveListVo;
 import com.bit.yes.model.entity.UserVo;
@@ -10,12 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,14 +78,24 @@ public class BranchController {
 
     @ResponseBody
     @RequestMapping(value = "/branchdetail", method = RequestMethod.POST)
-	public List<BranchVo> branchDetail(@RequestBody String branchID){
+	public List<BranchVo> branchDetail(@RequestBody String branchID, Model model){
 		List<BranchVo> allMenuList = branchService.allMenuLoad(branchID.substring(0, branchID.length()-1));
+
 		return allMenuList;
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/waitingList", method = RequestMethod.POST)
+	public int waitingList(@RequestBody String branchId){
+		return branchService.waitingList(branchId.substring(0, branchId.length()-1));
+	}
+
+
 	@ResponseBody
 	@RequestMapping(value = "/updatelatlng", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	public void updateLatLng(@RequestBody Map<String, Object> updateLatLng){
 		branchService.updateLatLng(updateLatLng);
+		System.out.println("updateLatLng run");
 //		System.out.println(updateLatLng.get("id"));
 	}
 
@@ -118,15 +124,86 @@ public class BranchController {
 
 	@ResponseBody
 	@RequestMapping(value = "reservepreview", method = RequestMethod.POST)
-	public void reservePreviewDate(@RequestBody Map<String, Object> map){
+	public ArrayList<String> reservePreviewDate(String id, String date){//@RequestBody Map<String, Object> map){
+
+		System.out.println(id);
+		System.out.println(date);
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("date", date);
+
 		List<ReserveListVo> reserveList = reserveListService.reserveDatePreview(map);
 		List<BranchVo> branchTimeList = branchService.reserveInfoPreview((map.get("id")).toString());
-		System.out.println(branchTimeList.get(0).getOpTime());
-		System.out.println(reserveList);
-//		System.out.println(reserveList.get(0).getReserveTime());
 
-		// case1 : reserveList ---> null일 경우 예약 되어있는게 없으므로 전부 예약 가능
+		String opTime = branchTimeList.get(0).getOpTime();
+		String[] opTimes = opTime.split("~");
+
+		String[] openTimes = opTimes[0].split(":");
+		int openTimeHour = Integer.parseInt(openTimes[0]);
+		int openTimeMin = Integer.parseInt(openTimes[1]);
+		String[] closeTimes = opTimes[1].split(":");
+		int closeTimeHour = Integer.parseInt(closeTimes[0]);
+		int closeTimeMin = Integer.parseInt(closeTimes[1]);
+
+		ArrayList<String> resultTimeArr = new ArrayList<String>();
+		int maxMin = 60;
+		// 영업시간에서 예약 가능한 시간을 구하는 로직. 10분단위
+		for (int j = openTimeHour; j <= closeTimeHour; j++) {
+			for (int i = openTimeMin; i < maxMin ; i = i + 10) {
+
+				if(j < 10){
+					if(i == 0) resultTimeArr.add("0"+j+":"+"00");
+					else resultTimeArr.add("0"+j+":"+i);
+				}else{
+					if(i == 0) resultTimeArr.add(j+":"+"00");
+					else resultTimeArr.add(j+":"+i);
+				}
+
+
+
+			}
+			if(j == closeTimeHour-1) maxMin = closeTimeMin;
+			else openTimeMin = 0;
+		}
+
+//		System.out.println("resultTimeArr : " +resultTimeArr);
+
+
+		if(reserveList.size() == 0){
+			return resultTimeArr;
+		}else{
+			for (int i = 0; i < reserveList.size(); i++) {
+				Map temp = (Map) reserveList.get(i);
+				String reserveTime = String.valueOf(temp.get("reserveTime"));
+				String reserved = reserveTime.substring(11, 16);
+				resultTimeArr.remove(reserved);
+				System.out.println("resultRemove : " +reserved);
+			}
+
+
+			// 예약된 시간
+			// 예약된 시간을 제한 예약 가능 배열
+			System.out.println("resultTimeArr : " +resultTimeArr);
+
+			return resultTimeArr;
+		}
 
 	}
+
+	@ResponseBody
+    @RequestMapping(value = "/ticketingStart", method = RequestMethod.POST)
+	public void ticketingStart(@RequestBody String branchID, HttpSession httpSession){
+		String clientId = ((UserVo)httpSession.getAttribute("member")).getId();
+		branchService.ticketingStart(branchID.substring(0, branchID.length()-1), clientId);
+	}
+	@ResponseBody
+    @RequestMapping(value = "/ticketingCheck", method = RequestMethod.POST)
+	public int ticketingCheck(@RequestBody String branchID, HttpSession httpSession){
+		String clientId = ((UserVo)httpSession.getAttribute("member")).getId();
+		if(clientId == null) return 1;
+		return branchService.ticketingCheck(branchID.substring(0, branchID.length()-1), clientId);
+	}
+
+
 
 }

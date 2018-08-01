@@ -59,4 +59,16 @@ public class BranchService {
 	public void updateLatLng(Map<String,Object> updateLatLng) {
 		branchDao.updateLatLng(updateLatLng);
 	}
+
+	public int waitingList(String id) {
+		return branchDao.waitingList(id);
+	}
+
+	public void ticketingStart(String id, String clientId) {
+		branchDao.ticketingStart(id, clientId);
+	}
+
+	public int ticketingCheck(String id, String clientId){
+		return branchDao.ticketingCheck(id, clientId);
+	}
 }

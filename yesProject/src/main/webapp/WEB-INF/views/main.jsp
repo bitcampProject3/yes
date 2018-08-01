@@ -12,6 +12,26 @@
 	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	    <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
     </head>
+    <style>
+	    .selectTimeContent{
+	        width: 50px;
+            height: 25px;
+            border: 1px solid gray;
+            background-color: white;
+            display: inline-block;
+            margin-right: 3px;
+		    margin-bottom: 5px;
+		    text-align: center;
+	    }
+	    
+	    .selectTime5, .selectTime10, .selectTime15, .selectTime15, .selectTime20,
+	    .selectTime25, .selectTime30, .selectTime35, .selectTime40, .selectTime45,
+	    .selectTime50, .selectTime55, .selectTime60,
+	    .selectTime65, .selectTime70, .selectTime75
+	    {
+		    margin-right: 0px;
+	    }
+    </style>
  <body>
        
        <jsp:include page="./layout/header.jsp"/>
@@ -30,29 +50,6 @@
                 // 브라우저 크기가 변할 시 동적으로 사이즈를 조절해야 하는경우
                 window.addEventListener('resize', mapResize);
             }
-            // var arr = [];
-            // function getSigungu() {
-            //     $.ajax({
-            //         url: "/json/area.json",
-            //         dataType : "text",
-            //         error: function () {
-            //             alert('error');
-            //
-            //         },
-            //         success: function (data) {
-            //             $("select[name='gugun1'] option").remove();
-            //             $.each(JSON.parse(data),function (index, value) {
-            //                 if (index === ($('#sido1').val())) {
-            //                     arr = value;
-            //                     for(i = 0; i<arr.length; i++){
-            //                         $('#gugun1').append(new Option(arr[i],"temp"));
-            //                     }
-            //                 }
-            //
-            //             })
-            //         }
-            //     })
-            // }
             
             function searchStart() {
                 
@@ -240,19 +237,22 @@
 					        '${articleList.image3}', '${articleList.image4}',
 					        '${articleList.image5}','${articleList.image6}',
 					        '${articleList.image7}','${articleList.image8}',
-					        '${articleList.category}', '${articleList.branchExplain}'];
+					        '${articleList.category}', '${articleList.branchExplain}',
+					        '${articleList.sido}', '${articleList.sigungu}',
+				            '${articleList.category}'];
 				        
 				        coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
 
-						if (('${articleList.latlngx}' && '${articleList.latlngy}')==null){
+						if (('${articleList.latlngx}' && '${articleList.latlngy}')===''){
 				        //기등록된 자료에 latlng 입력
+							alert('좌표없음'+tempId);
 						var latlngY = result[0].y,
 							latlngX = result[0].x;
 						var tempId = '${articleList.id}';
 						$.ajax({
 							type: 'POST',
-							url: './updatelatlng',
+							url: '/updatelatlng',
 							data: JSON.stringify({
 								latlngY: latlngY,
 								latlngX: latlngX,
@@ -309,7 +309,10 @@
 				        image7          = branchArr[20],
 				        image8          = branchArr[21],
 			            category        = branchArr[22],
-			            branchExplain   = branchArr[23];
+			            branchExplain   = branchArr[23],
+				        sido            = branchArr[24],
+				        sigungu         = branchArr[25],
+				        category        = branchArr[26];
 			            
 			        var imageSrc = './imgs/markerIcon/'+markerImage, // 마커이미지의 주소입니다
 				        imageSize = new daum.maps.Size(55, 55), // 마커이미지의 크기입니다
@@ -556,7 +559,10 @@
 				        image7          = branchDetailArr[20],
 				        image8          = branchDetailArr[21],
 			            category        = branchDetailArr[22],
-			            branchExplain   = branchDetailArr[23];
+			            branchExplain   = branchDetailArr[23],
+			            sido            = branchDetailArr[24],
+			            sigungu         = branchDetailArr[25],
+				        category        = branchDetailArr[26];
 		        	var test = [];
 					$.ajax({
 				        type: 'POST',
@@ -569,37 +575,79 @@
 						        test.push(val.price);
 					        });
 					        for (i = 0; i <test.length; i++){
-								$('.modalMenuName'+[i]).empty();
-								$('.modalMenuName'+[i]).append(test[i*2]);
-								$('.modalMenuPrice'+[i]).empty();
-								$('.modalMenuPrice'+[i]).append(test[i*2+1]);
+								$('.modalMenuName'+[i]).empty().append(test[i*2]);
+								$('.modalMenuPrice'+[i]).empty().append(test[i*2+1]);
 							}
-				        }
+				        },
+						error: function(request,status,error) {
+                            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							
+                        }
 			        });
+					$.ajax({
+				        type: 'POST',
+				        url: '/waitingList',
+				        data: id,
+				        success: function (data) {
+				        	if (data === 100) $('.modalStatus').css('display','none');
+				        	else {
+				        		$('.modalStatus').css('display','inline-block');
+				        		$('.ticketingText').empty().append(data+' 명');
+					        }
+				        },
+						error: function(request,status,error) {
+                            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                        }
+		            });
+					$.ajax({
+				        type: 'POST',
+				        url: '/ticketingCheck',
+				        data: id,
+				        success: function (data) {
+				        	alert(data);
+				        	if (data !== 0){
+				        		$('.ticketingBtn').empty().append('대기 중');
+				        		$('.ticketingBtn').off("click");
+					        }
+				        	else $('.ticketingBtn').empty().append('대기 시작');
+				        },
+						error: function(request,status,error) {
+                            // alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                        }
+		            });
 					
-					$('.detailModalTopTitle').empty();
-					$('.modalScore').empty();
-					$('.modalStatus').empty();
-					$('.modalJibunAddress').empty();
-					$('.modalAddress').empty();
-					$('.modalPhoneNum').empty();
-					$('.modalOpTime').empty();
-					$('.modalBreakTime').empty();
-					$('.modalOpDay').empty();
-					$('.modalExplain').empty();
+					
+					$('.ticketingBtn').click(function () {
+						$.ajax({
+					        type: 'POST',
+					        url: '/ticketingStart',
+					        data: id,
+					        success: function () {
+					        	var ticketingNum = $('.ticketingText').text();
+					        	var resultNum = ticketingNum.slice(0, ticketingNum.length-2);
+					        	$('.ticketingText').empty().append((resultNum*1+1)+' 명');
+					        	
+					        },
+							error: function () {
+								alert('로그인을 해주시기 바랍니다.');
+							}
+	                    });
+	                });
+					
+					
 					
 					// 매장 detail 페이지에 db정보 추가
-					$('.detailModalTopTitle').append(branchName);
-					$('.modalScore').append(score+' / 5.0');
-					$('.modalStatus').append(state);
-					$('.modalAddress').append(roadAddress);
-					$('.modalJibunAddress').append('(우) '+zoneCode+' (지번) '+jibunAddress);
-					$('.modalPhoneNum').append(phoneNum);
-					$('.modalOpTime').append(opTime);
-					$('.modalBreakTime').append(breakTime);
-					$('.modalOpDay').append(opDate);
-					$('.modalExplain').append(branchExplain);
-					
+					$('.detailModalTopTitle').empty().append(branchName);
+					$('.modalScore').empty().append('평점 : '+score+' / 5.0');
+					$('.modalAddress').empty().append(roadAddress);
+					$('.modalJibunAddress').empty().append('(우) '+zoneCode+' (지번) '+jibunAddress);
+					$('.modalPhoneNum').empty().append(phoneNum);
+					$('.modalOpTime').empty().append(opTime);
+					$('.modalBreakTime').empty().append(breakTime);
+					$('.modalOpDay').empty().append(opDate);
+					$('.modalExplain').empty().append(branchExplain);
+					$('.categorySpan').empty().append(sido+' '+sigungu);
+					$('.modalStatus').css('display','none');
 					
 					var imagePath = "/imgs/foodimgs/";
 					
@@ -612,16 +660,43 @@
 					}
 		        }
 		        
-	        </script>
-	        <script>
-		       
+		        
+		         function insertReserve() {
+    	
+                  	var times = $('.resultTimeDiv').text();
+                  	var time = times.slice(times.length-5, times.length);
+                  	if (time.length === 4) time = '0'+time;
+                  	console.log(time);
+                  	
+			        var data = {};
+                    data.targetDate = $('#targetDate').val() + '-' + time;
+                    data.targetPersonel = $('.reservePersonelInput').val();
+                    data.targetRequest = $('.reserveRequestInput').val();
+                    data.targetBranch = $('.reserveTimeDiv').attr('id');
+                  
+                    $.ajax({
+                        type: "POST",
+                        url: "/insertReserve",
+                        data: JSON.stringify(data),
+                        contentType: "application/json; charset=UTF-8",
+                        dataType: "json",
+                        success: function(data) {
+                            alert('ajax-success');
+                        },
+                        error: function(request,status,error) {
+                            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							
+                        }
+                    })
+                  
+                  }
 	        </script>
 	        <div id="ex1" class="modal">
 			        <div class="detailModalTop">
 			            <div class="detailModalTopTitle">
 			            </div>
 				        <div class="detailModalTopCategory">
-					        <span class="categorySpan">서울 마포구 한식</span>
+					        <span class="categorySpan"></span>
 				        </div>
 			        </div>
 	                <div class="detailModalLeft">
@@ -644,9 +719,12 @@
 		                </div>
 	                </div>
 	                <div class="detailModalRight">
-		                <div class="modalStatusDiv">
-			                <div class="modalScore"></div>
-			                <div class="modalStatus"></div>
+		                <div class="modalStatusDiv" style="text-align: center;">
+			                <div class="modalScore" style="width: 330px; "></div>
+			                <div class="modalStatus" style="width: 200px;height: 40px;display: inline-block;top: 0;right: 10px;position: absolute; text-align: right;">
+				                <div class="ticketingText" style="display: inline-block; margin-right: 20px;"></div>
+				                <div class="ticketingBtn" style="display: inline-block;">대기시작</div>
+			                </div>
 		                </div>
 		                <div>
 			                <div class="modalAddressDiv">주소</div>
@@ -743,27 +821,31 @@
 			        <span class="modalTopSpan">예약</span>
 		        </div>
 	            <div id="calendar"></div>
+	            <input type="hidden" name="" id="targetDate" value="">
 	            <div class="reserveTimeDiv">
 		            <div class="reservePersonel">
 			            <input type="number" min="1" max="10" class="reservePersonelInput" placeholder="1"/>명
 		            </div>
 		            <div class="reserveTimeSelect">
-			            <select class="timeSelect">
-				            <option>예약시간</option>
-			            </select>
+			            <div class="resultTimeDiv" style="height: 100%; width: 100%; font-size: 19px; line-height: 40px;">
+	                    </div>
 		            </div>
 	            </div>
-	            <div class="resultTimeDiv">
-		           17년 7월 30일 2명
-	            </div>
+	            
 	            <div class="reserveRequest">
 		           <input type="text" class="reserveRequestInput" placeholder="요청사항"/>
 	            </div>
 	            <div class="reserveBtn">
 		            <a href="#" class="btn-gradient gray block">취소</a>
-		            <a href="#" class="btn-gradient red block">예약</a>
+		            <a href="#" onclick="insertReserve()" class="btn-gradient red block">예약</a>
 	            </div>
+	            <div class="selectTimeDiv" style="position: absolute; display: none; width: 300px; height: 400px; top: 120px; right: -320px;">
+	                <div class="selectTimeTopDiv" style="text-align: center; color: white; font-weight: 500; font-size: 16pt; line-height: 70px;border-top-left-radius: 15px; border-top-right-radius: 15px; height: 70px; background-color: #e04f5f;"></div>
+		            <div class="selectTimeContentDiv" style="overflow-y: scroll;border: 3px dashed #e04f5f; border-top: none; height: 330px; padding: 8px; padding-top: 10px;">
+		            </div>
+                </div>
             </div>
+            
     <script>
     $.noConflict();
     $(document).ready(function () {
@@ -775,7 +857,7 @@
 			gallery: {
 				enabled: true,
 				navigateByImgClick: true,
-				preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+				preload: [0,1]
 			},
 			image: {
 				tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
@@ -794,30 +876,23 @@
         $('.day').click(function (target) {
         	$('.day').css('background-color','white');
             $(this).css('background-color','lightgray');
-	        // $.ajax({
-		     //    type: 'POST',
-		     //    url: './reservepreview',
-		     //    data: id,
-		     //    dataType: 'json',
-		     //    success: function (data) {
-			 //        $.each(data,  function (idx, val) {
-				//         test.push(val.menu);
-				//         test.push(val.price);
-			 //        });
-			 //        for (i = 0; i <test.length; i++){
-				// 		$('.modalMenuName'+[i]).empty();
-				// 		$('.modalMenuName'+[i]).append(test[i*2]);
-				// 		$('.modalMenuPrice'+[i]).empty();
-				// 		$('.modalMenuPrice'+[i]).append(test[i*2+1]);
-				// 	}
-		     //    }
-	        // });
-         
         });
+		
+		
+		$('.ticketingBtn').mouseover(function () {
+			$('.ticketingBtn').css('color','#e04f5f');
+		});
+		$('.ticketingBtn').mouseout(function () {
+			$('.ticketingBtn').css('color','black');
+		});
+	    
+	   
     });
+    
+   
     
     </script>
 	<script src="./js/clndr3.js"></script>
-    <script src="./js/demo.js"></script>
+    <script src="./js/demo.js?ver=3"></script>
     </body>
 </html>

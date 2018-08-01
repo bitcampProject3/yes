@@ -28,30 +28,75 @@ jQuery(document).ready( function() {
     // previousYear, nextInterval, previousInterval, or today. Then
     // onMonthChange (if the month changed), inIntervalChange if the interval
     // has changed, and finally onYearChange (if the year changed).
+
+
+
     calendars.clndr3 = jQuery('#calendar').clndr3({
         clickEvents: {
             click: function (target) {
-                console.log('Cal-1 clicked: ', target);
-                var branchid = jQuery('.reserveTimeDiv').attr('id'),
-                    targetDate = target.date._i;
-                jQuery.ajax({
-                    type: 'POST',
-                    url: 'reservepreview',
-                    data: JSON.stringify({'id' : branchid,
-                            'date' : targetDate}),
-                    dataType: 'json',
-                    contentType:"application/json; charset=UTF-8",
-                    success: function (data) {
-                        // $.each(data,  function (idx, val) {
-                        //     test.push(val.menu);
-                        //     test.push(val.price);
-                        //     mapSetMarker(test);
-                        // });
-                    },
-                    error:function(request,status,error){
-                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+				$('.selectTimeContentDiv').empty();
+				$('.resultTimeDiv').empty();
+            	var personel = $('.reservePersonelInput').val();
+				console.log(personel);
+            	if (personel === '') { // noinspection JSAnnotator
+		            alert('인원을 입력하여 주십시오');
+	            }else {
 
-                });
+		            console.log('Cal-1 clicked: ', target);
+		            var branchid = jQuery('.reserveTimeDiv').attr('id'),
+			            targetDate = target.date._i;
+
+		            var yyyymmdd = targetDate.split('-');
+		            var yyyy = yyyymmdd[0],
+			            mm = yyyymmdd[1],
+			            dd = yyyymmdd[2];
+
+
+		            $('.selectTimeTopDiv').empty().append(yyyy + '년 ' + mm + '월 ' + dd + '일' + ' 예약 가능 시간');
+
+		            jQuery.ajax({
+			            type: 'POST',
+			            url: 'reservepreview',
+			            data: {'id': branchid, 'date': targetDate},
+			            success: function (data) {
+				            // $('.timeSelect').empty();
+							$('#targetDate').val(targetDate);
+				            $('.selectTimeDiv').css('display', 'inherit');
+
+
+				            for (i = 0; i < data.length; i++) {
+					            $('.selectTimeContentDiv').append('<div class="selectTimeContent selectTime' + i + '">' + data[i] + '</div>');
+					            $('.selectTime' + i).css('margin-right', '7px');
+					            if ((i % 5) === 4) $('.selectTime' + i).css('margin-right', '0px');
+
+
+					            $('.selectTime' + i).click(function () {
+
+						            $('.selectTimeContent').css('background-color', 'white');
+						            $(this).css('background-color', '#ebebeb');
+									var thisTime = $(this).text();
+									console.log(thisTime);
+						            $('.resultTimeDiv').empty().append(yyyy + '년 ' + mm + '월 ' + dd + '일 ' + personel + '명 ' + thisTime);
+					            });
+
+
+				            }
+
+				            $('.selectTimeContent').css({
+					            'width': '50px',
+					            'height': '25px',
+					            'display': 'inline-block',
+					            'border': ' 1px solid gray',
+					            'margin-bottom': ' 5px',
+					            'text-align': ' center'
+				            });
+			            },
+			            error: function (request, status, error) {
+				            alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				            console.log(error);
+			            }
+		            });
+	            }
 
             },
             today: function () {

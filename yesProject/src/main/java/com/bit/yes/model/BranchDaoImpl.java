@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +21,7 @@ public class BranchDaoImpl implements BranchDao{
     private SqlSession sqlSession;
 
     @Override
-    public List<BranchVo> selectAll() throws SQLException {
+    public List<BranchVo> selectAll(){
         return sqlSession.selectList("branchList.selectAll");
     }
 
@@ -97,9 +96,6 @@ public class BranchDaoImpl implements BranchDao{
 
         for (int i = 0; i < menuArr.size(); i++) {
             insertMap = new HashMap<>();
-//            System.out.println(map.get("menu"+(i+1)));
-//            System.out.println(map.get("price"+(i+1)));
-//            System.out.println(map.get("checkbox"+(i+1)));
             insertMap.put("id", map.get("id"));
             insertMap.put("menu",menuArr.get(i));
             insertMap.put("price",priceArr.get(i));
@@ -127,6 +123,36 @@ public class BranchDaoImpl implements BranchDao{
     @Override
     public List<BranchVo> reserveInfoPreview(String id) {
         return sqlSession.selectList("branchList.reserveInfoPreview", id);
+    }
+
+    @Override
+    public int waitingList(String id) {
+        int countNum = sqlSession.selectOne("branchList.waitingNum", id);
+        if (countNum == 0){
+            int tableState = sqlSession.selectOne("branchList.tableState", id);
+            int maxTable = sqlSession.selectOne("branchList.maxTable", id);
+            if(tableState == maxTable) return countNum;
+            else return 100;    // 100 == 대기 시작버튼 비활성화
+        }
+        else return countNum;
+    }
+
+    @Override
+    public int ticketingCheck(String id, String clientId){
+        Map map = new HashMap();
+        map.put("branchId", id);
+        map.put("clientId", clientId);
+        return sqlSession.selectOne("branchList.ticketingCheck", map);
+    }
+
+    @Override
+    public void ticketingStart(String id, String clientId) {
+        int countNum = sqlSession.selectOne("branchList.waitingNum", id);
+        Map map = new HashMap();
+        map.put("branchId", id);
+        map.put("clientId", clientId);
+        map.put("countNum", countNum+1);
+        sqlSession.insert("branchList.ticketingStart",map);
     }
 
 
