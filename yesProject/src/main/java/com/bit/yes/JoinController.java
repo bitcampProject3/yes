@@ -1,13 +1,16 @@
 package com.bit.yes;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -47,9 +50,8 @@ public class JoinController {
 	
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	public String add(@ModelAttribute  UserVo bean,Model model) throws SQLException{
-		
-		
+	public String add(@ModelAttribute  UserVo bean,Model model,ServletRequest req) throws SQLException, UnsupportedEncodingException{
+		req.setCharacterEncoding("UTF-8");
 		sqlSession.getMapper(UserDao.class).insertOne(bean);
 		return "redirect:/";
 		
@@ -59,14 +61,12 @@ public class JoinController {
 	@ResponseBody
     @RequestMapping(value = "/test/remote", method = RequestMethod.POST)
     public  String remoteTest(String id,Model model,HttpServletRequest req) throws SQLException, IOException {
-        // queryString을 파싱하여 적절한 처리..
-        // queryString은 id=testID&mode=view&entry=10 이런 형식의 문자열로 넘어옴
     	
     	//String ref=req.getHeader("Referer").substring(26);
     	UserVo user=sqlSession.getMapper(UserDao.class).login(id);
     	
     	if(user!=null) {
-    		return "false";	// true 또는 false를 문자열로 return
+    		return "false";	
     	}
     	else {
     		return "true";

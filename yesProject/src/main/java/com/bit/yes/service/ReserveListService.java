@@ -27,7 +27,6 @@ public class ReserveListService {
       return list;
    }
    public BranchVo selectOne(String branchID) throws SQLException{
-
       return reserveDao.selectOne(branchID);
    }
    public void deleteOne(ReserveListVo bean) throws SQLException{

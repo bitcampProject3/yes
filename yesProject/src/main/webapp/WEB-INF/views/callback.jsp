@@ -18,19 +18,20 @@
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
   function naverSignInCallback() {
-   // alert(naver_id_login.getProfileData('email'));
-   // alert(naver_id_login.getProfileData('nickname'));
-   // alert(naver_id_login.getProfileData('age'));
    
     //비동기 통신
     $.ajax({
     	type:"POST",
     	url:"./naverlogin",
     	data:{
-    		"email": naver_id_login.getProfileData('email')
+    		"email": naver_id_login.getProfileData('email'),
+    		"name":naver_id_login.getProfileData('name'),
+    		"birthDate":naver_id_login.getProfileData('birthday'),
+    		"age":naver_id_login.getProfileData('age')
     	},
     	success:function(data){
-    		}
+    		
+    	}
     	}
     	
     

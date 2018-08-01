@@ -292,14 +292,14 @@ p {
 .cal2 .clndr .clndr-grid .day.event {
   background-color: #B4E09F;
 }
-<!--ë‚´ê°€ ì¶”ê°€í•œ ë¶€ë¶„-->
+<!--³»°¡ Ãß°¡ÇÑ ºÎºÐ-->
 .cal2 .clndr .clndr-table tr .day.today,
 .cal2 .clndr .clndr-table tr .day.my-today
 {
   /* background-color: #E3C57F; */
   background: #FFD8D8;
 }
-<!--ì¶”ê°€-->
+<!--Ãß°¡-->
 .cal2 .clndr .clndr-grid .day.selected {
   background-color: #E37FD6;
 }

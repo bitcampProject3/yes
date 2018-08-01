@@ -1,12 +1,13 @@
 @font-face {font-family: 'BareunBatang';font-style: normal;font-weight: 400;src: url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunBatang/BareunBatangOTFM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunBatang/BareunBatangOTFM.woff') format('woff');}
 @font-face {font-family: 'BareunBatang';font-style: normal;font-weight: 700;src: url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunBatang/BareunBatangOTFB.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunBatang/BareunBatangOTFB.woff') format('woff');}
 @font-face {font-family: 'BareunBatang';font-style: normal;font-weight: 300;src: url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunBatang/BareunBatangOTFL.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunBatang/BareunBatangOTFL.woff') format('woff');}
-.modal a.close-modal {top: 12px;right: 12px;background-image: url("/imgs/cancel.png");}
+.modal a.close-modal {top: 12px;right: 12px;background-image: url("../imgs/cancel.png");}
 .mfp-no-margins img.mfp-img {padding: 0;}
 .mfp-no-margins .mfp-figure:after {top: 0;bottom: 0;}
 .mfp-no-margins .mfp-container {padding: 0;}
 .popup-gallery a img{border: 2px solid gray;border-radius: 3px;margin-bottom: 5px;}
 *, body{font-weight: 900;}
+/* body{overflow-x: hidden;overflow-y: scroll !important;} */
 nav a{font-family: 'Jua', sans-serif;}
 .searchText{font-family: 'Do Hyeon', sans-serif;font-size: 30px;}
 .navbar-default{height: 80px;}
@@ -72,9 +73,11 @@ html,body {height:100%; margin:0; padding:0;overflow-y: hidden; overflow-x: hidd
 .searchResultContentTitle{width: 100%; height: 30px; text-align: center; font-size: 18px; font-weight: bold; background-color: rgba(224, 79, 95, 0.2);}
 .searchResultContentDetail{font-size: 11px;}
 
-/* Ïù¥Ìïò detail modalÏùò style */
+/* ¿Ã«œ detail modal¿« style */
+
 
 .modal{height: 500px; max-height: 500px; max-width: 640px; width: 640px; margin: auto; overflow: visible; border-radius: 10px; padding: 0px;}
+.modal2{height: 200px; max-height: 200px; max-width: 305px; width: 350px; margin: auto; overflow: visible; border-radius: 10px; padding: 0px;}
 .detailModalTop{width: 640px; height: 100px; border-top-left-radius: 10px; border-top-right-radius: 10px; background-color: #e04f5f;}
 .detailModalTopTitle{font-size: 40px; color: white; width: 310px; height: 100%; padding-left: 10px; line-height: 100px; display: inline-block; float: left;}
 .detailModalTopCategory{width: 310px; display: inline-block; height: 100%; line-height: 160px;}

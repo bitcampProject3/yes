@@ -10,30 +10,26 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
-	
-	
-
-	<annotation-driven/>
-	
-	
+	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/imgs/**" location="/resources/imgs/" />
 	<resources mapping="/js/**" location="/resources/js/" />
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/review_imgs/**" location="/resources/review_imgs/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="contentType" value="text/html; charset=UTF-8"/>
 	</beans:bean>
+	
+	<!-- file upload  -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="5242880"/>
-		<beans:property name="maxInMemorySize" value="1048576"/>
+		<beans:property name="maxUploadSize" value="10485760"></beans:property>
 	</beans:bean>
 	<context:component-scan base-package="com.bit.yes" />
-	
-	
 	
 </beans:beans>

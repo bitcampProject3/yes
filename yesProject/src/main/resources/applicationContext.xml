@@ -13,10 +13,11 @@
 	<bean id="dataSource"
 	class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 	p:driverClassName="com.mysql.cj.jdbc.Driver"
-	p:url="jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC&amp;characterEncoding=UTF-8"
+	p:url="jdbc:mysql://127.0.0.1:3306/mydb?serverTimezone=UTC&amp;characterEncoding=UTF-8"
 	p:username="scott" 
-	p:password="tiger"
-	></bean>
+	p:password="tiger"></bean>
+	
+
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="dataSource"
 		  p:configLocation="classpath:/mybatis-config.xml"
