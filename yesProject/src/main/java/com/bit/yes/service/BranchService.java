@@ -2,6 +2,7 @@ package com.bit.yes.service;
 
 import com.bit.yes.model.BranchDao;
 import com.bit.yes.model.entity.BranchVo;
+import com.bit.yes.model.entity.ReviewVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -70,5 +71,9 @@ public class BranchService {
 
 	public int ticketingCheck(String id, String clientId){
 		return branchDao.ticketingCheck(id, clientId);
+	}
+
+	public List<ReviewVo> branchReview(String branchId) {
+		return branchDao.branchReview(branchId);
 	}
 }

@@ -55,11 +55,10 @@
 	<style>
 
 
- .quize{
- font-size:15pt;
- 
- }
-</style>
+    .quize{
+        font-size:15pt;
+	}
+	</style>
 
      <script>
    
@@ -190,21 +189,21 @@
              });
         	
         	
-            $("#logout").click(function(){
-            	$.ajax({
-                    type : "POST",
-                    dataType : 'text',
-                    url : "http://nid.naver.com/nidlogin.logout",
-                    crossDomain : true,
-                    xhrFields : {
-                       withCredentials : true
-                    }
-                 }).done(function(data) {
-                    $('#logout').submit();
-                 }).fail(function(xhr, textStatus, errorThrown) {
-                    $('#logout').submit();
-                 });
-            });
+            // $("#logout").click(function(){
+            // 	$.ajax({
+            //         type : "POST",
+            //         dataType : 'text',
+            //         url : "http://nid.naver.com/nidlogin.logout",
+            //         crossDomain : true,
+            //         xhrFields : {
+            //            withCredentials : true
+            //         }
+            //      }).done(function(data) {
+            //         $('#logout').submit();
+            //      }).fail(function(xhr, textStatus, errorThrown) {
+            //         $('#logout').submit();
+            //      });
+            // });
             
             
             //지도
@@ -313,7 +312,7 @@
                 <c:if test="${member!=null }">
 
                     <li><a id="mypage" href="#">마이페이지</a></li>
-                    <li><a id="logout" href="logout">로그아웃</a></li>
+                    <li><a id="logout" onclick="logoutKakao()">로그아웃</a></li>
                 </c:if>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -715,39 +714,45 @@
     Kakao.init('630e98d8425188c04dae0728c65822bb');
     
     function loginWithKakao() {
-      // 로그인 창을 띄웁니다.
-      Kakao.Auth.login({
-        success: function(authObj) {
-	        Kakao.API.request({
- 	 	          url: '/v1/user/me',
- 	 	          success: function(res) {
-	 	            console.log(JSON.stringify(res.kaccount_email));
-	 	            var id=res.id;
- 	 	            var name=JSON.stringify(res.properties.nickname);
- 	 	            Kakao.Auth.logout();
- 	 	            $.ajax({
- 	 	               	type:"POST",
- 	 	              	url:"./kakaologin",
- 	 	              	data:{
- 	 	              		"id":id,
- 	 	              		"name":name
- 	 	              	},
- 	 	              	success:function(data){
- 	 	              		alert(data);
- 	 	            		$(location).attr("href","http://localhost:8090/yes/");  
- 	 	              	},
-						error:function(request,status,error){
-                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                        }
- 	 	            });
-        },
-        fail: function(err) {
-          alert(JSON.stringify(err));
-        }
+        // 로그인 창을 띄웁니다.
+		Kakao.Auth.cleanup();
+        Kakao.Auth.login({
+        // success: function(authObj) {
+			// Kakao.API.request({
+			// 	url: '/v1/user/me',
+			// 	success: function(res) {
+			// 	console.log(JSON.stringify(res.kaccount_email));
+			// 	var id=res.id;
+			// 	var name=JSON.stringify(res.properties.nickname);
+	// $.ajax({
+	// type:"POST",
+	// url:"./kakaologin",
+	// data:{
+	// "id":id,
+	// "name":name
+	// },
+	// success:function(data){
+	// alert(data);
+	// $(location).attr("href","http://localhost:8090/yes/");
+	// },
+	// error:function(request,status,error){
+	// alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	// }
+	// });
+	//
+	// 			},
+	// 			error: function(){
+	// 				alert('login error');
+	// 			}
+	// 		})
+	// 	},
+     //    fail: function(err) {
+     //      alert(JSON.stringify(err));
+     //    }
       }); 
-    } 	
+    	
     
-      }); }
+      };
       
       function logoutKakao(){
 	
@@ -761,7 +766,7 @@
 					});
 				},
 				fail: function(error) {
-			// console.log(error);
+					console.log(error);
 			
 				}
 			})

@@ -107,40 +107,97 @@
   	select * from review where idx=#{val}
   </select>
   
+  <select id="reviewCommentList" parameterType="int" resultType="com.bit.yes.model.entity.CommentVo">
+  	select * from review_comment where review_idx=#{value} order by comment_idx desc
+  </select>
+
   <delete id="reviewDelete" parameterType="int">
   	delete from review where idx=#{val};
   </delete>
-  
+
   <delete id="reviewDeleteFile" parameterType="int">
   	delete from review_images where idx=#{val};
   </delete>
-  
+
+  <delete id="reviewDeleteComment" parameterType="com.bit.yes.model.entity.CommentVo">
+  	delete from review_comment where comment_idx=#{comment_idx} and writer=#{writer}
+  </delete>
+
   <insert id="reviewWrite" parameterType="com.bit.yes.model.entity.ReviewVo">
   	insert into review (branchID, clientID, title, content, calendar, rating)
   	 values(#{branchID}, #{clientID}, #{title}, #{content}, current_timestamp(), #{rating})
   </insert>
-  
+
+  <insert id="reviewAddComment" parameterType="com.bit.yes.model.entity.CommentVo">
+  	insert into review_comment (review_idx, comment, writer, reg_date) values (#{review_idx}, #{comment}, #{writer}, current_timestamp())
+  </insert>
+
   <insert id="reviewImgUpload" parameterType="com.bit.yes.model.entity.ImageVo">
   	insert into review_images values ((select max(idx) from review), #{imageName})
   </insert>
-  
+
   <update id="reviewEdit" parameterType="com.bit.yes.model.entity.ReviewVo">
-  	update review set title=#{title}, rating=${rating}, content=#{content} where idx=#{idx}
+  	update review set title=#{title}, rating=#{rating}, content=#{content} where idx=#{idx}
+  		<!-- update review set title=#{title}, rating=${rating}, content=#{content} where idx=#{idx} -->
   </update>
-  
+
+  <insert id="reviewClickLike" parameterType="com.bit.yes.model.entity.LikeVo">
+  	insert into review_like values(#{review_idx}, #{writer}, #{checked}, current_timestamp())
+  </insert>
+
+  <select id="reviewCountLike" resultType="int" parameterType="com.bit.yes.model.entity.LikeVo">
+  	select count(*) from review_like where review_idx=#{review_idx} and checked=true
+  </select>
+
+  <select id="reviewCheckLike" resultType="com.bit.yes.model.entity.LikeVo" parameterType="com.bit.yes.model.entity.LikeVo">
+  	select * from review_like where writer=#{writer} and review_idx=#{review_idx}
+  </select>
+
+   <update id="reviewChangeLike" parameterType="hashmap">
+<!-- 	 <update id="reviewChangeLike" parameterType="com.bit.yes.model.entity.LikeVo">
+   	<choose>
+  		<when test="#{checked}">
+  			update review_like set checked=true where review_idx=#{review_idx} and writer=#{writer}
+  		</when>
+  		<when test="!#{checked}">
+  			update review_like set checked=false where review_idx=#{review_idx} and writer=#{writer}
+  		</when>
+  	</choose> -->
+    	<choose>
+  		<when test="checked == true">
+  			update review_like set checked=true where review_idx=#{bean.review_idx} and writer=#{bean.writer}
+  		</when>
+  		<when test="checked == false">
+  			update review_like set checked=false where review_idx=#{bean.review_idx} and writer=#{bean.writer}
+  		</when>
+  	</choose>
+  </update>
+ <!--
+  <select id="reviewIsExistLike" resultType="com.bit.yes.model.entity.LikeVo" parameterType="com.bit.yes.model.entity.LikeVo">
+  	select * from review_like where review_idx=#{review_idx} and writer=#{writer}
+  </select> -->
+
+  <insert id="reviewNewLike" parameterType="com.bit.yes.model.entity.LikeVo">
+  	insert into review_like values(#{review_idx}, #{writer}, #{checked}, current_timestamp())
+  </insert>
+
+  <delete id="reviewDeleteLike" parameterType="com.bit.yes.model.entity.LikeVo">
+  	delete from review_like where review_idx=#{review_idx} and writer=#{writer}
+  </delete>
+
 <!--   	<select id="selectAll" resultType="com.bit.myapp06.model.entity.GuestVo">
   	SELECT * FROM GUEST ORDER BY SABUN DESC
   	</select>
-  	
+
   	<select id="selectOne" parameterType="int" resultType="com.bit.myapp06.model.entity.GuestVo">
   	SELECT * FROM GUEST WHERE SABUN=#{value}
   	</select>
-  	
+
   	<update id="updateOne" parameterType="com.bit.myapp06.model.entity.GuestVo">
   	UPDATE GUEST SET NAME=#{name},PAY=#{pay} WHERE SABUN=#{sabun}
   	</update>
-  
+
   	<delete id="deleteOne" parameterType="int">
   	DELETE FROM GUEST WHERE SABUN=#{value}
-  	</delete>-->
+  	</delete> -->
   </mapper>

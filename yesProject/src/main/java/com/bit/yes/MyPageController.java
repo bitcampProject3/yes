@@ -239,7 +239,7 @@ public class MyPageController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/insertReserve", method = RequestMethod.POST)
+	@RequestMapping(value = "insertReserve", method = RequestMethod.POST)
 	public void insertReserve(@RequestBody Map<String, Object> map, HttpSession session){
 		System.out.println(map);
 		String id=((UserVo) session.getAttribute("member")).getId();

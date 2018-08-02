@@ -1,8 +1,6 @@
 /.metadata/
 /.metadata/
 /.recommenders/
-<<<<<<< HEAD
-=======
 /yesProject/.idea
 /yesProject/.classpath
 /yesProject/.project
@@ -10,4 +8,4 @@
 /yesProject/.springBeans
 /yesProject/out
 /yesProject/target
->>>>>>> master
+yesProject/src/main/webapp/WEB-INF

@@ -582,9 +582,40 @@
 							
                         }
 			        });
+					$('.bbsSub1').empty();
+					$('.bbsDate1').empty();
+					$('.bbsName1').empty();
 					$.ajax({
 				        type: 'POST',
-				        url: 'waitingList',
+				        url: './branchReview',
+				        data: id,
+				        dataType: 'json',
+				        success: function (data) {
+				        	console.log(data);
+					        $.each(data,  function (idx, val) {
+					        	if (idx === data.length-1){
+					        		$('.bbsSub1').empty().append(val.title);
+					        		$('.bbsDate1').empty().append(val.calendar);
+					        		$('.bbsName1').empty().append(val.nickName);
+						        } else if (idx === data.length){
+					        	    $('.bbsSub2').empty().append(val.title);
+					        		$('.bbsDate2').empty().append(val.calendar);
+					        		$('.bbsName2').empty().append(val.nickName);
+						        }
+						        console.log(val.clientID);
+						        console.log(val.title);
+						        console.log(val.calendar);
+						        
+					        });
+				        },
+						error: function(request,status,error) {
+                            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							
+                        }
+			        });
+					$.ajax({
+				        type: 'POST',
+				        url: './waitingList',
 				        data: id,
 				        success: function (data) {
 				        	if (data === 100) $('.modalStatus').css('display','none');
@@ -599,7 +630,7 @@
 		            });
 					$.ajax({
 				        type: 'POST',
-				        url: 'ticketingCheck',
+				        url: './ticketingCheck',
 				        data: id,
 				        success: function (data) {
 				        	alert(data);
@@ -610,14 +641,14 @@
 				        	else $('.ticketingBtn').empty().append('대기 시작');
 				        },
 						error: function(request,status,error) {
-                            // alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                         }
 		            });
 					
 					$('.ticketingBtn').click(function () {
 						$.ajax({
 					        type: 'POST',
-					        url: '/ticketingStart',
+					        url: './ticketingStart',
 					        data: id,
 					        success: function () {
 					        	var ticketingNum = $('.ticketingText').text();
@@ -634,7 +665,7 @@
 					
 					// 매장 detail 페이지에 db정보 추가
 					$('.detailModalTopTitle').empty().append(branchName);
-					$('.modalScore').empty().append('사용자 평점 : '+score+' / 5.0');
+					$('.modalScore').empty().append('평점 : '+score+' / 5.0');
 					$('.modalAddress').empty().append(roadAddress);
 					$('.modalJibunAddress').empty().append('(우) '+zoneCode+' (지번) '+jibunAddress);
 					$('.modalPhoneNum').empty().append(phoneNum);
@@ -672,7 +703,7 @@
                   
                     $.ajax({
                         type: "POST",
-                        url: "/insertReserve",
+                        url: "insertReserve",
                         data: JSON.stringify(data),
                         contentType: "application/json; charset=UTF-8",
                         dataType: "json",
@@ -793,14 +824,14 @@
 				                <div class="modalBbsTitleWriter">작성자</div>
 			                </div>
 			                <div class="modalBbsList">
-				                <div class="modalBbsListSub">이렇게 맛없는 집은 처음 본다....</div>
-				                <div class="modalBbsListDate">2018-07-19</div>
-				                <div class="modalBbsListName">만복</div>
+				                <div class="modalBbsListSub bbsSub1"></div>
+				                <div class="modalBbsListDate bbsDate1"></div>
+				                <div class="modalBbsListName bbsName1"></div>
 			                </div>
 			                <div class="modalBbsList">
-				                <div class="modalBbsListSub">이렇게 맛있는 집은 처음 본다....</div>
-				                <div class="modalBbsListDate">2018-07-17</div>
-				                <div class="modalBbsListName">천복</div>
+				                <div class="modalBbsListSub bbsSub2"></div>
+				                <div class="modalBbsListDate bbsDate2"></div>
+				                <div class="modalBbsListName bbsName2"></div>
 			                </div>
 		                </div>
 	                </div>

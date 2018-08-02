@@ -1,6 +1,7 @@
 package com.bit.yes.model;
 
 import com.bit.yes.model.entity.BranchVo;
+import com.bit.yes.model.entity.ReviewVo;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.sql.SQLException;
@@ -32,6 +33,8 @@ public interface BranchDao {
 
     void ticketingStart(String id, String clientId);
     int ticketingCheck(String id, String clientId);
+
+	List<ReviewVo> branchReview(String branchId);
 
 
 //    void addBranch(BranchVo branchInfoVo);

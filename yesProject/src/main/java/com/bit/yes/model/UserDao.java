@@ -5,9 +5,6 @@ import java.sql.SQLException;
 
 import com.bit.yes.model.entity.UserVo;
 public interface UserDao {
-
-	
-	
 	public void insertOne(UserVo bean) throws SQLException;
 	public UserVo loginCheck(String id,String password) throws SQLException;
 	public UserVo login(String id) throws SQLException;

@@ -2,6 +2,7 @@ package com.bit.yes;
 
 import com.bit.yes.model.entity.BranchVo;
 import com.bit.yes.model.entity.ReserveListVo;
+import com.bit.yes.model.entity.ReviewVo;
 import com.bit.yes.model.entity.UserVo;
 import com.bit.yes.service.BranchService;
 import com.bit.yes.service.ReserveListService;
@@ -191,17 +192,26 @@ public class BranchController {
 	}
 
 	@ResponseBody
-    @RequestMapping(value = "ticketingStart", method = RequestMethod.POST)
+    @RequestMapping(value = "/ticketingStart", method = RequestMethod.POST)
 	public void ticketingStart(@RequestBody String branchID, HttpSession httpSession){
+		System.out.println("ticketingStart Controller run..");
 		String clientId = ((UserVo)httpSession.getAttribute("member")).getId();
 		branchService.ticketingStart(branchID.substring(0, branchID.length()-1), clientId);
 	}
 	@ResponseBody
-    @RequestMapping(value = "ticketingCheck", method = RequestMethod.POST)
+    @RequestMapping(value = "/ticketingCheck", method = RequestMethod.POST)
 	public int ticketingCheck(@RequestBody String branchID, HttpSession httpSession){
+		System.out.println("ticketingCheck Controller run..");
 		String clientId = ((UserVo)httpSession.getAttribute("member")).getId();
 		if(clientId == null) return 1;
 		return branchService.ticketingCheck(branchID.substring(0, branchID.length()-1), clientId);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/branchReview", method = RequestMethod.POST)
+	public List<ReviewVo> branchReview(@RequestBody String branchId){
+		System.out.println("branchReview Controller run..");
+		return branchService.branchReview(branchId);
 	}
 
 
