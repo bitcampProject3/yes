@@ -51,7 +51,7 @@ public class BranchController {
 		String id = ((UserVo)httpSession.getAttribute("member")).getId();
 		System.out.println("markerImage : "+markerImage.substring(0,markerImage.length()-1));
 		System.out.println("id : "+id);
-		Map<String, String> imageMap = new HashMap<>();
+		Map<String, String> imageMap = new HashMap<String, String>();
 		imageMap.put("id", id);
 		imageMap.put("markerImage", markerImage.substring(0,markerImage.length()-1));
 		imageMap.put("mainImage", "mainImage.jpg");
@@ -147,7 +147,7 @@ public class BranchController {
 
 		ArrayList<String> resultTimeArr = new ArrayList<String>();
 		int maxMin = 60;
-		// 영업시간에서 예약 가능한 시간을 구하는 로직. 10분단위
+		// �쁺�뾽�떆媛꾩뿉�꽌 �삁�빟 媛��뒫�븳 �떆媛꾩쓣 援ы븯�뒗 濡쒖쭅. 10遺꾨떒�쐞
 		for (int j = openTimeHour; j <= closeTimeHour; j++) {
 			for (int i = openTimeMin; i < maxMin ; i = i + 10) {
 
@@ -181,8 +181,8 @@ public class BranchController {
 			}
 
 
-			// 예약된 시간
-			// 예약된 시간을 제한 예약 가능 배열
+			// �삁�빟�맂 �떆媛�
+			// �삁�빟�맂 �떆媛꾩쓣 �젣�븳 �삁�빟 媛��뒫 諛곗뿴
 			System.out.println("resultTimeArr : " +resultTimeArr);
 
 			return resultTimeArr;
