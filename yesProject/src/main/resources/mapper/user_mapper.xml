@@ -6,16 +6,16 @@
   <mapper namespace="com.bit.yes.model.UserDao">
   
 	  <select id="insertOne" parameterType="com.bit.yes.model.entity.UserVo">
-	  
+	  insert into
 	  <if test="password !=null">
-	 	insert into user_info(id,password,name,nickname,email,phoneNum,pwQuestion,birthDate,registNum) values(#{id},#{password},#{name},#{nickName},#{email},
+	 	 user_info(id,password,name,nickname,email,phoneNum,pwQuestion,birthDate,registNum) values(#{id},#{password},#{name},#{nickName},#{email},
 	  	#{phoneNum},#{pwQuestion},#{birthDate},#{registNum})
 	  </if>
-	  <if test="email!=null">
-	  	insert into user_info(id,name,email,birthDate,registNum) values (#{id},#{name},#{email},#{birthDate},#{registNum})
+	  <if test="password ==null and email!=null">
+	  	 user_info(id,name,email,birthDate,registNum) values (#{id},#{name},#{email},#{birthDate},#{registNum})
 	  </if>
-	  <if test="email==null">
-	  	insert into user_info(id,name,registNum) values(#{id},#{name},#{registNum})
+	  <if test="password == null and email==null">
+	  	 user_info(id,name,registNum) values(#{id},#{name},#{registNum})
 	  </if>
 	 
 	  </select>
