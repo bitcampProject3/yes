@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/clndr.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/clndr.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
@@ -42,15 +42,15 @@
 	<!-- jQuery Calander -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> 
-	<script src="./js/clndr.js"></script>
-	<script src="./js/clndr2.js"></script>
+	<script src="${pageContext.request.contextPath}/js/clndr.js"></script>
+	<script src="${pageContext.request.contextPath}/js/clndr2.js"></script>
 	
 
 	
 	<!-- jQuery validate -->
-	<script src="./js/jquery.validate.js"></script>
-	<script src="./js/additional-methods.min.js"></script>
-	<script src="./js/messages_ko.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
+	<script src="${pageContext.request.contextPath}/js/additional-methods.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/messages_ko.min.js"></script>
 	
 	<style>
 
@@ -195,22 +195,21 @@
                 $('body').css('overflow-y','auto');
              });
         	
-        	
-            // $("#logout").click(function(){
-            // 	$.ajax({
-            //         type : "POST",
-            //         dataType : 'text',
-            //         url : "http://nid.naver.com/nidlogin.logout",
-            //         crossDomain : true,
-            //         xhrFields : {
-            //            withCredentials : true
-            //         }
-            //      }).done(function(data) {
-            //         $('#logout').submit();
-            //      }).fail(function(xhr, textStatus, errorThrown) {
-            //         $('#logout').submit();
-            //      });
-            // });
+            $("#logout").click(function(){
+               $.ajax({
+                    type : "POST",
+                    dataType : 'text',
+                    url : "http://nid.naver.com/nidlogin.logout",
+                    crossDomain : true,
+                    xhrFields : {
+                       withCredentials : true
+                    }
+                 }).done(function(data) {
+                    $('#logout').submit();
+                 }).fail(function(xhr, textStatus, errorThrown) {
+                    $('#logout').submit();
+                 });
+            });
             
             
             //지도
@@ -302,7 +301,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" style="padding-top: 10px;" href="./"><img src="./imgs/logo_top3.png"/></a>
+                <a class="navbar-brand" style="padding-top: 10px;" href="./"><img src="${pageContext.request.contextPath}/imgs/logo_top3.png"/></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -332,7 +331,7 @@
                         <li><a id="logout" href="logout">로그아웃</a></li>
                     </c:when>
                     <c:when test="${member.id == 'admin' }">
-                        <li><a href="./admin/">관리자</a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/">관리자</a></li>
                     </c:when>
                 </c:choose>
                 </c:if>
@@ -845,12 +844,11 @@
         	},
         	success:function(data){
         		var result=data.slice(0,2);
-        		if(result=='성공'){
-        			
+        		if(result==='성공'){
         			location.href="/yes/";
         		}
         		else{
-        			alert(data.slice(3));
+        			alert(data);
         		}
         	},
 			error: function(request,status,error) {
@@ -1444,11 +1442,6 @@ $('#updatePW').click(function(){
     </script>
     <span id="guide" style="color:#999"></span>
     <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-	<!-- jQuery Calander -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-	<script src="./js/clndr.js"></script>
-	<script src="./js/clndr2.js"></script>
 	<script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {

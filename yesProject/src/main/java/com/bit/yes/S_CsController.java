@@ -36,17 +36,16 @@ public class S_CsController {
 	public void setService(S_CsService service) {
 		this.scsService = service;
 	}
-	
-	// È­¸é Ãâ·Â
+
 		@RequestMapping("/yesS_cs/")
-		public String list(Model model, HttpServletRequest req) throws Exception {
+		public String list(Model model, HttpServletRequest req, HttpSession httpSession) throws Exception {
 			int currentPageNo = 1;
 			int maxPost = 10;
 			
-			// ·Î±×ÀÎ ÇßÀ» °æ¿ì µé¾î¿À´Â ¼¼¼Ç id°ª 
-			// id°ªÀ» ÅëÇØ¼­ ÇØ´ç id¿¡ ÇØ´çÇÏ´Â °Ô½ÃÆÇ ±Û Ãâ·Â
-			// adminÀÌ °ü¸®ÀÚÀÌ¿©¾ßÇÔ
-			String writer = "ghdlf2"; 
+			// ë¡œê·¸ì¸ í–ˆì„ ê²½ìš° ë“¤ì–´ì˜¤ëŠ” ì„¸ì…˜ idê°’
+			// idê°’ì„ í†µí•´ì„œ registNumê°’ì„ ë½‘ì•„ì„œ ê³µì§€ì‚¬í•­,ê³ ê°ìƒë‹´,ê°€ë§¹ì ìƒë‹´ì¤‘ ì¶œë ¥í•  ê²ƒì„ ê²°ì •
+			// adminì´ ê´€ë¦¬ìì´ì—¬ì•¼í•¨
+			String writer = ((UserVo)httpSession.getAttribute("member")).getId();
 
 			
 			HashMap<String, Object> params = new HashMap<String, Object>();
@@ -64,6 +63,7 @@ public class S_CsController {
 			
 			ArrayList<S_CsVo> page = new ArrayList<S_CsVo>();
 			page = (ArrayList<S_CsVo>) scsService.writeList(params);
+			System.out.println(page);
 			paging.setNumberOfRecords(scsService.writeGetCount(params));
 			
 			paging.makePaging();
@@ -72,8 +72,10 @@ public class S_CsController {
 			String ids[] = new String[page.size()];
 			for(i=0; i<page.size(); i++) {
 				id= page.get(i).getWriter();
+				System.out.println("id : "+id);
 				UserVo nickName = scsService.selectNick(id);
-				ids[i] = nickName.getNickname();
+				System.out.println(nickName);
+				ids[i] = nickName.getNickName();
 			}
 			model.addAttribute("userNick", ids);
 			model.addAttribute("page", page);
@@ -83,17 +85,17 @@ public class S_CsController {
 		}
 		
 		@RequestMapping(value="/S_Cs_search")
-		public String S_CsSearchList(Model model, HttpServletRequest request) throws Exception {
+		public String S_CsSearchList(Model model, HttpServletRequest request,HttpSession httpSession) throws Exception {
 			
 			System.out.println("S_CsSearchList(post)");
 			
 			HttpSession session = request.getSession();
 			HashMap<String, Object> params = new HashMap<String, Object>();
 
-			// ·Î±×ÀÎ ÇßÀ» °æ¿ì µé¾î¿À´Â ¼¼¼Ç id°ª 
-			// id°ªÀ» ÅëÇØ¼­ ÇØ´ç id¿¡ ÇØ´çÇÏ´Â °Ô½ÃÆÇ ±Û Ãâ·Â
-			// adminÀÌ °ü¸®ÀÚÀÌ¿©¾ßÇÔ
-			String writer = "ghdlf2"; 
+			// ë¡œê·¸ì¸ í–ˆì„ ê²½ìš° ë“¤ì–´ì˜¤ëŠ” ì„¸ì…˜ idê°’
+			// idê°’ì„ í†µí•´ì„œ registNumê°’ì„ ë½‘ì•„ì„œ ê³µì§€ì‚¬í•­,ê³ ê°ìƒë‹´,ê°€ë§¹ì ìƒë‹´ì¤‘ ì¶œë ¥í•  ê²ƒì„ ê²°ì •
+			// adminì´ ê´€ë¦¬ìì´ì—¬ì•¼í•¨
+			String writer = ((UserVo)httpSession.getAttribute("member")).getId();
 			int currentPageNo = 1;
 			int maxPost = 10;
 			
@@ -167,12 +169,12 @@ public class S_CsController {
 		}
 		
 		@RequestMapping("/yesS_cs/yesS_csInsert")
-		public String insertpage(String id, UserVo nickName,Model model) throws SQLException {
+		public String insertpage(String id, UserVo nickName,Model model, HttpSession httpSession) throws SQLException {
 			
-			// ·Î±×ÀÎ ÇßÀ» °æ¿ì µé¾î¿À´Â ¼¼¼Ç id°ª 
-			// id°ªÀ» ÅëÇØ¼­ ÇØ´ç id¿¡ ÇØ´çÇÏ´Â °Ô½ÃÆÇ ±Û Ãâ·Â
-			// adminÀÌ °ü¸®ÀÚÀÌ¿©¾ßÇÔ
-			id="ghdlf2"; 
+			// ë¡œê·¸ì¸ í–ˆì„ ê²½ìš° ë“¤ì–´ì˜¤ëŠ” ì„¸ì…˜ idê°’
+			// idê°’ì„ í†µí•´ì„œ registNumê°’ì„ ë½‘ì•„ì„œ ê³µì§€ì‚¬í•­,ê³ ê°ìƒë‹´,ê°€ë§¹ì ìƒë‹´ì¤‘ ì¶œë ¥í•  ê²ƒì„ ê²°ì •
+			// adminì´ ê´€ë¦¬ìì´ì—¬ì•¼í•¨
+			id=((UserVo)httpSession.getAttribute("member")).getId();
 			
 			nickName=scsService.selectNick(id);
 			model.addAttribute("userInfo",nickName);

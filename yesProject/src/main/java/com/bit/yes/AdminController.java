@@ -85,15 +85,15 @@ public class AdminController {
 		if(req.getParameter("allPages") != null)
 			currentPageNo = Integer.parseInt(req.getParameter("allPages"));
 		
-	      if(category == null && keyword == null) {
-	          category = (String) session.getAttribute("category");
-	          keyword = (String) session.getAttribute("keyword");
-	       } else {
-	          /*req.setAttribute("category", category);
-	          req.setAttribute("keyword", keyword);*/
-	          session.setAttribute("category", category);
-	          session.setAttribute("keyword", keyword);
-	       }
+        if(category == null && keyword == null) {
+            category = (String) session.getAttribute("category");
+            keyword = (String) session.getAttribute("keyword");
+        } else {
+            /*req.setAttribute("category", category);
+            req.setAttribute("keyword", keyword);*/
+            session.setAttribute("category", category);
+            session.setAttribute("keyword", keyword);
+        }
 		
 		Paging allpaging = new Paging(currentPageNo, maxPost);
 		
@@ -335,11 +335,14 @@ public class AdminController {
 			String ids4[] = new String[page.size()];
 			for(i=0; i<page.size(); i++) {
 				branchID= page.get(i).getId();
+				System.out.println("branchId : "+branchID);
 				branch_addressVo address = adminService.management_address(branchID);
-				ids[i] = address.getRoadAddress();
-				ids2[i] = address.getJibunAddress();
-				ids3[i] = address.getDetailAddress();
-				ids4[i] = address.getZoneCode();
+				if(address.getRoadAddress()!=null) {
+					ids[i] = address.getRoadAddress();
+					ids2[i] = address.getJibunAddress();
+					ids3[i] = address.getDetailAddress();
+					ids4[i] = address.getZoneCode();
+				}
 			}
 			
 			model.addAttribute("road",ids );
