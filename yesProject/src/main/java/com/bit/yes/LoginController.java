@@ -3,10 +3,12 @@ package com.bit.yes;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.omg.PortableServer.Servant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +41,7 @@ public class LoginController {
 
 
    @ResponseBody
-   @RequestMapping(value="/find",method=RequestMethod.POST,produces="application/text; charset=utf8")
+   @RequestMapping(value="/find",method=RequestMethod.POST,produces="application/text; charset=utf-8")
    public String find(String name, String email,String birth) throws SQLException {
       String id=sqlSession.getMapper(UserDao.class).findId(name, email,birth);
       if(id!=null)
@@ -55,7 +57,7 @@ public class LoginController {
 
 
    @ResponseBody
-   @RequestMapping(value="/find2",method=RequestMethod.POST,produces="application/text; charset=utf8")
+   @RequestMapping(value="/find2",method=RequestMethod.POST,produces="application/text; charset=utf-8")
    public String find2(String id,String name, String email,String birth, String answer) throws SQLException {
       String pw=sqlSession.getMapper(UserDao.class).findPw(id, name, birth, email, answer);
       if(pw!=null) {
@@ -66,7 +68,7 @@ public class LoginController {
    }
 
    @ResponseBody
-   @RequestMapping(value="/pwUpdate", method=RequestMethod.POST,produces="application/text; charset=utf8")
+   @RequestMapping(value="/pwUpdate", method=RequestMethod.POST,produces="application/text; charset=utf-8")
    public String pwUpdate(String id,String password) throws SQLException {
       int result=sqlSession.getMapper(UserDao.class).updatePw(password,id);
       if(result>0)
@@ -77,13 +79,14 @@ public class LoginController {
 
    //로그인
    @ResponseBody
-   @RequestMapping(value="/check",method=RequestMethod.POST,produces="application/text; charset=utf8")
+   @RequestMapping(value="/check",method=RequestMethod.POST,produces="application/text; charset=utf-8")
    public String loginCheck(String id,String password,HttpSession session) throws SQLException {
 
      UserVo bean=sqlSession.getMapper(UserDao.class).loginCheck(id,password);
 
      if(bean!=null)
       { //로그인 성공
+      	System.out.println("로그인 성공");
          session.setAttribute("member", bean);
          return "성공";
       }
@@ -133,6 +136,7 @@ public class LoginController {
 	  session.setAttribute("member", bean);
       return "내정보 수정 해주세요.";
    }
+   
 
 
 }

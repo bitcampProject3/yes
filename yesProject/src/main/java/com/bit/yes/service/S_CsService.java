@@ -26,7 +26,7 @@ public class S_CsService {
 		scsDao.insertOne(bean);
 	}
 	
-	// ÆäÀÌÂ¡ Ã³¸®
+	// í˜ì´ì§• ì²˜ë¦¬
 //	public List<S_CsVo> writeList(int offset, int noOfRecords,String writer) throws SQLException {
 //		return scsDao.writeList(offset, noOfRecords, writer);
 //	}
@@ -48,7 +48,7 @@ public class S_CsService {
 		return scsDao.writeGetCount(params);
 	}
 
-	// ¾÷·Îµå Ã³¸®
+	// ì—…ë¡œë“œ ì²˜ë¦¬
 	public void s_counselImgUpload(ImageVo bean) throws SQLException {
 		scsDao.s_counselImgUpload(bean);
 	}

@@ -131,22 +131,27 @@ public class AdminDaoImpl01 implements AdminDao {
 		
 		params.put("offset", offset);
 		params.put("noOfRecords", noOfRecords);
-		
+		System.out.println("writeList start..");
 		managementwriteList = sqlSession.selectList("management_writeList", params);
+		System.out.println("writeList end..");
+		System.out.println("writeGetCount start..");
 		this.noOfRecords = sqlSession.selectOne("management_writeGetCount");
-		
+		System.out.println("writeGetCount end..");
+
 		return managementwriteList;
 	}
 
 	@Override
 	public int management_writeGetCount() throws SQLException {
 		// TODO Auto-generated method stub
+		System.out.println("writeGetCount2 start..");
 		return sqlSession.selectOne("yes.management_writeGetCount");
 	}
 
 	@Override
 	public branch_addressVo management_address(String id) throws SQLException {
 		// TODO Auto-generated method stub
+		System.out.println("management_address start..");
 		return sqlSession.selectOne("yes.management_address", id);
 	}
 

@@ -10,6 +10,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.bit.yes.model.entity.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,39 +34,39 @@ public class NoticeBbsController {
 	public void setService(NoticeService service) {
 		this.noticeService = service;
 	}
-	// È­¸é Ãâ·Â
+	// í™”ë©´ ì¶œë ¥
 	@RequestMapping("/yesnotice/")
-	public String list(Model model, HttpServletRequest req) throws Exception {
+	public String list(Model model, HttpServletRequest req,HttpSession httpSession) throws Exception {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		int currentPageNo = 1;
 		int maxPost = 10;
-		
-		// ·Î±×ÀÎ ÇßÀ» °æ¿ì µé¾î¿À´Â ¼¼¼Ç id°ª 
-		// id°ªÀ» ÅëÇØ¼­ registNum°ªÀ» »Ì¾Æ¼­ °øÁö»çÇ×,°í°´»ó´ã,°¡¸ÍÁ¡»ó´ãÁß Ãâ·ÂÇÒ °ÍÀ» °áÁ¤
-		// adminÀÌ °ü¸®ÀÚÀÌ¿©¾ßÇÔ
-		String id = "ghdlf2";
-		
+
+		// ë¡œê·¸ì¸ í–ˆì„ ê²½ìš° ë“¤ì–´ì˜¤ëŠ” ì„¸ì…˜ idê°’
+		// idê°’ì„ í†µí•´ì„œ registNumê°’ì„ ë½‘ì•„ì„œ ê³µì§€ì‚¬í•­,ê³ ê°ìƒë‹´,ê°€ë§¹ì ìƒë‹´ì¤‘ ì¶œë ¥í•  ê²ƒì„ ê²°ì •
+		// adminì´ ê´€ë¦¬ìì´ì—¬ì•¼í•¨
+		String id = ((UserVo)httpSession.getAttribute("member")).getId();
+
 		if(req.getParameter("pages") != null)
 			currentPageNo = Integer.parseInt(req.getParameter("pages"));
-		
+
 		Paging paging = new Paging(currentPageNo, maxPost);
-		
+
 		int offset = (paging.getCurrentPageNo() -1) * paging.getMaxPost();
-		
+
 		params.put("offset", offset);
 		params.put("noOfRecords", paging.getMaxPost());
-		
+
 		ArrayList<NoticeVo> page = new ArrayList<NoticeVo>();
 		page = (ArrayList<NoticeVo>) noticeService.writeList(params);
 		paging.setNumberOfRecords(noticeService.writeGetCount());
-		
+
 		paging.makePaging();
-		
+
 		if(id == "admin") {
 			model.addAttribute("id",id);
 			model.addAttribute("page", page);
 			model.addAttribute("paging",paging);
-			
+
 		}else{
 			String registNum = noticeService.user_selectOne(id).getRegistNum();
 			model.addAttribute("registNum",registNum);
@@ -73,46 +74,46 @@ public class NoticeBbsController {
 			model.addAttribute("page", page);
 			model.addAttribute("paging",paging);
 		}
-		
+
 		return "./notice/yesnotice";
 	}
-	
+
 	@RequestMapping("/yesnotice/yesnoticeInsert")
-	public String insertpage(Model model) throws SQLException {
-		
-		// ·Î±×ÀÎ ÇßÀ» °æ¿ì µé¾î¿À´Â ¼¼¼Ç id°ª 
-		// id°ªÀ» ÅëÇØ¼­ registNum°ªÀ» »Ì¾Æ¼­ °øÁö»çÇ×,°í°´»ó´ã,°¡¸ÍÁ¡»ó´ãÁß Ãâ·ÂÇÒ °ÍÀ» °áÁ¤
-		// adminÀÌ °ü¸®ÀÚÀÌ¿©¾ßÇÔ
-		String id = "ghdlf2";
-		
+	public String insertpage(Model model, HttpSession httpSession) throws SQLException {
+
+		// ë¡œê·¸ì¸ í–ˆì„ ê²½ìš° ë“¤ì–´ì˜¤ëŠ” ì„¸ì…˜ idê°’
+		// idê°’ì„ í†µí•´ì„œ registNumê°’ì„ ë½‘ì•„ì„œ ê³µì§€ì‚¬í•­,ê³ ê°ìƒë‹´,ê°€ë§¹ì ìƒë‹´ì¤‘ ì¶œë ¥í•  ê²ƒì„ ê²°ì •
+		// adminì´ ê´€ë¦¬ìì´ì—¬ì•¼í•¨
+		String id = ((UserVo)httpSession.getAttribute("member")).getId();
+
 		String registNum = noticeService.user_selectOne(id).getRegistNum();
 		model.addAttribute("registNum",registNum);
 		model.addAttribute("id",id);
 		return "./notice/yesnoticeInsert";
 	}
-	
+
 	@RequestMapping(value="/yesnotice/yesnoticeUpdate/{idx}",method=RequestMethod.GET)
-	public String updatepage(@PathVariable int idx,Model model) throws SQLException {
-		
-		// ·Î±×ÀÎ ÇßÀ» °æ¿ì µé¾î¿À´Â ¼¼¼Ç id°ª 
-		// id°ªÀ» ÅëÇØ¼­ registNum°ªÀ» »Ì¾Æ¼­ °øÁö»çÇ×,°í°´»ó´ã,°¡¸ÍÁ¡»ó´ãÁß Ãâ·ÂÇÒ °ÍÀ» °áÁ¤
-		// adminÀÌ °ü¸®ÀÚÀÌ¿©¾ßÇÔ
-		String id = "ghdlf2";
-				
+	public String updatepage(@PathVariable int idx,Model model, HttpSession httpSession) throws SQLException {
+
+		// ë¡œê·¸ì¸ í–ˆì„ ê²½ìš° ë“¤ì–´ì˜¤ëŠ” ì„¸ì…˜ idê°’
+		// idê°’ì„ í†µí•´ì„œ registNumê°’ì„ ë½‘ì•„ì„œ ê³µì§€ì‚¬í•­,ê³ ê°ìƒë‹´,ê°€ë§¹ì ìƒë‹´ì¤‘ ì¶œë ¥í•  ê²ƒì„ ê²°ì •
+		// adminì´ ê´€ë¦¬ìì´ì—¬ì•¼í•¨
+		String id = ((UserVo)httpSession.getAttribute("member")).getId();
+
 		String registNum = noticeService.user_selectOne(id).getRegistNum();
 		model.addAttribute("registNum",registNum);
 		model.addAttribute("id",id);
 		model.addAttribute("bean", noticeService.selectPage(idx));
 		return "./notice/yesnoticeUpdate";
 	}
-	
-	// »ğÀÔ »ó¼¼º¸±â »èÁ¦ ¼öÁ¤
-	// »ğÀÔ
+
+	// ì‚½ì… ìƒì„¸ë³´ê¸° ì‚­ì œ ìˆ˜ì •
+	// ì‚½ì…
 	@RequestMapping(value="/yesnotice/yesnoticeInsert",method=RequestMethod.POST)
 	public String insert(NoticeVo noticevo,MultipartHttpServletRequest mtfrequest, Model model) throws SQLException {
 
 		noticeService.addPage(noticevo);
-		
+
 		String genId, fileName, path;
 		ImageVo imageBean = new ImageVo();
 		java.util.List<MultipartFile> subFiles = mtfrequest.getFiles("subImages");
@@ -120,7 +121,7 @@ public class NoticeBbsController {
 		String attach_path = "resources/notice_imgs/";
 		String root_path=mtfrequest.getSession().getServletContext().getRealPath("/");
 		path = root_path + attach_path;
-		
+
 		try {
 			for(MultipartFile subFile : subFiles) {
 				String originalFileName = subFile.getOriginalFilename();
@@ -136,58 +137,58 @@ public class NoticeBbsController {
 					subFile.transferTo(new File(path + fileName));
 					noticeService.noticeImgUpload(imageBean);
 				}
-				
+
 			}
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return "redirect:/yesnotice/";
 	}
 
-	
-	// »ó¼¼º¸±â
+
+	// ìƒì„¸ë³´ê¸°
 	@RequestMapping(value="/yesnotice/{idx}",method=RequestMethod.GET )
-	public String detail(@PathVariable int idx,Model model) throws SQLException {
-		
-		// ·Î±×ÀÎ ÇßÀ» °æ¿ì µé¾î¿À´Â ¼¼¼Ç id°ª 
-		// id°ªÀ» ÅëÇØ¼­ registNum°ªÀ» »Ì¾Æ¼­ °øÁö»çÇ×,°í°´»ó´ã,°¡¸ÍÁ¡»ó´ãÁß Ãâ·ÂÇÒ °ÍÀ» °áÁ¤
-		// adminÀÌ °ü¸®ÀÚÀÌ¿©¾ßÇÔ
-		String id = "ghdlf2";
-		
+	public String detail(@PathVariable int idx,Model model, HttpSession httpSession) throws SQLException {
+
+		// ë¡œê·¸ì¸ í–ˆì„ ê²½ìš° ë“¤ì–´ì˜¤ëŠ” ì„¸ì…˜ idê°’
+		// idê°’ì„ í†µí•´ì„œ registNumê°’ì„ ë½‘ì•„ì„œ ê³µì§€ì‚¬í•­,ê³ ê°ìƒë‹´,ê°€ë§¹ì ìƒë‹´ì¤‘ ì¶œë ¥í•  ê²ƒì„ ê²°ì •
+		// adminì´ ê´€ë¦¬ìì´ì—¬ì•¼í•¨
+		String id = ((UserVo)httpSession.getAttribute("member")).getId();
+
 		String registNum = noticeService.user_selectOne(id).getRegistNum();
 		model.addAttribute("registNum",registNum);
 		model.addAttribute("id", id);
 		model.addAttribute("bean", noticeService.selectPage(idx));
 		model.addAttribute("subImages", noticeService.noticeSubImage(idx));
-		
+
 		return "./notice/yesnoticeDetail";
 	}
-	// »èÁ¦
+	// ì‚­ì œ
 	@RequestMapping(value="/yesnotice/{idx}",method=RequestMethod.DELETE)
 	public String delete(@PathVariable int idx) throws SQLException {
 		noticeService.deletePage(idx);
 		return "redirect:/yesnotice/";
 	}
-	// ¼öÁ¤
+	// ìˆ˜ì •
 	@RequestMapping(value="/yesnotice/yesnoticeUpdate/{idx}",method=RequestMethod.POST )
 	public String edit(@ModelAttribute NoticeVo bean,@PathVariable int idx,MultipartHttpServletRequest mtfrequest) throws SQLException {
 		bean.setIndex(idx);
 		noticeService.updatedeletePage(idx);
 		noticeService.updatePage(bean);
-		
+
 		String genId, fileName, path;
 		ImageVo imageBean = new ImageVo();
 		java.util.List<MultipartFile> subFiles = mtfrequest.getFiles("subImages");
 
 		genId = UUID.randomUUID().toString();
-		
+
 		String attach_path = "resources/notice_imgs/";
-		
+
 		String root_path=mtfrequest.getSession().getServletContext().getRealPath("/");
-		
+
 		path = root_path + attach_path;
-		
+
 		try {
 			for(MultipartFile subFile : subFiles) {
 				String originalFileName = subFile.getOriginalFilename();
@@ -204,41 +205,41 @@ public class NoticeBbsController {
 					subFile.transferTo(new File(path + fileName));
 					noticeService.updateimgPage(imageBean);
 				}
-				
+
 			}
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return "redirect:/yesnotice/";
 	}
 
-	// °Ë»ö
+	// ê²€ìƒ‰
 	@RequestMapping(value="/notice_search")
-	public String noticeSearchList(Model model, HttpServletRequest request) throws Exception {
-		
+	public String noticeSearchList(Model model, HttpServletRequest request, HttpSession httpSession) throws Exception {
+
 		System.out.println("searchList(post)");
-		
+
 		HttpSession session = request.getSession();
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		System.out.println("list(post)");
-		// ·Î±×ÀÎ ÇßÀ» °æ¿ì µé¾î¿À´Â ¼¼¼Ç id°ª 
-		// id°ªÀ» ÅëÇØ¼­ registNum°ªÀ» »Ì¾Æ¼­ °øÁö»çÇ×,°í°´»ó´ã,°¡¸ÍÁ¡»ó´ãÁß Ãâ·ÂÇÒ °ÍÀ» °áÁ¤
-		// adminÀÌ °ü¸®ÀÚÀÌ¿©¾ßÇÔ
-		String id = "ghdlf2";
-		
+		// ë¡œê·¸ì¸ í–ˆì„ ê²½ìš° ë“¤ì–´ì˜¤ëŠ” ì„¸ì…˜ idê°’
+		// idê°’ì„ í†µí•´ì„œ registNumê°’ì„ ë½‘ì•„ì„œ ê³µì§€ì‚¬í•­,ê³ ê°ìƒë‹´,ê°€ë§¹ì ìƒë‹´ì¤‘ ì¶œë ¥í•  ê²ƒì„ ê²°ì •
+		// adminì´ ê´€ë¦¬ìì´ì—¬ì•¼í•¨
+		String id = ((UserVo)httpSession.getAttribute("member")).getId();
+
 		int currentPageNo = 1;
 		int maxPost = 10;
-		
+
 		String category = request.getParameter("category");
 		String keyword = request.getParameter("keyword");
-		
-		
+
+
 		if(request.getParameter("pages") != null) {
 			System.out.println("pages is null");
 			currentPageNo = Integer.parseInt(request.getParameter("pages"));
 		}
-		
+
 		if(category == null && keyword == null) {
 			category = (String) session.getAttribute("category");
 			keyword = (String) session.getAttribute("keyword");
@@ -248,26 +249,26 @@ public class NoticeBbsController {
 			session.setAttribute("category", category);
 			session.setAttribute("keyword", keyword);
 		}
-		
+
 		System.out.println("current page(post) : " + currentPageNo);
 		Paging paging = new Paging(currentPageNo, maxPost);
-		System.out.println("Ã³À½ÆäÀÌÂ¡"+paging);
+		System.out.println("ì²˜ìŒí˜ì´ì§•"+paging);
 		int offset = (paging.getCurrentPageNo() -1) * paging.getMaxPost();
 		params.put("offset", offset);
 		params.put("noOfRecords", paging.getMaxPost());
-		
+
 		ArrayList<NoticeVo> page = new ArrayList<NoticeVo>();
 		params.put("keyword", keyword);
 		params.put("category", category);
 		page = (ArrayList<NoticeVo>) noticeService.writeList(params);
 		paging.setNumberOfRecords(noticeService.writeGetCount(params));
-		
+
 		paging.makePaging();
 		if(id == "admin") {
 			model.addAttribute("id",id);
 			model.addAttribute("page", page);
 			model.addAttribute("paging",paging);
-			
+
 		}else{
 			String registNum = noticeService.user_selectOne(id).getRegistNum();
 			model.addAttribute("registNum",registNum);
@@ -275,8 +276,8 @@ public class NoticeBbsController {
 			model.addAttribute("page", page);
 			model.addAttribute("paging",paging);
 		}
-		
+
 		return "./notice/yesnotice";
 	}
-	
+
 }

@@ -166,42 +166,7 @@
         
     </head>
     <body>
-        <div>
-            <nav class="navbar navbar-default">
-              <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" style="line-height: 20px; padding-top: 0px;" href="../"><img src="../resources/imgs/logo_top2.png"/></a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav">
-                    <li><a href="#" class="menuBtn">예약<span class="sr-only"></span></a></li>
-                    <li><a href="#" class="menuBtn">사용자 리뷰</a></li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
-                      <ul class="dropdown-menu" id="dropdown">
-                        <li><a href="../yesnotice/">공지사항</a></li>
-
-                      </ul>
-                    </li>
-                  </ul>
-                  <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">로그인</a></li>
-                    <li><a href="#">회원가입</a></li>
-                    <li><a href="../admin/">관리자</a></li>
-                  </ul>
-                </div><!-- /.navbar-collapse -->
-              </div><!-- /.container-fluid -->
-            </nav>
-            </div>
+	<jsp:include page="../layout/header.jsp"></jsp:include>
            
            <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left: 0px; padding-right: 0px;">
            
@@ -213,7 +178,7 @@
                     </h1>
                    </div>
    				
-   				  <c:if test="${bean.registNum ne null }">
+   				  <c:if test="${bean.registNum ne '0' }">
                   <div class="col-md-6">
                   	<h1 style="padding: 5px; margin-bottom: 20px; display: inline-block;">
                       <a href="./branchList" style="color: black;">사업자 정보</a>
@@ -276,7 +241,7 @@
                    </section>
                 </div>
             </div>
-            <c:if test="${bean.registNum ne null }">
+            <c:if test="${bean.registNum ne '0' }">
             <div class="col-md-6" style="padding-left: 40px; padding-right: 40px;">
                 <header style="padding-top: 15px">
                     <h4><b>상호명 : ${branchinfo.branchname}</b></h4></header>

@@ -1,7 +1,6 @@
 package com.bit.yes.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,7 @@ import org.springframework.ui.Model;
 import com.bit.yes.model.ReserveListDao;
 import com.bit.yes.model.entity.BranchVo;
 import com.bit.yes.model.entity.ReserveListVo;
-import com.mysql.cj.xdevapi.JsonArray;
+import com.bit.yes.model.entity.ReviewVo;
 
 @Service
 public class ReserveListService {
@@ -69,5 +68,23 @@ public class ReserveListService {
     public void insertReserve(Map<String, Object> map, String id){
       reserveDao.insertReserve(map, id);
     }
+	public int updateUseState(ReserveListVo bean) {
+		return reserveDao.updateUseState(bean);
+	}
+	public List<ReviewVo> writeList(Model model, String id) throws SQLException {
+	      List<ReviewVo> list=reserveDao.writeList(id);
+	      model.addAttribute("rlist",reserveDao.writeList(id));
+	      return list;
+	}
+	public List<ReviewVo> selectAll(Model model, String id) throws SQLException {
+		List<ReviewVo>	list=reserveDao.selectAll(id);
+		model.addAttribute("page",reserveDao.selectAll(id));
+		return list;
+	}
 
+
+    // 자신의 매장 조회
+	public List<BranchVo> selectOneBranch(String id) {
+      return reserveDao.selectOneBranch(id);
+	}
 }

@@ -107,6 +107,12 @@
 			</table>
 						
 		</div>
+		
+		<div id="useStateModal" class="modal" style="width:300px; height:180px; text-align:center;">
+			          <p>이용현황을 변경하시겠습니까?</p>
+                   	  <a href="#" class="btn btn-default" id="useStatebtn" >변경</a>
+			          <a href="#" class="btn btn-default" rel="modal:close">취소</a>
+		</div>
     
     <script type="text/javascript">
     	
@@ -166,7 +172,7 @@
 				for (var i = 0; i < array.length; i++) {
 					var day=array[i].day.slice(0,7);
 					
-					if(day==compare){
+					if(day===compare){
 						target='calendar-day-'+array[i].day.slice(0,10);
 						console.log(i);
 						$('.calendar-day-'+array[i].day+'').children().append('<div class="time">'+array[i].time+'</div>');
@@ -177,7 +183,7 @@
 						$('.table tbody .tr'+i).append('<td>'+array[i].time+'</td>');
 						$('.table tbody .tr'+i).append('<td>'+array[i].personel+'</td>');
 						$('.table tbody .tr'+i).append('<td style="width:60%; text-overflow:ellipsis; font-size:10pt;">'+array[i].request+'</td>');
-						$('.table tbody .tr'+i).append('<td>'+array[i].useState+'</td>');
+						$('.table tbody .tr'+i).append('<td><a style="color:gray" onclick="javascript:useState_change(\''+array[i].day+'\',\''+array[i].time+'\',\''+array[i].useState+'\');">'+array[i].useState+'</a></td>');
 						$('.table tbody').append('</tr>');
 					}
   				
@@ -209,23 +215,18 @@
 	            var eventArray = [];
 	            
 	        	var array=dataload();
+	        
 				if(array.length!=0){
 					for (var i = 0; i < array.length; i++) {
+						
 						var day=array[i].day.slice(0,7);
-						if(day==compare){
-							target='calendar-day-'+array[i].day.slice(0,10);
-							$('.calendar-day-'+array[i].day+'').children().append('<div class="time">'+array[i].time+'</div>');
-	 						$('.table tbody').append('<tr class="tr'+i+'">');
-							$('.table tbody .tr'+i).append('<td style="width:15%">'+array[i].name+'</td>');
-							$('.table tbody .tr'+i).append('<td>'+array[i].time+'</td>');
-							$('.table tbody .tr'+i).append('<td>'+array[i].personel+'</td>');
-							$('.table tbody .tr'+i).append('<td style="width:60%; text-overflow:ellipsis;  font-size:10pt;">'+array[i].request+'</td>');
-							$('.table tbody .tr'+i).append('<td>'+array[i].useState+'</td>');
-							$('.table tbody').append('</tr>')
-						}
 
 		            calendars.clndr1 = jQuery('.cal1').clndr({
 		                events: eventArray,
+			            ready: function () {
+				            array=dataload();
+	                        modal(array);
+			            },
 		                clickEvents: {
 		                    click: function (target) {
 		                        console.log('Cal-1 clicked: ', target);
@@ -275,6 +276,29 @@
 
 	        
 	        });//end
+	        
+	        var day;
+	        var use2;
+	        function useState_change(e,e1,e2){
+	        	day=e+'-'+e1;
+	        	use2=e2;
+	        	$('#useStateModal').modal('show');
+	        }
+	        $('#useStatebtn').click(function(){
+ 				 $.ajax({
+						url:'./useState_change',
+						method:'POST',
+						data:{'day':day,
+							  'use':use2 },
+						success:function(data){
+							alert(data);
+							location.href='/yes/branchReserve.yes';
+						}
+						});  
+	        	
+	        	
+	        	
+	        });
 	        
           </script>
     </body>

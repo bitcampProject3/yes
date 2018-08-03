@@ -19,7 +19,7 @@ public class NoticeDaoImpl01 implements NoticeDao {
 	@Autowired
 	SqlSession sqlSession;
 	int noOfRecords;
-	
+
 	@Override
 	public List<NoticeVo> selectAll() throws SQLException {
 		// TODO Auto-generated method stub
@@ -42,7 +42,7 @@ public class NoticeDaoImpl01 implements NoticeDao {
 	public int updatedelete(int index) throws SQLException {
 		return sqlSession.delete("yes.updatedelete", index);
 	}
-	
+
 	@Override
 	public int updateimg(ImageVo beans) throws SQLException {
 		sqlSession.insert("yes.updateimg", beans);
@@ -51,7 +51,7 @@ public class NoticeDaoImpl01 implements NoticeDao {
 	@Override
 	public int updateOne(NoticeVo bean) throws SQLException {
 		return sqlSession.update("yes.updateOne", bean);
-		
+
 	}
 
 	@Override
@@ -62,44 +62,44 @@ public class NoticeDaoImpl01 implements NoticeDao {
 
 	@Override
 	public List<NoticeVo> writeList(HashMap<String, Object> params) throws SQLException {
-		
+
 		List<NoticeVo> writeList = new ArrayList<NoticeVo>();
-		
-		writeList = sqlSession.selectList("writeList", params);
-		
-		this.noOfRecords = sqlSession.selectOne("writeGetCount");
-		
+
+		writeList = sqlSession.selectList("yes.writeList", params);
+
+		this.noOfRecords = sqlSession.selectOne("yes.writeGetCount");
+
 		return writeList;
 	}
-	
+
 //	@Override
 //	public List<NoticeVo> writeList(int offset, int noOfRecords) throws SQLException {
 //		List<NoticeVo> writeList = new ArrayList<NoticeVo>();
-//		
+//
 //		HashMap<String, Object> params = new HashMap<String, Object>();
-//		
+//
 //		params.put("offset", offset);
 //		params.put("noOfRecords", noOfRecords);
-//		
+//
 //		writeList = sqlSession.selectList("writeList", params);
 //		this.noOfRecords = sqlSession.selectOne("writeGetCount");
-//		
+//
 //		return writeList;
 //	}
 
 	@Override
 	public int writeGetCount() throws SQLException {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("writeGetCount");
-		
+		return sqlSession.selectOne("yes.writeGetCount");
+
 	}
-	
+
 	public int writeGetCount(HashMap<String, Object> params) throws SQLException {
-		
-		return sqlSession.selectOne("writeGetCount", params);
+
+		return sqlSession.selectOne("yes.writeGetCount", params);
 	}
-	
-	///////////////¾÷·Îµå
+
+	///////////////ì—…ë¡œë“œ
 
 	@Override
 	public List<ImageVo> noticeSubImage(int index) throws SQLException {
@@ -118,6 +118,6 @@ public class NoticeDaoImpl01 implements NoticeDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("yes.user_selectOne", id);
 	}
-	
+
 
 }

@@ -24,7 +24,7 @@ html[xmlns] .clearfix {
   -ms-user-select: none;
   /* IE10+ */
 }
-h4 {
+/* h4 {
   width: 75%;
   text-align: center;
   font-family: 'Droid Sans Mono';
@@ -34,7 +34,7 @@ h4 {
   margin: 0 auto 1em auto;
   padding: 1em;
   background: #b63642;
-}
+} */
 h5 {
   font-size: 1em;
   font-weight: bold;

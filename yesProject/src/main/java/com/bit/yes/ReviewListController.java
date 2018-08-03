@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -100,7 +101,7 @@ public class ReviewListController {
 		return "review/review_list";
 
 //		service.listPage(listModel);
-//		return "review/review_list"; // jspÆÄÀÏ¸í
+//		return "review/review_list"; // jspï¿½ï¿½ï¿½Ï¸ï¿½
 	}
 	
 //	@RequestMapping(value= {"/review_list/location/{words}", "/review_list/store/{words}", "/review_list/menu/{words}"}, method=RequestMethod.POST)
@@ -193,8 +194,10 @@ public class ReviewListController {
 	}
 
 	@RequestMapping(value = "/review_write")
-	public String reviewWritePage(Model model) {
-
+	public String reviewWritePage(HttpServletRequest req,Model model) {
+		String branchID=req.getParameter("branchID");
+		System.out.println(branchID);
+		model.addAttribute("branchID",branchID);
 		return "review/review_write";
 
 	}
@@ -265,7 +268,7 @@ public class ReviewListController {
 //		service.reviewSubImage(subModel, index);
 		
 		
-		return "review/review_detail"; // jspÆÄÀÏ¸í
+		return "review/review_detail"; // jspï¿½ï¿½ï¿½Ï¸ï¿½
 	}
 
 	@RequestMapping(value = "/review_list/{index}", method = RequestMethod.POST)
@@ -422,7 +425,7 @@ public class ReviewListController {
 		
 		id = "jaeseon3";
 		
-//		id = session.getAttribute("id");  // session¿¡¼­ id¸¦ ¹Þ¾Æ¼­ ÃÊ±âÈ­
+//		id = session.getAttribute("id");  // sessionï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½Ê±ï¿½È­
 		
 		System.out.println("reviewLike(get)");
 		

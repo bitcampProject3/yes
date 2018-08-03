@@ -6,23 +6,6 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!--         <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/selectDesign.css">
-        <link rel="stylesheet" href="./css/mapStyle.css">
-        <link rel="stylesheet" href="./css/mainStyle.css">
-       
-        jQuery Validation
-        <script src="./js/jquery.validate.js"></script> 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-        jQuery Modal
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
-
-
 
 	<style>
 	
@@ -150,7 +133,7 @@
     				</div>
 	            </div> 
 	            <div style="height:400px; text-align:center;margin-top:100px;">
-				<table style="width: 60%;margin: 0px auto;height: 100%;">
+				<table style="width: 60%;margin: 0px auto;height: 100%; margin-top:20px;">
 				<tr style="height:10%;">
 				<td><img src="./imgs/detailImgs/placeholder.png"/></td>
 				<td id="branchAddr"></td>
@@ -204,7 +187,7 @@
                     	<td>${bean.request }</td>
                     	<td>${bean.useState }
                      	<c:if test="${bean.useState eq 'Y' }">
-                    	<a style="margin-left:20px; font-size: 12px;" class="btn btn-default" >리뷰작성</a>
+                    	<a style="margin-left:20px; font-size: 12px;" class="btn btn-default" href="./review_write?branchID=${bean.branchID }" >리뷰작성</a>
                     	</c:if>
                      	<c:if test="${bean.useState eq 'N' }">
                     	<a id="modal" href="#deletebtn" rel="modal:open" style="margin-left:20px; font-size: 12px; color:red" onclick="javascript:del('${bean.reserveTime}');"  >예약취소</a>

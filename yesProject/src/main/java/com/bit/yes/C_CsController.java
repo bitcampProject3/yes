@@ -28,77 +28,79 @@ import com.bit.yes.service.C_CsService;
 
 @Controller
 public class C_CsController {
-	
+
 	@Autowired
 	C_CsService csService;
-	
+
 	public void setService(C_CsService service) {
 		this.csService = service;
 	}
-	
-	// È­¸é Ãâ·Â
+
+	// í™”ë©´ ì¶œë ¥
 		@RequestMapping("/yesC_cs/")
-		public String list(Model model, HttpServletRequest req) throws Exception {
+		public String list(Model model, HttpServletRequest req, HttpSession httpSession) throws Exception {
 			int currentPageNo = 1;
 			int maxPost = 10;
-			
-			HashMap<String, Object> params = new HashMap<String, Object>();
-			
-			// ·Î±×ÀÎ ÇßÀ» °æ¿ì µé¾î¿À´Â ¼¼¼Ç id°ª 
-			// id°ªÀ» ÅëÇØ¼­ registNum°ªÀ» »Ì¾Æ¼­ °øÁö»çÇ×,°í°´»ó´ã,°¡¸ÍÁ¡»ó´ãÁß Ãâ·ÂÇÒ °ÍÀ» °áÁ¤
-			// adminÀÌ °ü¸®ÀÚÀÌ¿©¾ßÇÔ
-			String clientID = "ghdlf2"; 
 
-			
+			HashMap<String, Object> params = new HashMap<String, Object>();
+
+			// ë¡œê·¸ì¸ í–ˆì„ ê²½ìš° ë“¤ì–´ì˜¤ëŠ” ì„¸ì…˜ idê°’
+			// idê°’ì„ í†µí•´ì„œ registNumê°’ì„ ë½‘ì•„ì„œ ê³µì§€ì‚¬í•­,ê³ ê°ìƒë‹´,ê°€ë§¹ì ìƒë‹´ì¤‘ ì¶œë ¥í•  ê²ƒì„ ê²°ì •
+			// adminì´ ê´€ë¦¬ìì´ì—¬ì•¼í•¨
+			String clientID = null;
+
+			if((UserVo)httpSession.getAttribute("member") != null) clientID = ((UserVo)httpSession.getAttribute("member")).getId();
+			else return "redirect:/";
+
 			if(req.getParameter("pages") != null)
 				currentPageNo = Integer.parseInt(req.getParameter("pages"));
-			
+
 			Paging paging = new Paging(currentPageNo, maxPost);
-			
+
 			int offset = (paging.getCurrentPageNo() -1) * paging.getMaxPost();
-			
+
 			ArrayList<C_CsVo> page = new ArrayList<C_CsVo>();
 			params.put("offset", offset);
 			params.put("noOfRecords", paging.getMaxPost());
 			params.put("clientID", clientID);
-			
+
 			page = (ArrayList<C_CsVo>) csService.writeList(params);
 			paging.setNumberOfRecords(csService.writeGetCount(params));
-			
+
 			paging.makePaging();
-			
+			System.out.println("clientID : "+clientID);
 			String registNum = csService.user_selectOne(clientID).getRegistNum();
 			model.addAttribute("registNum", registNum);
 			model.addAttribute("page", page);
 			model.addAttribute("paging",paging);
-			
+
 			return "./clientCounsel/yesC_cs";
 
 		}
-		
+
 		@RequestMapping(value="/C_Cs_search")
 		public String C_CsSearchList(Model model, HttpServletRequest request) throws Exception {
-			
+
 			HttpSession session = request.getSession();
 			HashMap<String, Object> params = new HashMap<String, Object>();
 			System.out.println("list(post)");
-			// ·Î±×ÀÎ ÇßÀ» °æ¿ì µé¾î¿À´Â ¼¼¼Ç id°ª 
-			// id°ªÀ» ÅëÇØ¼­ registNum°ªÀ» »Ì¾Æ¼­ °øÁö»çÇ×,°í°´»ó´ã,°¡¸ÍÁ¡»ó´ãÁß Ãâ·ÂÇÒ °ÍÀ» °áÁ¤
-			// adminÀÌ °ü¸®ÀÚÀÌ¿©¾ßÇÔ
-			String clientID = "ghdlf2"; 
-			
+			// ë¡œê·¸ì¸ í–ˆì„ ê²½ìš° ë“¤ì–´ì˜¤ëŠ” ì„¸ì…˜ idê°’
+			// idê°’ì„ í†µí•´ì„œ registNumê°’ì„ ë½‘ì•„ì„œ ê³µì§€ì‚¬í•­,ê³ ê°ìƒë‹´,ê°€ë§¹ì ìƒë‹´ì¤‘ ì¶œë ¥í•  ê²ƒì„ ê²°ì •
+			// adminì´ ê´€ë¦¬ìì´ì—¬ì•¼í•¨
+			String clientID = "ghdlf2";
+
 			int currentPageNo = 1;
 			int maxPost = 10;
-			
+
 			String category = request.getParameter("category");
 			String keyword = request.getParameter("keyword");
-			
-			
+
+
 			if(request.getParameter("pages") != null) {
 				System.out.println("pages is null");
 				currentPageNo = Integer.parseInt(request.getParameter("pages"));
 			}
-			
+
 			if(category == null && keyword == null) {
 				category = (String) session.getAttribute("category");
 				keyword = (String) session.getAttribute("keyword");
@@ -108,82 +110,82 @@ public class C_CsController {
 				session.setAttribute("category", category);
 				session.setAttribute("keyword", keyword);
 			}
-			
+
 			Paging paging = new Paging(currentPageNo, maxPost);
 			int offset = (paging.getCurrentPageNo() -1) * paging.getMaxPost();
 			ArrayList<C_CsVo> page = new ArrayList<C_CsVo>();
-			
+
 			params.put("offset", offset);
 			params.put("noOfRecords", paging.getMaxPost());
 			params.put("keyword", keyword);
 			params.put("category", category);
 			params.put("clientID", clientID);
-			
+
 			page = (ArrayList<C_CsVo>) csService.writeList(params);
 			paging.setNumberOfRecords(csService.writeGetCount(params));
-			
+
 			paging.makePaging();
 			model.addAttribute("id",clientID);
 			model.addAttribute("page", page);
 			model.addAttribute("paging",paging);
-			
+
 			return "./clientCounsel/yesC_cs";
 		}
-		
+
 		@RequestMapping(value="/yesC_cs/{idx}", method=RequestMethod.GET)
-		public String detail(@PathVariable int idx, Model model) throws SQLException { 
-			
-			// ·Î±×ÀÎ ÇßÀ» °æ¿ì µé¾î¿À´Â ¼¼¼Ç id°ª 
-			// id°ªÀ» ÅëÇØ¼­ registNum°ªÀ» »Ì¾Æ¼­ °øÁö»çÇ×,°í°´»ó´ã,°¡¸ÍÁ¡»ó´ãÁß Ãâ·ÂÇÒ °ÍÀ» °áÁ¤
-			// id°ªÀ» ÅëÇØ¼­ id¿¡ ÇØ´çÇÏ´Â °Ô½Ã±Û¸¸ Ãâ·Â
-			// adminÀÌ °ü¸®ÀÚÀÌ¿©¾ßÇÔ
-			String clientID = "ghdlf2"; 
-			
-			
+		public String detail(@PathVariable int idx, Model model) throws SQLException {
+
+			// ë¡œê·¸ì¸ í–ˆì„ ê²½ìš° ë“¤ì–´ì˜¤ëŠ” ì„¸ì…˜ idê°’
+			// idê°’ì„ í†µí•´ì„œ registNumê°’ì„ ë½‘ì•„ì„œ ê³µì§€ì‚¬í•­,ê³ ê°ìƒë‹´,ê°€ë§¹ì ìƒë‹´ì¤‘ ì¶œë ¥í•  ê²ƒì„ ê²°ì •
+			// idê°’ì„ í†µí•´ì„œ idì— í•´ë‹¹í•˜ëŠ” ê²Œì‹œê¸€ë§Œ ì¶œë ¥
+			// adminì´ ê´€ë¦¬ìì´ì—¬ì•¼í•¨
+			String clientID = "ghdlf2";
+
+
 			String registNum = csService.user_selectOne(clientID).getRegistNum();
-			
-			String id = (csService.selectPage(idx)).getBranchID(); // °¡¸ÍÁ¡ ¾ÆÀÌµğ ¾ò¾î¿À±â
-			
-			if(id.equals("ÇØ´ç ¾øÀ½")) {
+
+			String id = (csService.selectPage(idx)).getBranchID(); // ê°€ë§¹ì  ì•„ì´ë”” ì–»ì–´ì˜¤ê¸°
+
+			if(id.equals("í•´ë‹¹ ì—†ìŒ")) {
 				model.addAttribute("id",id);
-				model.addAttribute("beans", csService.reserveOne(id)); //branch_info °ª
+				model.addAttribute("beans", csService.reserveOne(id)); //branch_info ê°’
 				model.addAttribute("bean", csService.selectPage(idx));
 				model.addAttribute("subImages", csService.c_counselSubImage(idx));
 				model.addAttribute("registNum",registNum);
-				
+
 			}else {
 				branch_addressVo address = csService.c_selectAddress(id);
 				String road = address.getRoadAddress();
 				String jibun = address.getJibunAddress();
 				String detailaddress = address.getDetailAddress();
 				String zonecode = address.getZoneCode();
-				
+
 				model.addAttribute("registNum",registNum);
 				model.addAttribute("road", road );
 				model.addAttribute("jibun", jibun);
 				model.addAttribute("detailaddress", detailaddress);
 				model.addAttribute("zonecode", zonecode);
 				model.addAttribute("id",id);
-				model.addAttribute("beans", csService.reserveOne(id)); //branch_info °ª
+				model.addAttribute("beans", csService.reserveOne(id)); //branch_info ê°’
 				model.addAttribute("bean", csService.selectPage(idx));
-				model.addAttribute("subImages", csService.c_counselSubImage(idx));			
-			
+				model.addAttribute("subImages", csService.c_counselSubImage(idx));
+
 			}
 			return "./clientCounsel/yesC_csDetail";
 		}
-		
+
 		@RequestMapping("/yesC_cs/yesC_csInsert")
 		public String insertpage(String id, UserVo nickName, Model model) throws SQLException {
 
-			// ·Î±×ÀÎ ÇßÀ» °æ¿ì µé¾î¿À´Â ¼¼¼Ç id°ª 
-			// id°ªÀ» ÅëÇØ¼­ registNum°ªÀ» »Ì¾Æ¼­ °øÁö»çÇ×,°í°´»ó´ã,°¡¸ÍÁ¡»ó´ãÁß Ãâ·ÂÇÒ °ÍÀ» °áÁ¤
-			// adminÀÌ °ü¸®ÀÚÀÌ¿©¾ßÇÔ
-			id="ghdlf2"; 
-			
+			// ë¡œê·¸ì¸ í–ˆì„ ê²½ìš° ë“¤ì–´ì˜¤ëŠ” ì„¸ì…˜ idê°’
+			// idê°’ì„ í†µí•´ì„œ registNumê°’ì„ ë½‘ì•„ì„œ ê³µì§€ì‚¬í•­,ê³ ê°ìƒë‹´,ê°€ë§¹ì ìƒë‹´ì¤‘ ì¶œë ¥í•  ê²ƒì„ ê²°ì •
+			// adminì´ ê´€ë¦¬ìì´ì—¬ì•¼í•¨
+			id="ghdlf2";
+
 			String registNum = csService.user_selectOne(id).getRegistNum();
-			
+
 			nickName=csService.selectNick(id);
-				
+
 			int i=0;
 			String branchID = null;
 			String ids[] = new String[csService.reserveList(id).size()];
@@ -198,7 +200,7 @@ public class C_CsController {
 				ids3[i] = address.getDetailAddress();
 				ids4[i] = address.getZoneCode();
 			}
-			
+
 			model.addAttribute("registNum",registNum);
 			model.addAttribute("road",ids );
 			model.addAttribute("jibun", ids2);
@@ -209,12 +211,12 @@ public class C_CsController {
 			model.addAttribute("bean", csService.reserveList(id));
 			return "./clientCounsel/yesC_csInsert";
 		}
-		
+
 		@RequestMapping(value="/yesC_cs/yesC_csInsert",method=RequestMethod.POST)
 		public String insert(C_CsVo csvo, MultipartHttpServletRequest mtfrequest, Model model) throws SQLException {
-			
+
 			csService.addPage(csvo);
-			
+
 			String genId, fileName, path;
 			ImageVo imageBean = new ImageVo();
 			java.util.List<MultipartFile> subFiles = mtfrequest.getFiles("subImages");
@@ -222,7 +224,7 @@ public class C_CsController {
 			String attach_path = "resources/c_counsel_imgs/";
 			String root_path=mtfrequest.getSession().getServletContext().getRealPath("/");
 			path = root_path + attach_path;
-			
+
 			try {
 				for(MultipartFile subFile : subFiles) {
 					String originalFileName = subFile.getOriginalFilename();
@@ -238,7 +240,7 @@ public class C_CsController {
 						subFile.transferTo(new File(path + fileName));
 						csService.c_counselImgUpload(imageBean);
 					}
-					
+
 				}
 			}catch (IOException e) {
 				e.printStackTrace();

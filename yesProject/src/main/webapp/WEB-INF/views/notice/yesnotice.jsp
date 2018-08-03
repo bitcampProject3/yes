@@ -326,7 +326,7 @@
                 </table>
                 <!-- 관리자일 경우 작성버튼이 보임  -->
                 <c:choose>
-                <c:when test="${id eq 'admin'}"> 
+                <c:when test="${member.id eq 'admin'}"> 
                 <div class="huge-top">
                 <a href="./yesnoticeInsert">
                     <button class="btn btn-normal pull-right" id="insert" style="padding-bottom:12px;">

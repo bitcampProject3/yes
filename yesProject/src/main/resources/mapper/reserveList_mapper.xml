@@ -59,4 +59,28 @@
 <select id="insertReserve" parameterType="Map">
 	insert into reserve_list values (#{targetBranch}, #{id}, #{targetDate}, now(), #{targetPersonel}, #{targetRequest}, 'N');
 </select>
+<update id="updateUseState" parameterType="com.bit.yes.model.entity.ReserveListVo">
+		update reserve_list set
+		<choose>
+        <when test='useState.equals("Y")'>
+			 useState='N' where reserveTime=#{reserveTime}
+        </when>
+        <otherwise>
+        	 useState='Y' where reserveTime=#{reserveTime}
+        </otherwise>        
+		</choose>
+			  
+	
+</update>
+
+<select id="writeList" parameterType="string" resultType="com.bit.yes.model.entity.ReviewVo">
+	select * from review where clientID=#{param1}
+</select>
+
+<select id="selectAll" parameterType="string" resultType="com.bit.yes.model.entity.ReviewVo">
+	select * from review where branchID=#{param1}
+</select>
+	<select id="selectOneBranch" parameterType="string" resultType="com.bit.yes.model.entity.BranchVo">
+    select * from branch_info a inner join branch_address b on a.id = b.id inner join branch_image c on a.id = c.id where a.id = #{param1}
+  </select>
 </mapper>

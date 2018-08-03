@@ -105,15 +105,15 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	
-	// ÀüÃ¼ ¸®½ºÆ® ÆäÀÌÂ¡
+	// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Â¡
 	
 	@Override
 	public List<ReviewVo> writeList(HashMap<String, Object> params) throws SQLException {
 		
 		List<ReviewVo> writeList = new ArrayList<ReviewVo>();
 		
-		writeList = sqlSession.selectList("writeList", params);
-		this.noOfRecords = sqlSession.selectOne("writeGetCount");
+		writeList = sqlSession.selectList("review.writeList", params);
+		this.noOfRecords = sqlSession.selectOne("review.writeGetCount");
 		
 		return writeList;
 	}
@@ -121,14 +121,14 @@ public class ReviewDaoImpl implements ReviewDao {
 	@Override
 	public int writeGetCount() throws SQLException {
 		
-		return sqlSession.selectOne("writeGetCount");
+		return sqlSession.selectOne("review.writeGetCount");
 		
 	}
 
 	@Override
 	public int writeGetCount(HashMap<String, Object> params) throws SQLException {
 		
-		return sqlSession.selectOne("writeGetCount", params);
+		return sqlSession.selectOne("review.writeGetCount", params);
 		
 	}
 
@@ -178,8 +178,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	
-	// °Ë»ö ¸®½ºÆ® ÆäÀÌÂ¡
-	
+	// ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Â¡
 /*	public List<ReviewVo> writeList(int offset, int noOfRecords, String category, String keyword) throws SQLException {
 		
 		List<ReviewVo> writeList = new ArrayList<ReviewVo>();
