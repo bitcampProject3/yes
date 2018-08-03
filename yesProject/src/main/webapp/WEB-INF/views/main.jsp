@@ -84,6 +84,7 @@
 	<script src="${pageContext.request.contextPath}/js/main_js/branch_detail.js"></script>
 	<%-- 매장 예약 모달 관리 --%>
 	<script src="${pageContext.request.contextPath}/js/main_js/branch_reserve.js"></script>
+
 	<script>
 		<c:forEach items="${alist}" var="articleList">
 		// 주소를 좌표로 변환해줌
@@ -352,7 +353,7 @@
 
 
 </script>
-<script src="./js/clndr3.js"></script>
-<script src="./js/demo.js?ver=3"></script>
+<script src="${pageContext.request.contextPath}/js/calendar/clndr3.js"></script>
+<script src="${pageContext.request.contextPath}/js/calendar/demo.js?ver=3"></script>
 </body>
 </html>
