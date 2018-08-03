@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-
 	request.setCharacterEncoding("UTF-8");
 %>
 <html>
@@ -15,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/clndr.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/clndr.css?version=1">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
@@ -42,19 +41,17 @@
 	<!-- jQuery Calander -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> 
-	<script src="./js/clndr.js"></script>
-	<script src="./js/clndr2.js"></script>
+	<script src="${pageContext.request.contextPath}/js/clndr.js"></script>
+	<script src="${pageContext.request.contextPath}/js/clndr2.js"></script>
 	
 
 	
 	<!-- jQuery validate -->
-	<script src="./js/jquery.validate.js"></script>
-	<script src="./js/additional-methods.min.js"></script>
-	<script src="./js/messages_ko.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
+	<script src="${pageContext.request.contextPath}/js/additional-methods.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/messages_ko.min.js"></script>
 	
 	<style>
-
-
  .quize{
  font-size:15pt;
  
@@ -65,7 +62,8 @@
    
     //새로고침 (오류나면 지우기)
     var member='${member.registNum}';
-    if(member>=0){
+    var id='${member.id}';
+    if(member>=0 && id!='admin'){
            window.setInterval("count()",10000);}
    	
  	function count(){
@@ -128,7 +126,7 @@
  					if(list.length==0) //예약한 내역이 없을 때 처리..
  						{
  						calendars.clndr2 = jQuery('.cal2').clndr2({
-					        clickEvents: {
+ 							clickEvents: {
 					            onMonthChange: function () {
 					            	console.log('monthChange');
 					            },
@@ -152,7 +150,15 @@
 														'border-radius':'50%'});
 					   
 						calendars.clndr2 = jQuery('.cal2').clndr2({
-					        clickEvents: {
+							ready:function(){
+								for (var i = 0; i < list.length; i++) {
+					            	var day=(list[i].reserveTime).slice(0,10);
+									$('.calendar2-day-'+day+'').css({'background-color':'#FFA7A7',
+										'border-radius':'50%'});
+					            	}
+				        	},
+							clickEvents: {
+					        	
 					            onMonthChange: function () {
 					            	for (var i = 0; i < list.length; i++) {
 					            	var day=(list[i].reserveTime).slice(0,10);
@@ -209,7 +215,6 @@
             
             //지도
             
-
             $("#searchBox").slideToggle('slow', function(){});
             // searchBox open / close
             $('#searchIcon1').click(function() {
@@ -218,8 +223,6 @@
                     // 객체가 다 펼치지거나 접히고 나면 여기에 든 내용이 실행된다.
                 });
             });
-
-
         });
         
         
@@ -246,12 +249,12 @@
             <ul style="width:100%;padding-left:5px;">
             	<c:if test="${member.registNum==0 }">
                 <li><a href="reservation.yes">예약 현황</a></li>
-                <li><a href="review.yes">리뷰 작성</a></li>
+                <li><a href="myWrite.yes">작성글 보기</a></li>
                 <li><a href="myInfo.yes">내정보</a></li>
             	</c:if>
             	<c:if test="${member.registNum!=0 }">
                 <li><a href="branchReserve.yes">예약 현황</a></li>
-                <li><a href="#">리뷰게시판</a></li>
+                <li><a href="branch_ReviewList.yes">리뷰게시판</a></li>
                 <li><a href="myInfo.yes">내정보</a></li>
                 <li><a href="branchInfo.yes" style="width:100%;">매장정보</a></li>
                 <li><a href="branchManage.yes" style="width:100%;">매장관리</a></li>
@@ -286,7 +289,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" style="padding-top: 10px;" href="./"><img src="./imgs/logo_top3.png"/></a>
+                <a class="navbar-brand" style="padding-top: 10px;" href="/yes/"><img src="${pageContext.request.contextPath}/imgs/logo_top3.png"/></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -308,12 +311,18 @@
                 <c:if test="${member==null}">
                     <li><a id="modal" href="#login" rel="modal:open">로그인</a></li>
                     <li><a id="modal" href="#joinForm" rel="modal:open" >회원가입</a></li>
-                	<li><a href="./admin/">관리자</a></li>
                 </c:if>
                 <c:if test="${member!=null }">
-
-                    <li><a id="mypage" href="#">마이페이지</a></li>
-                    <li><a id="logout" href="logout">로그아웃</a></li>
+					<c:choose>
+						<c:when test="${member.id !='admin' }">
+	                    <li><a id="mypage" href="#">마이페이지</a></li>
+	                    <li><a id="logout" href="logout">로그아웃</a></li>
+	                    </c:when>
+	                    <c:when test="${member.id == 'admin' }">    
+                		<li><a href="${pageContext.request.contextPath}/admin/">관리자</a></li>
+                		<li><a id="logout" href="logout">로그아웃</a></li>
+                		</c:when>
+					</c:choose>
                 </c:if>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -338,7 +347,6 @@
         		});
         		
         		$('#backJoin').click(function(){
-
         			$('.step2').css('display','none');
         			$('.step1').css('display','inline-block');        			
         			
@@ -380,7 +388,6 @@
                 	                            }
                 	                       } 
                 	                       }
-
                 				},
                 				password:{required:true,minlength:4},
                 				confirm:{required:true,equalTo:"#password"},
@@ -1008,14 +1015,11 @@
 	</div>
 </div>
 <script>
-
 function loginBack(){
 	$('#login-findID').css('display','none');
 	$('#login-findPW').css('display','none');
 	$('#loginForm').css('display','block');
 }
-
-
 $('#findID_btn').click(function(){
 		var name=$('.name').val();
 		var birth=$('.birth').val();
@@ -1039,9 +1043,7 @@ $('#findID_btn').click(function(){
 				}
         	} 
       });
-
 });
-
 var id;
 $('#findPW_btn').click(function(){
 	id=$('.id2').val();
@@ -1071,7 +1073,6 @@ $('#findPW_btn').click(function(){
   });
 	
 });
-
 $('#updatePW').click(function(){
 	var pw=$('.pw').val();
 	
@@ -1096,9 +1097,6 @@ $('#updatePW').click(function(){
 		
 	}); 
 });
-
-
-
 </script>
 
 
@@ -1224,7 +1222,6 @@ $('#updatePW').click(function(){
             },
             error: function(request,status,error) {
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-
             }
         })
     }
@@ -1418,23 +1415,17 @@ $('#updatePW').click(function(){
     </script>
     <span id="guide" style="color:#999"></span>
     <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-	<!-- jQuery Calander -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-	<script src="./js/clndr.js"></script>
-	<script src="./js/clndr2.js"></script>
+	
 	<script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                 // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
                 var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
                 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
                 // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
                 if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -1452,7 +1443,6 @@ $('#updatePW').click(function(){
                 if(fullRoadAddr !== ''){
                     fullRoadAddr += extraRoadAddr;
                 }
-
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('zoneCode').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('address').value = fullRoadAddr;
@@ -1466,11 +1456,9 @@ $('#updatePW').click(function(){
                     //예상되는 도로명 주소에 조합형 주소를 추가한다.
                     var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                     document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-
                 } else if(data.autoJibunAddress) {
                     var expJibunAddr = data.autoJibunAddress;
                     document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-
                 } else {
                     document.getElementById('guide').innerHTML = '';
                 }

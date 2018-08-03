@@ -5,28 +5,10 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<link
-	href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
-<link rel="stylesheet" href="./css/selectDesign.css">
-<link rel="stylesheet" href="./css/mapStyle.css">
-<link rel="stylesheet" href="./css/mainStyle.css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
-<!-- <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
+
 <style>
 * {
 	font-family: 'Nanum Gothic', sans-serif;
@@ -259,51 +241,10 @@ nav a {
 	    });
 	}
 	</script>
-<body>
-	<div>
-		<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-					aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" style="line-height: 20px; padding-top: 0px;"
-					href="main.html"><img src="imgs/logo_top2.png" /></a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="#" class="menuBtn">예약<span class="sr-only"></span></a></li>
-					<li><a href="review.html" class="menuBtn">사용자 리뷰</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">고객센터<span class="caret"></span></a>
-						<ul class="dropdown-menu" id="dropdown">
-							<li><a href="#">공지사항</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="#">고객 상담</a></li>
-							<li><a href="#">사업자 상담</a></li>
-						</ul></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">로그인</a></li>
-					<li><a href="#">회원가입</a></li>
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-fluid --> </nav>
-		<div style=""></div>
-	</div>
+<body style="overflow-y:auto;">
+<jsp:include page="../layout/header.jsp"></jsp:include>
 	<form method="POST">
-		<a class="btn btn-default" href="../review_list" role="button">뒤로</a>
+		<a class="btn btn-default" href="javascript:history.back();" role="button">뒤로</a>
 		<button type="submit" class="btn btn-default">삭제</button>
 		<a class="btn btn-default" href="../review_edit/${bean.idx }"
 			role="button">수정</a>

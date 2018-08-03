@@ -79,7 +79,7 @@ public class UserVo {
 	}
 
 
-	public String getNickName() {
+  public String getNickName() {
 		return nickName;
 	}
 

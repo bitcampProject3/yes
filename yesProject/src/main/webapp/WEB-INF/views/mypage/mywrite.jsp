@@ -117,7 +117,7 @@
                 
               <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px;  ">
                   <h1 style="padding: 5px; margin-bottom: 20px; ">
-                      <a href="" style="color: black;">예약 현황</a>
+                      <a href="" style="color: black;">작성글 보기</a>
                   </h1>
 
               </div>
@@ -168,30 +168,23 @@
                    <table class="table">
                    <thead>
                     <tr>
-                    	<th></th>
-                        <th >가맹점 이름</th>
-                        <th>예약 시간</th>
-                        <th>인원</th>
-                        <th style="width:30%;">요청 사항</th>
-                        <th style="width:15%;">이용 현황</th>
+                    	<th>글번호</th>
+                        <th >매장 이름</th>
+                        <th style="width:30%;">제목</th>
+                        <th>작성시간</th>
+                        <th>평점</th>
                     </tr>
                     </thead>
                     <tbody>
                  
 						<c:forEach items="${rlist}" var="bean" varStatus="status">
                     	<tr>
-                    	<td>${status.count }</td>
-                    	<td><a id="modal"href="#ex1" rel="modal:open" onclick="javascript:detail('${bean.branchID}','${bean.request }');">${bean.branchName }</a></td>
-                    	<td>${bean.reserveTime }</td>
-                    	<td>${bean.personel }</td>
-                    	<td>${bean.request }</td>
-                    	<td>${bean.useState }
-                     	<c:if test="${bean.useState eq 'Y' }">
-                    	<a style="margin-left:20px; font-size: 12px;" class="btn btn-default" href="./review_write?branchID=${bean.branchID }" >리뷰작성</a>
-                    	</c:if>
-                     	<c:if test="${bean.useState eq 'N' }">
-                    	<a id="modal" href="#deletebtn" rel="modal:open" style="margin-left:20px; font-size: 12px; color:red" onclick="javascript:del('${bean.reserveTime}');"  >예약취소</a>
-                    	</c:if>
+                    	<td>${bean.idx }</td>
+                    	<td>${bean.branchID }</td>
+                    	<td><a id="modal"href="#ex1" rel="modal:open" >${bean.title }</a></td>
+                    	<td>${bean.calendar }</td>
+                    	<td>${bean.rating }
+                    	<a id="modal" href="#deletebtn" rel="modal:open" style="margin-left:20px; font-size: 12px; color:red"   >삭제</a>
                     	</td>
                     	</tr>
 						</c:forEach>

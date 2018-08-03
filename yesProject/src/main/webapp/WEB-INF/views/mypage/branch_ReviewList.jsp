@@ -171,38 +171,21 @@ nav a {
 </head>
 <body style="overflow-y:auto;">
 <jsp:include page="../layout/header.jsp"></jsp:include>
-	<br />
-	<form class="form-inline" role="form" method="post" action="review_search">
-		검색분류
-			<select class="form-control" name="category">			
-				<option value="total">전체</option>
-				<option value="location">지역</option>
-				<option value="store">가게명</option>
-				<option value="menu">음식</option>
-			</select>
-		<br/>
-		<br/>		
-		<br /> 검색
-		<div class="form-group">
-			<label class="sr-only" for="exampleInputEmail2">키워드검색 </label> <input
-				type="text" class="form-control" id="exampleInputEmail2" name="keyword"
-				placeholder="키워드검색">
-		</div>
-		<button type="submit" class="btn btn-default">검색</button>
-	</form>
+	  <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
+               border-bottom-color: #e04f5f; margin-top:30px;">
+                
+              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px;  ">
+                  <h1 style="padding: 5px; margin-bottom: 20px; ">
+                      <a href="#" style="color: black;">리뷰 게시판</a>
+                  </h1>
+
+              </div>
+            </div>
 	
 	<br />
 	<br />
 	<br />
-	<table class="table table-hover" id="table">
-	<%--	<c:forEach items="${alist }" var="bean">
-    			<tr>
-    				<td>${bean.branchID }</td>
-    				<td>${bean.clientID }</td>
-    				<td>${bean.index }</td>
-    				<td>${bean.title }</td>
-    			</tr> 
-    		</c:forEach> --%>
+	<table class="table table-hover" id="table" style="width:80%; margin:0px auto;">
 		<thead>
 			<tr>
 				<th class="text-center" style="cursor: pointer;">글번호</th>
@@ -215,7 +198,7 @@ nav a {
 			<c:forEach var="bean" items="${page}" varStatus="status">
 				<tr>
 					<td class="text-center" style="cursor: pointer;"
-						onClick=" location.href='review_list/${bean.idx }' ">${bean.idx}</td>
+						onClick=" location.href='review_list/${bean.idx }' ">${status.count}</td>
 					<td class="text-center" style="cursor: pointer;"
 						onClick=" location.href='review_list/${bean.idx }' "><img
 						src="review_imgs/${imageList[status.index].imageName }" id="image" /></td>
@@ -244,7 +227,6 @@ nav a {
 	</table>
 
 	<br />
-	<a class="btn btn-default" href="./review_write" role="button">글쓰기</a>
 	<br />
 
 	<!-- paging  -->

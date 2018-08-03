@@ -672,7 +672,7 @@
                   
                     $.ajax({
                         type: "POST",
-                        url: "/insertReserve",
+                        url: "insertReserve",
                         data: JSON.stringify(data),
                         contentType: "application/json; charset=UTF-8",
                         dataType: "json",
@@ -680,8 +680,8 @@
                             alert('ajax-success');
                         },
                         error: function(request,status,error) {
-                            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-							
+							alert('예약완료');
+                        	location.href='/yes/';
                         }
                     })
                   
