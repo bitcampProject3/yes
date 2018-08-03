@@ -1,4 +1,4 @@
--- we don't know how to generate schema mydb (class Schema) :(
+
 create table br_accept
 (
 	licenceNum varchar(20) not null
