@@ -15,3 +15,4 @@ master branch에서 pull해서 테스트 하면 됨...
 
 ### ` 업로드 하실때 yesProject폴더 안에 src폴더와 pom.xml 파일만 부탁드립니다...`
 
+깃 업로드 파일 및 폴더 예외처리는 .gitignore 파일에 등록하면 됨
