@@ -259,10 +259,10 @@
 				<li><a href="branch_ReviewList.yes">리뷰게시판</a></li>
 				<li><a href="myInfo.yes">내정보</a></li>
 				<c:choose>
-					<c:when test="${member.acctepState == 'true'}">
+					<c:when test="${member.acceptState=='true'}">
 						<li><a href="#modal3" rel="modal:open" onclick="javascript:myBranch();" style="width:100%;">매장정보</a></li>
 					</c:when>
-					<c:when test="${member.acctepState == 'false'}">
+					<c:when test="${member.acceptState=='false'}">
 						<li><a href="#modal3" rel="modal:open" onclick="javascript:myBranch();" style="width:100%;">등록 요청 정보</a></li>
 					</c:when>
 					<c:otherwise>

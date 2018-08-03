@@ -31,7 +31,7 @@ create table branch_info(
 	branchExplain varchar(40) NOT NULL,
  	maxTable int not null,
  	tableState int not null,
- 	acctepState varchar(10) not null,
+ 	acceptState varchar(10) not null,
 	waitingNum int not null
 );
 

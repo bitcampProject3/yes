@@ -538,11 +538,11 @@
   		
   		<!-- 전체 레코드 개수 조회 --> <!-- 전체 -->
 	  	<select id ="management_writeGetCount" resultType="int">
-	  		select count(*) from mydb.branch_info where acctepState = 'false'
+	  		select count(*) from mydb.branch_info where acceptState = 'false'
 	  	</select>
 	<!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->  	
   		<select id="management_writeList" parameterType="hashmap" resultMap="branch_infoVo">
-  			select * from mydb.branch_info where acctepState = 'false' order by id ASC limit #{offset}, #{noOfRecords}
+  			select * from mydb.branch_info where acceptState = 'false' order by id ASC limit #{offset}, #{noOfRecords}
   		</select>
   		<select id ="management_writeInfoList" resultMap = "branch_infoVo">
   			select * from mydb.branch_info where info = 1 order by branch_info.id ASC
@@ -555,7 +555,7 @@
   		
   <!-- 추가 한 내용 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  -->
   		<update id="manage_update" parameterType="java.lang.String">
-  			UPDATE branch_info SET acctepState='true' WHERE branch_info.id = #{id}
+  			UPDATE branch_info SET acceptState='true' WHERE branch_info.id = #{id}
   		</update>
 		<update id="manage_registNum" parameterType="java.lang.String"> 
 			UPDATE user_info SET registNum=1 WHERE user_info.id = #{id} 
@@ -567,12 +567,12 @@
 	<!-- 전체 레코드 개수 조회 -->
 	<!-- 전체 -->
 		<select id="managementdel_writeGetCount" resultType="int">
-			select count(*) from mydb.branch_info where acctepState = 1
+			select count(*) from mydb.branch_info where acceptState = 1
 		</select>
 
 <!-- 게시글 조회를 위한 쿼리 (값을 받아와서 해당 하단 페이지 버튼의 레코드 출력) -->
 		<select id="managementdel_writeList" resultMap="branch_infoVo" parameterType="hashmap"> 
-			select * from mydb.branch_info where acctepState = 'true' order by id ASC limit #{offset}, #{noOfRecords}
+			select * from mydb.branch_info where acceptState = 'true' order by id ASC limit #{offset}, #{noOfRecords}
 		</select>
 		<select id="managementdel_writeInfoList" resultMap="branch_infoVo"> 
 			select * from mydb.branch_info where info = 1 order by branch_info.id ASC 

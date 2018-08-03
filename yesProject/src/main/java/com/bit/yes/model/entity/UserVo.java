@@ -16,10 +16,7 @@ public class UserVo {
 	private String pwQuestion;
 	private Date birthDate;
 	private String registNum; //사업자 등록번호
-	private String acctepState;     //branch_info의 매장 등록 여부
-
-	public UserVo() {
-	}
+	private String acceptState;     //branch_info의 매장 등록 여부
 
 	@Override
 	public String toString() {
@@ -34,8 +31,32 @@ public class UserVo {
 				", pwQuestion='" + pwQuestion + '\'' +
 				", birthDate=" + birthDate +
 				", registNum='" + registNum + '\'' +
-				", acctepState='" + acctepState + '\'' +
+				", acceptState='" + acceptState + '\'' +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		UserVo userVo = (UserVo) o;
+		return Objects.equals(id, userVo.id) &&
+				Objects.equals(password, userVo.password) &&
+				Objects.equals(name, userVo.name) &&
+				Objects.equals(nickname, userVo.nickname) &&
+				Objects.equals(nickName, userVo.nickName) &&
+				Objects.equals(email, userVo.email) &&
+				Objects.equals(phoneNum, userVo.phoneNum) &&
+				Objects.equals(pwQuestion, userVo.pwQuestion) &&
+				Objects.equals(birthDate, userVo.birthDate) &&
+				Objects.equals(registNum, userVo.registNum) &&
+				Objects.equals(acceptState, userVo.acceptState);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(id, password, name, nickname, nickName, email, phoneNum, pwQuestion, birthDate, registNum, acceptState);
 	}
 
 	public String getId() {
@@ -118,39 +139,15 @@ public class UserVo {
 		this.registNum = registNum;
 	}
 
-	public String getAcctepState() {
-		return acctepState;
+	public String getacceptState() {
+		return acceptState;
 	}
 
-	public void setAcctepState(String acctepState) {
-		this.acctepState = acctepState;
+	public void setacceptState(String acceptState) {
+		this.acceptState = acceptState;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		UserVo userVo = (UserVo) o;
-		return Objects.equals(id, userVo.id) &&
-				Objects.equals(password, userVo.password) &&
-				Objects.equals(name, userVo.name) &&
-				Objects.equals(nickname, userVo.nickname) &&
-				Objects.equals(nickName, userVo.nickName) &&
-				Objects.equals(email, userVo.email) &&
-				Objects.equals(phoneNum, userVo.phoneNum) &&
-				Objects.equals(pwQuestion, userVo.pwQuestion) &&
-				Objects.equals(birthDate, userVo.birthDate) &&
-				Objects.equals(registNum, userVo.registNum) &&
-				Objects.equals(acctepState, userVo.acctepState);
-	}
-
-	@Override
-	public int hashCode() {
-
-		return Objects.hash(id, password, name, nickname, nickName, email, phoneNum, pwQuestion, birthDate, registNum, acctepState);
-	}
-
-	public UserVo(String id, String password, String name, String nickname, String nickName, String email, String phoneNum, String pwQuestion, Date birthDate, String registNum, String acctepState) {
+	public UserVo(String id, String password, String name, String nickname, String nickName, String email, String phoneNum, String pwQuestion, Date birthDate, String registNum, String acceptState) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -161,6 +158,9 @@ public class UserVo {
 		this.pwQuestion = pwQuestion;
 		this.birthDate = birthDate;
 		this.registNum = registNum;
-		this.acctepState = acctepState;
+		this.acceptState = acceptState;
+	}
+
+	public UserVo() {
 	}
 }
