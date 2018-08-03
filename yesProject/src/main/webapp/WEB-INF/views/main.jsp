@@ -22,7 +22,6 @@
 		    margin-bottom: 5px;
 		    text-align: center;
 	    }
-	    
 	    .selectTime5, .selectTime10, .selectTime15, .selectTime15, .selectTime20,
 	    .selectTime25, .selectTime30, .selectTime35, .selectTime40, .selectTime45,
 	    .selectTime50, .selectTime55, .selectTime60,
