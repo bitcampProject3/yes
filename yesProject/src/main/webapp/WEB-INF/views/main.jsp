@@ -440,10 +440,10 @@
 							test.push(val.menu);
 							test.push(val.price);
 							mapSetMarker(test);
-						});
-					}
-				});
-
+						}); // each end
+					}     // success end
+				});     // ajax end
+      }         // callback end
 				function mapSetMarker(test) {
 
 					var mapProjection = map.getProjection(),

@@ -3,10 +3,12 @@ package com.bit.yes;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.omg.PortableServer.Servant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -134,6 +136,7 @@ public class LoginController {
 	  session.setAttribute("member", bean);
       return "내정보 수정 해주세요.";
    }
+   
 
 
 }

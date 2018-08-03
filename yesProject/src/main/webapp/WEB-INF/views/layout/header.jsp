@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-
 	request.setCharacterEncoding("UTF-8");
 %>
 <html>
@@ -15,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/clndr.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/clndr.css?version=1">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
@@ -53,18 +52,18 @@
 	<script src="${pageContext.request.contextPath}/js/messages_ko.min.js"></script>
 	
 	<style>
-
-
-    .quize{
-        font-size:15pt;
-	}
-	</style>
+ .quize{
+ font-size:15pt;
+ 
+ }
+</style>
 
      <script>
    
     //새로고침 (오류나면 지우기)
     var member='${member.registNum}';
-    if(member>=0){
+    var id='${member.id}';
+    if(member>=0 && id!='admin'){
            window.setInterval("count()",10000);}
    	
  	function count(){
@@ -127,7 +126,7 @@
  					if(list.length==0) //예약한 내역이 없을 때 처리..
  						{
  						calendars.clndr2 = jQuery('.cal2').clndr2({
-					        clickEvents: {
+ 							clickEvents: {
 					            onMonthChange: function () {
 					            	console.log('monthChange');
 					            },
@@ -214,7 +213,6 @@
             
             //지도
             
-
             $("#searchBox").slideToggle('slow', function(){});
             // searchBox open / close
             $('#searchIcon1').click(function() {
@@ -223,8 +221,6 @@
                     // 객체가 다 펼치지거나 접히고 나면 여기에 든 내용이 실행된다.
                 });
             });
-
-
         });
         
         
@@ -325,15 +321,16 @@
                     <li><a id="modal" href="#joinForm" rel="modal:open" >회원가입</a></li>
                 </c:if>
                 <c:if test="${member!=null }">
-                <c:choose>
-                    <c:when test="${member.id !='admin' }">
-                        <li><a id="mypage" href="#">마이페이지</a></li>
-                        <li><a id="logout" href="logout">로그아웃</a></li>
-                    </c:when>
-                    <c:when test="${member.id == 'admin' }">
-                        <li><a href="${pageContext.request.contextPath}/admin/">관리자</a></li>
-                    </c:when>
-                </c:choose>
+					<c:choose>
+						<c:when test="${member.id !='admin' }">
+	                    <li><a id="mypage" href="#">마이페이지</a></li>
+	                    <li><a id="logout" href="logout">로그아웃</a></li>
+	                    </c:when>
+	                    <c:when test="${member.id == 'admin' }">    
+                		<li><a href="${pageContext.request.contextPath}/admin/">관리자</a></li>
+                		<li><a id="logout" href="logout">로그아웃</a></li>
+                		</c:when>
+					</c:choose>
                 </c:if>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -358,7 +355,6 @@
         		});
         		
         		$('#backJoin').click(function(){
-
         			$('.step2').css('display','none');
         			$('.step1').css('display','inline-block');        			
         			
@@ -400,7 +396,6 @@
                 	                            }
                 	                       } 
                 	                       }
-
                 				},
                 				password:{required:true,minlength:4},
                 				confirm:{required:true,equalTo:"#password"},
@@ -1032,14 +1027,11 @@
 	</div>
 </div>
 <script>
-
 function loginBack(){
 	$('#login-findID').css('display','none');
 	$('#login-findPW').css('display','none');
 	$('#loginForm').css('display','block');
 }
-
-
 $('#findID_btn').click(function(){
 		var name=$('.name').val();
 		var birth=$('.birth').val();
@@ -1063,9 +1055,7 @@ $('#findID_btn').click(function(){
 				}
         	} 
       });
-
 });
-
 var id;
 $('#findPW_btn').click(function(){
 	id=$('.id2').val();
@@ -1095,7 +1085,6 @@ $('#findPW_btn').click(function(){
   });
 	
 });
-
 $('#updatePW').click(function(){
 	var pw=$('.pw').val();
 	
@@ -1120,9 +1109,6 @@ $('#updatePW').click(function(){
 		
 	}); 
 });
-
-
-
 </script>
 
 
@@ -1248,7 +1234,6 @@ $('#updatePW').click(function(){
             },
             error: function(request,status,error) {
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-
             }
         })
     }
@@ -1448,12 +1433,10 @@ $('#updatePW').click(function(){
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                 // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
                 var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
                 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
                 // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
                 if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -1471,7 +1454,6 @@ $('#updatePW').click(function(){
                 if(fullRoadAddr !== ''){
                     fullRoadAddr += extraRoadAddr;
                 }
-
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('zoneCode').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('address').value = fullRoadAddr;
@@ -1485,11 +1467,9 @@ $('#updatePW').click(function(){
                     //예상되는 도로명 주소에 조합형 주소를 추가한다.
                     var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                     document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-
                 } else if(data.autoJibunAddress) {
                     var expJibunAddr = data.autoJibunAddress;
                     document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-
                 } else {
                     document.getElementById('guide').innerHTML = '';
                 }

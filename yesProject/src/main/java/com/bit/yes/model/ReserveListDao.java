@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.bit.yes.model.entity.BranchVo;
 import com.bit.yes.model.entity.ReserveListVo;
+import com.bit.yes.model.entity.ReviewVo;
 
 public interface ReserveListDao {
    //고객 예약 현황 리스트
@@ -22,9 +23,11 @@ public interface ReserveListDao {
    public int getNum(String id);
    public int getState(String id);
 
-	public List<ReserveListVo> reserveDatePreview(Map<String,Object> map);
+  public List<ReserveListVo> reserveDatePreview(Map<String,Object> map);
 
    void insertReserve(Map<String,Object> map, String id);
-
+   public int updateUseState(ReserveListVo bean);
+   public List<ReviewVo> writeList(String id) throws SQLException;
+   public List<ReviewVo> selectAll(String id) throws SQLException;
 	List<BranchVo> selectOneBranch(String id);
 }

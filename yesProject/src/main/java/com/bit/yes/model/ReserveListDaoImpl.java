@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bit.yes.model.entity.BranchVo;
 import com.bit.yes.model.entity.ReserveListVo;
+import com.bit.yes.model.entity.ReviewVo;
 
 @Repository
 public class ReserveListDaoImpl implements ReserveListDao {
@@ -88,7 +89,19 @@ public class ReserveListDaoImpl implements ReserveListDao {
       map.put("id", id);
       sqlSession.insert("reserveList.insertReserve",map);
    }
-
+   @Override
+	public int updateUseState(ReserveListVo bean) {
+	   return sqlSession.update("reserveList.updateUseState", bean);
+	}
+   @Override
+	public List<ReviewVo> writeList(String id) throws SQLException {
+		return sqlSession.selectList("reserveList.writeList",id);
+	}
+   
+   @Override
+	public List<ReviewVo> selectAll(String id) throws SQLException {
+		return sqlSession.selectList("reserveList.selectAll",id);
+	}
    @Override
    public List<BranchVo> selectOneBranch(String id) {
       return sqlSession.selectList("reserveList.selectOneBranch", id);

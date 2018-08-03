@@ -177,6 +177,8 @@ public class ReviewDaoImpl implements ReviewDao {
 		return sqlSession.delete("review.reviewDeleteLike", bean);
 	}
 
+	
+	// �˻� ����Ʈ ����¡
 /*	public List<ReviewVo> writeList(int offset, int noOfRecords, String category, String keyword) throws SQLException {
 		
 		List<ReviewVo> writeList = new ArrayList<ReviewVo>();

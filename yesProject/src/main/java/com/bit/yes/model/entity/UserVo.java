@@ -91,7 +91,7 @@ public class UserVo {
 		this.nickname = nickname;
 	}
 
-	public String getNickName() {
+  public String getNickName() {
 		return nickName;
 	}
 

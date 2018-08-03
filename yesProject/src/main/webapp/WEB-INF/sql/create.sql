@@ -2,8 +2,6 @@
 -- USE mydb;
 
 
-/*����� �ѹ� �߰�*/
-
 create table user_info(
 	id varchar(30) primary key,
 	name varchar(30),
@@ -16,25 +14,8 @@ create table user_info(
 	registNum varchar(30)/*사업자 등록번호*/
 
 );
-drop table user_info;
-select * from mydb.user_info;
 
 
-
-
-create table branch_info(
-	id varchar(20) primary key,
-	opTime varchar(20) not null,
-	breakTime varchar(20) not null,
-	opDate varchar(20) not null,
-	menu varchar(20) not null,
-	address varchar(20) not null,
-	phoneNum varchar(20) not null,
-	image varchar(20) not null,
-	score decimal(2,1) not null,
-
-
-);
 
 
 create table ticketing(
@@ -45,19 +26,6 @@ create table ticketing(
 
 );
 
-
-create table br_accept(
-	licenceNum varchar(20) primary key,
-	name varchar(20) not null,
-	address varchar(20) not null,
-	opTime varchar(20) not null,
-	menu varchar(20) not null,
-	image varchar(20) not null,
-	phoneNum varchar(20) not null,
-	cartegory varchar(20) not null
-
-
-);
 
 
 --reserveTime >���� �ð� , checkTime �����������ð�--
@@ -197,4 +165,11 @@ delete from user_info where id like 'kakao%';
 
 insert into branch_info values('branch01','매장8','09:00~23:05','14:00~15:05','매주 금요일 휴무','010-2131-4136','1.6','적당','8','0','false','0');
 
+select * from user_info;
+insert into user_info values('admin','관리자','admin',null,null,null,null,null,null);
 
+
+select * from reserve_list where branchID='branch02';
+select * from reserve_list where clientID='wonywony93';
+
+select * from review where branchID='branch01';

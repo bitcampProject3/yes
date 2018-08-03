@@ -11,11 +11,16 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.yes.model.UserDao;
 import com.bit.yes.model.entity.BranchVo;
 import com.bit.yes.model.entity.ReserveListVo;
+import com.bit.yes.model.entity.ReviewVo;
 import com.bit.yes.model.entity.UserVo;
 import com.bit.yes.service.ReserveListService;
 
@@ -55,6 +60,7 @@ public class MyPageController {
 		if(result>0)
 		{
 			model.addAttribute("user", user);
+			System.out.println(user);
 			return "mypage/myInfo";
 		}
 		else
@@ -83,18 +89,20 @@ public class MyPageController {
 	@RequestMapping("/reservation.yes")
 	public String reservation(HttpSession session,Model model,HttpServletRequest req) throws SQLException {
 		String id=((UserVo)session.getAttribute("member")).getId();
-		//페이징 처리 전
-		int currentPageNo=1;
-		int maxPost=10;
-		if(req.getParameter("pages")!=null)
-			currentPageNo=Integer.parseInt(req.getParameter("pages"));
-		
-	/*	Paging paging=new Paging(currentPageNo,maxPost);*/
-		
-		
 		service.listPage(model,id);
 		return "mypage/myReserve";
 	}
+	
+	//-----------(고객)작성글 보기-----------------------
+
+	@RequestMapping("/myWrite.yes")
+	public String myWrite(HttpSession session,Model model,HttpServletRequest req) throws SQLException {
+		String id=((UserVo)session.getAttribute("member")).getId();
+		List<ReviewVo> list=service.writeList(model,id);
+		System.out.println(list);
+		return "mypage/mywrite";
+	}
+	
 	//---------마이페이지 달력-----------
 	@ResponseBody
 	@RequestMapping(value="/loadReserve",method=RequestMethod.POST)
@@ -147,7 +155,8 @@ public class MyPageController {
 		return "mypage/branchReserve";
 	}
 	
-
+	
+	
 	//-------------------사업자 매장정보-----------------
 	@ResponseBody
 	@RequestMapping(value = "/branchInfo", method = RequestMethod.POST, produces = "application/json;")
@@ -248,4 +257,34 @@ public class MyPageController {
 		service.insertReserve(map, id);
 
 	}
+	
+	//---------------(가맹점)이용현황 변경하기-----------
+	
+	@ResponseBody
+	@RequestMapping(value="/useState_change",method=RequestMethod.POST,produces="application/text; charset=utf8")
+	public String useState_change(String day,String use) throws SQLException{
+		System.out.println(use);
+		ReserveListVo bean=new ReserveListVo();
+		bean.setUseState(use);
+		bean.setReserveTime(day);
+		int result=service.updateUseState(bean);
+		System.out.println(result);
+		return "이용현황 변경되었습니다";
+	}
+	
+	//-------------(가맹점) 리뷰 게시판---------------
+	
+	@RequestMapping("/branch_ReviewList.yes")
+	public String branchReview(HttpSession session,Model model) throws SQLException{
+		String id=((UserVo) session.getAttribute("member")).getId();
+		 List<ReviewVo> list=service.selectAll(model,id);
+		System.out.println(list);
+		
+		/*	String id=((UserVo) session.getAttribute("member")).getId();
+		BranchVo bean=service.selectBranch(id);
+		model.addAttribute("bean",bean);*/
+		return "mypage/branch_ReviewList";
+	}
+	
+	
 }
