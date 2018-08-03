@@ -22,7 +22,7 @@
 	  
 	  
 	  <select id="loginCheck" parameterType="String" resultType="com.bit.yes.model.entity.UserVo">
-	  	select *  from user_info where id=#{param1} and password=#{param2}
+	  	select a.id, a.password, a.name, a.nickname, a.email, a.phoneNum, a.pwQuestion, a.birthDate, a.registNum, b.acctepState from user_info a left join branch_info b on a.id = b.id where a.id=#{param1} and a.password=#{param2}
 	  </select>
   	  <select id="login" parameterType="String" resultType="com.bit.yes.model.entity.UserVo">
 	  	select *  from user_info where id=#{param1}

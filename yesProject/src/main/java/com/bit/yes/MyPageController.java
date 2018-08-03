@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.CSS;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import com.bit.yes.model.UserDao;
 import com.bit.yes.model.entity.BranchVo;
 import com.bit.yes.model.entity.ReserveListVo;
 import com.bit.yes.model.entity.UserVo;
-import com.bit.yes.model.paging.Paging;
 import com.bit.yes.service.ReserveListService;
 
 
@@ -151,9 +149,12 @@ public class MyPageController {
 	
 
 	//-------------------사업자 매장정보-----------------
-	@RequestMapping("/branchInfo.yes")
-	public String branchInfo() {
-		return "mypage/branchInfo";
+	@ResponseBody
+	@RequestMapping(value = "/branchInfo", method = RequestMethod.POST, produces = "application/json;")
+	public List<BranchVo> branchInfo(HttpSession httpSession) {
+		String id=((UserVo) httpSession.getAttribute("member")).getId();
+		return service.selectOneBranch(id);
+
 	}
 	//----------------매장관리(테이블 관리)----------------------
 	@RequestMapping("/branchManage.yes")

@@ -34,6 +34,7 @@ public class BranchController {
 	@ResponseBody
 	@RequestMapping(value = "/insertstep1", method = RequestMethod.POST)
 	public void insertStep1 (@RequestBody Map<String, String> map, HttpSession httpSession){
+		System.out.println("insertStep1 controller run");
 		String id = ((UserVo)httpSession.getAttribute("member")).getId();
 		map.put("id", id);
 		branchService.insertBranchInfo(map);
@@ -42,6 +43,7 @@ public class BranchController {
 	@ResponseBody
 	@RequestMapping(value = "/insertstep2", method = RequestMethod.POST)
 	public void insertStep2 (@RequestBody Map<String, Object> map, HttpSession httpSession){
+		System.out.println("insertStep2 controller run");
 		String id = ((UserVo)httpSession.getAttribute("member")).getId();
 		map.put("id",id);
 		branchService.insertBranchMenu(map);
@@ -49,6 +51,7 @@ public class BranchController {
 	@ResponseBody
 	@RequestMapping(value = "/insertstep3", method = RequestMethod.POST)
 	public void insertStep3 (@RequestBody String markerImage, HttpSession httpSession){
+		System.out.println("insertStep3 controller run");
 		String id = ((UserVo)httpSession.getAttribute("member")).getId();
 		System.out.println("markerImage : "+markerImage.substring(0,markerImage.length()-1));
 		System.out.println("id : "+id);
@@ -83,6 +86,14 @@ public class BranchController {
 		List<BranchVo> allMenuList = branchService.allMenuLoad(branchID.substring(0, branchID.length()-1));
 
 		return allMenuList;
+	}
+    @ResponseBody
+    @RequestMapping(value = "/mybranchdetail", method = RequestMethod.POST)
+	public List<BranchVo> myBranchDetail(HttpSession httpSession){
+		String branchId = ((UserVo)httpSession.getAttribute("member")).getId();
+		List<BranchVo> myAllMenuList = branchService.myAllMenuLoad(branchId);
+
+		return myAllMenuList;
 	}
 
 	@ResponseBody

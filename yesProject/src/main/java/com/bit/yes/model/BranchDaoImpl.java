@@ -79,7 +79,7 @@ public class BranchDaoImpl implements BranchDao{
     @Override
     public void insertBranchInfo(Map<String, String> map) {
         map.put("acceptState","false");
-
+        System.out.println("insertBranchInfo Dao run..");
         sqlSession.insert("branchList.insertBranchInfo",map);
 
     }
@@ -151,6 +151,11 @@ public class BranchDaoImpl implements BranchDao{
     public List<ReviewVo> branchReview(String branchId) {
         System.out.println("branchReview dao run..");
         return sqlSession.selectList("branchList.branchReview", branchId.substring(0, branchId.length()-1));
+    }
+
+    @Override
+    public List<BranchVo> myAllMenuLoad(String branchId) {
+        return sqlSession.selectList("branchList.myAllMenuLoad", branchId);
     }
 
     @Override

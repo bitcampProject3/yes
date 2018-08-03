@@ -166,7 +166,7 @@
 				for (var i = 0; i < array.length; i++) {
 					var day=array[i].day.slice(0,7);
 					
-					if(day==compare){
+					if(day===compare){
 						target='calendar-day-'+array[i].day.slice(0,10);
 						console.log(i);
 						$('.calendar-day-'+array[i].day+'').children().append('<div class="time">'+array[i].time+'</div>');
@@ -212,20 +212,13 @@
 				if(array.length!=0){
 					for (var i = 0; i < array.length; i++) {
 						var day=array[i].day.slice(0,7);
-						if(day==compare){
-							target='calendar-day-'+array[i].day.slice(0,10);
-							$('.calendar-day-'+array[i].day+'').children().append('<div class="time">'+array[i].time+'</div>');
-	 						$('.table tbody').append('<tr class="tr'+i+'">');
-							$('.table tbody .tr'+i).append('<td style="width:15%">'+array[i].name+'</td>');
-							$('.table tbody .tr'+i).append('<td>'+array[i].time+'</td>');
-							$('.table tbody .tr'+i).append('<td>'+array[i].personel+'</td>');
-							$('.table tbody .tr'+i).append('<td style="width:60%; text-overflow:ellipsis;  font-size:10pt;">'+array[i].request+'</td>');
-							$('.table tbody .tr'+i).append('<td>'+array[i].useState+'</td>');
-							$('.table tbody').append('</tr>')
-						}
 
 		            calendars.clndr1 = jQuery('.cal1').clndr({
 		                events: eventArray,
+			            ready: function () {
+				            array=dataload();
+	                        modal(array);
+			            },
 		                clickEvents: {
 		                    click: function (target) {
 		                        console.log('Cal-1 clicked: ', target);

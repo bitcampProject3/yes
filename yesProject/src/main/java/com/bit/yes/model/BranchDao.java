@@ -36,6 +36,8 @@ public interface BranchDao {
 
 	List<ReviewVo> branchReview(String branchId);
 
+    List<BranchVo> myAllMenuLoad(String branchId);
+
 
 //    void addBranch(BranchVo branchInfoVo);
 }

@@ -88,4 +88,9 @@ public class ReserveListDaoImpl implements ReserveListDao {
       map.put("id", id);
       sqlSession.insert("reserveList.insertReserve",map);
    }
+
+   @Override
+   public List<BranchVo> selectOneBranch(String id) {
+      return sqlSession.selectList("reserveList.selectOneBranch", id);
+   }
 }

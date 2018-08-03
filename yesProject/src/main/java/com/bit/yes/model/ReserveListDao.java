@@ -25,4 +25,6 @@ public interface ReserveListDao {
 	public List<ReserveListVo> reserveDatePreview(Map<String,Object> map);
 
    void insertReserve(Map<String,Object> map, String id);
+
+	List<BranchVo> selectOneBranch(String id);
 }

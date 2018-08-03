@@ -76,4 +76,8 @@ public class BranchService {
 	public List<ReviewVo> branchReview(String branchId) {
 		return branchDao.branchReview(branchId);
 	}
+
+	public List<BranchVo> myAllMenuLoad(String branchId) {
+		return branchDao.myAllMenuLoad(branchId);
+	}
 }
