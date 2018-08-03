@@ -35,13 +35,13 @@
 	<!-- jQuery Calander -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> 
-	<script src="${pageContext.request.contextPath}/js/clndr.js"></script>
-	<script src="${pageContext.request.contextPath}/js/clndr2.js"></script>
+	<script src="${pageContext.request.contextPath}/js/calendar/clndr.js"></script>
+	<script src="${pageContext.request.contextPath}/js/calendar/clndr2.js"></script>
 	
 	<!-- jQuery validate -->
-	<script src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
-	<script src="${pageContext.request.contextPath}/js/additional-methods.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/messages_ko.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/validate/jquery.validate.js"></script>
+	<script src="${pageContext.request.contextPath}/js/validate/additional-methods.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/validate/messages_ko.min.js"></script>
 	
 	<style>
         .quize{font-size:15pt;}
