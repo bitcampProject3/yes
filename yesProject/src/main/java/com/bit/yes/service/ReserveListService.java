@@ -82,4 +82,9 @@ public class ReserveListService {
 		return list;
 	}
 
+
+    // 자신의 매장 조회
+	public List<BranchVo> selectOneBranch(String id) {
+      return reserveDao.selectOneBranch(id);
+	}
 }

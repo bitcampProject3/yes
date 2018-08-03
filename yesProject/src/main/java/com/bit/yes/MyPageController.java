@@ -158,9 +158,12 @@ public class MyPageController {
 	
 	
 	//-------------------사업자 매장정보-----------------
-	@RequestMapping("/branchInfo.yes")
-	public String branchInfo() {
-		return "mypage/branchInfo";
+	@ResponseBody
+	@RequestMapping(value = "/branchInfo", method = RequestMethod.POST, produces = "application/json;")
+	public List<BranchVo> branchInfo(HttpSession httpSession) {
+		String id=((UserVo) httpSession.getAttribute("member")).getId();
+		return service.selectOneBranch(id);
+
 	}
 	//----------------매장관리(테이블 관리)----------------------
 	@RequestMapping("/branchManage.yes")

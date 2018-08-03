@@ -102,4 +102,8 @@ public class ReserveListDaoImpl implements ReserveListDao {
 	public List<ReviewVo> selectAll(String id) throws SQLException {
 		return sqlSession.selectList("reserveList.selectAll",id);
 	}
+   @Override
+   public List<BranchVo> selectOneBranch(String id) {
+      return sqlSession.selectList("reserveList.selectOneBranch", id);
+   }
 }

@@ -165,7 +165,6 @@ alter table branch_info modify column image2 varchar(20) not null after image;
 alter table branch_info modify column image3 varchar(20) not null after image2;
 
 
--- # ���� ���̺� ���� �� ����
 alter table branch_info drop menu1;
 alter table branch_info drop menu2;
 alter table branch_info drop menu3;

@@ -68,4 +68,12 @@
     <select id="ticketingCheck" parameterType="map" resultType="int">
       select count(*) as num from ticketing where branchID = #{branchId} and clientID = #{clientId}
     </select>
+
+    <select id="branchReview" parameterType="string" resultType="com.bit.yes.model.entity.ReviewVo">
+      select * from review a left join user_info b on a.clientID = b.id where a.branchID = #{param1}
+    </select>
+    <select id="myAllMenuLoad" parameterType="string" resultType="com.bit.yes.model.entity.BranchVo">
+      select * from branch_menu where id = #{param1}
+    </select>
+
   </mapper>

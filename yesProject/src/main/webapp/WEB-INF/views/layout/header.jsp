@@ -150,15 +150,14 @@
 														'border-radius':'50%'});
 					   
 						calendars.clndr2 = jQuery('.cal2').clndr2({
-							ready:function(){
+							ready: function(){
 								for (var i = 0; i < list.length; i++) {
 					            	var day=(list[i].reserveTime).slice(0,10);
 									$('.calendar2-day-'+day+'').css({'background-color':'#FFA7A7',
 										'border-radius':'50%'});
-					            	}
-				        	},
-							clickEvents: {
-					        	
+				                }
+							},
+					        clickEvents: {
 					            onMonthChange: function () {
 					            	for (var i = 0; i < list.length; i++) {
 					            	var day=(list[i].reserveTime).slice(0,10);
@@ -195,9 +194,8 @@
                 $('body').css('overflow-y','auto');
              });
         	
-        	
             $("#logout").click(function(){
-            	$.ajax({
+               $.ajax({
                     type : "POST",
                     dataType : 'text',
                     url : "http://nid.naver.com/nidlogin.logout",
@@ -240,42 +238,52 @@
     </script>
 </head>
 <body>
-        <div id="slide" >
-            <a id="close" style="float: right; color: black; font-size: 25px;">X</a>
-          
-            <h1>마이 페이지</h1>
+<div id="slide" >
+	<a id="close" style="float: right; color: black; font-size: 25px;">X</a>
 
-			<div id="slide-menu">
-            <ul style="width:100%;padding-left:5px;">
-            	<c:if test="${member.registNum==0 }">
-                <li><a href="reservation.yes">예약 현황</a></li>
-                <li><a href="myWrite.yes">작성글 보기</a></li>
-                <li><a href="myInfo.yes">내정보</a></li>
-            	</c:if>
-            	<c:if test="${member.registNum!=0 }">
-                <li><a href="branchReserve.yes">예약 현황</a></li>
-                <li><a href="branch_ReviewList.yes">리뷰게시판</a></li>
-                <li><a href="myInfo.yes">내정보</a></li>
-                <li><a href="branchInfo.yes" style="width:100%;">매장정보</a></li>
-                <li><a href="branchManage.yes" style="width:100%;">매장관리</a></li>
-            	</c:if>
-            </ul>
-			</div>
+	<h1>마이 페이지</h1>
+
+	<div id="slide-menu">
+		<ul style="width:100%;padding-left:5px;">
 			<c:if test="${member.registNum==0 }">
-			<div id="slide-menu2">
-			<h2></h2>
-			</div>
+				<li><a href="reservation.yes">예약 현황</a></li>
+				<li><a href="myWrite.yes">작성글 보기</a></li>
+				<li><a href="myInfo.yes">내정보</a></li>
 			</c:if>
 			<c:if test="${member.registNum!=0 }">
-			<div id="slide-menu4">
-			<h2>대기인원:</h2>
-			</div>
-			</c:if>			
-			<div id="slide-menu3">
-  		 	<div class="cal2"></div> 
-			</div>
-            
-        </div> <!-- slide menu end-->
+				<li><a href="branchReserve.yes">예약 현황</a></li>
+				<li><a href="branch_ReviewList.yes">리뷰게시판</a></li>
+				<li><a href="myInfo.yes">내정보</a></li>
+				<c:choose>
+					<c:when test="${member.acceptState=='true'}">
+						<li><a href="#modal3" rel="modal:open" onclick="javascript:myBranch();" style="width:100%;">매장정보</a></li>
+					</c:when>
+					<c:when test="${member.acceptState=='false'}">
+						<li><a href="#modal3" rel="modal:open" onclick="javascript:myBranch();" style="width:100%;">등록 요청 정보</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="#modal2" rel="modal:open" onclick="javascript:modalStep1();" style="width:100%;">매장 등록</a></li>
+					</c:otherwise>
+				</c:choose>
+				<li><a href="branchManage.yes" style="width:100%;">매장관리</a></li>
+			</c:if>
+		</ul>
+	</div>
+	<c:if test="${member.registNum==0 }">
+	<div id="slide-menu2">
+		<h2></h2>
+	</div>
+	</c:if>
+	<c:if test="${member.registNum!=0 }">
+	<div id="slide-menu4">
+		<h2>대기인원:</h2>
+	</div>
+	</c:if>
+	<div id="slide-menu3">
+		<div class="cal2"></div>
+	</div>
+ 
+</div> <!-- slide menu end-->
 
 
 <div>
@@ -289,7 +297,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" style="padding-top: 10px;" href="/yes/"><img src="${pageContext.request.contextPath}/imgs/logo_top3.png"/></a>
+                <a class="navbar-brand" style="padding-top: 10px;" href="./"><img src="${pageContext.request.contextPath}/imgs/logo_top3.png"/></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -722,56 +730,58 @@
     Kakao.init('630e98d8425188c04dae0728c65822bb');
     
     function loginWithKakao() {
-      // 로그인 창을 띄웁니다.
-      Kakao.Auth.login({
+        // 로그인 창을 띄웁니다.
+        Kakao.Auth.login({
+		throughTalk: false,
+		persistAccessToken: false,
         success: function(authObj) {
-	        Kakao.API.request({
- 	 	          url: '/v1/user/me',
- 	 	          success: function(res) {
-	 	            console.log(JSON.stringify(res.kaccount_email));
-	 	            var id=res.id;
- 	 	            var name=JSON.stringify(res.properties.nickname);
- 	 	            Kakao.Auth.logout();
- 	 	            $.ajax({
- 	 	               	type:"POST",
- 	 	              	url:"./kakaologin",
- 	 	              	data:{
- 	 	              		"id":id,
- 	 	              		"name":name
- 	 	              	},
- 	 	              	success:function(data){
- 	 	              		alert(data);
- 	 	            		$(location).attr("href","http://localhost:8090/yes/");  
- 	 	              	},
-						error:function(request,status,error){
-                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                        }
- 	 	            });
+          alert(JSON.stringify(authObj));
         },
         fail: function(err) {
           alert(JSON.stringify(err));
         }
-      }); 
-    } 	
-    
-      }); }
+      });
+	}
+        // success: function(authObj) {
+			// Kakao.API.request({
+			// 	url: '/v1/user/me',
+			// 	success: function(res) {
+			// 	console.log(JSON.stringify(res.kaccount_email));
+			// 	var id=res.id;
+			// 	var name=JSON.stringify(res.properties.nickname);
+	// $.ajax({
+	// type:"POST",
+	// url:"./kakaologin",
+	// data:{
+	// "id":id,
+	// "name":name
+	// },
+	// success:function(data){
+	// alert(data);
+	// $(location).attr("href","http://localhost:8090/yes/");
+	// },
+	// error:function(request,status,error){
+	// alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	// }
+	// });
+	//
+	// 			},
+	// 			error: function(){
+	// 				alert('login error');
+	// 			}
+	// 		})
+	// 	},
+     //    fail: function(err) {
+     //      alert(JSON.stringify(err));
+     //    }
+     
+    	
       
       function logoutKakao(){
 	
 	
-			Kakao.API.request({
-				url: '/v1/user/me',
-				success: function(res) {
-					Kakao.Auth.logout(function () {
-						var frm = document.applicationJoinForm;
-						frm.submit();
-					});
-				},
-				fail: function(error) {
-			// console.log(error);
-			
-				}
-			})
+				
+	
 		}
  	
  	 /*  Kakao.init('630e98d8425188c04dae0728c65822bb');
@@ -829,14 +839,16 @@
         	},
         	success:function(data){
         		var result=data.slice(0,2);
-        		if(result=='성공'){
-        			
+        		if(result==='성공'){
         			location.href="/yes/";
         		}
         		else{
-        			alert(data.slice(3));
+        			alert(data);
         		}
-        	} 
+        	},
+			error: function(request,status,error) {
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
       });
  	});
  	
@@ -1213,7 +1225,7 @@ $('#updatePW').click(function(){
         
         $.ajax({
             type: "POST",
-            url: "/insertstep1",
+            url: "./insertstep1",
             data: JSON.stringify(data),
             contentType: "application/json; charset=UTF-8",
             dataType: "json",
@@ -1323,7 +1335,7 @@ $('#updatePW').click(function(){
     
         $.ajax({
             type: "POST",
-            url: "/insertstep2",
+            url: "./insertstep2",
             traditional: true,
             dataType: 'json',
             data: JSON.stringify({
@@ -1400,7 +1412,7 @@ $('#updatePW').click(function(){
         
         $.ajax({
             type: 'POST',
-            url: '/insertstep3',
+            url: './insertstep3',
             data: imageTarget,
             dataType: 'json',
             success: function() {
@@ -1415,7 +1427,6 @@ $('#updatePW').click(function(){
     </script>
     <span id="guide" style="color:#999"></span>
     <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-	
 	<script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
@@ -1467,7 +1478,226 @@ $('#updatePW').click(function(){
         }).open();
         
     }
+    
+    
+    // 로그인시 내 매장 정보를 눌렀을때의 modal
+	function myBranch() {
+    	console.log('myBranch...');
+		var myBranchDetail = [];
+    	$.ajax({
+            type: "POST",
+            url:"./branchInfo",
+			dataType:"json",
+            success:function(data){
+				console.log(data[0]);
+				var id              = data[0].id,
+					branchName      = data[0].branchName,
+					opTime          = data[0].opTime,
+					breakTime       = data[0].breakTime,
+					opDate          = data[0].opDate,
+					phoneNum        = data[0].phoneNum,
+					score           = data[0].score,
+					state           = data[0].state,
+					zoneCode        = data[0].zoneCode,
+					roadAddress     = data[0].roadAddress,
+					jibunAddress    = data[0].jibunAddress,
+					detailAddress   = data[0].detailAddress,
+					markerImage     = data[0].markerImage,
+					mainImage       = data[0].mainImage,
+					image1          = data[0].image1,
+					image2          = data[0].image2,
+					image3          = data[0].image3,
+					image4          = data[0].image4,
+					image5          = data[0].image5,
+					image6          = data[0].image6,
+					image7          = data[0].image7,
+					image8          = data[0].image8,
+					category        = data[0].category,
+					branchExplain   = data[0].branchExplain,
+					sido            = data[0].sido,
+					sigungu         = data[0].sigungu,
+					category        = data[0].category;
+				
+				// 매장 detail 페이지에 db정보 추가
+				$('.detailModalTopTitle').empty().append(branchName);
+				$('.modalScore').empty().append('평점 : '+score+' / 5.0');
+				$('.modalAddress').empty().append(roadAddress);
+				$('.modalJibunAddress').empty().append('(우) '+zoneCode+' (지번) '+jibunAddress);
+				$('.modalPhoneNum').empty().append(phoneNum);
+				$('.modalOpTime').empty().append(opTime);
+				$('.modalBreakTime').empty().append(breakTime);
+				$('.modalOpDay').empty().append(opDate);
+				$('.modalExplain').empty().append(branchExplain);
+				$('.categorySpan').empty().append(sido+' '+sigungu);
+				$('.modalStatus').css('display','none');
+				
+				var imagePath = "/imgs/foodimgs/";
+				
+				$('.gallerymain').attr('src',imagePath+image1);
+				$('.gallerylink').attr('href',imagePath+image1);
+				
+				for (i = 1; i<9; i++){
+					$('.img'+[i]).attr('src',imagePath+(image1.substring(0,10))+i+'.jpg');
+					$('.imgLink'+[i]).attr('href',imagePath+(image1.substring(0,10))+i+'.jpg');
+				}
+				
+            },
+			error: function(request,status,error) {
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
+    	
+    	var menuArr = [];
+    	
+    	$.ajax({
+	        type: 'POST',
+	        url: './mybranchdetail',
+	        dataType: 'json',
+	        success: function (data) {
+	        	console.log(data);
+		        $.each(data,  function (idx, val) {
+		        	console.log(val);
+			        menuArr.push(val.menu);
+			        menuArr.push(val.price);
+		        });
+		        for (i = 0; i <test.length; i++){
+					$('.modalMenuName'+[i]).empty().append(menuArr[i*2]);
+					$('.modalMenuPrice'+[i]).empty().append(menuArr[i*2+1]);
+				}
+	        },
+			error: function(request,status,error) {
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
+    	
+    	
+	}
+  
+  
 	</script>
+	<%--<c:if test="${member.registNum==0 }">--%>
+                        <%--<li><a href="reservation.yes">예약 현황</a></li>--%>
+                        <%--<li><a href="review.yes">리뷰 작성</a></li>--%>
+                        <%--<li><a href="myInfo.yes">내정보</a></li>--%>
+                	<%--</c:if>--%>
+	<div id="modal3" class="modal">
+        <div class="detailModalTop">
+            <div class="detailModalTopTitle">
+            </div>
+	        <div class="detailModalTopCategory">
+		        <span class="categorySpan"></span>
+	        </div>
+        </div>
+        <div class="detailModalLeft">
+            <div class="detailModalLeftImg">
+                <div class="popup-gallery">
+                    <a href="" class="gallerylink"><img src="" class="gallerymain"></a>
+		
+                </div>
+            </div>
+            <div class="popup-gallery popup-gallery2">
+			<a class="imgLink1" href=""><img src="" width="60" height="60" class="galleryimg img1"></a>
+			<a class="imgLink2" href=""><img src="" width="60" height="60" class="galleryimg img2"></a>
+			<a class="imgLink3" href=""><img src="" width="60" height="60" class="galleryimg img3"></a>
+			<a class="imgLink4" href=""><img src="" width="60" height="60" class="galleryimg img4"></a>
+			<a class="imgLink5" href=""><img src="" width="60" height="60" class="galleryimg img5"></a>
+			<a class="imgLink6" href=""><img src="" width="60" height="60" class="galleryimg img6"></a>
+			<a class="imgLink7" href=""><img src="" width="60" height="60" class="galleryimg img7"></a>
+			<a class="imgLink8" href=""><img src="" width="60" height="60" class="galleryimg img8"></a>
+            
+            </div>
+        </div>
+        <div class="detailModalRight">
+            <div class="modalStatusDiv" style="text-align: center;">
+                <div class="modalScore" style="width: 330px; "></div>
+                <div class="modalStatus" style="width: 200px;height: 40px;display: inline-block;top: 0;right: 10px;position: absolute; text-align: right;">
+	                <div class="ticketingText" style="display: inline-block; margin-right: 20px;"></div>
+	                <div class="ticketingBtn" style="display: inline-block;"></div>
+                </div>
+            </div>
+            <div>
+                <div class="modalAddressDiv">주소</div>
+                <div class="modalAddress"></div>
+            </div>
+            <div class="modalJibunAddress">
+            </div>
+            <div>
+                <div class="modalPhoneNumDiv">연락처</div>
+                <div class="modalPhoneNum"></div>
+            </div>
+            <div>
+                <div class="modalOpTimeDiv">영업시간</div>
+                <div class="modalOpTime"></div>
+            </div>
+            <div>
+                <div class="modalBreakTimeDiv">휴게시간</div>
+                <div class="modalBreakTime"></div>
+            </div>
+            <div class="modalOpDayBox">
+                <div class="modalOpDayDiv">영업일</div>
+                <div class="modalOpDay" ></div>
+            </div>
+            
+            <div class="modalMenuBox">
+                <div class="modalMenuBoxLeft">
+	                <div class="modalLeftMenu">
+		                <div class="modalMenuName0"></div>
+		                <div class="modalMenuPrice0"></div>
+	                </div>
+	                <div class="modalLeftMenu">
+		                <div class="modalMenuName2"></div>
+		                <div class="modalMenuPrice2"></div>
+	                </div>
+	                <div class="modalLeftMenu">
+		                <div class="modalMenuName4"></div>
+		                <div class="modalMenuPrice4"></div>
+	                </div>
+	                <div class="modalLeftMenu">
+		                <div class="modalMenuName6"></div>
+		                <div class="modalMenuPrice6"></div>
+	                </div>
+                </div>
+                <div class="modalMenuBoxRight">
+	                <div class="modalRightMenu">
+		                <div class="modalMenuName1"></div>
+		                <div class="modalMenuPrice1"></div>
+	                </div>
+	                <div class="modalRightMenu">
+		                <div class="modalMenuName3"></div>
+		                <div class="modalMenuPrice3"></div>
+	                </div>
+	                <div class="modalRightMenu">
+		                <div class="modalMenuName5"></div>
+		                <div class="modalMenuPrice5"></div>
+	                </div>
+	                <div class="modalRightMenu">
+		                <div class="modalMenuName7"></div>
+		                <div class="modalMenuPrice7"></div>
+	                </div>
+                </div>
+            </div>
+            <div class="modalExplain">
+            </div>
+            <%--<div class="modalBbs">--%>
+                <%--<div class="modalBbsMore">더보기</div>--%>
+                <%--<div class="modalBbsTitle">--%>
+	                <%--<div class="modalBbsTitleSub">제목</div>--%>
+	                <%--<div class="modalBbsTitleDate">날짜</div>--%>
+	                <%--<div class="modalBbsTitleWriter">작성자</div>--%>
+                <%--</div>--%>
+                <%--<div class="modalBbsList">--%>
+	                <%--<div class="modalBbsListSub bbsSub1"></div>--%>
+	                <%--<div class="modalBbsListDate bbsDate1"></div>--%>
+	                <%--<div class="modalBbsListName bbsName1"></div>--%>
+                <%--</div>--%>
+                <%--<div class="modalBbsList">--%>
+	                <%--<div class="modalBbsListSub bbsSub2"></div>--%>
+	                <%--<div class="modalBbsListDate bbsDate2"></div>--%>
+	                <%--<div class="modalBbsListName bbsName2"></div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        </div>
+    </div>
 	
 
 	

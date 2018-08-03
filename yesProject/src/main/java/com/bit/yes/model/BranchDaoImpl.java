@@ -1,6 +1,7 @@
 package com.bit.yes.model;
 
 import com.bit.yes.model.entity.BranchVo;
+import com.bit.yes.model.entity.ReviewVo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -78,7 +79,7 @@ public class BranchDaoImpl implements BranchDao{
     @Override
     public void insertBranchInfo(Map<String, String> map) {
         map.put("acceptState","false");
-
+        System.out.println("insertBranchInfo Dao run..");
         sqlSession.insert("branchList.insertBranchInfo",map);
 
     }
@@ -142,7 +143,19 @@ public class BranchDaoImpl implements BranchDao{
         Map map = new HashMap();
         map.put("branchId", id);
         map.put("clientId", clientId);
+        System.out.println("ticketingCheck dao run..");
         return sqlSession.selectOne("branchList.ticketingCheck", map);
+    }
+
+    @Override
+    public List<ReviewVo> branchReview(String branchId) {
+        System.out.println("branchReview dao run..");
+        return sqlSession.selectList("branchList.branchReview", branchId.substring(0, branchId.length()-1));
+    }
+
+    @Override
+    public List<BranchVo> myAllMenuLoad(String branchId) {
+        return sqlSession.selectList("branchList.myAllMenuLoad", branchId);
     }
 
     @Override
@@ -152,6 +165,7 @@ public class BranchDaoImpl implements BranchDao{
         map.put("branchId", id);
         map.put("clientId", clientId);
         map.put("countNum", countNum+1);
+        System.out.println("ticketingStart dao run..");
         sqlSession.insert("branchList.ticketingStart",map);
     }
 

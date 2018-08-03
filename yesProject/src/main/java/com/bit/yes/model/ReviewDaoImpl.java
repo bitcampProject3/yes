@@ -179,7 +179,6 @@ public class ReviewDaoImpl implements ReviewDao {
 
 	
 	// �˻� ����Ʈ ����¡
-	
 /*	public List<ReviewVo> writeList(int offset, int noOfRecords, String category, String keyword) throws SQLException {
 		
 		List<ReviewVo> writeList = new ArrayList<ReviewVo>();

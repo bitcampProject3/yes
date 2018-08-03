@@ -60,8 +60,8 @@ public class S_CsDaoImpl01 implements S_CsDao {
 	public List<S_CsVo> writeList(HashMap<String, Object> params) throws SQLException {
 		List<S_CsVo> writeList = new ArrayList<S_CsVo>();
 
-		writeList = sqlSession.selectList("s_writeList", params);
-		this.noOfRecords = sqlSession.selectOne("s_writeGetCount");
+		writeList = sqlSession.selectList("yes.s_writeList", params);
+		this.noOfRecords = sqlSession.selectOne("yes.s_writeGetCount");
 		
 		return writeList;
 	}
@@ -69,7 +69,7 @@ public class S_CsDaoImpl01 implements S_CsDao {
 	@Override
 	public int writeGetCount(HashMap<String, Object> params) throws SQLException {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("s_writeGetCount", params);
+		return sqlSession.selectOne("yes.s_writeGetCount", params);
 	}
 	
 	@Override
