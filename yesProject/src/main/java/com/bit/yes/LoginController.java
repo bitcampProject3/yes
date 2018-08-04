@@ -136,7 +136,6 @@ public class LoginController {
 	  session.setAttribute("member", bean);
       return "내정보 수정 해주세요.";
    }
-   
 
 
 }
