@@ -10,7 +10,10 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/clndrstyle.css?ver=1">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
+	
+	<%-- 매장 검색창 --%>
 	<script src="${pageContext.request.contextPath}/js/main_js/branch_search.js"></script>
+
 </head>
 <style>
 	.selectTimeContent {
@@ -77,7 +80,6 @@
 	<div id="map"></div>
 	<script type="text/javascript"
 	        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=630e98d8425188c04dae0728c65822bb&libraries=services,clusterer"></script>
-	
 	<%-- 지도 생성 및 마커 생성 --%>
 	<script src="${pageContext.request.contextPath}/js/main_js/set_map.js"></script>
 	<%-- 매장 팝업 및 디테일 모달 관리 --%>
@@ -353,6 +355,8 @@
 
 
 </script>
+
+<%--바로예약의 script--%>
 <script src="${pageContext.request.contextPath}/js/calendar/clndr3.js"></script>
 <script src="${pageContext.request.contextPath}/js/calendar/demo.js?ver=3"></script>
 </body>

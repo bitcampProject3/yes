@@ -213,8 +213,8 @@ public class BranchController {
     @RequestMapping(value = "/ticketingCheck", method = RequestMethod.POST)
 	public int ticketingCheck(@RequestBody String branchID, HttpSession httpSession){
 		System.out.println("ticketingCheck Controller run..");
+		if(httpSession.getAttribute("member") == null) return 1001;
 		String clientId = ((UserVo)httpSession.getAttribute("member")).getId();
-		if(clientId == null) return 1;
 		return branchService.ticketingCheck(branchID.substring(0, branchID.length()-1), clientId);
 	}
 
