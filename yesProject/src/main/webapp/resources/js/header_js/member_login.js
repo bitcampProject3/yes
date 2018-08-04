@@ -7,54 +7,44 @@ function loginWithKakao() {
     Kakao.Auth.login({
 		throughTalk: false,
 		persistAccessToken: false,
-        success: function(authObj) {
-            alert(JSON.stringify(authObj));
-        },
-        fail: function(err) {
-            alert(JSON.stringify(err));
-        }
+		success: function(authObj) {
+	 		Kakao.API.request({
+                url: '/v1/user/me',
+                success: function (res) {
+                    console.log(JSON.stringify(res.kaccount_email));
+                    var id = res.id;
+                    var name = JSON.stringify(res.properties.nickname);
+                    $.ajax({
+                        type: "POST",
+                        url: "./kakaologin",
+                        data: {
+                            "id": id,
+                            "name": name
+                        },
+                        success: function (data) {
+                            alert(data);
+                            $(location).attr("href", "http://localhost:8090/yes/");
+                        },
+                        error: function (request, status, error) {
+                            alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                        }
+                    });
+                },
+                fail: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            })
+		}
     });
 }
-    // success: function(authObj) {
-		// Kakao.API.request({
-		// 	url: '/v1/user/me',
-		// 	success: function(res) {
-		// 	console.log(JSON.stringify(res.kaccount_email));
-		// 	var id=res.id;
-		// 	var name=JSON.stringify(res.properties.nickname);
-// $.ajax({
-// type:"POST",
-// url:"./kakaologin",
-// data:{
-// "id":id,
-// "name":name
-// },
-// success:function(data){
-// alert(data);
-// $(location).attr("href","http://localhost:8090/yes/");
-// },
-// error:function(request,status,error){
-// alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// }
-// });
-//
-// 			},
-// 			error: function(){
-// 				alert('login error');
-// 			}
-// 		})
-// 	},
- //    fail: function(err) {
- //      alert(JSON.stringify(err));
- //    }
+
 
 
 
 function logoutKakao(){
-
-
-
-
+    window.open('http://developers.kakao.com/logout', 'kakao_iframe','width=2px, height=2px');
+    alert('로그아웃 되었습니다.');
+    $(location).attr("href", "http://localhost:8090/yes/");
 }
 
  /*  Kakao.init('630e98d8425188c04dae0728c65822bb');

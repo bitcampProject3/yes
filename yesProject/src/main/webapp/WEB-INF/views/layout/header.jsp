@@ -135,7 +135,7 @@
 					<c:choose>
 						<c:when test="${member.id !='admin' }">
 	                    <li><a id="mypage" href="#">마이페이지</a></li>
-	                    <li><a id="logout" href="logout">로그아웃</a></li>
+	                    <li><a id="logout" href="logout" onclick="logoutKakao();">로그아웃</a></li>
 	                    </c:when>
 	                    <c:when test="${member.id == 'admin' }">    
                 		<li><a href="${pageContext.request.contextPath}/admin/">관리자</a></li>
@@ -691,9 +691,9 @@
             <%--</div>--%>
         </div>
     </div>
-	
 
-	
+
+	<iframe name="kakao_iframe" src="" width="6px" height="4px" style="visibility:hidden; display: none;"></iframe>
 </body>
 
 <%--count function & document Ready --%>
