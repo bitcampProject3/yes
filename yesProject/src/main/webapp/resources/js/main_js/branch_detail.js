@@ -100,12 +100,22 @@
 				url: './ticketingCheck',
 				data: id,
 				success: function (data) {
-					alert(data);
-					if (data !== 0) {
+
+					if (data === 1001)          // 1001 === 비회원
+					{
+						$('.ticketingBtn').empty().append('대기 시작');
+						$('.ticketingBtn').modal('login');
+					}
+					else if (data !== 0)        // 대기중인 회원
+					{
 						$('.ticketingBtn').empty().append('대기 중');
 						$('.ticketingBtn').off("click");
 					}
-					else $('.ticketingBtn').empty().append('대기 시작');
+					else                        // 대기x 회원
+					{
+						$('.ticketingBtn').empty().append('대기 시작');
+						$('.ticketingBtn').attr('href','#').attr('rel','');
+					}
 				},
 				error: function (request, status, error) {
 					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
