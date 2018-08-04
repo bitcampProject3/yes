@@ -41,7 +41,7 @@ create table branch_info
 	branchExplain varchar(40) not null,
 	maxTable int not null,
 	tableState int not null,
-	acceptState varchar(10) not null,
+	acceptState varchar(10) null,
 	waitingNum int not null
 )
 ;
@@ -220,13 +220,13 @@ create table user_info
 (
 	id varchar(30) not null
 		primary key,
-	password varchar(30) not null,
+	password varchar(30) null,
 	name varchar(30) not null,
-	nickname varchar(30) not null,
-	email varchar(30) not null,
-	phoneNum varchar(30) not null,
-	pwQuestion varchar(100) not null,
-	birthDate date not null,
+	nickname varchar(30) null,
+	email varchar(30) null,
+	phoneNum varchar(30) null,
+	pwQuestion varchar(100) null,
+	birthDate date null,
 	registNum varchar(30) null
 )
 ;

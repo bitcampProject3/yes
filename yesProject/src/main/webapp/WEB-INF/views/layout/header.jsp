@@ -484,18 +484,18 @@
 				<div class="cols-sm-10">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-						        <div class="dropdown">
-									  <button class="btn btn-default dropdown-toggle quizChoice" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 100%">
-									    학창시절 기억에 남는 선생님은?
-									    <span class="caret"></span>
-									  </button>
-									  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-									    <li><a class="quiz" href="#" >당신의 별명은?</a></li>
-									    <li><a class="quiz" href="#" >좋아하는 운동은?</a></li>
-									    <li><a class="quiz" href="#">가장 친한 친구는?</a></li>
-									    <li><a class="quiz" href="#">당신의 보물 1호는?</a></li>
-									  </ul>
-								</div>
+					        <div class="dropdown">
+								  <button class="btn btn-default dropdown-toggle quizChoice" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 100%">
+								    학창시절 기억에 남는 선생님은?
+								    <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								    <li><a class="quiz" href="#" >당신의 별명은?</a></li>
+								    <li><a class="quiz" href="#" >좋아하는 운동은?</a></li>
+								    <li><a class="quiz" href="#">가장 친한 친구는?</a></li>
+								    <li><a class="quiz" href="#">당신의 보물 1호는?</a></li>
+								  </ul>
+							</div>
 					</div>
 				</div>
 		</div>
