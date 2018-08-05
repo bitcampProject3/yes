@@ -109,12 +109,14 @@ public class LoginController {
 	  bean.setRegistNum("0");
 	  Date date=java.sql.Date.valueOf("0000-"+birthDate);
 	  bean.setBirthDate(date);
-
-	  if(sqlSession.getMapper(UserDao.class).login(bean.getId())==null)
-		  sqlSession.getMapper(UserDao.class).insertOne(bean);
 	  
+	  
+	  if(sqlSession.getMapper(UserDao.class).login(bean.getId())==null)
+		  {sqlSession.getMapper(UserDao.class).insertOne(bean);
+		  }
 	  session.setAttribute("member", bean);
-      return "redirect:/";
+	  System.out.println(bean);
+      return "success";
    }
 
 
