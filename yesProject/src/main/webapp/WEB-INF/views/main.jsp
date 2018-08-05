@@ -81,13 +81,16 @@
 	<script type="text/javascript"
 	        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=630e98d8425188c04dae0728c65822bb&libraries=services,clusterer"></script>
 	<%-- 지도 생성 및 마커 생성 --%>
-	<script src="${pageContext.request.contextPath}/js/main_js/set_map.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main_js/set_map.js?ver=1"></script>
 	<%-- 매장 팝업 및 디테일 모달 관리 --%>
-	<script src="${pageContext.request.contextPath}/js/main_js/branch_detail.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main_js/branch_detail.js?ver=2"></script>
 	<%-- 매장 예약 모달 관리 --%>
 	<script src="${pageContext.request.contextPath}/js/main_js/branch_reserve.js"></script>
 
 	<script>
+        var imagePath = "./imgs/foodimgs/";
+
+
 		<c:forEach items="${alist}" var="articleList">
 		// 주소를 좌표로 변환해줌
 		geocoder.addressSearch('${articleList.roadAddress}', function (result, status) {
@@ -112,15 +115,16 @@
 
 				coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
-
-				if (('${articleList.latlngx}' && '${articleList.latlngy}') == null) {
+				console.log('${articleList.latlngx}');
+				console.log('${articleList.latlngy}');
+				if (('${articleList.latlngx}' && '${articleList.latlngy}') == '') {
 					//기등록된 자료에 latlng 입력
 					var latlngY = result[0].y,
 						latlngX = result[0].x;
 					var tempId = '${articleList.id}';
 					$.ajax({
 						type: 'POST',
-						url: '/updatelatlng',
+						url: './updatelatlng',
 						data: JSON.stringify({
 							latlngY: latlngY,
 							latlngX: latlngX,
@@ -136,7 +140,6 @@
 							// });
 						},
 						error: function () {
-							alert('latlng error');
 						}
 					});
 				}
@@ -332,7 +335,8 @@
 		});
 		$('.galleryimg').mouseover(function (e) {
 			var imageSrcArr = e.target.src.split('/');
-			var imageSrc = "/imgs/foodimgs/" + imageSrcArr[5];
+            console.log(imageSrcArr);
+            var imageSrc = "./imgs/foodimgs/" + imageSrcArr[6];
 			$('.gallerymain').attr('src', imageSrc);
 			$('.gallerylink').attr('href', imageSrc);
 		})

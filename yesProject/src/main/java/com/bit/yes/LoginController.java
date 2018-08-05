@@ -130,9 +130,7 @@ public class LoginController {
 	   
 	   if(sqlSession.getMapper(UserDao.class).login(bean.getId())==null)
 		   sqlSession.getMapper(UserDao.class).insertOne(bean); 
-	   
-	   
-	   
+
 	  session.setAttribute("member", bean);
       return "내정보 수정 해주세요.";
    }

@@ -1,0 +1,805 @@
+
+# 테이블 생성
+create table br_accept
+(
+  licenceNum varchar(20) not null
+    primary key,
+  name varchar(20) not null,
+  address varchar(20) not null,
+  opTime varchar(20) not null,
+  menu varchar(20) not null,
+  image varchar(20) not null,
+  phoneNum varchar(20) not null,
+  cartegory varchar(20) not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table branch_counsel
+(
+  `index` int auto_increment
+    primary key,
+  title varchar(30) not null,
+  content varchar(100) not null,
+  writer varchar(20) not null,
+  calendar date not null,
+  comment varchar(100) null,
+  questionSelect varchar(100) not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table branch_info
+(
+  id varchar(20) not null
+    primary key,
+  branchname varchar(20) not null,
+  opTime varchar(20) not null,
+  breakTime varchar(20) not null,
+  opDate varchar(20) not null,
+  phoneNum varchar(20) not null,
+  score decimal(2,1) null,
+  state varchar(20) not null,
+  category varchar(20) not null,
+  branchExplain varchar(40) not null,
+  maxTable int not null,
+  tableState int not null,
+  acceptState varchar(10) not null,
+  waitingNum int not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table branch_address
+(
+  id varchar(20) not null
+    primary key,
+  zoneCode varchar(10) not null,
+  roadAddress varchar(50) not null,
+  jibunAddress varchar(30) not null,
+  detailAddress varchar(30) not null,
+  sido varchar(20) not null,
+  sigungu varchar(20) not null,
+  bname1 varchar(20) null,
+  bname2 varchar(20) not null,
+  latlngx varchar(20) not null,
+  latlngy varchar(20) not null,
+  constraint fk_id
+  foreign key (id) references branch_info (id)
+    on delete cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table branch_image
+(
+  id varchar(20) not null
+    primary key,
+  markerImage varchar(40) not null,
+  mainImage varchar(40) not null,
+  image1 varchar(40) not null,
+  image2 varchar(40) null,
+  image3 varchar(40) null,
+  image4 varchar(40) null,
+  image5 varchar(40) null,
+  image6 varchar(40) null,
+  image7 varchar(40) null,
+  image8 varchar(40) null,
+  constraint fk_img_id
+  foreign key (id) references branch_info (id)
+    on delete cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table branch_menu
+(
+  id varchar(20) not null,
+  menu varchar(20) not null,
+  price varchar(20) not null,
+  mainMenu varchar(20) not null,
+  constraint fk_me_id
+  foreign key (id) references branch_info (id)
+    on delete cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table c_counsel_images
+(
+  `index` int not null,
+  imageName varchar(100) null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table client_counsel
+(
+  branchID varchar(20) not null,
+  clientID varchar(45) not null,
+  `index` int auto_increment
+    primary key,
+  title varchar(45) not null,
+  content varchar(100) not null,
+  writer varchar(45) not null,
+  calendar datetime not null,
+  comment varchar(100) null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table guest
+(
+  sabun int auto_increment
+    primary key,
+  name varchar(45) null,
+  nalja date null,
+  pay int null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table notice
+(
+  `index` int auto_increment
+    primary key,
+  title varchar(20) not null,
+  content varchar(100) not null,
+  writer varchar(20) not null,
+  calendar date null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table notice_images
+(
+  `index` int not null,
+  imageName varchar(100) null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table reserve_list
+(
+  branchID varchar(20) not null,
+  clientID varchar(20) not null,
+  reserveTime varchar(20) not null,
+  checkTime datetime not null,
+  personel int not null,
+  request varchar(100) not null,
+  useState varchar(10) not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table review
+(
+  branchID varchar(20) not null,
+  clientID varchar(20) not null,
+  idx int auto_increment
+    primary key,
+  title varchar(20) not null,
+  content varchar(100) not null,
+  calendar datetime not null,
+  rating decimal(2,1) default '0.0' not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table review_comment
+(
+  comment_idx int(10) auto_increment
+    primary key,
+  review_idx int(10) not null,
+  comment longtext null,
+  writer varchar(50) null,
+  reg_date datetime null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table review_images
+(
+  idx int not null,
+  imageName varchar(100) not null
+    primary key
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table review_like
+(
+  review_idx int(10) not null,
+  writer varchar(50) not null,
+  checked tinyint(1) default '0' not null,
+  click_date datetime not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table s_counsel_images
+(
+  `index` int not null,
+  imageName varchar(100) null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table ticketing
+(
+  branchID varchar(20) null,
+  clientID varchar(20) null,
+  ticketingTime datetime not null,
+  waitingNum int not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+create table user_info
+(
+  id varchar(30) not null
+    primary key,
+  password varchar(30) not null,
+  name varchar(30) not null,
+  nickname varchar(30) not null,
+  email varchar(30) not null,
+  phoneNum varchar(30) not null,
+  pwQuestion varchar(100) not null,
+  birthDate date not null,
+  registNum varchar(30) null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
+alter database mydb default character set utf8;
+show variables like 'c%';
+
+
+
+##########################################################
+
+# user_info
+insert into user_info values('user01','user01','윤자혜','모건','oygd@naver.com','010-2776-7252','수수','1986-6-26','753-45-69663');
+insert into user_info values('user02','user02','서원늬','기단','mmad@gmail.com','010-3792-4929','천기','1986-2-1','469-12-58756');
+insert into user_info values('user03','user03','정화선','자나','pgvi@hanmail.net','010-7295-5215','관길','2000-9-24','678-28-15049');
+insert into user_info values('user04','user04','김모치','강고','damr@nate.com','010-3976-8716','천기','1979-7-22','378-42-15547');
+insert into user_info values('user05','user05','한관기','희채','nlfk@hanmail.net','010-2319-9726','산채','1995-5-17','222-52-76574');
+insert into user_info values('user06','user06','장송모','구원','zoxd@hanmail.net','010-7708-8647','영중','1982-1-13','270-96-61629');
+insert into user_info values('user07','user07','정식선','고사','nswe@hanmail.net','010-6440-4936','길평','1959-4-5','236-63-69371');
+insert into user_info values('user08','user08','조늬관','모모','rzol@naver.com','010-3660-4495','수백','1966-11-28','203-25-13535');
+insert into user_info values('user09','user09','강기평','원호','uslk@hanmail.net','010-9913-9978','치모','1969-3-21','511-41-43671');
+insert into user_info values('user10','user10','오중중','가길','plma@naver.com','010-5197-2644','늬가','1977-7-25','522-70-32133');
+insert into user_info values('user11','user11','박수고','평치','dbqf@naver.com','010-3135-4735','가구','1967-1-16','670-74-20246');
+insert into user_info values('user12','user12','김강천','가원','rbjo@hanmail.net','010-9429-9999','나국','2008-7-3','487-36-44785');
+insert into user_info values('user13','user13','오기강','평송','meqq@naver.com','010-9529-3032','건선','1975-4-23','788-85-29674');
+insert into user_info values('user14','user14','최선송','건선','pgup@naver.com','010-9662-6231','람건','1957-12-25','492-81-66985');
+insert into user_info values('user15','user15','오수자','고혜','bgrc@gmail.com','010-7962-6324','화국','2002-11-23','534-29-71712');
+insert into user_info values('user16','user16','송사영','가천','qyol@nate.com','010-7713-5558','연여','1966-12-19','428-63-39765');
+insert into user_info values('user17','user17','오홍강','단호','skmo@naver.com','010-5211-8520','중자','1959-2-26','666-63-14287');
+insert into user_info values('user18','user18','이송관','화천','hkqk@naver.com','010-5720-1426','람희','1972-11-27','302-41-13162');
+insert into user_info values('user19','user19','조자치','백자최','rdeg@nate.com','010-3397-5447','희원','1953-8-14','625-38-69762');
+insert into user_info values('user20','user20','장무산','길고강','yekn@naver.com','010-5791-6456','길건','1962-5-13','617-52-23053');
+insert into user_info values('user21','user21','송송치','사기강','wioh@gmail.com','010-9001-8054','길홍','1956-4-29','410-29-55757');
+insert into user_info values('user22','user22','임구기','늬자한','tltr@gmail.com','010-4982-6656','송평','1982-9-22','327-51-35433');
+insert into user_info values('user23','user23','박채모','사연강','gnno@hanmail.net','010-2609-6881','나채','1951-11-6','547-68-22535');
+insert into user_info values('user24','user24','장치산','늘선최','aofb@hanmail.net','010-2429-8333','혜구','1950-9-19','558-53-24483');
+insert into user_info values('user25','user25','김늘가','늬천임','sgvh@nate.com','010-2965-1091','늬건','1977-1-19','396-24-47326');
+insert into user_info values('user26','user26','강채가','사자최','frjv@gmail.com','010-3768-9293','사람','1959-7-6','258-12-13849');
+insert into user_info values('user27','user27','김원관','구희서','sfma@hanmail.net','010-6127-7624','늘수','1991-1-27','716-83-42968');
+insert into user_info values('user28','user28','류혜식','강중송','psdk@hanmail.net','010-5439-5739','송길','1990-7-18','694-94-17211');
+insert into user_info values('user29','user29','조관가','치희박','zjoa@hanmail.net','010-8483-5767','영단','1961-11-2','469-39-49261');
+insert into user_info values('user30','user30','서호평','구모이','dsqu@naver.com','010-7645-7239','관관','1990-2-17','433-58-66222');
+insert into user_info values('user31','user31','이나혜','단무윤','mwlq@hanmail.net','010-3100-2126','가고','1976-11-26','314-41-66663');
+insert into user_info values('user32','user32','류자수','람모김','npbd@gmail.com','010-8029-8346','홍자','1993-4-12','219-21-33372');
+insert into user_info values('user33','user33','김치기','치관박','lbvy@naver.com','010-2051-1945','늬고','1987-12-30','401-64-61778');
+insert into user_info values('user34','user34','장모늘','호화강','hded@gmail.com','010-3515-5628','수수','1975-6-16','620-87-54075');
+insert into user_info values('user35','user35','송화평','송원한','rilh@gmail.com','010-5055-5929','자건','1968-12-12','733-90-62412');
+insert into user_info values('user36','user36','정연자','모구박','vgaz@gmail.com','010-1350-7491','모산','2008-5-4','757-22-70083');
+insert into user_info values('user37','user37','박자중','무호윤','qgkq@hanmail.net','010-9272-3110','강희','1963-6-28','424-99-42531');
+insert into user_info values('user38','user38','박강람','모단이','xcke@nate.com','010-2684-4520','백채','1951-1-7','439-49-73506');
+insert into user_info values('user39','user39','한강람','기늬임람','ozak@gmail.com','010-8168-6305','건단','1970-4-14','681-35-80077');
+insert into user_info values('user40','user40','김치늬','치무강중','umaj@gmail.com','010-9934-8743','수단','1951-6-7','684-79-84617');
+insert into user_info values('user41','user41','강길길','고산이홍','kpun@gmail.com','010-9626-4040','백기','1987-5-23','242-88-80606');
+insert into user_info values('user42','user42','오길자','연치김모','dhli@nate.com','010-3537-2713','식홍','2006-5-26','265-39-85471');
+insert into user_info values('user43','user43','강가구','관선송평','pdio@naver.com','010-3142-2541','가기','1998-2-3','436-22-66984');
+insert into user_info values('user44','user44','송중진','강기최홍','xahk@naver.com','010-8439-9127','국기','1985-2-6','605-33-19932');
+insert into user_info values('user45','user45','강강식','치혜이기','gtao@naver.com','010-5364-6384','진혜','1959-6-20','295-96-82353');
+insert into user_info values('user46','user46','송길기','무자서고','hhip@gmail.com','010-4807-1698','송구','1961-12-5','580-64-67708');
+insert into user_info values('user47','user47','류건치','관가최백','fqwj@naver.com','010-5789-9164','희치','1998-10-28','208-89-62037');
+insert into user_info values('user48','user48','장나선','식기김기','eaho@hanmail.net','010-8776-5196','람여','1993-3-21','355-69-54391');
+insert into user_info values('user49','user49','서채구','자천김늬','dbhv@nate.com','010-7647-6197','가연','1976-8-21','528-66-41035');
+insert into user_info values('user50','user50','오늘송','중치이자','bhxl@nate.com','010-4734-1380','평기','1996-11-15','574-44-37339');
+
+
+
+# branch_info
+insert into branch_info values('user01','아오리라멘','12:05~23:04','14:36~17:41','매주 월요일 휴무','02-2494-1106','3.0','','일식','라멘이 맛있는 집',4,0,'FALSE',0);
+insert into branch_info values('user02','콩불','09:40~22:40','15:27~17:47','매주 화요일 휴무','02-2687-6227','3.1','','한식','콩나물 불고기가 일품',5,0,'FALSE',0);
+insert into branch_info values('user03','하남돼지집','12:50~17:51','15:22~17:22','매주 수요일 휴무','02-2545-3832','3.2','','한식','앉아 계시면 저희가 구워 드립니다',6,0,'FALSE',0);
+insert into branch_info values('user04','공화춘','10:16~21:05','15:30~16:15','매주 목요일 휴무','02-2904-6555','3.3','','중식','짬뽕이 맛있는 집',7,0,'FALSE',0);
+insert into branch_info values('user05','거궁','09:21~17:26','15:44~17:01','매주 금요일 휴무','02-2927-7299','3.4','','한식','서울에서 가장 맛있는 한식',8,0,'FALSE',0);
+insert into branch_info values('user06','TGI Fridays','11:46~20:24','15:27~17:00','매주 토요일 휴무','02-2647-2283','3.5','','양식','믿고 먹는 패밀리 레스토랑 입니다.',9,0,'FALSE',0);
+insert into branch_info values('user07','꼬치사께','10:27~23:23','14:32~16:23','매주 일요일 휴무','02-2827-1240','3.6','','일식','서울에서 가장 맛있는 이자카야',10,0,'FALSE',0);
+insert into branch_info values('user08','맛있는 전','11:47~23:45','14:22~17:06','연중무휴','02-2474-7357','3.7','','한식','각종 전 주문 받습니다',11,0,'FALSE',0);
+insert into branch_info values('user09','고을래','09:44~18:09','15:54~16:12','매주 월요일 휴무','02-2838-8887','3.8','','한식','스페인산 이베리코 흑돼지',12,0,'FALSE',0);
+insert into branch_info values('user10','미다래','09:11~23:19','15:46~17:47','매주 화요일 휴무','02-2664-7400','3.9','','일식','가장 맛있는 일식집',13,0,'FALSE',0);
+insert into branch_info values('user11','불불이족발','09:49~17:53','15:45~16:58','매주 수요일 휴무','02-2329-4875','4.0','','한식','진짜 정말 매워요',14,0,'FALSE',0);
+insert into branch_info values('user12','착한곱창','12:06~17:18','14:05~16:24','매주 목요일 휴무','02-2944-8073','4.1','','한식','깨끗하게 닦은 곱창입니다',15,0,'FALSE',0);
+insert into branch_info values('user13','미인닭발','09:54~21:52','14:28~17:26','매주 금요일 휴무','02-2402-1028','4.2','','한식','닭 발가락은 몇 개일까요',16,0,'FALSE',0);
+insert into branch_info values('user14','굽네치킨','09:18~20:33','14:19~16:49','매주 토요일 휴무','02-2893-5488','4.3','','한식','치킨은 굽네치킨',17,0,'FALSE',0);
+insert into branch_info values('user15','여름에 먹는 회','10:38~23:18','15:16~17:43','매주 일요일 휴무','02-2467-7723','4.4','','일식','폭염에는 회를 먹어야죠',18,0,'FALSE',0);
+insert into branch_info values('user16','스시오','10:13~19:11','15:51~17:36','연중무휴','02-2753-3521','4.5','','일식','국내 최고의 스시집',19,0,'FALSE',0);
+insert into branch_info values('user17','솔레미오','11:23~18:33','14:16~17:13','매주 월요일 휴무','02-2585-4657','4.6','','양식','스파게티가 참 맛있습니다',20,0,'FALSE',0);
+insert into branch_info values('user18','신선설농탕','11:08~22:26','15:49~17:20','매주 화요일 휴무','02-2220-1571','4.7','','한식','신선들만 먹는다는 설렁탕',4,0,'FALSE',0);
+insert into branch_info values('user19','포베이','09:29~22:33','15:34~16:17','매주 수요일 휴무','02-2577-2722','4.8','','양식','베트남 현지인들이 찾는다는 쌀국수',5,0,'FALSE',0);
+insert into branch_info values('user20','신전떡볶이','09:44~20:21','15:39~17:31','매주 목요일 휴무','02-2505-7387','4.9','','한식','요즘 대세 국물떡볶이',6,0,'FALSE',0);
+insert into branch_info values('user21','지호한방삼계탕','11:51~21:41','15:28~17:14','매주 금요일 휴무','02-2737-7320','5.0','','한식','말복에는 지호한방삼계탕',7,0,'FALSE',0);
+insert into branch_info values('user22','코코이찌방야','11:15~22:48','15:43~16:02','매주 토요일 휴무','02-2796-7387','3.0','','일식','일본식 카레가 참 맛있는집',8,0,'FALSE',0);
+insert into branch_info values('user23','남가네 설악추어탕','09:30~18:43','14:60~17:48','매주 일요일 휴무','02-2537-2624','3.1','','한식','추어탕을 드시면 튀김도 서비스로 드려요',9,0,'FALSE',0);
+insert into branch_info values('user24','마루가메제면','11:03~20:59','14:36~16:59','연중무휴','02-2394-3613','3.2','','일식','우동이 정말 맛있는 집',10,0,'FALSE',0);
+insert into branch_info values('user25','스시노백쉐프','11:24~20:34','15:14~16:56','매주 월요일 휴무','02-705-4609','3.3','','일식','국내 두번째로 맛있는 스시집',11,0,'FALSE',0);
+insert into branch_info values('user26','한춘상 일미간장게장','12:11~22:34','15:45~17:47','매주 화요일 휴무','02-790-6774','3.4','','한식','간장게장 >>> 양념게장',12,0,'FALSE',0);
+insert into branch_info values('user27','바토스','11:27~19:07','14:30~17:48','매주 수요일 휴무','02-426-3786','3.5','','양식','한국에서 먹는 멕시코 타코',13,0,'FALSE',0);
+insert into branch_info values('user28','바비레드','10:25~19:26','14:18~17:33','매주 목요일 휴무','02-610-7692','3.6','','양식','강남 데이트코스 1순위',14,0,'FALSE',0);
+insert into branch_info values('user29','진주집','10:57~20:06','15:45~17:42','매주 금요일 휴무','02-555-4251','3.7','','한식','콩국물이 일품입니다',15,0,'FALSE',0);
+insert into branch_info values('user30','패션5','11:16~23:30','15:15~16:13','매주 토요일 휴무','02-585-8064','3.8','','양식','크림치즈 머핀이 참 맛있는 집',16,0,'FALSE',0);
+insert into branch_info values('user31','라이너스바베큐','12:30~21:25','14:42~16:14','매주 일요일 휴무','02-791-3253','3.9','','양식','미국식 오리지날 바베큐',17,0,'FALSE',0);
+insert into branch_info values('user32','롯데호텔월드 라세느','10:49~17:52','14:52~17:52','연중무휴','02-756-6678','4.0','','양식','비싼값 하는 뷔페',18,0,'FALSE',0);
+insert into branch_info values('user33','키움초밥','09:45~18:54','15:38~16:12','매주 월요일 휴무','02-716-8029','4.1','','일식','연어초밥이 맛있는 맛집',19,0,'FALSE',0);
+insert into branch_info values('user34','미진','10:31~18:54','14:05~16:48','매주 화요일 휴무','02-753-3002','4.2','','한식','한국에서 가장 맛있는 소바',20,0,'FALSE',0);
+insert into branch_info values('user35','마코토','10:11~17:08','15:11~17:56','매주 수요일 휴무','02-560-4815','4.3','','일식','일식 먹고 플때도 좋은 다이닝 이자카야',4,0,'FALSE',0);
+insert into branch_info values('user36','토끼정','09:53~22:51','14:57~16:29','매주 목요일 휴무','02-554-2336','4.4','','한식','정이 머무르는 곳, 마음과 마음이 닿아 진심이 전해지는 곳',5,0,'FALSE',0);
+insert into branch_info values('user37','송죽장','11:53~17:25','14:01~17:12','매주 금요일 휴무','02-653-1215','4.5','','중식','고추짬뽕이 맛있는 중국집',6,0,'FALSE',0);
+insert into branch_info values('user38','고에몬','09:15~21:22','15:43~16:45','매주 토요일 휴무','02-717-8564','4.6','','양식','생활의 달인 출연한 스파게티 맛집',7,0,'FALSE',0);
+insert into branch_info values('user39','리북집','12:58~20:29','15:36~17:26','매주 일요일 휴무','02-491-2348','4.7','','한식','쟁반국수 그리고 냉채족발 맛있는 곳',8,0,'FALSE',0);
+insert into branch_info values('user40','애플하우스','11:33~18:34','14:49~17:26','연중무휴','02-666-2204','4.8','','한식','인기있는 즉석 떡볶이 맛집',9,0,'FALSE',0);
+insert into branch_info values('user41','을지면옥','11:07~18:02','15:35~17:22','매주 월요일 휴무','02-731-7230','4.9','','한식','의정부파 냉면의 계보를 잇는 평양냉면 맛집',10,0,'FALSE',0);
+insert into branch_info values('user42','젤렌','10:05~17:01','15:36~17:01','매주 화요일 휴무','02-626-2795','5.0','','양식','불가리아 레스토랑 젤렌',11,0,'FALSE',0);
+insert into branch_info values('user43','마이타이','12:26~21:55','15:59~17:08','매주 수요일 휴무','02-491-5130','3.0','','양식','서울 최고의 태국음식집',12,0,'FALSE',0);
+insert into branch_info values('user44','혼가츠','10:36~23:00','15:34~16:25','매주 목요일 휴무','02-440-8073','3.1','','일식','성지 치즈돈가스가 유명한 돈까스맛집',13,0,'FALSE',0);
+insert into branch_info values('user45','단골집','11:41~19:15','15:00~16:55','매주 금요일 휴무','02-584-3797','3.2','','한식','한번 와보시면 단골집 됩니다',14,0,'FALSE',0);
+insert into branch_info values('user46','정원레스토랑 어반가든','09:30~22:35','15:33~16:18','매주 토요일 휴무','02-750-1405','3.3','','양식','분위기 정말 좋은 레스토랑',15,0,'FALSE',0);
+insert into branch_info values('user47','호무랑','10:50~23:15','14:02~17:56','매주 일요일 휴무','02-493-3989','3.4','','한식','수요미식회 메밀소바 특이한 붕장어 국수',16,0,'FALSE',0);
+insert into branch_info values('user48','데블스도어','12:59~23:07','14:09~16:10','연중무휴','02-591-5752','3.5','','양식','맥주가 정말 맛있어요',17,0,'FALSE',0);
+insert into branch_info values('user49','김덕후의곱창조','11:44~18:00','14:01~17:45','매주 월요일 휴무','02-548-7489','3.6','','한식','곱창 무한리필은 역시 이곳',18,0,'FALSE',0);
+insert into branch_info values('user50','만푸쿠','12:07~18:36','14:13~16:24','매주 화요일 휴무','02-438-4308','3.7','','일식','일본 가정식 달인의 살살 녹는 연어 뱃살 덮밥',19,0,'FALSE',0);
+
+
+# branch_address
+insert into branch_address values('user01','60610','서울 강동구 고덕로 31','암사동 506-6','','서울','강동구','','암사동','','');
+insert into branch_address values('user02','15001','경기 성남시 분당구 대왕판교로 477','판교동 649','B1','경기','성남시','','판교동','','');
+insert into branch_address values('user03','23722','서울 강남구 도산대로 154','논현동 6-4','402호','서울','강남구','','논현동','','');
+insert into branch_address values('user04','30824','서울 강남구 개포로32길 15','개포동 1209-20','','서울','강남구','','개포동','','');
+insert into branch_address values('user05','24856','서울 강서구 등촌로 57','화곡동 772-67','경남빌딩','서울','강서구','','화곡동','','');
+insert into branch_address values('user06','55198','서울 서초구 서초대로78길 24','서초동 1327-5','레몬프라자','서울','서초구','','서초동','','');
+insert into branch_address values('user07','42708','서울 용산구 남산공원길 3','후암동 30-66','보람프라자','서울','용산구','','후암동','','');
+insert into branch_address values('user08','82000','인천 서구 고산로 35','원당동 851-2','','인천','서구 ','','원당동','','');
+insert into branch_address values('user09','67924','서울 종로구 율곡로 6','중학동 14','대우아파트상가 403호','서울','종로구','','중학동','','');
+insert into branch_address values('user10','24201','서울 중구 통일로 30','봉래동1가 126-2','','서울','중구 ','','봉래동1가','','');
+insert into branch_address values('user11','24138','서울 중구 마른내로 31','초동 107-12','103호','서울','중구 ','','초동','','');
+insert into branch_address values('user12','61800','서울 중구 퇴계로 15','남대문로5가 84-17','','서울','중구 ','','남대문로5가','','');
+insert into branch_address values('user13','16670','서울 종로구 율곡로 58','경운동 96-18','','서울','종로구','','경운동','','');
+insert into branch_address values('user14','60686','서울 종로구 사직로 65','사직동 262-85','4층','서울','종로구','','사직동','','');
+insert into branch_address values('user15','42404','서울 용산구 소월로 66','후암동 448-103','','서울','용산구','','후암동','','');
+insert into branch_address values('user16','33821','서울 중구 동호로 296','장충동2가 186-69','B108호','서울','중구 ','','장충동2가','','');
+insert into branch_address values('user17','82761','서울 서초구 서초대로74길 45 2층','서초동 1330-3','','서울','서초구','','서초동','','');
+insert into branch_address values('user18','89380','서울 강남구 논현로111길 16','논현동 193-38','','서울','강남구','','논현동','','');
+insert into branch_address values('user19','59344','서울 중구 퇴계로36길 10','필동2가 80-2','수인빌딩','서울','중구 ','','필동2가','','');
+insert into branch_address values('user20','32291','서울 종로구 북촌로5길 62','소격동 122-3','B1','서울','종로구','','소격동','','');
+insert into branch_address values('user21','72916','서울 종로구 삼일대로32길 55-4','운니동 51','402호','서울','종로구','','운니동','','');
+insert into branch_address values('user22','55862','서울 중구 남대문시장4길 39-1','남창동 48-12','','서울','중구 ','','남창동','','');
+insert into branch_address values('user23','81132','서울 종로구 인사동12길 3','관훈동 68','경남빌딩','서울','종로구','','관훈동','','');
+insert into branch_address values('user24','13298','서울 서초구 신반포로 329','잠원동 40-9','레몬프라자','서울','서초구','','잠원동','','');
+insert into branch_address values('user25','83026','서울 광진구 자양로18길 95','구의동 221-28','보람프라자','서울','광진구','','구의동','','');
+insert into branch_address values('user26','83810','서울 성북구 안암로 81','안암동5가 104-35','','서울','성북구','','안암동5가','','');
+insert into branch_address values('user27','96363','서울 종로구 종로32길 23-5','종로5가 395-10','대우아파트상가 403호','서울','종로구','','종로5가','','');
+insert into branch_address values('user28','35271','서울 중구 창경궁로 62-29','주교동 118-1','','서울','중구 ','','주교동','','');
+insert into branch_address values('user29','29526','서울 강남구 강남대로 452','역삼동 809-13','103호','서울','강남구','','역삼동','','');
+insert into branch_address values('user30','51053','서울 강남구 도산대로 327','신사동 652-16','','서울','강남구','','신사동','','');
+insert into branch_address values('user31','76343','서울 중구 명동10길 29','명동2가 25-2','','서울','중구 ','','명동2가','','');
+insert into branch_address values('user32','65346','서울 성동구 아차산로9길 8','성수동2가 277-135','4층','서울','성동구','','성수동2가','','');
+insert into branch_address values('user33','26040','서울 용산구 이태원로42길 28-4','한남동 683-63','','서울','용산구','','한남동','','');
+insert into branch_address values('user34','32494','서울 성동구 연무장3길 9','성수동2가 301-16','B108호','서울','성동구','','성수동2가','','');
+insert into branch_address values('user35','52327','서울 종로구 수표로28길 23','익선동 174','','서울','종로구','','익선동','','');
+insert into branch_address values('user36','78287','서울 강남구 학동로 305-3','논현동 115-14','','서울','강남구','','논현동','','');
+insert into branch_address values('user37','39256','서울 영등포구 국회대로76길 10','여의도동 13-1','수인빌딩','서울','영등포','','여의도동','','');
+insert into branch_address values('user38','20758','서울 종로구 대학로9길 12','명륜4가 107','B1','서울','종로구','','명륜4가','','');
+insert into branch_address values('user39','67226','서울 마포구 동교로 267','연남동 229-67','402호','서울','마포구','','연남동','','');
+insert into branch_address values('user40','58908','서울 중구 정동길 12-15','정동 28-2','','서울','중구 ','','정동','','');
+insert into branch_address values('user41','72319','서울 중구 남산공원길 627','예장동 산5-6','경남빌딩','서울','중구 ','','예장동','','');
+insert into branch_address values('user42','96037','서울 중구 장충단로 275','을지로6가 18-12','레몬프라자','서울','중구 ','','을지로6가','','');
+insert into branch_address values('user43','66899','서울 강남구 봉은사로 418','삼성동 113','보람프라자','서울','강남구','','삼성동','','');
+insert into branch_address values('user44','36337','서울 마포구 숭문길 24','염리동 147-6','','서울','마포구','','염리동','','');
+insert into branch_address values('user45','84042','서울 강남구 강남대로94길 9','역삼동 818-14','대우아파트상가 403호','서울','강남구','','역삼동','','');
+insert into branch_address values('user46','90760','서울 용산구 이태원로15길 1','이태원동 181-8','','서울','용산구','','이태원동','','');
+insert into branch_address values('user47','62387','서울 중구 서애로 26','필동3가 1-5','103호','서울','중구 ','','필동3가','','');
+insert into branch_address values('user48','22101','서울 중구 을지로3길 24','다동 121-4','','서울','중구 ','','다동','','');
+insert into branch_address values('user49','59523','서울 강남구 언주로107길 7','역삼동 655-12','','서울','강남구','','역삼동','','');
+insert into branch_address values('user50','82623','서울 성동구 성수이로 78','성수동2가 322-32','4층','서울','성동구','','성수동2가','','');
+
+
+# branch_image
+insert into branch_image values('user01','foodIcon1.png','food_user01_1.jpg','food_user01_1.jpg','food_user01_2.jpg','food_user01_3.jpg','food_user01_4.jpg','food_user01_5.jpg','food_user01_6.jpg','food_user01_7.jpg','food_user01_8.jpg');
+insert into branch_image values('user02','foodIcon2.png','food_user02_2.jpg','food_user02_1.jpg','food_user02_2.jpg','food_user02_3.jpg','food_user02_4.jpg','food_user02_5.jpg','food_user02_6.jpg','food_user02_7.jpg','food_user02_8.jpg');
+insert into branch_image values('user03','foodIcon3.png','food_user03_3.jpg','food_user03_1.jpg','food_user03_2.jpg','food_user03_3.jpg','food_user03_4.jpg','food_user03_5.jpg','food_user03_6.jpg','food_user03_7.jpg','food_user03_8.jpg');
+insert into branch_image values('user04','foodIcon4.png','food_user04_4.jpg','food_user04_1.jpg','food_user04_2.jpg','food_user04_3.jpg','food_user04_4.jpg','food_user04_5.jpg','food_user04_6.jpg','food_user04_7.jpg','food_user04_8.jpg');
+insert into branch_image values('user05','foodIcon5.png','food_user05_5.jpg','food_user05_1.jpg','food_user05_2.jpg','food_user05_3.jpg','food_user05_4.jpg','food_user05_5.jpg','food_user05_6.jpg','food_user05_7.jpg','food_user05_8.jpg');
+insert into branch_image values('user06','foodIcon6.png','food_user06_6.jpg','food_user06_1.jpg','food_user06_2.jpg','food_user06_3.jpg','food_user06_4.jpg','food_user06_5.jpg','food_user06_6.jpg','food_user06_7.jpg','food_user06_8.jpg');
+insert into branch_image values('user07','foodIcon7.png','food_user07_7.jpg','food_user07_1.jpg','food_user07_2.jpg','food_user07_3.jpg','food_user07_4.jpg','food_user07_5.jpg','food_user07_6.jpg','food_user07_7.jpg','food_user07_8.jpg');
+insert into branch_image values('user08','foodIcon8.png','food_user08_8.jpg','food_user08_1.jpg','food_user08_2.jpg','food_user08_3.jpg','food_user08_4.jpg','food_user08_5.jpg','food_user08_6.jpg','food_user08_7.jpg','food_user08_8.jpg');
+insert into branch_image values('user09','foodIcon9.png','food_user09_1.jpg','food_user09_1.jpg','food_user09_2.jpg','food_user09_3.jpg','food_user09_4.jpg','food_user09_5.jpg','food_user09_6.jpg','food_user09_7.jpg','food_user09_8.jpg');
+insert into branch_image values('user10','foodIcon10.png','food_user10_2.jpg','food_user10_1.jpg','food_user10_2.jpg','food_user10_3.jpg','food_user10_4.jpg','food_user10_5.jpg','food_user10_6.jpg','food_user10_7.jpg','food_user10_8.jpg');
+insert into branch_image values('user11','foodIcon11.png','food_user11_3.jpg','food_user11_1.jpg','food_user11_2.jpg','food_user11_3.jpg','food_user11_4.jpg','food_user11_5.jpg','food_user11_6.jpg','food_user11_7.jpg','food_user11_8.jpg');
+insert into branch_image values('user12','foodIcon12.png','food_user12_4.jpg','food_user12_1.jpg','food_user12_2.jpg','food_user12_3.jpg','food_user12_4.jpg','food_user12_5.jpg','food_user12_6.jpg','food_user12_7.jpg','food_user12_8.jpg');
+insert into branch_image values('user13','foodIcon13.png','food_user13_5.jpg','food_user13_1.jpg','food_user13_2.jpg','food_user13_3.jpg','food_user13_4.jpg','food_user13_5.jpg','food_user13_6.jpg','food_user13_7.jpg','food_user13_8.jpg');
+insert into branch_image values('user14','foodIcon14.png','food_user14_6.jpg','food_user14_1.jpg','food_user14_2.jpg','food_user14_3.jpg','food_user14_4.jpg','food_user14_5.jpg','food_user14_6.jpg','food_user14_7.jpg','food_user14_8.jpg');
+insert into branch_image values('user15','foodIcon15.png','food_user15_7.jpg','food_user15_1.jpg','food_user15_2.jpg','food_user15_3.jpg','food_user15_4.jpg','food_user15_5.jpg','food_user15_6.jpg','food_user15_7.jpg','food_user15_8.jpg');
+insert into branch_image values('user16','foodIcon16.png','food_user16_8.jpg','food_user16_1.jpg','food_user16_2.jpg','food_user16_3.jpg','food_user16_4.jpg','food_user16_5.jpg','food_user16_6.jpg','food_user16_7.jpg','food_user16_8.jpg');
+insert into branch_image values('user17','foodIcon17.png','food_user17_1.jpg','food_user17_1.jpg','food_user17_2.jpg','food_user17_3.jpg','food_user17_4.jpg','food_user17_5.jpg','food_user17_6.jpg','food_user17_7.jpg','food_user17_8.jpg');
+insert into branch_image values('user18','foodIcon18.png','food_user18_2.jpg','food_user18_1.jpg','food_user18_2.jpg','food_user18_3.jpg','food_user18_4.jpg','food_user18_5.jpg','food_user18_6.jpg','food_user18_7.jpg','food_user18_8.jpg');
+insert into branch_image values('user19','foodIcon19.png','food_user19_3.jpg','food_user19_1.jpg','food_user19_2.jpg','food_user19_3.jpg','food_user19_4.jpg','food_user19_5.jpg','food_user19_6.jpg','food_user19_7.jpg','food_user19_8.jpg');
+insert into branch_image values('user20','foodIcon20.png','food_user20_4.jpg','food_user20_1.jpg','food_user20_2.jpg','food_user20_3.jpg','food_user20_4.jpg','food_user20_5.jpg','food_user20_6.jpg','food_user20_7.jpg','food_user20_8.jpg');
+insert into branch_image values('user21','foodIcon21.png','food_user21_5.jpg','food_user21_1.jpg','food_user21_2.jpg','food_user21_3.jpg','food_user21_4.jpg','food_user21_5.jpg','food_user21_6.jpg','food_user21_7.jpg','food_user21_8.jpg');
+insert into branch_image values('user22','foodIcon22.png','food_user22_6.jpg','food_user22_1.jpg','food_user22_2.jpg','food_user22_3.jpg','food_user22_4.jpg','food_user22_5.jpg','food_user22_6.jpg','food_user22_7.jpg','food_user22_8.jpg');
+insert into branch_image values('user23','foodIcon23.png','food_user23_7.jpg','food_user23_1.jpg','food_user23_2.jpg','food_user23_3.jpg','food_user23_4.jpg','food_user23_5.jpg','food_user23_6.jpg','food_user23_7.jpg','food_user23_8.jpg');
+insert into branch_image values('user24','foodIcon24.png','food_user24_8.jpg','food_user24_1.jpg','food_user24_2.jpg','food_user24_3.jpg','food_user24_4.jpg','food_user24_5.jpg','food_user24_6.jpg','food_user24_7.jpg','food_user24_8.jpg');
+insert into branch_image values('user25','foodIcon25.png','food_user25_1.jpg','food_user25_1.jpg','food_user25_2.jpg','food_user25_3.jpg','food_user25_4.jpg','food_user25_5.jpg','food_user25_6.jpg','food_user25_7.jpg','food_user25_8.jpg');
+insert into branch_image values('user26','foodIcon26.png','food_user26_1.jpg','food_user26_1.jpg','food_user26_2.jpg','food_user26_3.jpg','food_user26_4.jpg','food_user26_5.jpg','food_user26_6.jpg','food_user26_7.jpg','food_user26_8.jpg');
+insert into branch_image values('user27','foodIcon27.png','food_user27_2.jpg','food_user27_1.jpg','food_user27_2.jpg','food_user27_3.jpg','food_user27_4.jpg','food_user27_5.jpg','food_user27_6.jpg','food_user27_7.jpg','food_user27_8.jpg');
+insert into branch_image values('user28','foodIcon28.png','food_user28_3.jpg','food_user28_1.jpg','food_user28_2.jpg','food_user28_3.jpg','food_user28_4.jpg','food_user28_5.jpg','food_user28_6.jpg','food_user28_7.jpg','food_user28_8.jpg');
+insert into branch_image values('user29','foodIcon29.png','food_user29_4.jpg','food_user29_1.jpg','food_user29_2.jpg','food_user29_3.jpg','food_user29_4.jpg','food_user29_5.jpg','food_user29_6.jpg','food_user29_7.jpg','food_user29_8.jpg');
+insert into branch_image values('user30','foodIcon30.png','food_user30_5.jpg','food_user30_1.jpg','food_user30_2.jpg','food_user30_3.jpg','food_user30_4.jpg','food_user30_5.jpg','food_user30_6.jpg','food_user30_7.jpg','food_user30_8.jpg');
+insert into branch_image values('user31','foodIcon31.png','food_user31_6.jpg','food_user31_1.jpg','food_user31_2.jpg','food_user31_3.jpg','food_user31_4.jpg','food_user31_5.jpg','food_user31_6.jpg','food_user31_7.jpg','food_user31_8.jpg');
+insert into branch_image values('user32','foodIcon32.png','food_user32_7.jpg','food_user32_1.jpg','food_user32_2.jpg','food_user32_3.jpg','food_user32_4.jpg','food_user32_5.jpg','food_user32_6.jpg','food_user32_7.jpg','food_user32_8.jpg');
+insert into branch_image values('user33','foodIcon33.png','food_user33_8.jpg','food_user33_1.jpg','food_user33_2.jpg','food_user33_3.jpg','food_user33_4.jpg','food_user33_5.jpg','food_user33_6.jpg','food_user33_7.jpg','food_user33_8.jpg');
+insert into branch_image values('user34','foodIcon34.png','food_user34_1.jpg','food_user34_1.jpg','food_user34_2.jpg','food_user34_3.jpg','food_user34_4.jpg','food_user34_5.jpg','food_user34_6.jpg','food_user34_7.jpg','food_user34_8.jpg');
+insert into branch_image values('user35','foodIcon35.png','food_user35_2.jpg','food_user35_1.jpg','food_user35_2.jpg','food_user35_3.jpg','food_user35_4.jpg','food_user35_5.jpg','food_user35_6.jpg','food_user35_7.jpg','food_user35_8.jpg');
+insert into branch_image values('user36','foodIcon36.png','food_user36_3.jpg','food_user36_1.jpg','food_user36_2.jpg','food_user36_3.jpg','food_user36_4.jpg','food_user36_5.jpg','food_user36_6.jpg','food_user36_7.jpg','food_user36_8.jpg');
+insert into branch_image values('user37','foodIcon37.png','food_user37_4.jpg','food_user37_1.jpg','food_user37_2.jpg','food_user37_3.jpg','food_user37_4.jpg','food_user37_5.jpg','food_user37_6.jpg','food_user37_7.jpg','food_user37_8.jpg');
+insert into branch_image values('user38','foodIcon38.png','food_user38_5.jpg','food_user38_1.jpg','food_user38_2.jpg','food_user38_3.jpg','food_user38_4.jpg','food_user38_5.jpg','food_user38_6.jpg','food_user38_7.jpg','food_user38_8.jpg');
+insert into branch_image values('user39','foodIcon39.png','food_user39_6.jpg','food_user39_1.jpg','food_user39_2.jpg','food_user39_3.jpg','food_user39_4.jpg','food_user39_5.jpg','food_user39_6.jpg','food_user39_7.jpg','food_user39_8.jpg');
+insert into branch_image values('user40','foodIcon40.png','food_user40_7.jpg','food_user40_1.jpg','food_user40_2.jpg','food_user40_3.jpg','food_user40_4.jpg','food_user40_5.jpg','food_user40_6.jpg','food_user40_7.jpg','food_user40_8.jpg');
+insert into branch_image values('user41','foodIcon41.png','food_user41_8.jpg','food_user41_1.jpg','food_user41_2.jpg','food_user41_3.jpg','food_user41_4.jpg','food_user41_5.jpg','food_user41_6.jpg','food_user41_7.jpg','food_user41_8.jpg');
+insert into branch_image values('user42','foodIcon42.png','food_user42_1.jpg','food_user42_1.jpg','food_user42_2.jpg','food_user42_3.jpg','food_user42_4.jpg','food_user42_5.jpg','food_user42_6.jpg','food_user42_7.jpg','food_user42_8.jpg');
+insert into branch_image values('user43','foodIcon43.png','food_user43_2.jpg','food_user43_1.jpg','food_user43_2.jpg','food_user43_3.jpg','food_user43_4.jpg','food_user43_5.jpg','food_user43_6.jpg','food_user43_7.jpg','food_user43_8.jpg');
+insert into branch_image values('user44','foodIcon44.png','food_user44_3.jpg','food_user44_1.jpg','food_user44_2.jpg','food_user44_3.jpg','food_user44_4.jpg','food_user44_5.jpg','food_user44_6.jpg','food_user44_7.jpg','food_user44_8.jpg');
+insert into branch_image values('user45','foodIcon45.png','food_user45_4.jpg','food_user45_1.jpg','food_user45_2.jpg','food_user45_3.jpg','food_user45_4.jpg','food_user45_5.jpg','food_user45_6.jpg','food_user45_7.jpg','food_user45_8.jpg');
+insert into branch_image values('user46','foodIcon46.png','food_user46_5.jpg','food_user46_1.jpg','food_user46_2.jpg','food_user46_3.jpg','food_user46_4.jpg','food_user46_5.jpg','food_user46_6.jpg','food_user46_7.jpg','food_user46_8.jpg');
+insert into branch_image values('user47','foodIcon47.png','food_user47_6.jpg','food_user47_1.jpg','food_user47_2.jpg','food_user47_3.jpg','food_user47_4.jpg','food_user47_5.jpg','food_user47_6.jpg','food_user47_7.jpg','food_user47_8.jpg');
+insert into branch_image values('user48','foodIcon48.png','food_user48_7.jpg','food_user48_1.jpg','food_user48_2.jpg','food_user48_3.jpg','food_user48_4.jpg','food_user48_5.jpg','food_user48_6.jpg','food_user48_7.jpg','food_user48_8.jpg');
+insert into branch_image values('user49','foodIcon49.png','food_user49_8.jpg','food_user49_1.jpg','food_user49_2.jpg','food_user49_3.jpg','food_user49_4.jpg','food_user49_5.jpg','food_user49_6.jpg','food_user49_7.jpg','food_user49_8.jpg');
+insert into branch_image values('user50','foodIcon50.png','food_user50_1.jpg','food_user50_1.jpg','food_user50_2.jpg','food_user50_3.jpg','food_user50_4.jpg','food_user50_5.jpg','food_user50_6.jpg','food_user50_7.jpg','food_user50_8.jpg');
+
+
+#branch_menu
+insert into branch_menu values('user01','아오리라멘','10000','TRUE');
+insert into branch_menu values('user02','콩불','6000','TRUE');
+insert into branch_menu values('user03','모둠한판','38000','TRUE');
+insert into branch_menu values('user04','런치세트B','20000','TRUE');
+insert into branch_menu values('user05','거한상','14000','TRUE');
+insert into branch_menu values('user06','A Lot! 플레이트','17900','TRUE');
+insert into branch_menu values('user07','시아와세니 나루','40500','TRUE');
+insert into branch_menu values('user08','빈대떡','4000','TRUE');
+insert into branch_menu values('user09','흑돼지 생구이','30000','TRUE');
+insert into branch_menu values('user10','규동','5000','TRUE');
+insert into branch_menu values('user11','불불이커플세트','30000','TRUE');
+insert into branch_menu values('user12','소곱창 구이','15500','TRUE');
+insert into branch_menu values('user13','미인불도리탕','22000','TRUE');
+insert into branch_menu values('user14','굽네 허니멜로','18000','TRUE');
+insert into branch_menu values('user15','전복물회','20000','TRUE');
+insert into branch_menu values('user16','쉐프의정성','10000','TRUE');
+insert into branch_menu values('user17','봉골레 크림 스파게티','7300','TRUE');
+insert into branch_menu values('user18','설렁탕','8000','TRUE');
+insert into branch_menu values('user19','숯불구이 볶음밥','11000','TRUE');
+insert into branch_menu values('user20','떡볶이','3000','TRUE');
+insert into branch_menu values('user21','건강 한방삼계탕','14000','TRUE');
+insert into branch_menu values('user22','로스까스카레','9900','TRUE');
+insert into branch_menu values('user23','추어탕','7500','TRUE');
+insert into branch_menu values('user24','가마아게 우동','3900','TRUE');
+insert into branch_menu values('user25','랍스터 반반 라인','45500','TRUE');
+insert into branch_menu values('user26','간장게장 대','95000','TRUE');
+insert into branch_menu values('user27','김치 까르니따스 프라이즈','13000','TRUE');
+insert into branch_menu values('user28','레드갈비스튜','14000','TRUE');
+insert into branch_menu values('user29','냉콩국수','10000','TRUE');
+insert into branch_menu values('user30','라즈베리 크림치즈 머핀','5000','TRUE');
+insert into branch_menu values('user31','풀드포크 샌드위치','7900','TRUE');
+insert into branch_menu values('user32','아침(평일, 성인)','59300','TRUE');
+insert into branch_menu values('user33','커플세트A','42000','TRUE');
+insert into branch_menu values('user34','냉메밀','8500','TRUE');
+insert into branch_menu values('user35','특사시미 모리아와세','149000','TRUE');
+insert into branch_menu values('user36','깻잎 불고기 사라다 밥','11700','TRUE');
+insert into branch_menu values('user37','짜장','5500','TRUE');
+insert into branch_menu values('user38','까르보나라 멘타이꼬(명란파스타)','13000','TRUE');
+insert into branch_menu values('user39','족발(앞발)','35000','TRUE');
+insert into branch_menu values('user40','일반떡볶이','3500','TRUE');
+insert into branch_menu values('user41','물냉면','11000','TRUE');
+insert into branch_menu values('user42','샵스카 샐러드','15500','TRUE');
+insert into branch_menu values('user43','팟타이 꿍','16000','TRUE');
+insert into branch_menu values('user44','치즈돈까스','9500','TRUE');
+insert into branch_menu values('user45','뒷고기','8500','TRUE');
+insert into branch_menu values('user46','런치세트','19000','TRUE');
+insert into branch_menu values('user47','런치코스A','60000','TRUE');
+insert into branch_menu values('user48','데블스 버거','14500','TRUE');
+insert into branch_menu values('user49','무한리필','21900','TRUE');
+insert into branch_menu values('user50','낫또동','7000','TRUE');
+insert into branch_menu values('user01','아오리라멘 Lite','10000','TRUE');
+insert into branch_menu values('user02','치즈콩불','7000','TRUE');
+insert into branch_menu values('user03','생삼겹살','13000','');
+insert into branch_menu values('user04','런치세트C','30000','');
+insert into branch_menu values('user05','(특) 거한상','21000','');
+insert into branch_menu values('user06','뉴욕 스트립 스테이크','29900','');
+insert into branch_menu values('user07','모둠꼬치','18000','');
+insert into branch_menu values('user08','고기완자','2000','TRUE');
+insert into branch_menu values('user09','흑돼지 오겹살','15000','TRUE');
+insert into branch_menu values('user10','규동카레','6500','TRUE');
+insert into branch_menu values('user11','불불이바베큐족발 특대','40000','TRUE');
+insert into branch_menu values('user12','차돌박이','14000','TRUE');
+insert into branch_menu values('user13','국물닭발','17000','TRUE');
+insert into branch_menu values('user14','굽네 허니멜로 윙','19900','TRUE');
+insert into branch_menu values('user15','해삼물회','20000','TRUE');
+insert into branch_menu values('user16','평일런치','14900','TRUE');
+insert into branch_menu values('user17','해물 스파게티','8300','TRUE');
+insert into branch_menu values('user18','떡만두설농탕','9000','TRUE');
+insert into branch_menu values('user19','돔양꿍','10000','TRUE');
+insert into branch_menu values('user20','치즈떡볶이','4000','TRUE');
+insert into branch_menu values('user21','미용 한방삼계탕','14000','TRUE');
+insert into branch_menu values('user22','멘치까스카레','8900','TRUE');
+insert into branch_menu values('user23','추어탕(특)','8500','TRUE');
+insert into branch_menu values('user24','자루 우동','3900','TRUE');
+insert into branch_menu values('user25','핑크 한상 라인','20000','TRUE');
+insert into branch_menu values('user26','꽃게찜','75000','TRUE');
+insert into branch_menu values('user27','치미추리 치킨 타코','6900','TRUE');
+insert into branch_menu values('user28','레드크림파스타','14000','TRUE');
+insert into branch_menu values('user29','비빔국수','8000','TRUE');
+insert into branch_menu values('user30','뱅 오 쇼콜라','3500','TRUE');
+insert into branch_menu values('user31','풀드포크 플래터','15000','TRUE');
+insert into branch_menu values('user32','점심(평일, 성인)','95000','TRUE');
+insert into branch_menu values('user33','커플세트B','32000','TRUE');
+insert into branch_menu values('user34','비빔메밀','8500','TRUE');
+insert into branch_menu values('user35','사시미 모리아와세','79000','TRUE');
+insert into branch_menu values('user36','매콤달콤 닭고기 튀김','14500','TRUE');
+insert into branch_menu values('user37','짬뽕','6000','TRUE');
+insert into branch_menu values('user38','수플레오믈렛 멘타이꼬 리조또','15000','TRUE');
+insert into branch_menu values('user39','냉채족발(특미)','35000','TRUE');
+insert into branch_menu values('user40','즉석떡볶이','3000','TRUE');
+insert into branch_menu values('user41','비빔냉면','11000','TRUE');
+insert into branch_menu values('user42','스피니치 치킨','22000','TRUE');
+insert into branch_menu values('user43','시꽁무 팟 사파로드','22000','TRUE');
+insert into branch_menu values('user44','왕돈까스','8500','TRUE');
+insert into branch_menu values('user45','꼼장어','7000','TRUE');
+insert into branch_menu values('user46','파스타','15000','TRUE');
+insert into branch_menu values('user47','런치코스B','70000','TRUE');
+insert into branch_menu values('user48','데블스 프라이드 치킨','23000','TRUE');
+insert into branch_menu values('user49','덕후모듬','10900','TRUE');
+insert into branch_menu values('user50','가츠동','7500','TRUE');
+insert into branch_menu values('user01','미소라멘','10000','TRUE');
+insert into branch_menu values('user02','닭불고기','7000','');
+insert into branch_menu values('user03','특목살','13000','TRUE');
+insert into branch_menu values('user04','자장면','5000','TRUE');
+insert into branch_menu values('user05','소갈비구이 거한상','24000','');
+insert into branch_menu values('user06','케이준 후라이드 치킨샐러드','20900','');
+insert into branch_menu values('user07','케이준샐러드','13000','');
+insert into branch_menu values('user08','호박전','12000','TRUE');
+insert into branch_menu values('user09','흑돼지 목살','15000','TRUE');
+insert into branch_menu values('user10','치킨까스','7000','TRUE');
+insert into branch_menu values('user11','불불이바베큐족발 대','35000','TRUE');
+insert into branch_menu values('user12','소곱창 전골','30000','TRUE');
+insert into branch_menu values('user13','국물무뼈닭발','18000','TRUE');
+insert into branch_menu values('user14','굽네 허니멜로 순살','21000','TRUE');
+insert into branch_menu values('user15','항아리모듬물회','15000','TRUE');
+insert into branch_menu values('user16','평일디너, 주말','17900','TRUE');
+insert into branch_menu values('user17','마레알리오 스파게티','7900','TRUE');
+insert into branch_menu values('user18','마늘설농탕','11000','TRUE');
+insert into branch_menu values('user19','청신탕면','9000','TRUE');
+insert into branch_menu values('user20','오뎅(6개)','2000','TRUE');
+insert into branch_menu values('user21','죽 한방삼계탕','14000','TRUE');
+insert into branch_menu values('user22','로스까스치즈카레','11400','TRUE');
+insert into branch_menu values('user23','통추어탕','8500','TRUE');
+insert into branch_menu values('user24','가케 우동','3900','TRUE');
+insert into branch_menu values('user25','빅콰트로 라인','61500','TRUE');
+insert into branch_menu values('user26','꽃게양념찜','75000','TRUE');
+insert into branch_menu values('user27','망고 쉬림프 퀘사디아','16900','TRUE');
+insert into branch_menu values('user28','바비스테이크','18000','TRUE');
+insert into branch_menu values('user29','닭칼국수','8000','TRUE');
+insert into branch_menu values('user30','망고 무스 쇼트','7000','TRUE');
+insert into branch_menu values('user31','브리스킷 샌드위치','10900','TRUE');
+insert into branch_menu values('user32','저녁(평일, 성인)','113000','TRUE');
+insert into branch_menu values('user33','모둠초밥','15000','TRUE');
+insert into branch_menu values('user34','메밀전병','6000','TRUE');
+insert into branch_menu values('user35','특선 마코토 코스','120000','TRUE');
+insert into branch_menu values('user36','숯불구이반반','13200','TRUE');
+insert into branch_menu values('user37','볶음밥','6500','TRUE');
+insert into branch_menu values('user38','치킨가라아게 미트소스','14000','TRUE');
+insert into branch_menu values('user39','매운족발','30000','TRUE');
+insert into branch_menu values('user40','라면사리','2500','TRUE');
+insert into branch_menu values('user41','평양냉면','10000','TRUE');
+insert into branch_menu values('user42','연어 스테이크','27500','TRUE');
+insert into branch_menu values('user43','꿍 톳 카티움','24000','TRUE');
+insert into branch_menu values('user44','매운돈까스','7500','TRUE');
+insert into branch_menu values('user45','닭발','12000','TRUE');
+insert into branch_menu values('user46','피자','16000','TRUE');
+insert into branch_menu values('user47','스시세트','46000','TRUE');
+insert into branch_menu values('user48','맥앤치즈피자','16500','TRUE');
+insert into branch_menu values('user49','진짜소고기라면','4900','TRUE');
+insert into branch_menu values('user50','비꾸리동','8500','TRUE');
+insert into branch_menu values('user01','마제멘','11000','');
+insert into branch_menu values('user02','달달소불고기','9000','');
+insert into branch_menu values('user03','생갈비','13000','');
+insert into branch_menu values('user04','굴짬뽕','8000','TRUE');
+insert into branch_menu values('user05','갈비찜 거한상','27000','');
+insert into branch_menu values('user06','잭다니엘 글레이즈드 립','36900','TRUE');
+insert into branch_menu values('user07','소고기다다끼','15000','');
+insert into branch_menu values('user08','감자전','12000','');
+insert into branch_menu values('user09','제주 오겹살','13000','');
+insert into branch_menu values('user10','고구마치즈돈까스','8000','');
+insert into branch_menu values('user11','불불이바베큐족발 중','29000','');
+insert into branch_menu values('user12','돼지곱창 철판볶음','9500','');
+insert into branch_menu values('user13','직화통닭발','16000','');
+insert into branch_menu values('user14','굽네 허니멜로 통다리','19900','');
+insert into branch_menu values('user15','1인해전물회','22000','');
+insert into branch_menu values('user16','주말, 공휴일','17900','');
+insert into branch_menu values('user17','살모네 스파게티','8700','');
+insert into branch_menu values('user18','백세설농탕','13000','');
+insert into branch_menu values('user19','돔양볶음밥','11000','');
+insert into branch_menu values('user20','만두(5개)','2000','');
+insert into branch_menu values('user21','얼큰 한방삼계탕','15000','');
+insert into branch_menu values('user22','블럭비프토마토 아스파라거스카레','11500','');
+insert into branch_menu values('user23','추어얼큰이탕','8500','');
+insert into branch_menu values('user24','기츠네 우동','4800','');
+insert into branch_menu values('user25','스시노 반반 라인','39500','');
+insert into branch_menu values('user26','꽃게탕','75000','');
+insert into branch_menu values('user27','허니 타킬라 치킨 윙즈','13500','');
+insert into branch_menu values('user28','레드토마토파스타','12000','');
+insert into branch_menu values('user29','육개장칼국수','8000','');
+insert into branch_menu values('user31','브리스킷 플래터','19000','');
+insert into branch_menu values('user32','아침(주말, 성인)','59300','');
+insert into branch_menu values('user33','vip혼마구로세트','48000','');
+insert into branch_menu values('user34','왕만두','6000','');
+insert into branch_menu values('user35','샤브샤브 정식','68000','');
+insert into branch_menu values('user36','스튜우동(고로케)','11500','');
+insert into branch_menu values('user37','탕수육(소)','12000','');
+insert into branch_menu values('user38','포크 멘타이꼬 하카타풍','13000','');
+insert into branch_menu values('user39','보쌈','33000','');
+insert into branch_menu values('user40','라면+쫄면사리','3500','');
+insert into branch_menu values('user41','편육','22000','');
+insert into branch_menu values('user42','씨푸드플랫','20000','');
+insert into branch_menu values('user43','솜 땀 가이','19000','');
+insert into branch_menu values('user44','나가사끼라멘','7500','');
+insert into branch_menu values('user45','소갈비살','10000','');
+insert into branch_menu values('user46','런치코스','29000','');
+insert into branch_menu values('user47','돈부리세트','41000','');
+insert into branch_menu values('user48','하와이안BBQ치킨피자','16500','');
+insert into branch_menu values('user49','열무냉면','4900','');
+insert into branch_menu values('user50','가라아게동','8500','');
+insert into branch_menu values('user01','계란간장밥','3000','');
+insert into branch_menu values('user02','해물불고기','8000','TRUE');
+insert into branch_menu values('user03','특별한판','50000','TRUE');
+insert into branch_menu values('user04','공화춘짜장면','10000','');
+insert into branch_menu values('user05','보리굴비 거한상','29000','TRUE');
+insert into branch_menu values('user06','빠네 크리미 어니언 파스타','19900','');
+insert into branch_menu values('user07','치킨데리야끼 숙주볶음','16000','TRUE');
+insert into branch_menu values('user08','해물파전','15000','');
+insert into branch_menu values('user09','제주 항정살','13000','');
+insert into branch_menu values('user10','치킨까스','8000','');
+insert into branch_menu values('user11','불불이바베큐족발 소','20000','');
+insert into branch_menu values('user12','볶음밥','2500','');
+insert into branch_menu values('user13','직화무뼈닭발','17000','');
+insert into branch_menu values('user14','굽네 스윗 볼케이노','17000','');
+insert into branch_menu values('user15','해전물회(2인분)','40000','');
+insert into branch_menu values('user16','유아','5900','');
+insert into branch_menu values('user17','까르보나라 스파게티','7900','');
+insert into branch_menu values('user18','도가니탕','18000','');
+insert into branch_menu values('user19','나시고랭','11000','');
+insert into branch_menu values('user20','잡채말이(3개)','2000','');
+insert into branch_menu values('user21','옻 한방삼계탕','16000','');
+insert into branch_menu values('user22','카라아게 스피니치카레','10400','');
+insert into branch_menu values('user23','순대국','6000','');
+insert into branch_menu values('user24','멘타이 가마타마 우동','6500','');
+insert into branch_menu values('user25','시그니처 라인','39500','');
+insert into branch_menu values('user26','꽃게양념무침','95000','');
+insert into branch_menu values('user27','바토스 리타','17400','');
+insert into branch_menu values('user28','레드갈릭밥스타','12000','');
+insert into branch_menu values('user29','접시만두','8000','');
+insert into branch_menu values('user31','2인용 플래터','33000','');
+insert into branch_menu values('user32','점심(주말, 성인)','113000','');
+insert into branch_menu values('user33','혼마구로 뱃살초밥','25000','');
+insert into branch_menu values('user35','스키야키 정식','68000','');
+insert into branch_menu values('user36','돈데키','12300','');
+insert into branch_menu values('user37','팔보채','35000','');
+insert into branch_menu values('user38','수플레오믈렛 크림 리조또','15000','');
+insert into branch_menu values('user39','냉채해파리 추가','5000','');
+insert into branch_menu values('user40','무침군만두 4개','2500','');
+insert into branch_menu values('user42','메샤나스카라','49500','');
+insert into branch_menu values('user43','똠양꿍','19000','');
+insert into branch_menu values('user45','단골 김치찌개','6500','');
+insert into branch_menu values('user46','디너스테이크코스','49000','');
+insert into branch_menu values('user47','장어소바','27000','');
+insert into branch_menu values('user48','비어아이스크림','6000','');
+insert into branch_menu values('user49','덕후육회','13900','');
+insert into branch_menu values('user50','빅 에비동','8500','');
+insert into branch_menu values('user01','면추가','2000','');
+insert into branch_menu values('user03','항정살','13000','');
+insert into branch_menu values('user04','유린기(소)','30000','');
+insert into branch_menu values('user06','얼티밋 칵테일','8500','TRUE');
+insert into branch_menu values('user07','새우튀김&꽃맛살샐러드','14000','');
+insert into branch_menu values('user08','막걸리','3000','');
+insert into branch_menu values('user09','흑돼지 오겹살','30000','');
+insert into branch_menu values('user10','생선까스','7500','');
+insert into branch_menu values('user11','불불이커플세트','30000','');
+insert into branch_menu values('user12','소주','4000','');
+insert into branch_menu values('user13','오돌뼈','15000','');
+insert into branch_menu values('user14','굽네 고추바사삭','17000','');
+insert into branch_menu values('user15','섭국','12000','');
+insert into branch_menu values('user17','허니크림새우샐러드','7000','');
+insert into branch_menu values('user18','명품두부야채설농탕','11000','');
+insert into branch_menu values('user22','크림고로케카레','8900','');
+insert into branch_menu values('user23','순대국(특)','7000','');
+insert into branch_menu values('user24','비빔 우동','4800','');
+insert into branch_menu values('user25','와규 스테이크 라인','39800','');
+insert into branch_menu values('user26','조림게장','95000','');
+insert into branch_menu values('user27','크래프트 맥주','14000','');
+insert into branch_menu values('user28','스테이크샐러드','20000','');
+insert into branch_menu values('user29','음료수','1000','');
+insert into branch_menu values('user31','4인용 플레터','74000','');
+insert into branch_menu values('user33','꽃등심(불)초밥','20000','');
+insert into branch_menu values('user36','야끼스파게티','9300','');
+insert into branch_menu values('user37','고추짬뽕밥','8000','');
+insert into branch_menu values('user38','까르보나라 칠리토마토','13000','');
+insert into branch_menu values('user39','쟁반국수','12000','');
+insert into branch_menu values('user40','삶은계란','500','');
+insert into branch_menu values('user42','양고기 스튜','27000','');
+insert into branch_menu values('user43','가이쌈로드','20000','');
+insert into branch_menu values('user45','소막창','12000','');
+insert into branch_menu values('user46','생맥주','4000','');
+insert into branch_menu values('user47','새우튀김소바','26000','');
+insert into branch_menu values('user48','미트치즈핑거','12000','');
+insert into branch_menu values('user49','덕후밥','2900','');
+insert into branch_menu values('user50','규동','8000','');
+insert into branch_menu values('user01','공기밥','1000','');
+insert into branch_menu values('user03','갈매기살','13000','');
+insert into branch_menu values('user04','유린기(대)','35000','');
+insert into branch_menu values('user06','모히또','7500','');
+insert into branch_menu values('user07','가츠오 오뎅탕','18000','TRUE');
+insert into branch_menu values('user08','옛날맛동동주','5000','');
+insert into branch_menu values('user09','흑돼지 꽃목살','30000','');
+insert into branch_menu values('user10','매콤왕돈까스','8500','');
+insert into branch_menu values('user11','쟁반국수','9000','');
+insert into branch_menu values('user12','맥주','4000','');
+insert into branch_menu values('user13','닭똥집','15000','');
+insert into branch_menu values('user14','굽네 갈비천왕','19000','');
+insert into branch_menu values('user15','일반물회','15000','');
+insert into branch_menu values('user17','케이준치킨커리라이스','9000','');
+insert into branch_menu values('user18','마늘설농탕','11000','');
+insert into branch_menu values('user22','불고기카레','9300','');
+insert into branch_menu values('user23','얼큰이순대국','7000','');
+insert into branch_menu values('user24','김치 우동','4500','');
+insert into branch_menu values('user25','붓코스 라인','32000','');
+insert into branch_menu values('user26','해물양념찜','75000','');
+insert into branch_menu values('user28','리코타 치즈 샐러드','13000','');
+insert into branch_menu values('user31','스페어 립','22000','');
+insert into branch_menu values('user33','광어초밥','17000','');
+insert into branch_menu values('user36','돈까스 카레우동','11000','');
+insert into branch_menu values('user37','삼선짬뽕밥','9500','');
+insert into branch_menu values('user38','매콤 새우 버섯 토마토소스','14000','');
+insert into branch_menu values('user39','해물파전','15000','');
+insert into branch_menu values('user40','라면','3000','');
+insert into branch_menu values('user42','스피니치사 체','16000','');
+insert into branch_menu values('user43','팍붕 화이뎅','10000','');
+insert into branch_menu values('user45','숯불 닭갈비','10000','');
+insert into branch_menu values('user46','음료수','2000','');
+insert into branch_menu values('user47','낫또소바','23000','');
+insert into branch_menu values('user48','버팔로윙','11000','');
+insert into branch_menu values('user49','공기밥','1000','');
+insert into branch_menu values('user50','아나고동','10000','');
+insert into branch_menu values('user03','가브리살','13000','');
+insert into branch_menu values('user06','레몬에이드','6500','');
+insert into branch_menu values('user07','오크라타코와사비','13000','');
+insert into branch_menu values('user09','스페셜 모듬','35000','');
+insert into branch_menu values('user10','불왕돈까스','9000','');
+insert into branch_menu values('user11','화로오돌뼈주먹밥','4000','');
+insert into branch_menu values('user13','홍합떡볶이','15000','');
+insert into branch_menu values('user14','굽네 오리지날','16000','');
+insert into branch_menu values('user15','성게알비빔밥','15000','');
+insert into branch_menu values('user17','초코바나나피자','14000','');
+insert into branch_menu values('user18','만두설농탕','9000','');
+insert into branch_menu values('user22','참치샐러드','3500','');
+insert into branch_menu values('user23','찰순대','6000','');
+insert into branch_menu values('user24','카레 우동','6500','');
+insert into branch_menu values('user25','연어 컬렉션','21000','');
+insert into branch_menu values('user26','해물탕','75000','');
+insert into branch_menu values('user28','살몬 샐러드','13000','');
+insert into branch_menu values('user31','다 밤 샌드위치','9500','');
+insert into branch_menu values('user33','참치초밥','15000','');
+insert into branch_menu values('user36','양념찜닭','14900','');
+insert into branch_menu values('user37','잡탕밥','14000','');
+insert into branch_menu values('user39','감자전','12000','');
+insert into branch_menu values('user40','순대','3000','');
+insert into branch_menu values('user42','볼랴로스코 큐프테','19900','');
+insert into branch_menu values('user43','암운센','18000','');
+insert into branch_menu values('user45','껍데기','5000','');
+insert into branch_menu values('user46','레몬에이드','5500','');
+insert into branch_menu values('user47','자루소바','18000','');
+insert into branch_menu values('user48','맥주','4000','');
+insert into branch_menu values('user49','소주','4000','');
+insert into branch_menu values('user50','사케동','10500','');

@@ -153,13 +153,13 @@
 			$('.categorySpan').empty().append(sido + ' ' + sigungu);
 			$('.modalStatus').css('display', 'none');
 
-			var imagePath = "/imgs/foodimgs/";
+
 
 			$('.gallerymain').attr('src', imagePath + image1);
 			$('.gallerylink').attr('href', imagePath + image1);
 
 			for (i = 1; i < 9; i++) {
-				$('.img' + [i]).attr('src', imagePath + (image1.substring(0, 10)) + i + '.jpg');
-				$('.imgLink' + [i]).attr('href', imagePath + (image1.substring(0, 10)) + i + '.jpg');
+				$('.img' + [i]).attr('src', imagePath + (image1.substring(0, 12)) + i + '.jpg');
+				$('.imgLink' + [i]).attr('href', imagePath + (image1.substring(0, 12)) + i + '.jpg');
 			}
 		}
