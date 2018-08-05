@@ -30,15 +30,17 @@
     		"age":naver_id_login.getProfileData('age')
     	},
     	success:function(data){
-    		
-    	}
+    		if(data=='success')
+    	   	{self.close();
+    	    $(opener.location).attr("href","http://localhost:8090/yes/");
+    	   	}
+    	   }
     	}
     	
     
      );
     
-   	self.close();
-    $(opener.location).attr("href","http://localhost:8090/yes/");
+
   }
 </script>	
 	
