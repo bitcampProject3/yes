@@ -34,7 +34,7 @@
 		margin-right: 0px;
 	}
 </style>
-<body>
+<body style="overflow-y: hidden">
 
 <jsp:include page="./layout/header.jsp"/>
 
