@@ -197,6 +197,8 @@ public class ReviewListController {
 	public String reviewWritePage(HttpServletRequest req,Model model) {
 		String branchID=req.getParameter("branchID");
 		System.out.println(branchID);
+		
+		
 		model.addAttribute("branchID",branchID);
 		return "review/review_write";
 
@@ -209,6 +211,7 @@ public class ReviewListController {
 
 		int rating = Integer.parseInt(httpRequest.getParameter("rating"));
 		reviewBean.setRating(rating);
+
 		String content = reviewBean.getContent();
         String replacedContent="";
         int startIdx = 0;
@@ -224,6 +227,7 @@ public class ReviewListController {
         replacedContent +=  content.substring(startIdx, content.length());
 
         reviewBean.setContent(replacedContent);
+
 
 		service.reviewWrite(reviewBean);
 		String genId, fileName, path;
