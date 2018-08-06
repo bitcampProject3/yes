@@ -31,7 +31,10 @@
 				},
 				error: function (request, status, error) {
 					alert("예약 완료");
-					location.href = "/yes/";
+					console.log(request);
+					console.log(status);
+					console.log(error);
+					// location.href = "/yes/";
 				}
 			})
 

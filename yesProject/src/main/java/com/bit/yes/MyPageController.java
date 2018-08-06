@@ -185,7 +185,7 @@ public class MyPageController {
 		System.out.println(count);
 		if(count>0)
 		{
-			//현재 입장 번호 저장하기--- 저장 ok
+			//현재 입장 번호 저장하기--- 저장 okƒ
 			if(Integer.parseInt(entry)>0)
 			{
 			bean.setWaitingNum(Integer.parseInt(entry));
@@ -247,11 +247,16 @@ public class MyPageController {
 
 	@ResponseBody
 	@RequestMapping(value = "insertReserve", method = RequestMethod.POST)
-	public void insertReserve(@RequestBody Map<String, Object> map, HttpSession session){
+	public void insertReserve(@RequestBody Map<String, Object> map, HttpSession session, Model model){
 		System.out.println(map);
-		String id=((UserVo) session.getAttribute("member")).getId();
 
-		service.insertReserve(map, id);
+//		if(session.getAttribute("member") == null) model.addAttribute("reserveResult","로그인이 필요합니다.");
+//		else{
+			String id=((UserVo) session.getAttribute("member")).getId();
+			service.insertReserve(map, id);
+//			model.addAttribute("reserveMsg","로그인이 필요합니다.");
+//		}
+
 
 	}
 	
