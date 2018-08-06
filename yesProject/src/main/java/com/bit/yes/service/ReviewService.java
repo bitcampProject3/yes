@@ -159,4 +159,8 @@ public class ReviewService {
 	public int editComment(CommentVo commentVo) {
 		return reviewDao.reviewEditComment(commentVo);
 	}
+
+	public int loadReviewScoreAvg(String branchId) {
+		return reviewDao.loadReviewScoreAvg(branchId);
+	}
 }

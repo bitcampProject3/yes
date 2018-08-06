@@ -1,7 +1,7 @@
 
 		var container = document.getElementById('map');
 		var options = {
-			center: new daum.maps.LatLng(37.50438513347702, 127.07697329184347),
+			center: new daum.maps.LatLng(37.554976260087024, 127.12879044359133),
 			level: 2
 		};
 
@@ -56,6 +56,9 @@
 			$('.btn-gradient').click(function (event) {
 				event.preventDefault();
 			});
+
+
+
 			var id = branchArr[0],
 				branchName = branchArr[1],
 				opTime = branchArr[2],
@@ -155,7 +158,7 @@
 				'</div>' +
 				'<div class="restDiv3_2">' +
 				'</div>' +
-				'<div class="restDiv3_3">' +
+				'<div class="restDiv3_3" style="text-align: left;">' +
 				'</div>' +
 				'<div class="restDiv4_1">' +
 				'</div>' +
@@ -170,7 +173,7 @@
 				'이용자 평점' +
 				'</div>' +
 				'<div class="gradeDiv2">' +
-				score + ' / 5.0' +
+				'<span class="reviewScoreAvg"></span>' + ' / 5.0' +
 				'</div>' +
 				'<div class="gradeDiv3">' +
 				'<img src="./imgs/angryemoji.png"' + 'class="angryEmoji">' +
@@ -196,6 +199,20 @@
 
 			$('.wrap').css('display', 'none');
 
+			// // 리뷰게시판의 평점 평균을 불러옴
+			// $.ajax({
+			// 	type: 'POST',
+			// 	url: './loadReviewScoreAvg',
+			// 	data: id,
+			// 	dataType: 'text',
+			// 	success: function (data) {
+			// 		alert('성공');
+			// 		alert(data);
+			// 	},
+			// 	error: function (request, status, error) {
+			// 		alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+			// 	}
+			// });
 
 			var callback = function () {
 				var test = [];
@@ -273,17 +290,17 @@
 						if (test.length > 1) {
 							$('.restDiv2_2').css('border-bottom', '1px dotted gray');
 							$('.restDiv2_1').text(test[0]);
-							$('.restDiv2_3').text(test[1]);
+							$('.restDiv2_3').text(test[1]+"원");
 						}
 						if (test.length > 3) {
 							$('.restDiv3_2').css('border-bottom', '1px dotted gray');
 							$('.restDiv3_1').text(test[2]);
-							$('.restDiv3_3').text(test[3]);
+							$('.restDiv3_3').text(test[3]+"원");
 						}
 						if (test.length > 5) {
 							$('.restDiv4_2').css('border-bottom', '1px dotted gray');
 							$('.restDiv4_1').text(test[4]);
-							$('.restDiv4_3').text(test[5]);
+							$('.restDiv4_3').text(test[5]+"원");
 						}
 					}
 				}

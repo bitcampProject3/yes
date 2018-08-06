@@ -49,7 +49,6 @@
 				$('.categorySpan').empty().append(sido+' '+sigungu);
 				$('.modalStatus').css('display','none');
 
-
 				$('.gallerymain').attr('src',imagePath+image1);
 				$('.gallerylink').attr('href',imagePath+image1);
 
@@ -77,9 +76,9 @@
 			        menuArr.push(val.menu);
 			        menuArr.push(val.price);
 		        });
-		        for (i = 0; i <menuArr.length; i++){
+		        for (i = 0; i <menuArr.length/2; i++){
 					$('.modalMenuName'+[i]).empty().append(menuArr[i*2]);
-					$('.modalMenuPrice'+[i]).empty().append(menuArr[i*2+1]);
+					$('.modalMenuPrice'+[i]).empty().append(menuArr[i*2+1]+"명");
 				}
 	        },
 			error: function(request,status,error) {

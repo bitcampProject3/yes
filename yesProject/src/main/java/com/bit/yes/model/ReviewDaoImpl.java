@@ -138,6 +138,14 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	@Override
+	public int loadReviewScoreAvg(String branchId) {
+		List list;
+		list = sqlSession.selectList("review.loadReviewScoreAvg",branchId);
+		System.out.println("list : "+list);
+		return 0;
+	}
+
+	@Override
 	public int reviewClickLike(LikeVo bean) throws SQLException {
 		
 		return sqlSession.insert("review.reviewLikeClick", bean);

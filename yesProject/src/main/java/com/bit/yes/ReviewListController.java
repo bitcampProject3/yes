@@ -506,6 +506,16 @@ public class ReviewListController {
 		return "success";
 	}
 
+	//20180806 추가
+	@ResponseBody
+	@RequestMapping(value = "/loadReviewScoreAvg", method = RequestMethod.POST)
+	public int loadReviewScoreAvg(String branchId){
+		service.loadReviewScoreAvg(branchId);
+
+
+		return 0;
+	}
+
 //	@RequestMapping(value = "multiRequest")
 //	public String reviewMultiUpload(MultipartHttpServletRequest mtfRequest) throws SQLException {
 //

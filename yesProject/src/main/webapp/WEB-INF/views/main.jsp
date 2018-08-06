@@ -80,13 +80,13 @@
 	<div id="map"></div>
 	<script type="text/javascript"
 	        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=630e98d8425188c04dae0728c65822bb&libraries=services,clusterer"></script>
-	<%-- 지도 생성 및 마커 생성 --%>
-	<script src="${pageContext.request.contextPath}/js/main_js/set_map.js?ver=1"></script>
-	<%-- 매장 팝업 및 디테일 모달 관리 --%>
-	<script src="${pageContext.request.contextPath}/js/main_js/branch_detail.js?ver=3"></script>
-	<%-- 매장 예약 모달 관리 --%>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<%-- 지도 생성 및 마커 생성 --%>
+	<script src="${pageContext.request.contextPath}/js/main_js/set_map.js?ver=2"></script>
+<%-- 매장 팝업 및 디테일 모달 관리 --%>
+	<script src="${pageContext.request.contextPath}/js/main_js/branch_detail.js?ver=4"></script>
+<%-- 매장 예약 모달 관리 --%>
 	<script src="${pageContext.request.contextPath}/js/main_js/branch_reserve.js?ver=1"></script>
-
 	<script>
         var imagePath = "./imgs/foodimgs/";
 
@@ -115,8 +115,7 @@
 
 				coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
-				console.log('${articleList.latlngx}');
-				console.log('${articleList.latlngy}');
+				
 				if (('${articleList.latlngx}' && '${articleList.latlngy}') == '') {
 					//기등록된 자료에 latlng 입력
 					var latlngY = result[0].y,
