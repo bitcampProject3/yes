@@ -79,7 +79,7 @@ public class C_CsController {
 		}
 
 		@RequestMapping(value="/C_Cs_search")
-		public String C_CsSearchList(Model model, HttpServletRequest request) throws Exception {
+		public String C_CsSearchList(Model model, HttpServletRequest request, HttpSession httpSession) throws Exception {
 
 			HttpSession session = request.getSession();
 			HashMap<String, Object> params = new HashMap<String, Object>();
@@ -87,7 +87,7 @@ public class C_CsController {
 			// 로그인 했을 경우 들어오는 세션 id값
 			// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
 			// admin이 관리자이여야함
-			String clientID = "ghdlf2";
+			String clientID = ((UserVo)httpSession.getAttribute("member")).getId();
 
 			int currentPageNo = 1;
 			int maxPost = 10;
@@ -133,13 +133,13 @@ public class C_CsController {
 		}
 
 		@RequestMapping(value="/yesC_cs/{idx}", method=RequestMethod.GET)
-		public String detail(@PathVariable int idx, Model model) throws SQLException {
+		public String detail(@PathVariable int idx, Model model, HttpSession httpSession) throws SQLException {
 
 			// 로그인 했을 경우 들어오는 세션 id값
 			// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
 			// id값을 통해서 id에 해당하는 게시글만 출력
 			// admin이 관리자이여야함
-			String clientID = "ghdlf2";
+			String clientID = ((UserVo)httpSession.getAttribute("member")).getId();
 
 
 			String registNum = csService.user_selectOne(clientID).getRegistNum();
@@ -175,12 +175,12 @@ public class C_CsController {
 		}
 
 		@RequestMapping("/yesC_cs/yesC_csInsert")
-		public String insertpage(String id, UserVo nickName, Model model) throws SQLException {
+		public String insertpage(String id, UserVo nickName, Model model, HttpSession httpSession) throws SQLException {
 
 			// 로그인 했을 경우 들어오는 세션 id값
 			// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
 			// admin이 관리자이여야함
-			id="ghdlf2";
+			id = ((UserVo)httpSession.getAttribute("member")).getId();
 
 			String registNum = csService.user_selectOne(id).getRegistNum();
 
