@@ -169,7 +169,7 @@ create table review
   title varchar(20) not null,
   content varchar(100) not null,
   calendar datetime not null,
-  rating decimal(2,1) default '0.0' not null
+  rating int not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ;
 
