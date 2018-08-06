@@ -14,34 +14,24 @@ public class ReviewVo {
 	String image;
 	String comment;
 	Date calendar;
-	double rating;
+	int rating;
 	String nickName;
 
 	public ReviewVo() {
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		ReviewVo reviewVo = (ReviewVo) o;
-		return idx == reviewVo.idx &&
-				Double.compare(reviewVo.rating, rating) == 0 &&
-				Objects.equals(branchID, reviewVo.branchID) &&
-				Objects.equals(clientID, reviewVo.clientID) &&
-				Objects.equals(title, reviewVo.title) &&
-				Objects.equals(content, reviewVo.content) &&
-				Objects.equals(writer, reviewVo.writer) &&
-				Objects.equals(image, reviewVo.image) &&
-				Objects.equals(comment, reviewVo.comment) &&
-				Objects.equals(calendar, reviewVo.calendar) &&
-				Objects.equals(nickName, reviewVo.nickName);
-	}
-
-	@Override
-	public int hashCode() {
-
-		return Objects.hash(branchID, clientID, idx, title, content, writer, image, comment, calendar, rating, nickName);
+	public ReviewVo(String branchID, String clientID, int idx, String title, String content, String writer, String image, String comment, Date calendar, int rating, String nickName) {
+		this.branchID = branchID;
+		this.clientID = clientID;
+		this.idx = idx;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.image = image;
+		this.comment = comment;
+		this.calendar = calendar;
+		this.rating = rating;
+		this.nickName = nickName;
 	}
 
 	@Override
@@ -59,6 +49,30 @@ public class ReviewVo {
 				", rating=" + rating +
 				", nickName='" + nickName + '\'' +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ReviewVo reviewVo = (ReviewVo) o;
+		return idx == reviewVo.idx &&
+				rating == reviewVo.rating &&
+				Objects.equals(branchID, reviewVo.branchID) &&
+				Objects.equals(clientID, reviewVo.clientID) &&
+				Objects.equals(title, reviewVo.title) &&
+				Objects.equals(content, reviewVo.content) &&
+				Objects.equals(writer, reviewVo.writer) &&
+				Objects.equals(image, reviewVo.image) &&
+				Objects.equals(comment, reviewVo.comment) &&
+				Objects.equals(calendar, reviewVo.calendar) &&
+				Objects.equals(nickName, reviewVo.nickName);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(branchID, clientID, idx, title, content, writer, image, comment, calendar, rating, nickName);
 	}
 
 	public String getBranchID() {
@@ -133,11 +147,11 @@ public class ReviewVo {
 		this.calendar = calendar;
 	}
 
-	public double getRating() {
+	public int getRating() {
 		return rating;
 	}
 
-	public void setRating(double rating) {
+	public void setRating(int rating) {
 		this.rating = rating;
 	}
 
@@ -146,20 +160,6 @@ public class ReviewVo {
 	}
 
 	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-
-	public ReviewVo(String branchID, String clientID, int idx, String title, String content, String writer, String image, String comment, Date calendar, double rating, String nickName) {
-		this.branchID = branchID;
-		this.clientID = clientID;
-		this.idx = idx;
-		this.title = title;
-		this.content = content;
-		this.writer = writer;
-		this.image = image;
-		this.comment = comment;
-		this.calendar = calendar;
-		this.rating = rating;
 		this.nickName = nickName;
 	}
 }

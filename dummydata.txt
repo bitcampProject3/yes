@@ -169,7 +169,7 @@ create table review
   title varchar(20) not null,
   content varchar(100) not null,
   calendar datetime not null,
-  rating decimal(2,1) default '0.0' not null
+  rating int not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ;
 
@@ -221,19 +221,16 @@ create table user_info
 (
   id varchar(30) not null
     primary key,
-  password varchar(30) not null,
-  name varchar(30) not null,
-  nickname varchar(30) not null,
-  email varchar(30) not null,
-  phoneNum varchar(30) not null,
-  pwQuestion varchar(100) not null,
-  birthDate date not null,
+  password varchar(30),
+  name varchar(30),
+  nickname varchar(30),
+  email varchar(30),
+  phoneNum varchar(30),
+  pwQuestion varchar(100),
+  birthDate date,
   registNum varchar(30) null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ;
-
-alter database mydb default character set utf8;
-show variables like 'c%';
 
 
 

@@ -177,6 +177,11 @@
   <delete id="reviewDeleteLike" parameterType="com.bit.yes.model.entity.LikeVo">
   	delete from review_like where review_idx=#{review_idx} and writer=#{writer}
   </delete>
+
+	<!--180806 추가-->
+	<update id="reviewEditComment" parameterType="com.bit.yes.model.entity.CommentVo">
+		update review_comment set comment=#{comment} where comment_idx=#{comment_idx}
+	</update>
 <!--   	<select id="selectAll" resultType="com.bit.myapp06.model.entity.GuestVo">
   	SELECT * FROM GUEST ORDER BY SABUN DESC
   	</select>

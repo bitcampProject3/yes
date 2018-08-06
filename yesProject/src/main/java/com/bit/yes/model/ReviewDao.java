@@ -43,4 +43,7 @@ public interface ReviewDao {
 	
 	int writeGetCount() throws SQLException;
 	int writeGetCount(HashMap<String, Object> params) throws SQLException;
+
+	int reviewEditComment(CommentVo commentVo);
+
 }
