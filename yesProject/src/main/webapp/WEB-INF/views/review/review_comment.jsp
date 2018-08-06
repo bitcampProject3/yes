@@ -19,7 +19,7 @@
                 <span><strong>Comments</strong></span> <span id="cCnt"></span>
             </div>
             <div>
-                <table class="table">                    
+                <table class="table">
                     <tr>
                         <td>
                             <textarea style="width: 1100px" rows="3" cols="30" id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>
@@ -47,7 +47,7 @@
 /*
  * 댓글 등록하기(Ajax)
  */
-function addComment(code){
+function addComment(code){ // check : 0 = 추가, 1=수정
     
     $.ajax({
         type:'POST',
@@ -65,7 +65,10 @@ function addComment(code){
        }
         
     });
+	
 }
+
+
  
 /**
  * 초기 페이지 로딩시 댓글 불러오기
@@ -96,20 +99,23 @@ function getCommentList(){
                 
                 for(i=0; i<data.length; i++){
                 	if(data[i].comment_idx != null){
-                	html += "<form id='commentDelete"+data[i].comment_idx+"' name='commentDelete' method='post'>"
+                	html += "<form id='commentInfo"+data[i].comment_idx+"' name='commentInfo' method='post'>"
                     html += "<div>";
-                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong>&emsp;<a href='#'>수정</a>&emsp;<a href='#' onClick='deleteAlert("+data[i].comment_idx+")'>삭제</a></h6>";
+                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong>&emsp;<a href='#' onClick='changeText("+data[i].comment_idx+")'>수정</a>&emsp;<a href='#' onClick='deleteAlert("+data[i].comment_idx+")'>삭제</a></h6>";
 /*                     html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong>&emsp;<a href='#'>수정</a>&emsp;<a href='#' onClick='deleteComment(\"${bean.idx}\")'>삭제</a></h6>"; */
-                    html += data[i].comment+"  /   "+data[i].comment_idx + "<tr><td></td></tr>";
-                    html += "</table></div>";
-                    html += "</div>";
                     html += "<input type='hidden' id='comment_idx' name='comment_idx' value="+data[i].comment_idx+" /> ";
                     html += "<input type='hidden' id='review_idx' name='review_idx' value='${bean.idx}' /> ";
-                    html += "</form>";
+/*                     html += "</form>";
+                    html += "<form id='commentEdit"+data[i].comment_idx+"' name='commentEdit' method='post'>"; */
+                    html += "<div id='editComment"+data[i].comment_idx+"'>" + data[i].comment+"  /   "+data[i].comment_idx + "</div><tr><td></td></tr>";
+/*                     html += "<button type='button' onclick='editComment("+data[i].comment_idx+")'>확인</button>";
+                    html += "<button type='button' onclick='getCommentList()'>취소</button>"; */
+                    html += "</table></form></div>";
+                    html += "</div>";
                 } else {
-                	html += "<form id='commentDelete"+data[i].comment_idx+"' name='commentDelete' method='post'>"
+                	html += "<form id='commentInfo"+data[i].comment_idx+"' name='commentInfo' method='post'>"
                 	html += "</form>"
-                }
+                	}
                 }
             } else {
                 
@@ -130,19 +136,50 @@ function getCommentList(){
 }
 
 
-function deleteAlert(code) {
-	if(confirm("정말 삭제하시겠습니까?")) {
-		deleteComment(code)
+function deleteAlert(comment_idx) {
+	if(confirm("정말 삭제하시겠습니까???")) {
+		deleteComment(comment_idx)
 	} else {
 	}
 }
 
-function deleteComment(code) {
+function deleteComment(comment_idx) {
 	
 	$.ajax({
 		type: 'POST',
 		url : "<c:url value='deleteComment'/>",
-		data: $("#commentDelete"+code).serialize(),
+		data: $("#commentInfo"+comment_idx).serialize(),
+		success : function(data) {
+			if(data == "success") {
+ 				getCommentList();
+				$("#comment").val();
+			}
+		}
+	})
+}
+
+function changeText(comment_idx) {
+	
+	var comment = document.getElementById('editComment'+comment_idx).innerText;
+	var commentHtml="";
+	
+	commentHtml += "<div id='editComment'><input type='text' name='comment' id='comment' value="+comment+"/></div><tr><td></td></tr>";
+	commentHtml += "<input type='hidden' id='comment_idx' name='comment_idx' value="+comment_idx+" /> ";
+	commentHtml += "<input type='hidden' id='review_idx' name='review_idx' value='${bean.idx}' /> ";
+	commentHtml += "<button type='button' onclick='editComment("+comment_idx+")'>확인</button>";
+	commentHtml += "<button type='button' onclick='getCommentList()'>취소</button>";
+	
+	$("#editComment"+comment_idx).html(commentHtml);
+}
+
+function editComment(comment_idx) {
+	
+	var comment = document.getElementById('editComment'+comment_idx).innerText;
+	
+	$.ajax({
+		type: 'POST',
+		url : "<c:url value='editComment'/>",
+		data: $("#commentInfo"+comment_idx).serialize(),
 		success : function(data) {
 			if(data == "success") {
  				getCommentList();
@@ -151,9 +188,14 @@ function deleteComment(code) {
 		}
 	})
 	
+	/* var commentHtml = "<input type='text' id='comment' value="+comment+"/>"; */
+	
+	
+	/* 실행할 코드  */
+	
+
+	
 }
-
-
 </script>
  
 </body>

@@ -203,9 +203,14 @@ public class ReviewListController {
 	}
 
 	@RequestMapping(value = "/review_write", method = RequestMethod.POST)
-	public String reviewWrite(ReviewVo reviewBean, MultipartHttpServletRequest mtfRequest) throws SQLException {
+	public String reviewWrite(ReviewVo reviewBean, MultipartHttpServletRequest mtfRequest, HttpServletRequest httpRequest) throws SQLException {
 
 		System.out.println("write(POST)");
+
+		int rating = Integer.parseInt(httpRequest.getParameter("rating"));
+		reviewBean.setRating(rating);
+
+
 		service.reviewWrite(reviewBean);
 		String genId, fileName, path;
 		ImageVo imageBean = new ImageVo();
@@ -461,7 +466,27 @@ public class ReviewListController {
 		return new ResponseEntity<String>(json.toString(), responseHeaders, HttpStatus.CREATED);
 	}
 	
+	@RequestMapping(value="/review_list/editComment", method=RequestMethod.POST)
+	@ResponseBody
+	public String reviewEditComment(@ModelAttribute("commentVo") CommentVo commentVo, HttpServletRequest request) throws SQLException {
 
+		HttpSession session = request.getSession();
+
+
+		commentVo.setWriter("jaeseon");
+
+//		service.deleteComment(commentVo);
+
+		System.out.println("reviewEditComment");
+
+		service.editComment(commentVo);
+
+		System.out.println("editComment : " + commentVo.getComment());
+		System.out.println("review_idx(edit) : " + commentVo.getReview_idx());
+		System.out.println("comment_idx(edit) : " + commentVo.getComment_idx());
+
+		return "success";
+	}
 
 //	@RequestMapping(value = "multiRequest")
 //	public String reviewMultiUpload(MultipartHttpServletRequest mtfRequest) throws SQLException {

@@ -5,10 +5,28 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-
+<link
+	href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="./css/selectDesign.css">
+<link rel="stylesheet" href="./css/mapStyle.css">
+<link rel="stylesheet" href="./css/mainStyle.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
-
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 <style>
 * {
 	font-family: 'Nanum Gothic', sans-serif;
@@ -241,10 +259,10 @@ nav a {
 	    });
 	}
 	</script>
-<body style="overflow-y:auto;">
-<jsp:include page="../layout/header.jsp"></jsp:include>
+<body>
+<jsp:include page="../layout/header.jsp"/>
 	<form method="POST">
-		<a class="btn btn-default" href="javascript:history.back();" role="button">뒤로</a>
+		<a class="btn btn-default" href="../review_list" role="button">뒤로</a>
 		<button type="submit" class="btn btn-default">삭제</button>
 		<a class="btn btn-default" href="../review_edit/${bean.idx }"
 			role="button">수정</a>

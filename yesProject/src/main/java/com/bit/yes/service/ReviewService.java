@@ -135,7 +135,7 @@ public class ReviewService {
 	
 //	--------------------paging
 	
-	// ÀüÃ¼ ¸®½ºÆ®
+	// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½Æ®
 /*	public List<ReviewVo> writeList(int offset, int noOfRecords) throws SQLException {
 		return reviewDao.writeList(offset, noOfRecords);
 	}*/
@@ -143,7 +143,7 @@ public class ReviewService {
 		return reviewDao.writeList(params);
 	}
 	
-	// °Ë»ö ¸®½ºÆ®
+	// ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 //	public List<ReviewVo> writeList(int offset, int noOfRecords, String category, String keyword) throws SQLException {
 //		return reviewDao.writeList(offset, noOfRecords, category, keyword);
 //	}
@@ -154,6 +154,9 @@ public class ReviewService {
 	public int writeGetCount(HashMap<String, Object> params) throws Exception {
 		return reviewDao.writeGetCount(params);
 	}
-	
-	
+
+
+	public int editComment(CommentVo commentVo) {
+		return reviewDao.reviewEditComment(commentVo);
+	}
 }

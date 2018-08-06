@@ -133,6 +133,11 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	@Override
+	public int reviewEditComment(CommentVo commentVo) {
+		return sqlSession.update("review.reviewEditComment", commentVo);
+	}
+
+	@Override
 	public int reviewClickLike(LikeVo bean) throws SQLException {
 		
 		return sqlSession.insert("review.reviewLikeClick", bean);
