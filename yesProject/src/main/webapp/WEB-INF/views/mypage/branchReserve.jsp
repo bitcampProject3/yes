@@ -124,7 +124,7 @@
             var compare;
             
   			function dataload(){
-  				var array=new Array();
+  				var array=[];
   				
   				
   				<c:forEach items="${alist }" var="bean" varStatus="status" >
@@ -135,7 +135,7 @@
 				$('.'+time+'').remove();
   		
 				
-				var client=new Object();
+				var client={};
   				client.day=nalja.slice(0,10);
   				client.clientID='${bean.clientID}';
 				client.name='${bean.name}';
@@ -216,7 +216,7 @@
 	            
 	        	var array=dataload();
 	        
-				if(array.length!=0){
+				if(array.length!==0){
 					for (var i = 0; i < array.length; i++) {
 						
 						var day=array[i].day.slice(0,7);
