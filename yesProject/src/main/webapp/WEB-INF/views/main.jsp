@@ -281,7 +281,7 @@
 </div>
 <div id="reserveModal" class="modal" style="height: 600px; max-height: 600px; max-width: 400px; width: 400px;">
 	<div class="detailModalTop" style="width: 400px; color: white;">
-		<span class="modalTopSpan">예약</span>
+		<span class="modalTopSpan" style=" font-size: 30px; ">예약</span>
 	</div>
 	<div id="calendar"></div>
 	<input type="hidden" name="" id="targetDate" value="">
@@ -290,7 +290,7 @@
 			<input type="number" min="1" max="10" class="reservePersonelInput" placeholder="1"/>명
 		</div>
 		<div class="reserveTimeSelect">
-			<div class="resultTimeDiv" style="height: 100%; width: 100%; font-size: 19px; line-height: 40px;">
+			<div class="resultTimeDiv" style="height: 100%; width: 100%; font-size: 13px; text-align: center; line-height: 40px;">
 			</div>
 		</div>
 	</div>
@@ -302,7 +302,7 @@
 		<a href="#" onclick="insertReserve()" class="btn-gradient red block">예약</a>
 	</div>
 	<div class="selectTimeDiv"
-	     style="position: absolute; display: none; width: 300px; height: 400px; top: 120px; right: -320px;">
+	     style="position: absolute; display: none; width: 305px; height: 400px; top: 120px; right: -320px;">
 		<div class="selectTimeTopDiv"
 		     style="text-align: center; color: white; font-weight: 500; font-size: 16pt; line-height: 70px;border-top-left-radius: 15px; border-top-right-radius: 15px; height: 70px; background-color: #e04f5f;"></div>
 		<div class="selectTimeContentDiv"

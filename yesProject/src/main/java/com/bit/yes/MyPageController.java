@@ -246,16 +246,17 @@ public class MyPageController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "insertReserve", method = RequestMethod.POST)
-	public void insertReserve(@RequestBody Map<String, Object> map, HttpSession session, Model model){
+	@RequestMapping(value = "insertReserve", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String insertReserve(@RequestBody Map<String, Object> map, HttpSession session, Model model){
 		System.out.println(map);
 
-//		if(session.getAttribute("member") == null) model.addAttribute("reserveResult","로그인이 필요합니다.");
-//		else{
+		if(session.getAttribute("member") == null) return "loginError";
+		else{
 			String id=((UserVo) session.getAttribute("member")).getId();
 			service.insertReserve(map, id);
+			return "success";
 //			model.addAttribute("reserveMsg","로그인이 필요합니다.");
-//		}
+		}
 
 
 	}

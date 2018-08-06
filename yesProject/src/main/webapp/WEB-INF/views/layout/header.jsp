@@ -57,7 +57,7 @@
 	function count(){
 
 	    $.ajax({
-	        url:'./count',
+	        url:'${pageContext.request.contextPath}/count',
 	        method:'POST',
 	        data:{'registNum':member},
 	        success:function(data){
@@ -108,7 +108,7 @@
 	         {right:0,},'slow');
 
 	    $.ajax({
-	        url:'./loadReserve',
+	        url:'${pageContext.request.contextPath}/loadReserve',
 	        method:'POST',
 	        success:function(list){
 	            if(list.length==0) //예약한 내역이 없을 때 처리..
@@ -273,21 +273,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" style="padding-top: 10px;" href="./"><img src="${pageContext.request.contextPath}/imgs/logo_top3.png"/></a>
+                <a class="navbar-brand" style="padding-top: 10px;" href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/imgs/logo_top3.png"/></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#modal2" onclick="javascript:modalStep1();" rel="modal:open" class="menuBtn">예약<span class="sr-only"></span></a></li>
-                    <li><a href="review_list" class="menuBtn">사용자 리뷰</a></li>
+                    <li><a href="${pageContext.request.contextPath}/" class="menuBtn">예약<span class="sr-only"></span></a></li>
+                    <li><a href="${pageContext.request.contextPath}/review_list" class="menuBtn">사용자 리뷰</a></li>
                     <li class="dropdown" id="openCsBtn">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                         <ul class="dropdown-menu" id="dropdown">
                             <li><a href="#">공지사항</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="./yesC_cs/">고객 상담</a></li>
-                            <li><a href="./yesS_cs/">사업자 상담</a></li>
+                            <li><a href="${pageContext.request.contextPath}/yesC_cs/">고객 상담</a></li>
+                            <li><a href="${pageContext.request.contextPath}/yesS_cs/">사업자 상담</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -300,11 +300,11 @@
 					<c:choose>
 						<c:when test="${member.id !='admin' }">
 	                    <li><a id="mypage" href="#">마이페이지</a></li>
-	                    <li><a id="logout" href="./logout" onclick="logoutKakao();">로그아웃</a></li>
+	                    <li><a id="logout" href="${pageContext.request.contextPath}/logout" onclick="logoutKakao();">로그아웃</a></li>
 	                    </c:when>
 	                    <c:when test="${member.id == 'admin' }">    
                 		<li><a href="${pageContext.request.contextPath}/admin/">관리자</a></li>
-                		<li><a id="logout" href="./logout">로그아웃</a></li>
+                		<li><a id="logout" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
                 		</c:when>
 					</c:choose>
                 </c:if>
