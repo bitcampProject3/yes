@@ -172,7 +172,7 @@
 				'<div class="gradeDiv1">' +
 				'이용자 평점' +
 				'</div>' +
-				'<div class="gradeDiv2">' +
+				'<div class="gradeDiv2" style="font-size: 15px;">' +
 				'<span class="reviewScoreAvg"></span>' + ' / 5.0' +
 				'</div>' +
 				'<div class="gradeDiv3">' +
@@ -199,20 +199,7 @@
 
 			$('.wrap').css('display', 'none');
 
-			// // 리뷰게시판의 평점 평균을 불러옴
-			// $.ajax({
-			// 	type: 'POST',
-			// 	url: './loadReviewScoreAvg',
-			// 	data: id,
-			// 	dataType: 'text',
-			// 	success: function (data) {
-			// 		alert('성공');
-			// 		alert(data);
-			// 	},
-			// 	error: function (request, status, error) {
-			// 		alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-			// 	}
-			// });
+
 
 			var callback = function () {
 				var test = [];
@@ -229,6 +216,9 @@
 						}); // each end
 					}     // success end
 				});     // ajax end
+
+
+
 				function mapSetMarker(test) {
 
 					var mapProjection = map.getProjection(),
@@ -303,6 +293,21 @@
 							$('.restDiv4_3').text(test[5]+"원");
 						}
 					}
+
+					// // 리뷰게시판의 평점 평균을 불러옴
+					$.ajax({
+						type: 'POST',
+						url: './loadReviewScoreAvg',
+						data: id,
+						dataType: 'text',
+						success: function (data) {
+							if(data === '6.0') $('.reviewScoreAvg').text('평가없음');
+							else $('.reviewScoreAvg').text(data);
+						},
+						error: function (request, status, error) {
+							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+						}
+					});
 				}
 			};
 			daum.maps.event.addListener(marker, 'click', callback);

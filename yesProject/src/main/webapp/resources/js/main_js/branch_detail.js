@@ -61,11 +61,11 @@
 				success: function (data) {
 					console.log(data);
 					$.each(data, function (idx, val) {
-						if (idx === data.length - 1) {
+						if (idx === 0) {
 							$('.bbsSub1').empty().append(val.title);
 							$('.bbsDate1').empty().append(val.calendar);
 							$('.bbsName1').empty().append(val.nickName);
-						} else if (idx === data.length) {
+						} else if (idx === 1) {
 							$('.bbsSub2').empty().append(val.title);
 							$('.bbsDate2').empty().append(val.calendar);
 							$('.bbsName2').empty().append(val.nickName);
@@ -159,7 +159,6 @@
 
 			// 매장 detail 페이지에 db정보 추가
 			$('.detailModalTopTitle').empty().append(branchName);
-			$('.modalScore').empty().append('평점 : ' + score + ' / 5.0');
 			$('.modalAddress').empty().append(roadAddress);
 			$('.modalJibunAddress').empty().append('(우) ' + zoneCode + ' (지번) ' + jibunAddress);
 			$('.modalPhoneNum').empty().append(phoneNum);
@@ -170,7 +169,20 @@
 			$('.categorySpan').empty().append(sido + ' ' + sigungu);
 			$('.modalStatus').css('display', 'none');
 
-
+			// // 리뷰게시판의 평점 평균을 불러옴
+			$.ajax({
+				type: 'POST',
+				url: './loadReviewScoreAvg',
+				data: id,
+				dataType: 'text',
+				success: function (data) {
+					if(data === '6.0') $('.modalScore').empty().append('평점 : ' + '평가없음' + ' / 5.0');
+					else $('.modalScore').empty().append('평점 : ' + data + ' / 5.0');
+				},
+				error: function (request, status, error) {
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				}
+			});
 
 			$('.gallerymain').attr('src', imagePath + image1);
 			$('.gallerylink').attr('href', imagePath + image1);

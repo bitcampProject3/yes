@@ -245,7 +245,7 @@ nav a {
 
 	<br />
 	<c:if test="${member != null }">
-	<a class="btn btn-default" href="./review_write" role="button">글쓰기</a>
+	<a class="btn btn-default" href="./review_write" role="button" style="display: none;">글쓰기</a>
 	</c:if>
 	<br />
 

@@ -84,7 +84,7 @@
 <%-- 지도 생성 및 마커 생성 --%>
 	<script src="${pageContext.request.contextPath}/js/main_js/set_map.js?ver=2"></script>
 <%-- 매장 팝업 및 디테일 모달 관리 --%>
-	<script src="${pageContext.request.contextPath}/js/main_js/branch_detail.js?ver=4"></script>
+	<script src="${pageContext.request.contextPath}/js/main_js/branch_detail.js?ver=5"></script>
 <%-- 매장 예약 모달 관리 --%>
 	<script src="${pageContext.request.contextPath}/js/main_js/branch_reserve.js?ver=1"></script>
 	<script>

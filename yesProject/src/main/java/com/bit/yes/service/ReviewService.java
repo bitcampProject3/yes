@@ -160,7 +160,7 @@ public class ReviewService {
 		return reviewDao.reviewEditComment(commentVo);
 	}
 
-	public int loadReviewScoreAvg(String branchId) {
+	public double loadReviewScoreAvg(String branchId) {
 		return reviewDao.loadReviewScoreAvg(branchId);
 	}
 }

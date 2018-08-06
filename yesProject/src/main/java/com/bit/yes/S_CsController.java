@@ -75,7 +75,7 @@ public class S_CsController {
 				System.out.println("id : "+id);
 				UserVo nickName = scsService.selectNick(id);
 				System.out.println(nickName);
-				ids[i] = nickName.getNickName();
+				ids[i] = nickName.getNickname();
 			}
 			model.addAttribute("userNick", ids);
 			model.addAttribute("page", page);

@@ -138,11 +138,20 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	@Override
-	public int loadReviewScoreAvg(String branchId) {
+	public double loadReviewScoreAvg(String branchId) {
 		List list;
-		list = sqlSession.selectList("review.loadReviewScoreAvg",branchId);
-		System.out.println("list : "+list);
-		return 0;
+		list = sqlSession.selectList("review.loadReviewScoreAvg", branchId);
+		System.out.println("list : " + list);
+		int scoreAvg = 0;
+		if (list.size() == 0) return 6;
+		else{
+			for (int i = 0; i < list.size(); i++) {
+				int cnt = 0;
+				cnt = (int) list.get(i);
+				scoreAvg = scoreAvg + cnt;
+			}
+			return scoreAvg/list.size();
+		}
 	}
 
 	@Override
