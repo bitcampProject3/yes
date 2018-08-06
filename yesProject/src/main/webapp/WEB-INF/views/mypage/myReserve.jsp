@@ -64,7 +64,7 @@
 	
 	<script>
 	 
-	function del(e){
+	function del(){
 		 
 		 $('#del').click(function(){
 			 $.ajax({
@@ -74,7 +74,7 @@
 					success:function(data){
 						location.href='.'+data;
 					}
-					}); 
+					});
 		 });
 	 } 
 	 
@@ -89,7 +89,7 @@
 			$('#branchTime').empty();
 			
 		 $.ajax({
-		url:'./branchInfo',
+		url:'./member_branchInfo',
 		method:'POST',
 		data:{'id':e},
 		dataType:'JSON',
@@ -182,7 +182,7 @@
                     	<tr>
                     	<td>${status.count }</td>
                     	<td><a id="modal"href="#ex1" rel="modal:open" onclick="javascript:detail('${bean.branchID}','${bean.request }');">${bean.branchName }</a></td>
-                    	<td>${bean.reserveTime }</td>
+                    	<td class="myReserveTime '${status.index}'">${bean.reserveTime }</td>
                     	<td>${bean.personel }</td>
                     	<td>${bean.request }</td>
                     	<td>${bean.useState }
@@ -190,7 +190,7 @@
                     	<a style="margin-left:20px; font-size: 12px;" class="btn btn-default" href="./review_write?branchID=${bean.branchID }" >리뷰작성</a>
                     	</c:if>
                      	<c:if test="${bean.useState eq 'N' }">
-                    	<a id="modal" href="#deletebtn" rel="modal:open" style="margin-left:20px; font-size: 12px; color:red" onclick="javascript:del('${bean.reserveTime}');"  >예약취소</a>
+                    	<a id="modal" href="#deletebtn" rel="modal:open" style="margin-left:20px; font-size: 12px; color:red" onclick="javascript:del();"  >예약취소</a>
                     	</c:if>
                     	</td>
                     	</tr>

@@ -110,7 +110,7 @@ public class MyPageController {
 		String id=((UserVo)session.getAttribute("member")).getId();
 		UserVo user=sqlSession.getMapper(UserDao.class).login(id);
 		List<ReserveListVo> list;
-		if(Integer.parseInt(user.getRegistNum())==0)//고객
+		if(user.getRegistNum().equals("0"))//고객
 		{
 			list=service.listPage(model, id);
 			System.out.println(list);
@@ -125,7 +125,7 @@ public class MyPageController {
 
 	//----------예약한 가게의 정보 불러오기----------
 	@ResponseBody
-	@RequestMapping(value="/branchInfo",method=RequestMethod.POST)
+	@RequestMapping(value="/member_branchInfo",method=RequestMethod.POST)
 	public BranchVo reservation2(String id) throws SQLException {
 		BranchVo bean=service.selectOne(id);
 		System.out.println(bean);
@@ -188,7 +188,7 @@ public class MyPageController {
 		System.out.println(count);
 		if(count>0)
 		{
-			//현재 입장 번호 저장하기--- 저장 ok
+			//현재 입장 번호 저장하기--- 저장 okƒ
 			if(Integer.parseInt(entry)>0)
 			{
 			bean.setWaitingNum(Integer.parseInt(entry));
@@ -226,7 +226,7 @@ public class MyPageController {
 			
 			if(id!=null) {
 				int count=0;
-				if(Integer.parseInt(registNum)>0) { //사업자
+				if(!(registNum.equals("0"))) { //사업자
 					count=service.loadTicket(id);//대기하는 사람 몇명인지..
 					return "사업"+count+"명";
 				}
@@ -250,11 +250,16 @@ public class MyPageController {
 
 	@ResponseBody
 	@RequestMapping(value = "insertReserve", method = RequestMethod.POST)
-	public void insertReserve(@RequestBody Map<String, Object> map, HttpSession session){
+	public void insertReserve(@RequestBody Map<String, Object> map, HttpSession session, Model model){
 		System.out.println(map);
-		String id=((UserVo) session.getAttribute("member")).getId();
 
-		service.insertReserve(map, id);
+//		if(session.getAttribute("member") == null) model.addAttribute("reserveResult","로그인이 필요합니다.");
+//		else{
+			String id=((UserVo) session.getAttribute("member")).getId();
+			service.insertReserve(map, id);
+//			model.addAttribute("reserveMsg","로그인이 필요합니다.");
+//		}
+
 
 	}
 	

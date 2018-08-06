@@ -221,12 +221,12 @@
 
 	<div id="slide-menu">
 		<ul style="width:100%;padding-left:5px;">
-			<c:if test="${member.registNum==0 }">
+			<c:if test="${member.registNum=='0' }">
 				<li><a href="reservation.yes">예약 현황</a></li>
 				<li><a href="myWrite.yes">작성글 보기</a></li>
 				<li><a href="myInfo.yes">내정보</a></li>
 			</c:if>
-			<c:if test="${member.registNum!=0 }">
+			<c:if test="${member.registNum!='0' }">
 				<li><a href="branchReserve.yes">예약 현황</a></li>
 				<li><a href="branch_ReviewList.yes">리뷰게시판</a></li>
 				<li><a href="myInfo.yes">내정보</a></li>
@@ -245,12 +245,12 @@
 			</c:if>
 		</ul>
 	</div>
-	<c:if test="${member.registNum==0 }">
+	<c:if test="${member.registNum=='0' }">
 	<div id="slide-menu2">
 		<h2></h2>
 	</div>
 	</c:if>
-	<c:if test="${member.registNum!=0 }">
+	<c:if test="${member.registNum!='0' }">
 	<div id="slide-menu4">
 		<h2>대기인원:</h2>
 	</div>
