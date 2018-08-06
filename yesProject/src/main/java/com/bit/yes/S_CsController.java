@@ -45,8 +45,13 @@ public class S_CsController {
 			// 로그인 했을 경우 들어오는 세션 id값
 			// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
 			// admin이 관리자이여야함
-			String writer = ((UserVo)httpSession.getAttribute("member")).getId();
+			//String writer = ((UserVo)httpSession.getAttribute("member")).getId();
 
+			
+			String writer = null;
+
+			if((UserVo)httpSession.getAttribute("member") != null) writer = ((UserVo)httpSession.getAttribute("member")).getId();
+			else return "redirect:/";
 			
 			HashMap<String, Object> params = new HashMap<String, Object>();
 			
@@ -75,7 +80,7 @@ public class S_CsController {
 				System.out.println("id : "+id);
 				UserVo nickName = scsService.selectNick(id);
 				System.out.println(nickName);
-				ids[i] = nickName.getNickName();
+				ids[i] = nickName.getNickname();
 			}
 			model.addAttribute("userNick", ids);
 			model.addAttribute("page", page);
@@ -95,6 +100,10 @@ public class S_CsController {
 			// 로그인 했을 경우 들어오는 세션 id값
 			// id값을 통해서 registNum값을 뽑아서 공지사항,고객상담,가맹점상담중 출력할 것을 결정
 			// admin이 관리자이여야함
+			
+			
+			
+			
 			String writer = ((UserVo)httpSession.getAttribute("member")).getId();
 			int currentPageNo = 1;
 			int maxPost = 10;

@@ -284,7 +284,7 @@
                     <li class="dropdown" id="openCsBtn">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
                         <ul class="dropdown-menu" id="dropdown">
-                            <li><a href="#">공지사항</a></li>
+                            <li><a href="${pageContext.request.contextPath}/yesnotice/">공지사항</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="${pageContext.request.contextPath}/yesC_cs/">고객 상담</a></li>
                             <li><a href="${pageContext.request.contextPath}/yesS_cs/">사업자 상담</a></li>

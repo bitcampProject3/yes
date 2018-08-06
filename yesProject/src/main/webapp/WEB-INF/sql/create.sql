@@ -14,6 +14,8 @@ create table br_accept
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ;
 
+
+
 create table branch_counsel
 (
   `index` int auto_increment
@@ -308,9 +310,9 @@ delete from user_info where id like 'kakao%';
 
 insert into branch_info values('branch01','매장8','09:00~23:05','14:00~15:05','매주 금요일 휴무','010-2131-4136','1.6','적당','8','0','false','0');
 
-select * from user_info;
-insert into user_info values('admin','관리자','admin',null,null,null,null,null,null);
-
+select * from user_info where id='admin';
+delete from user_info where id='admin';
+insert into user_info values('admin','admin','관리자',null,null,null,null,null,null);
 
 select * from branch_info a inner join branch_address b on a.id=b.id where a.id='user01';
 
