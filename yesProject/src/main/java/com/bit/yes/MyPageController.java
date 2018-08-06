@@ -175,22 +175,24 @@ public class MyPageController {
 	// --------실시간 state전송(좌석관리)-----------
 	@ResponseBody
 	@RequestMapping(value="/manageTable",method=RequestMethod.POST)
-	public String manageTable(String state,String entry,String entryR,String end,HttpSession session) throws SQLException{
+	public int manageTable(String state,String entry,String entryR,String end,HttpSession session) throws SQLException{
 		String id=((UserVo)session.getAttribute("member")).getId();
 		BranchVo bean=service.selectBranch(id);
 		bean.setTableState(Integer.parseInt(state));
 		service.updateState(bean);
 		int count=0;
 		count=service.loadTicket(id);//대기하는 사람 몇명인지..
-		System.out.println(count);
+		System.out.println("대기번호"+count);
 		if(count>0)
 		{
+			System.out.println("현재입장번호"+entry);
 			//현재 입장 번호 저장하기--- 저장 okƒ
 			if(Integer.parseInt(entry)>0)
 			{
 			bean.setWaitingNum(Integer.parseInt(entry));
 			service.updateWaiting(bean);
 			if(entryR!=null) {
+				System.out.println(entryR);
 				System.out.println("현재 입장번호:"+entry);
 				//ticketing에서 삭제하기---(현재입장번호)
 				service.deleteTicket(Integer.parseInt(entry)); //삭제 ok
@@ -207,7 +209,7 @@ public class MyPageController {
 			service.updateWaiting(bean);
 			service.end(id);
 		}
-		return count+"";
+		return count;
 	}
 	
 	
@@ -280,7 +282,7 @@ public class MyPageController {
 	@RequestMapping("/branch_ReviewList.yes")
 	public String branchReview(HttpSession session,Model model) throws SQLException{
 		String id=((UserVo) session.getAttribute("member")).getId();
-		 List<ReviewVo> list=service.selectAll(model,id);
+		List<ReviewVo> list=service.selectAll(model,id);
 		System.out.println(list);
 		
 		/*	String id=((UserVo) session.getAttribute("member")).getId();

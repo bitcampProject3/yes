@@ -1,4 +1,4 @@
-
+update branch_info set acceptState = 'false' where acceptState = 'FALSE';
 # 테이블 생성
 create table br_accept
 (
@@ -270,6 +270,7 @@ select * from user_info;
 
 select * from user_info where id='user01';
 
+select * from reserve_list where branchID='user01';
 
 select * from reserve_list a inner join user_info b on a.clientID=b.id where branchID='user01';
 
@@ -278,11 +279,16 @@ update user_info set registNum='1002' where id='branch01';
 select waitingNum from ticketing where clientID='wonywony93';
 
 select a.waitingNum from branch_info a inner join ticketing b on a.id=b.branchID where b.clientID='wonywony93';
-select maxTable,tableState,waitingNum from branch_info where id='branch01';
+select maxTable,tableState,waitingNum from branch_info where id='user08';
+
+
+
+
 select * from user_info;
 select * from reserve_list a inner join user_info b on a.clientID=b.id where branchID='branch01'; 
 select * from branch_info a inner join branch_address b on a.id=b.id where a.id='branch02';
 
+select * from branch_info;
 select * from branch_address;
 
 alter table user_info change password password varchar(20);
@@ -320,3 +326,6 @@ select * from reserve_list a inner join user_info b on a.clientID=b.id where bra
 select * from branch_info;
 select * from reserve_list a inner join branch_info b on a.branchID=b.id where clientID=#{param1}
 select * from review where branchID='branch01';
+
+
+select * from review where branchID='user01';

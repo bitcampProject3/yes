@@ -244,7 +244,9 @@ nav a {
 	</table>
 
 	<br />
+	<c:if test="${member != null }">
 	<a class="btn btn-default" href="./review_write" role="button">글쓰기</a>
+	</c:if>
 	<br />
 
 	<!-- paging  -->

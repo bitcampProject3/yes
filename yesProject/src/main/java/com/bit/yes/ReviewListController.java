@@ -196,7 +196,6 @@ public class ReviewListController {
 	@RequestMapping(value = "/review_write")
 	public String reviewWritePage(HttpServletRequest req,Model model) {
 		String branchID=req.getParameter("branchID");
-		System.out.println(branchID);
 		
 		
 		model.addAttribute("branchID",branchID);

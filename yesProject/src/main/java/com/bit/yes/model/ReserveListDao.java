@@ -23,11 +23,11 @@ public interface ReserveListDao {
    public int getNum(String id);
    public int getState(String id);
 
-  public List<ReserveListVo> reserveDatePreview(Map<String,Object> map);
+   public List<ReserveListVo> reserveDatePreview(Map<String,Object> map);
 
    void insertReserve(Map<String,Object> map, String id);
    public int updateUseState(ReserveListVo bean);
    public List<ReviewVo> writeList(String id) throws SQLException;
-   public List<ReviewVo> selectAll(String id) throws SQLException;
-	List<BranchVo> selectOneBranch(String id);
+   public List<ReviewVo> selectAll(String id) throws SQLException; //리뷰리스트 가져오기
+   List<BranchVo> selectOneBranch(String id);
 }
