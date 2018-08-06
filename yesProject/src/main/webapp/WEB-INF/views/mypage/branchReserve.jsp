@@ -125,7 +125,6 @@
             
   			function dataload(){
   			var array=new Array();
-				
   				<c:forEach items="${alist }" var="bean" varStatus="status" >
 				var nalja='${bean.reserveTime}';
 				var day='calendar-day-'+nalja.slice(0,10);
@@ -225,7 +224,7 @@
 	            var eventArray = [];
 	            
 	        	var array=dataload();
-	        	if(array.length!=0){
+				if(array.length!==0){
 					for (var i = 0; i < array.length; i++) {
 						var day=array[i].day.slice(0,7);
 

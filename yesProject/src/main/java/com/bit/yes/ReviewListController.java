@@ -211,21 +211,23 @@ public class ReviewListController {
 
 		int rating = Integer.parseInt(httpRequest.getParameter("rating"));
 		reviewBean.setRating(rating);
-		 String content = reviewBean.getContent();
-	      String replacedContent="";
-	      int startIdx = 0;
-	      
-	      for(int i = 0; i < content.length(); i++) {
-	         if(content.charAt(i) == '\n') {
-	            replacedContent += content.substring(startIdx, i);
-	            replacedContent += "<br>";
-	            startIdx=i+1;
-	         }
-	      }
-	      
-	      replacedContent +=  content.substring(startIdx, content.length());
-	      
-	      reviewBean.setContent(replacedContent);
+
+		String content = reviewBean.getContent();
+        String replacedContent="";
+        int startIdx = 0;
+
+        for(int i = 0; i < content.length(); i++) {
+            if(content.charAt(i) == '\n') {
+               replacedContent += content.substring(startIdx, i);
+               replacedContent += "<br>";
+               startIdx=i+1;
+            }
+        }
+
+        replacedContent +=  content.substring(startIdx, content.length());
+
+        reviewBean.setContent(replacedContent);
+
 
 		service.reviewWrite(reviewBean);
 		String genId, fileName, path;
