@@ -113,10 +113,9 @@ public class MyPageController {
 		if(user.getRegistNum().equals("0"))//고객
 		{
 			list=service.listPage(model, id);
-			System.out.println(list);
 			return list;
 		}
-		else {
+		else { //사업자
 			list=service.reserveAll(model,id);
 			return list;
 		}
@@ -128,7 +127,6 @@ public class MyPageController {
 	@RequestMapping(value="/member_branchInfo",method=RequestMethod.POST)
 	public BranchVo reservation2(String id) throws SQLException {
 		BranchVo bean=service.selectOne(id);
-		System.out.println(bean);
 		return bean;
 	}
 	
@@ -149,7 +147,6 @@ public class MyPageController {
 	public String branchReserve(HttpSession session,Model model) throws SQLException{
 		UserVo bean=(UserVo) session.getAttribute("member");
 		String id=bean.getId();
-
 		//예약 리스트 불러오기
 		service.reserveAll(model,id);
 		return "mypage/branchReserve";

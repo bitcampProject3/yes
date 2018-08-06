@@ -86,8 +86,8 @@ public class LoginController {
 
      if(bean!=null)
       { //로그인 성공
-      	System.out.println("로그인 성공");
-         session.setAttribute("member", bean);
+    	 session.setAttribute("member", bean);
+      	 System.out.println("로그인 성공");
          return "성공";
       }
       else
@@ -115,7 +115,6 @@ public class LoginController {
 		  {sqlSession.getMapper(UserDao.class).insertOne(bean);
 		  }
 	  session.setAttribute("member", bean);
-	  System.out.println(bean);
       return "success";
    }
 
@@ -128,7 +127,6 @@ public class LoginController {
 	   bean.setId("kakao"+id.toString());
 	   bean.setName(name.substring(1, name.length()-1));
 	   bean.setRegistNum("0");
-	   System.out.println(bean);
 	   
 	   if(sqlSession.getMapper(UserDao.class).login(bean.getId())==null)
 		   sqlSession.getMapper(UserDao.class).insertOne(bean); 

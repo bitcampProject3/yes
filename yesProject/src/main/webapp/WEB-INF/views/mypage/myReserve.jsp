@@ -63,18 +63,20 @@
 	</style>
 	
 	<script>
-	 
-	function del(){
+	var array=[];
+	function del(e,e2){
 		 
 		 $('#del').click(function(){
-			 $.ajax({
+			 var int2=e2-1;
+			console.log(array[int2]);		
+ 			 $.ajax({
 					url:'./delreserve',
 					method:'POST',
-					data:{'time':e},
+					data:{'time':array[int2]},
 					success:function(data){
 						location.href='.'+data;
 					}
-					});
+					});  
 		 });
 	 } 
 	 
@@ -88,19 +90,23 @@
 			$('#branchDate').empty();
 			$('#branchTime').empty();
 			
-		 $.ajax({
+		$.ajax({
 		url:'./member_branchInfo',
 		method:'POST',
 		data:{'id':e},
 		dataType:'JSON',
 		success:function(data){
+		
 			$('#branchName').append(data.branchName);
 			$('#branchAddr').append(data.roadAddress);
 			$('#branchAddr2').append(data.jibunAddress);
 			$('#branchPhone').append(data.phoneNum);
 			$('#branchDate').append(data.opDate);
 			$('#branchTime').append(data.opTime);
-		}
+		},
+		error:function(request,status,error){
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+        
 		}); 
 	}
 	
@@ -177,8 +183,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                 
 						<c:forEach items="${rlist}" var="bean" varStatus="status">
+						<script>
+                     	array.push('${bean.reserveTime}');
+                     	</script>
                     	<tr>
                     	<td>${status.count }</td>
                     	<td><a id="modal"href="#ex1" rel="modal:open" onclick="javascript:detail('${bean.branchID}','${bean.request }');">${bean.branchName }</a></td>
@@ -190,13 +198,13 @@
                     	<a style="margin-left:20px; font-size: 12px;" class="btn btn-default" href="./review_write?branchID=${bean.branchID }" >리뷰작성</a>
                     	</c:if>
                      	<c:if test="${bean.useState eq 'N' }">
-                    	<a id="modal" href="#deletebtn" rel="modal:open" style="margin-left:20px; font-size: 12px; color:red" onclick="javascript:del();"  >예약취소</a>
+
+                    	<a id="modal" href="#deletebtn" rel="modal:open" style="margin-left:20px; font-size: 12px; color:red" onclick="javascript:del('${bean.reserveTime}','${status.count }');"  >예약취소</a>
+
                     	</c:if>
                     	</td>
                     	</tr>
 						</c:forEach>
-                    
-
                     </tbody>
 
                    </table>
@@ -220,10 +228,10 @@
   </ul>
 </nav>                  
                    
-                   	 <div id="deletebtn" class="modal2" style="display:none;">
+                   	 <div id="deletebtn" class="modal2" style="display:none; height:130px;">
                    	 <p>예약을 취소하시겠습니까?</p>
-                   	  <a href="#" class="btn btn-default" id="del" >예</a>
 			          <a href="#" class="btn btn-default" rel="modal:close">아니오</a>
+                   	  <a href="#" class="btn btn-default" id="del" >예</a>
                    	 </div>
                    
                    
