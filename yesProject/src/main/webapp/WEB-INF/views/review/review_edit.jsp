@@ -160,7 +160,7 @@ nav a {
 		checkedRating();
 	});
 </script>
-<body>
+<body style="overflow-y:auto;">
 
 	<jsp:include page="../layout/header.jsp"/>
 	<!-- <div>

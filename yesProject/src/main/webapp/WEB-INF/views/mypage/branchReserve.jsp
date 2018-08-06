@@ -183,13 +183,12 @@
 								$('.tr'+i).remove();
 								if(tmpArray[i].target==current)
 								{
-									console.log(i+tmpArray[i].time);
 									$('.table tbody').append('<tr class="tr'+i+'">');
 									$('.table tbody .tr'+i).append('<td class="tx"style="width:15%">'+tmpArray[i].name+'</td>');
 									$('.table tbody .tr'+i).append('<td class="tx">'+tmpArray[i].time+'</td>');
 									$('.table tbody .tr'+i).append('<td class="tx">'+tmpArray[i].personel+'</td>');
 									$('.table tbody .tr'+i).append('<td class="tx" style="width:60%; text-overflow:ellipsis; font-size:10pt;">'+tmpArray[i].request+'</td>');
-									$('.table tbody .tr'+i).append('<td class="tx"><a style="color:gray" onclick="javascript:useState_change(\''+tmpArray[i].day+'\',\''+tmpArray[i].time+'\',\''+tmpArray[i].useState+'\');">'+tmpArray[i].useState+'</a></td>');
+									$('.table tbody .tr'+i).append('<td class="tx"><a style="color:gray" onclick="javascript:useState_change(\''+tmpArray[i].target+'\',\''+tmpArray[i].time+'\',\''+tmpArray[i].useState+'\');">'+tmpArray[i].useState+'</a></td>');
 									$('.table tbody').append('</tr>');
 									
 								}
@@ -287,8 +286,9 @@
 	        var day;
 	        var use2;
 	        function useState_change(e,e1,e2){
-	        	day=e+'-'+e1;
+	        	day=e.slice(13)+'-'+e1;
 	        	use2=e2;
+	        	console.log(use2);
 	        	$('#useStateModal').modal('show');
 	        }
 	        $('#useStatebtn').click(function(){

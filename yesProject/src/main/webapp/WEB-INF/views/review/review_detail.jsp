@@ -259,10 +259,10 @@ nav a {
 	    });
 	}
 	</script>
-<body>
+<body style="overflow-y:auto;">
 <jsp:include page="../layout/header.jsp"/>
 	<form method="POST">
-		<a class="btn btn-default" href="../review_list" role="button">뒤로</a>
+		<a class="btn btn-default" href="javascript:history.back();" role="button">뒤로</a>
 		<button type="submit" class="btn btn-default">삭제</button>
 		<a class="btn btn-default" href="../review_edit/${bean.idx }"
 			role="button">수정</a>

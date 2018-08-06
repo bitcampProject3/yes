@@ -65,8 +65,6 @@
     <insert id="ticketingStart" parameterType="map">
       insert into ticketing values(#{branchId},#{clientId},now(),#{countNum});
     </insert>
-
-
     <select id="ticketingCheck" parameterType="map" resultType="int">
       select count(*) as num from ticketing where branchID = #{branchId} and clientID = #{clientId}
     </select>
