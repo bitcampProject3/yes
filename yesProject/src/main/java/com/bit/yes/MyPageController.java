@@ -110,13 +110,12 @@ public class MyPageController {
 		String id=((UserVo)session.getAttribute("member")).getId();
 		UserVo user=sqlSession.getMapper(UserDao.class).login(id);
 		List<ReserveListVo> list;
-		if(Integer.parseInt(user.getRegistNum())==0)//고객
+		if(user.getRegistNum().equals("0"))//고객
 		{
 			list=service.listPage(model, id);
-			System.out.println(list);
 			return list;
 		}
-		else {
+		else { //사업자
 			list=service.reserveAll(model,id);
 			return list;
 		}
@@ -125,10 +124,9 @@ public class MyPageController {
 
 	//----------예약한 가게의 정보 불러오기----------
 	@ResponseBody
-	@RequestMapping(value="/branchInfo",method=RequestMethod.POST)
+	@RequestMapping(value="/member_branchInfo",method=RequestMethod.POST)
 	public BranchVo reservation2(String id) throws SQLException {
 		BranchVo bean=service.selectOne(id);
-		System.out.println(bean);
 		return bean;
 	}
 	
@@ -149,7 +147,6 @@ public class MyPageController {
 	public String branchReserve(HttpSession session,Model model) throws SQLException{
 		UserVo bean=(UserVo) session.getAttribute("member");
 		String id=bean.getId();
-
 		//예약 리스트 불러오기
 		service.reserveAll(model,id);
 		return "mypage/branchReserve";
@@ -226,7 +223,7 @@ public class MyPageController {
 			
 			if(id!=null) {
 				int count=0;
-				if(Integer.parseInt(registNum)>0) { //사업자
+				if(!(registNum.equals("0"))) { //사업자
 					count=service.loadTicket(id);//대기하는 사람 몇명인지..
 					return "사업"+count+"명";
 				}

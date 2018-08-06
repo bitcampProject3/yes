@@ -268,7 +268,7 @@ select * from ticketing where clientID='wonywony93';
 select * from user_info;
 
 
-select * from user_info;
+select * from user_info where id='user01';
 
 
 
@@ -306,7 +306,12 @@ select * from user_info;
 insert into user_info values('admin','관리자','admin',null,null,null,null,null,null);
 
 
+select * from branch_info a inner join branch_address b on a.id=b.id where a.id='user01';
+
+
+select * from branch_info a inner join branch_address b on a.id=b.id where a.id=#{param1};
 select * from reserve_list where branchID='branch02';
 select * from reserve_list where clientID='wonywony93';
-
+select * from branch_info;
+select * from reserve_list a inner join branch_info b on a.branchID=b.id where clientID=#{param1}
 select * from review where branchID='branch01';

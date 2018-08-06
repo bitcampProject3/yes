@@ -23,6 +23,7 @@ public class ReserveListService {
    public List<ReserveListVo> listPage(Model model,String id) throws SQLException{
       List<ReserveListVo> list=reserveDao.reserveList(id);
       model.addAttribute("rlist",reserveDao.reserveList(id));
+      System.out.println(list);
       return list;
    }
    public BranchVo selectOne(String branchID) throws SQLException{
