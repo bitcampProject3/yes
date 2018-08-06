@@ -49,14 +49,12 @@
 				$('.categorySpan').empty().append(sido+' '+sigungu);
 				$('.modalStatus').css('display','none');
 
-				var imagePath = "/imgs/foodimgs/";
-
 				$('.gallerymain').attr('src',imagePath+image1);
 				$('.gallerylink').attr('href',imagePath+image1);
 
 				for (i = 1; i<9; i++){
-					$('.img'+[i]).attr('src',imagePath+(image1.substring(0,10))+i+'.jpg');
-					$('.imgLink'+[i]).attr('href',imagePath+(image1.substring(0,10))+i+'.jpg');
+					$('.img'+[i]).attr('src',imagePath+(image1.substring(0,12))+i+'.jpg');
+					$('.imgLink'+[i]).attr('href',imagePath+(image1.substring(0,12))+i+'.jpg');
 				}
 
             },
@@ -78,9 +76,9 @@
 			        menuArr.push(val.menu);
 			        menuArr.push(val.price);
 		        });
-		        for (i = 0; i <test.length; i++){
+		        for (i = 0; i <menuArr.length/2; i++){
 					$('.modalMenuName'+[i]).empty().append(menuArr[i*2]);
-					$('.modalMenuPrice'+[i]).empty().append(menuArr[i*2+1]);
+					$('.modalMenuPrice'+[i]).empty().append(menuArr[i*2+1]+"명");
 				}
 	        },
 			error: function(request,status,error) {

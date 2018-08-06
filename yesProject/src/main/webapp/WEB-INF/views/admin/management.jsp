@@ -249,7 +249,7 @@
 							${bean.category }
 							</td>
 							<c:choose>
-							<c:when test="${bean.acceptState eq '0' }">
+							<c:when test="${bean.acceptState eq 'false' }">
 								<td class="text-center" style = "cursor:pointer;" onclick="javascript:content_view('${bean.id}')">
 								¹Ìµî·Ï
 								</td>

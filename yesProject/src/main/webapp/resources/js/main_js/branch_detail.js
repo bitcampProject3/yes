@@ -1,3 +1,4 @@
+
 		function branchDetail(e) {
 			var branchDetailArr = [];
 			branchDetailArr = e.split(",");
@@ -39,9 +40,9 @@
 						test.push(val.menu);
 						test.push(val.price);
 					});
-					for (i = 0; i < test.length; i++) {
+					for (i = 0; i < test.length/2; i++) {
 						$('.modalMenuName' + [i]).empty().append(test[i * 2]);
-						$('.modalMenuPrice' + [i]).empty().append(test[i * 2 + 1]);
+						$('.modalMenuPrice' + [i]).empty().append(test[i * 2 + 1]+"원");
 					}
 				},
 				error: function (request, status, error) {
@@ -104,7 +105,6 @@
 					if (data === 1001)          // 1001 === 비회원
 					{
 						$('.ticketingBtn').empty().append('대기 시작');
-						$('.ticketingBtn').modal('login');
 					}
 					else if (data !== 0)        // 대기중인 회원
 					{
@@ -129,12 +129,29 @@
 					data: id,
 					success: function () {
 						var ticketingNum = $('.ticketingText').text();
+						console.log(ticketingNum);
 						var resultNum = ticketingNum.slice(0, ticketingNum.length - 2);
-						$('.ticketingText').empty().append((resultNum * 1 + 1) + ' 명');
-
+						console.log(resultNum);
+						$.ajax({
+							type: 'POST',
+							url: './waitingList',
+							data: id,
+							success: function (data) {
+								if (data === 100) $('.modalStatus').css('display', 'none');
+								else {
+									alert(data);
+									$('.modalStatus').css('display', 'inline-block');
+									$('.ticketingText').empty().append(data + ' 명');
+								}
+							},
+							error: function (request, status, error) {
+								alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+							}
+						});
 					},
 					error: function () {
 						alert('로그인 해주시기 바랍니다.');
+						location.href = "./";
 					}
 				});
 			});

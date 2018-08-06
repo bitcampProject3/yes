@@ -19,7 +19,7 @@
 	<!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainStyle.css?ver=7">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainStyle.css?ver=8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/insertstyle.css?ver=4">
 	
 	<!-- Website Font style -->
@@ -48,7 +48,7 @@
 	</style>
 	<script>
 	
-
+	var imagePath = ".${pageContext.request.contextPath}/imgs/foodimgs/";
 	//새로고침 (오류나면 지우기)
 	var member='${member.registNum}';
 	var id='${member.id}';

@@ -165,7 +165,6 @@ public class BranchDaoImpl implements BranchDao{
         map.put("branchId", id);
         map.put("clientId", clientId);
         map.put("countNum", countNum+1);
-        System.out.println("ticketingStart dao run..");
         sqlSession.insert("branchList.ticketingStart",map);
     }
 
