@@ -124,17 +124,13 @@
             var compare;
             
   			function dataload(){
-  				var array=new Array();
-  				
-  				
+  			var array=new Array();
+				
   				<c:forEach items="${alist }" var="bean" varStatus="status" >
 				var nalja='${bean.reserveTime}';
 				var day='calendar-day-'+nalja.slice(0,10);
-				
 				var time=nalja.slice(11,16);
 				$('.'+time+'').remove();
-  		
-				
 				var client=new Object();
   				client.day=nalja.slice(0,10);
   				client.clientID='${bean.clientID}';
@@ -143,17 +139,11 @@
 				client.request='${bean.request}';
 				client.time=time;
 				client.useState='${bean.useState}';
-				
 				array.push(client);
-				
 				</c:forEach>
-				
-				
 				for (var i = 0; i < array.length; i++) {
-					
 					$('.tr'+i).remove();
 				}
-				
 				
   				return array;
   			}
@@ -169,40 +159,60 @@
 	            compare=changeYear+'-0'+changeMonth;
 	            }
 	            
+	            
+	            var tmpArray=new Array(); //target 담았음.
 				for (var i = 0; i < array.length; i++) {
 					var day=array[i].day.slice(0,7);
 					
-					if(day===compare){
+					if(day===compare){ //현재달과 가져온 달이 같으면,,,
 						target='calendar-day-'+array[i].day.slice(0,10);
-						console.log(i);
 						$('.calendar-day-'+array[i].day+'').children().append('<div class="time">'+array[i].time+'</div>');
- 					
+					
+	           			var tmpObject=new Object();
+						tmpObject.target=target;
+						tmpObject.time=array[i].time;
+						tmpObject.name=array[i].name;
+						tmpObject.personel=array[i].personel;
+						tmpObject.request=array[i].request;
+						tmpObject.useState=array[i].useState;
+						tmpArray.push(tmpObject);
 						
-						$('.table tbody').append('<tr class="tr'+i+'">');
-						$('.table tbody .tr'+i).append('<td style="width:15%">'+array[i].name+'</td>');
-						$('.table tbody .tr'+i).append('<td>'+array[i].time+'</td>');
-						$('.table tbody .tr'+i).append('<td>'+array[i].personel+'</td>');
-						$('.table tbody .tr'+i).append('<td style="width:60%; text-overflow:ellipsis; font-size:10pt;">'+array[i].request+'</td>');
-						$('.table tbody .tr'+i).append('<td><a style="color:gray" onclick="javascript:useState_change(\''+array[i].day+'\',\''+array[i].time+'\',\''+array[i].useState+'\');">'+array[i].useState+'</a></td>');
-						$('.table tbody').append('</tr>');
+
+						$('.'+target+'').click(function(e){ //target에 이벤트 등록
+							var current=e.currentTarget.classList[1];
+							for (var i = 0; i < tmpArray.length; i++) {
+								$('.tr'+i).remove();
+								if(tmpArray[i].target==current)
+								{
+									console.log(i+tmpArray[i].time);
+									$('.table tbody').append('<tr class="tr'+i+'">');
+									$('.table tbody .tr'+i).append('<td class="tx"style="width:15%">'+tmpArray[i].name+'</td>');
+									$('.table tbody .tr'+i).append('<td class="tx">'+tmpArray[i].time+'</td>');
+									$('.table tbody .tr'+i).append('<td class="tx">'+tmpArray[i].personel+'</td>');
+									$('.table tbody .tr'+i).append('<td class="tx" style="width:60%; text-overflow:ellipsis; font-size:10pt;">'+tmpArray[i].request+'</td>');
+									$('.table tbody .tr'+i).append('<td class="tx"><a style="color:gray" onclick="javascript:useState_change(\''+tmpArray[i].day+'\',\''+tmpArray[i].time+'\',\''+tmpArray[i].useState+'\');">'+tmpArray[i].useState+'</a></td>');
+									$('.table tbody').append('</tr>');
+									
+								}
+								
+							}
+							
+							$('#ex1').modal('show');
+							
+							
+							});
+					
+					
 					}
-  				
-  				
+
+
   				}
-				
-				$('.'+target+'').click(function(){
-					$('#ex1').modal('show');
-				});
-				
-				
-				
   			}
     	
 	        var calendars = {};
 	        
 	        
 	        jQuery(document).ready(function() {
-	        	
 
 	            if(changeMonth>9){
 	            	
@@ -215,10 +225,8 @@
 	            var eventArray = [];
 	            
 	        	var array=dataload();
-	        
-				if(array.length!=0){
+	        	if(array.length!=0){
 					for (var i = 0; i < array.length; i++) {
-						
 						var day=array[i].day.slice(0,7);
 
 		            calendars.clndr1 = jQuery('.cal1').clndr({

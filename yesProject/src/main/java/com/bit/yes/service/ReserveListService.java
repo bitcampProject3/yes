@@ -35,6 +35,7 @@ public class ReserveListService {
    public List<ReserveListVo> reserveAll(Model model, String id) throws SQLException {
       List<ReserveListVo> list=reserveDao.b_reserveList(id);
       model.addAttribute("alist",reserveDao.b_reserveList(id));
+      System.out.println(list);
       return list;
    }
    public BranchVo selectBranch(String id) {
