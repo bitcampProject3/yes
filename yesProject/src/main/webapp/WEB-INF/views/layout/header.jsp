@@ -13,17 +13,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/clndr.css?version=1">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js?ver=1"></script>--%>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 	<!-- jQuery Modal -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainStyle.css?ver=8">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/insertstyle.css?ver=4">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainStyle.css?ver=8">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/insertstyle.css?ver=4">
+	
 	
 	<!-- Website Font style -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
@@ -34,7 +35,7 @@
 	
 	<!-- jQuery Calander -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/calendar/clndr.js"></script>
 	<script src="${pageContext.request.contextPath}/js/calendar/clndr2.js"></script>
 	
@@ -43,12 +44,12 @@
 	<script src="${pageContext.request.contextPath}/js/validate/additional-methods.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/validate/messages_ko.min.js"></script>
 	
-	<style>
-        .quize{font-size:15pt;}
-	</style>
+
 	<script>
 	
-	var imagePath = ".${pageContext.request.contextPath}/imgs/foodimgs/";
+	
+	
+	var imagePath = "${pageContext.request.contextPath}/imgs/foodimgs/";
 	//새로고침 (오류나면 지우기)
 	var member='${member.registNum}';
 	var id='${member.id}';
@@ -84,17 +85,14 @@
 
 	//-----------------------------//
 
+	
 
 
 	var state=false;
-
-
 	var calendars = {};
 	var days=new Array();
 
 	jQuery(document).ready(function(){
-
-
 
 	    $('#slide').animate(
 	            {right:-300},'slow'
@@ -302,7 +300,7 @@
 	                    <li><a id="mypage" href="#">마이페이지</a></li>
 	                    <li><a id="logout" href="${pageContext.request.contextPath}/logout" onclick="logoutKakao();">로그아웃</a></li>
 	                    </c:when>
-	                    <c:when test="${member.id == 'admin' }">    
+	                    <c:when test="${member.id == 'admin' }">
                 		<li><a href="${pageContext.request.contextPath}/admin/">관리자</a></li>
                 		<li><a id="logout" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
                 		</c:when>
@@ -335,10 +333,10 @@
     	</div>
     	
     	
-   <!-- 가맹점 회원가입 --> 	
+   <!-- 가맹점 회원가입 -->
 		<div class="step2">
 		<form id="joinForm2" class="form-horizontal" method="post" action="add">
-						
+		
 		<div class="form-group">
 		<label for="id" class="cols-sm-2 control-label">아이디</label>
 				<div class="cols-sm-10">
@@ -367,7 +365,7 @@
 						<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="비밀번호를 한번 더 입력해주세요"/>
 					</div>
 				</div>
-		</div>		
+		</div>
 		
 		<div class="form-group">
 		<%--@declare id="username"--%><label for="username" class="cols-sm-2 control-label">이름</label>
@@ -400,7 +398,7 @@
 		</div>
 
 
-								
+		
 		<div class="form-group">
 		<label for="email" class="cols-sm-2 control-label">이메일</label>
 				<div class="cols-sm-10">
@@ -477,7 +475,7 @@
 		
 		</div>
 
-    <a href="#" class="close-modal" rel="modal:close">Close</a>
+    <a href="javascript:close_modal();" class="close_modal">Close</a>
     </div>
     
 </div>
@@ -500,7 +498,7 @@
 				<input type="text" class="form-control id" name="id"  placeholder="아이디를 입력해주세요" style="width:411px; height:34px;"/>
 			</div>
 		</div>
-	</div>	
+	</div>
 
 		<div class="form-group">
 		<label for="password" class="cols-sm-2 control-label">비밀번호</label>
@@ -510,7 +508,7 @@
 						<input type="password" class="form-control password" name="password"   placeholder="비밀번호를 입력해주세요"  />
 					</div>
 				</div>
-		</div>	
+		</div>
 	 <a onclick="loginCheck()"><input type="button"id="loginCheck" class="btn btn-primary" style="padding-left:10px; width:100%; font-size: 20px; margin-top: 10px; "value="로그인"/></a>
 	</form>
 	
@@ -555,7 +553,7 @@
 	
 	
 		<form class="form-horizontal" >
-						
+		
 		<div class="form-group">
 		<label for="name" class="cols-sm-2 control-label">이름</label>
 				<div class="cols-sm-10">
@@ -565,7 +563,7 @@
 					</div>
 				</div>
 		</div>
-		  
+		
 		<div class="form-group">
 		<%--@declare id="birth"--%><label for="birth" class="cols-sm-2 control-label">생년월일</label>
 				<div class="cols-sm-10">
@@ -577,7 +575,7 @@
 		</div>
 
 
-								
+		
 		<div class="form-group">
 		<label for="email" class="cols-sm-2 control-label">이메일</label>
 				<div class="cols-sm-10">
@@ -592,7 +590,7 @@
 		  </div>
 		  <a onclick="loginBack();">뒤로가기</a>
 		</form>
-			
+		
 
 	</div>
 	
@@ -611,7 +609,7 @@
 						<input type="text" class="form-control id2" name="id"  placeholder="아이디를 입력해주세요"/>
 					</div>
 				</div>
-		</div>						
+		</div>
 		<div class="form-group">
 		<label for="name" class="cols-sm-2 control-label">이름</label>
 				<div class="cols-sm-10">
@@ -621,7 +619,7 @@
 					</div>
 				</div>
 		</div>
-		  
+		
 		<div class="form-group">
 		<%--@declare id="birth"--%><label for="birth" class="cols-sm-2 control-label">생년월일</label>
 				<div class="cols-sm-10">
@@ -633,7 +631,7 @@
 		</div>
 
 
-								
+		
 		<div class="form-group">
 		<label for="email" class="cols-sm-2 control-label">이메일</label>
 				<div class="cols-sm-10">
@@ -679,7 +677,7 @@
 		  </div>
 		  <a onclick="loginBack();">뒤로가기</a>
 		</form>
-			
+		
 
 	</div>
 
@@ -767,7 +765,8 @@
         </div>
         <div class="detailModalRight">
             <div class="modalStatusDiv" style="text-align: center;">
-                <div class="modalScore" style="width: 330px; "></div>
+                <div class="modalScore" style="width: 330px;  text-align: right;
+    margin-right: 100px;"></div>
                 <div class="modalStatus" style="width: 200px;height: 40px;display: inline-block;top: 0;right: 10px;position: absolute; text-align: right;">
 	                <div class="ticketingText" style="display: inline-block; margin-right: 20px;"></div>
 	                <div class="ticketingBtn" style="display: inline-block;"></div>
@@ -836,30 +835,16 @@
             </div>
             <div class="modalExplain">
             </div>
-            <%--<div class="modalBbs">--%>
-                <%--<div class="modalBbsMore">더보기</div>--%>
-                <%--<div class="modalBbsTitle">--%>
-	                <%--<div class="modalBbsTitleSub">제목</div>--%>
-	                <%--<div class="modalBbsTitleDate">날짜</div>--%>
-	                <%--<div class="modalBbsTitleWriter">작성자</div>--%>
-                <%--</div>--%>
-                <%--<div class="modalBbsList">--%>
-	                <%--<div class="modalBbsListSub bbsSub1"></div>--%>
-	                <%--<div class="modalBbsListDate bbsDate1"></div>--%>
-	                <%--<div class="modalBbsListName bbsName1"></div>--%>
-                <%--</div>--%>
-                <%--<div class="modalBbsList">--%>
-	                <%--<div class="modalBbsListSub bbsSub2"></div>--%>
-	                <%--<div class="modalBbsListDate bbsDate2"></div>--%>
-	                <%--<div class="modalBbsListName bbsName2"></div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
         </div>
     </div>
 
 
 	<iframe name="kakao_iframe" src="" width="6px" height="4px" style="visibility:hidden; display: none;"></iframe>
 </body>
+<style>
+	                                                                                              .quize{font-size:15pt;}
+</style>
+
 
 
 <%--member join--%>
@@ -872,4 +857,5 @@
 <script src="${pageContext.request.contextPath}/js/header_js/mybranch.js"></script>
 <%--etc : markerImageList() && loadFile--%>
 <script src="${pageContext.request.contextPath}/js/header_js/etc.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 </html>

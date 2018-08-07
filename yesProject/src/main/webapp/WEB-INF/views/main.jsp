@@ -80,9 +80,8 @@
 	<div id="map"></div>
 	<script type="text/javascript"
 	        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=630e98d8425188c04dae0728c65822bb&libraries=services,clusterer"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <%-- 지도 생성 및 마커 생성 --%>
-	<script src="${pageContext.request.contextPath}/js/main_js/set_map.js?ver=2"></script>
+	<script src="${pageContext.request.contextPath}/js/main_js/set_map.js?ver=3"></script>
 <%-- 매장 팝업 및 디테일 모달 관리 --%>
 	<script src="${pageContext.request.contextPath}/js/main_js/branch_detail.js?ver=5"></script>
 <%-- 매장 예약 모달 관리 --%>
@@ -181,7 +180,8 @@
 		</div>
 		<div class="detailModalRight">
 			<div class="modalStatusDiv" style="text-align: center;">
-				<div class="modalScore" style="width: 330px; "></div>
+				<div class="modalScore" style="width: 330px; text-align: right;
+    margin-right: 100px;"></div>
 				<div class="modalStatus"
 				     style="width: 200px;height: 40px;display: inline-block;top: 0;right: 10px;position: absolute; text-align: right;">
 					<div class="ticketingText" style="display: inline-block; margin-right: 20px;"></div>
@@ -260,16 +260,17 @@
 				</div>
 				<div class="modalBbsList">
 					<div class="modalBbsListSub bbsSub1"></div>
-					<div class="modalBbsListDate bbsDate1"></div>
+					<div class="modalBbsListDate bbsDate1" style="font-size: 11px;"></div>
 					<div class="modalBbsListName bbsName1"></div>
 				</div>
 				<div class="modalBbsList">
 					<div class="modalBbsListSub bbsSub2"></div>
-					<div class="modalBbsListDate bbsDate2"></div>
+					<div class="modalBbsListDate bbsDate2" style="font-size: 11px;"></div>
 					<div class="modalBbsListName bbsName2"></div>
 				</div>
 			</div>
 		</div>
+		
 	</div>
 	
 	
