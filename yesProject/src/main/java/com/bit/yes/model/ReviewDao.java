@@ -46,4 +46,5 @@ public interface ReviewDao {
 
 	int reviewEditComment(CommentVo commentVo);
 
+	double loadReviewScoreAvg(String branchId);
 }

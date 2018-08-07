@@ -182,6 +182,9 @@
 	<update id="reviewEditComment" parameterType="com.bit.yes.model.entity.CommentVo">
 		update review_comment set comment=#{comment} where comment_idx=#{comment_idx}
 	</update>
+	<select id="loadReviewScoreAvg" parameterType="string" resultType="int">
+		select rating from review where branchID = #{branchId}
+	</select>
 <!--   	<select id="selectAll" resultType="com.bit.myapp06.model.entity.GuestVo">
   	SELECT * FROM GUEST ORDER BY SABUN DESC
   	</select>

@@ -14,7 +14,7 @@ nav a{font-family: 'Jua', sans-serif;}
 #searchIcon1 {-moz-transition: transform 1s;-webkit-transition: transform 1s;transition: transform 1s;}
 #footerImg {-moz-transition: transform 1s;-webkit-transition: transform 1s;transition: transform 1s;}
 .flip {transform: rotate(-180deg);}
-html,body {height:100%; margin:0; padding:0;overflow-y: hidden; overflow-x: hidden;}
+html,body {height:100%; margin:0; padding:0; overflow-x: hidden;}
 .searchRe{font-size: 16px;font-weight: bold;}
 .navbar-default .navbar-nav>li>a{color: white;}
 .page{width:100%; height: 100%;}
@@ -73,7 +73,7 @@ html,body {height:100%; margin:0; padding:0;overflow-y: hidden; overflow-x: hidd
 .searchResultContentTitle{width: 100%; height: 30px; text-align: center; font-size: 18px; font-weight: bold; background-color: rgba(224, 79, 95, 0.2);}
 .searchResultContentDetail{font-size: 11px;}
 
-/* ÀÌÇÏ detail modalÀÇ style */
+/* ï¿½ï¿½ï¿½ï¿½ detail modalï¿½ï¿½ style */
 
 
 .modal{height: 500px; max-height: 500px; max-width: 640px; width: 640px; margin: auto; overflow: visible; border-radius: 10px; padding: 0px;}

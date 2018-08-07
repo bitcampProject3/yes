@@ -173,7 +173,7 @@
 
     </head>
     <body>
-        <jsp:include page="../layout/header.jsp"></jsp:include>
+       <jsp:include page="../layout/header.jsp"></jsp:include>
            
            <div class="container">
            <div class="container" style=" border: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 

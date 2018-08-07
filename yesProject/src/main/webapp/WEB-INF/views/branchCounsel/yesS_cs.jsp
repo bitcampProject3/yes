@@ -26,17 +26,17 @@
             }
             @media (min-width: 1095px) {
                 .container-fluid{
-                    background-color: #e04f5f; 
+                    background-color: #e04f5f;
                     height: 120px;
                 }
                 .navbar-collapse{
-                    padding-top: 40px; 
-                    padding-left: 360px; 
+                    padding-top: 40px;
+                    padding-left: 360px;
                     font-size: 20px;
                 }
                 li > a{
                     color: black;
-                    margin-right: 50px; 
+                    margin-right: 50px;
                     font-size: 30px;
                 }
                 .menuBtnToggle{
@@ -102,7 +102,7 @@
                   display:block !important;
               }
                 .container-fluid{
-                    background-color: #e04f5f; 
+                    background-color: #e04f5f;
                     height: 120px;
                 }
                 .navbar-collapse a{
@@ -130,7 +130,7 @@
                     padding-right: 0px;
                 }
                 .navbar-nav{
-                    background-color: black;    
+                    background-color: black;
                 }
 */
             }

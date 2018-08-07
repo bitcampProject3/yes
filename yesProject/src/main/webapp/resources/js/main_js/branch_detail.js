@@ -1,3 +1,4 @@
+
 		function branchDetail(e) {
 			var branchDetailArr = [];
 			branchDetailArr = e.split(",");
@@ -39,9 +40,9 @@
 						test.push(val.menu);
 						test.push(val.price);
 					});
-					for (i = 0; i < test.length; i++) {
+					for (i = 0; i < test.length/2; i++) {
 						$('.modalMenuName' + [i]).empty().append(test[i * 2]);
-						$('.modalMenuPrice' + [i]).empty().append(test[i * 2 + 1]);
+						$('.modalMenuPrice' + [i]).empty().append(test[i * 2 + 1]+"원");
 					}
 				},
 				error: function (request, status, error) {
@@ -60,11 +61,11 @@
 				success: function (data) {
 					console.log(data);
 					$.each(data, function (idx, val) {
-						if (idx === data.length - 1) {
+						if (idx === 0) {
 							$('.bbsSub1').empty().append(val.title);
 							$('.bbsDate1').empty().append(val.calendar);
 							$('.bbsName1').empty().append(val.nickName);
-						} else if (idx === data.length) {
+						} else if (idx === 1) {
 							$('.bbsSub2').empty().append(val.title);
 							$('.bbsDate2').empty().append(val.calendar);
 							$('.bbsName2').empty().append(val.nickName);
@@ -104,7 +105,6 @@
 					if (data === 1001)          // 1001 === 비회원
 					{
 						$('.ticketingBtn').empty().append('대기 시작');
-						$('.ticketingBtn').modal('login');
 					}
 					else if (data !== 0)        // 대기중인 회원
 					{
@@ -129,12 +129,29 @@
 					data: id,
 					success: function () {
 						var ticketingNum = $('.ticketingText').text();
+						console.log(ticketingNum);
 						var resultNum = ticketingNum.slice(0, ticketingNum.length - 2);
-						$('.ticketingText').empty().append((resultNum * 1 + 1) + ' 명');
-
+						console.log(resultNum);
+						$.ajax({
+							type: 'POST',
+							url: './waitingList',
+							data: id,
+							success: function (data) {
+								if (data === 100) $('.modalStatus').css('display', 'none');
+								else {
+									alert(data);
+									$('.modalStatus').css('display', 'inline-block');
+									$('.ticketingText').empty().append(data + ' 명');
+								}
+							},
+							error: function (request, status, error) {
+								alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+							}
+						});
 					},
 					error: function () {
 						alert('로그인 해주시기 바랍니다.');
+						location.href = "./";
 					}
 				});
 			});
@@ -142,7 +159,6 @@
 
 			// 매장 detail 페이지에 db정보 추가
 			$('.detailModalTopTitle').empty().append(branchName);
-			$('.modalScore').empty().append('평점 : ' + score + ' / 5.0');
 			$('.modalAddress').empty().append(roadAddress);
 			$('.modalJibunAddress').empty().append('(우) ' + zoneCode + ' (지번) ' + jibunAddress);
 			$('.modalPhoneNum').empty().append(phoneNum);
@@ -153,7 +169,20 @@
 			$('.categorySpan').empty().append(sido + ' ' + sigungu);
 			$('.modalStatus').css('display', 'none');
 
-
+			// // 리뷰게시판의 평점 평균을 불러옴
+			$.ajax({
+				type: 'POST',
+				url: './loadReviewScoreAvg',
+				data: id,
+				dataType: 'text',
+				success: function (data) {
+					if(data === '6.0') $('.modalScore').empty().append('평점 : ' + '평가없음' + ' / 5.0');
+					else $('.modalScore').empty().append('평점 : ' + data + ' / 5.0');
+				},
+				error: function (request, status, error) {
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				}
+			});
 
 			$('.gallerymain').attr('src', imagePath + image1);
 			$('.gallerylink').attr('href', imagePath + image1);

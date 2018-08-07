@@ -1,4 +1,4 @@
-
+update branch_info set acceptState = 'false' where acceptState = 'FALSE';
 # 테이블 생성
 create table br_accept
 (
@@ -13,6 +13,8 @@ create table br_accept
   cartegory varchar(20) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ;
+
+
 
 create table branch_counsel
 (
@@ -268,21 +270,27 @@ select * from ticketing where clientID='wonywony93';
 select * from user_info;
 
 
-select * from user_info;
+select * from user_info where id='user01';
 
+select * from reserve_list where branchID='user01';
 
-
+select * from reserve_list a inner join user_info b on a.clientID=b.id where branchID='user01';
 
 update user_info set registNum='1002' where id='branch01';
 
 select waitingNum from ticketing where clientID='wonywony93';
 
 select a.waitingNum from branch_info a inner join ticketing b on a.id=b.branchID where b.clientID='wonywony93';
-select maxTable,tableState,waitingNum from branch_info where id='branch01';
+select maxTable,tableState,waitingNum from branch_info where id='user08';
+
+
+
+
 select * from user_info;
 select * from reserve_list a inner join user_info b on a.clientID=b.id where branchID='branch01'; 
 select * from branch_info a inner join branch_address b on a.id=b.id where a.id='branch02';
 
+select * from branch_info;
 select * from branch_address;
 
 alter table user_info change password password varchar(20);
@@ -302,11 +310,24 @@ delete from user_info where id like 'kakao%';
 
 insert into branch_info values('branch01','매장8','09:00~23:05','14:00~15:05','매주 금요일 휴무','010-2131-4136','1.6','적당','8','0','false','0');
 
-select * from user_info;
-insert into user_info values('admin','관리자','admin',null,null,null,null,null,null);
+select * from user_info where id='admin';
+delete from user_info where id='admin';
+insert into user_info values('admin','admin','관리자',null,null,null,null,null,null);
+
+select * from branch_info a inner join branch_address b on a.id=b.id where a.id='user01';
 
 
-select * from reserve_list where branchID='branch02';
+
+select * from branch_info a inner join branch_address b on a.id=b.id where a.id=#{param1};
+select * from reserve_list where branchID='user01';
 select * from reserve_list where clientID='wonywony93';
 
+
+select * from reserve_list a inner join user_info b on a.clientID=b.id where branchID='user01'
+
+select * from branch_info;
+select * from reserve_list a inner join branch_info b on a.branchID=b.id where clientID=#{param1}
 select * from review where branchID='branch01';
+
+
+select * from review where branchID='user01';

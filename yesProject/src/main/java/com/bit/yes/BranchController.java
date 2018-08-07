@@ -153,6 +153,7 @@ public class BranchController {
 		String[] openTimes = opTimes[0].split(":");
 		int openTimeHour = Integer.parseInt(openTimes[0]);
 		int openTimeMin = Integer.parseInt(openTimes[1]);
+
 		String[] closeTimes = opTimes[1].split(":");
 		int closeTimeHour = Integer.parseInt(closeTimes[0]);
 		int closeTimeMin = Integer.parseInt(closeTimes[1]);
@@ -161,7 +162,7 @@ public class BranchController {
 		int maxMin = 60;
 		// 영업시간에서 예약 가능한 시간을 구하는 로직. 10분단위
 		for (int j = openTimeHour; j <= closeTimeHour; j++) {
-			for (int i = openTimeMin; i < maxMin ; i = i + 10) {
+			for (int i = (openTimeMin+9)/10*10; i < maxMin ; i = i + 10) {
 
 				if(j < 10){
 					if(i == 0) resultTimeArr.add("0"+j+":"+"00");
