@@ -50,7 +50,6 @@
                             '<div>'+
                             '    <a href="javascript:modalStep2();" onclick="modalStep1Event()">다음</a>'+
                             '</div>';
-                            '</div>';
         $('.modalContent').empty().append(contentStep1);
         $('.detailModalTopCategory').empty().append('1 / 3단계 -- 가맹점 정보');
     }
@@ -83,9 +82,6 @@
             dataType: "json",
             success: function(data) {
                 alert('ajax-success');
-            },
-            error: function(request,status,error) {
-                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         })
     }
@@ -102,49 +98,49 @@
                              '    <div class="modalStep2tr">'+
                              '        <div class="modalStep2nth1">1</div>'+
                              '        <div class="modalStep2nth2"><input type="text" name="menu1" id="menu1"/></div>'+
-                             '        <div class="modalStep2nth3"><input type="text" name="price1" id="price1" placeholder="1,000원"/></div>'+
+                             '        <div class="modalStep2nth3"><input type="text" name="price1" id="price1" placeholder="1000"/></div>'+
                              '        <div class="modalStep2nth4"><input type="checkbox" name="checkbox" id="checkbox1" class="checkbox1"/></div>'+
                              '    </div>'+
                              '    <div class="modalStep2tr">'+
                              '        <div class="modalStep2nth1">2</div>'+
                              '        <div class="modalStep2nth2"><input type="text" name="menu2" id="menu2"/></div>'+
-                             '        <div class="modalStep2nth3"><input type="text" name="price2" id="price2" placeholder="2,000원"/></div>'+
+                             '        <div class="modalStep2nth3"><input type="text" name="price2" id="price2" placeholder="2000"/></div>'+
                              '        <div class="modalStep2nth4"><input type="checkbox" name="checkbox" id="checkbox2" class="checkbox2"/></div>'+
                              '    </div>'+
                              '    <div class="modalStep2tr">'+
                              '        <div class="modalStep2nth1">3</div>'+
                              '        <div class="modalStep2nth2"><input type="text" name="menu3" id="menu3"/></div>'+
-                             '        <div class="modalStep2nth3"><input type="text" name="price3" id="price3" placeholder="3,000원"/></div>'+
+                             '        <div class="modalStep2nth3"><input type="text" name="price3" id="price3" placeholder="3000"/></div>'+
                              '        <div class="modalStep2nth4"><input type="checkbox" name="checkbox" id="checkbox3" class="checkbox3"/></div>'+
                              '    </div>'+
                              '    <div class="modalStep2tr">'+
                              '        <div class="modalStep2nth1">4</div>'+
                              '        <div class="modalStep2nth2"><input type="text" name="menu4" id="menu4"/></div>'+
-                             '        <div class="modalStep2nth3"><input type="text" name="price4" id="price4" placeholder="4,000원"/></div>'+
+                             '        <div class="modalStep2nth3"><input type="text" name="price4" id="price4" placeholder="4000"/></div>'+
                              '        <div class="modalStep2nth4"><input type="checkbox" name="checkbox" id="checkbox4" class="checkbox4"/></div>'+
                              '    </div>'+
                              '    <div class="modalStep2tr">'+
                              '        <div class="modalStep2nth1">5</div>'+
                              '        <div class="modalStep2nth2"><input type="text" name="menu5" id="menu5"/></div>'+
-                             '        <div class="modalStep2nth3"><input type="text" name="price5" id="price5" placeholder="5,000원"/></div>'+
+                             '        <div class="modalStep2nth3"><input type="text" name="price5" id="price5" placeholder="5000"/></div>'+
                              '        <div class="modalStep2nth4"><input type="checkbox" name="checkbox" id="checkbox5" class="checkbox5"/></div>'+
                              '    </div>'+
                              '    <div class="modalStep2tr">'+
                              '        <div class="modalStep2nth1">6</div>'+
                              '        <div class="modalStep2nth2"><input type="text" name="menu6" id="menu6"/></div>'+
-                             '        <div class="modalStep2nth3"><input type="text" name="price6" id="price6" placeholder="6,000원"/></div>'+
+                             '        <div class="modalStep2nth3"><input type="text" name="price6" id="price6" placeholder="6000"/></div>'+
                              '        <div class="modalStep2nth4"><input type="checkbox" name="checkbox" id="checkbox6" class="checkbox6"/></div>'+
                              '    </div>'+
                              '    <div class="modalStep2tr">'+
                              '        <div class="modalStep2nth1">7</div>'+
                              '        <div class="modalStep2nth2"><input type="text" name="menu7" id="menu7"/></div>'+
-                             '        <div class="modalStep2nth3"><input type="text" name="price7" id="price7" placeholder="7,000원"/></div>'+
+                             '        <div class="modalStep2nth3"><input type="text" name="price7" id="price7" placeholder="7000"/></div>'+
                              '        <div class="modalStep2nth4"><input type="checkbox" name="checkbox" id="checkbox7" class="checkbox7"/></div>'+
                              '    </div>'+
                              '    <div class="modalStep2tr">'+
                              '        <div class="modalStep2nth1">8</div>'+
                              '        <div class="modalStep2nth2"><input type="text" name="menu8" id="menu8"/></div>'+
-                             '        <div class="modalStep2nth3"><input type="text" name="price8" id="price8" placeholder="8,000원"/></div>'+
+                             '        <div class="modalStep2nth3"><input type="text" name="price8" id="price8" placeholder="8000"/></div>'+
                              '        <div class="modalStep2nth4"><input type="checkbox" name="checkbox" id="checkbox8" class="checkbox8"/></div>'+
                              '    </div>'+
                              '    <div class="modalStep2tr">'+
@@ -198,9 +194,6 @@
             contentType:"application/json; charset=UTF-8",
             success: function(data) {
                 alert('ajax-success');
-            },
-            error: function(request,status,error) {
-                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         })
     }
@@ -211,35 +204,35 @@
     	var contentStep3 =  '<form name="fileForm" action="requestupload2" method="post" enctype="multipart/form-data">'+
                             '    <div class="fileFormTr">'+
                             '        <div><input multiple="multiple" type="file" name="file" onchange="loadFile(event)" id="fileUpload1"/></div>'+
-                            '        <div><img src="/imgs/blank.png" id="output1" width="50px" height="50px"/></div>'+
+                            '        <div><img src="'+path+'/imgs/blank.png" id="output1" width="50px" height="50px"/></div>'+
                             '    </div>'+
                             '    <div class="fileFormTr">'+
                             '        <div><input multiple="multiple" type="file" name="file" onchange="loadFile(event)" id="fileUpload2"/></div>'+
-                            '        <div><img src="/imgs/blank.png" id="output2" width="50px" height="50px"/></div>'+
+                            '        <div><img src="'+path+'/imgs/blank.png" id="output2" width="50px" height="50px"/></div>'+
                             '    </div>'+
                             '    <div class="fileFormTr">'+
                             '        <div><input multiple="multiple" type="file" name="file" onchange="loadFile(event)" id="fileUpload3"/></div>'+
-                            '        <div><img src="/imgs/blank.png" id="output3" width="50px" height="50px"/></div>'+
+                            '        <div><img src="'+path+'/imgs/blank.png" id="output3" width="50px" height="50px"/></div>'+
                             '    </div>'+
                             '    <div class="fileFormTr">'+
                             '        <div><input multiple="multiple" type="file" name="file" onchange="loadFile(event)" id="fileUpload4"/></div>'+
-                            '        <div><img src="/imgs/blank.png" id="output4" width="50px" height="50px"/></div>'+
+                            '        <div><img src="'+path+'/imgs/blank.png" id="output4" width="50px" height="50px"/></div>'+
                             '    </div>'+
                             '    <div class="fileFormTr">'+
                             '        <div><input multiple="multiple" type="file" name="file" onchange="loadFile(event)" id="fileUpload5"/></div>'+
-                            '        <div><img src="/imgs/blank.png" id="output5" width="50px" height="50px"/></div>'+
+                            '        <div><img src="'+path+'/imgs/blank.png" id="output5" width="50px" height="50px"/></div>'+
                             '    </div>'+
                             '    <div class="fileFormTr">'+
                             '        <div><input multiple="multiple" type="file" name="file" onchange="loadFile(event)" id="fileUpload6"/></div>'+
-                            '        <div><img src="/imgs/blank.png" id="output6" width="50px" height="50px"/></div>'+
+                            '        <div><img src="'+path+'/imgs/blank.png" id="output6" width="50px" height="50px"/></div>'+
                             '    </div>'+
                             '    <div class="fileFormTr">'+
                             '        <div><input multiple="multiple" type="file" name="file" onchange="loadFile(event)" id="fileUpload7"/></div>'+
-                            '        <div><img src="/imgs/blank.png" id="output7" width="50px" height="50px"/></div>'+
+                            '        <div><img src="'+path+'imgs/blank.png" id="output7" width="50px" height="50px"/></div>'+
                             '    </div>'+
                             '    <div class="fileFormTr">'+
                             '        <div><input multiple="multiple" type="file" name="file" onchange="loadFile(event)" id="fileUpload8"/></div>'+
-                            '        <div><img src="/imgs/blank.png" id="output8" width="50px" height="50px"/></div>'+
+                            '        <div><img src="'+path+'/imgs/blank.png" id="output8" width="50px" height="50px"/></div>'+
                             '    </div>'+
                             '    <div class="markerImageListDiv" style="width: 390px; margin-left: 125px; height: 250px; margin-right: 125px; margin-top: 30px; border: 1px solid black;">'+
                             '        '+
@@ -269,9 +262,6 @@
             dataType: 'json',
             success: function() {
                 alert('ajax 성공');
-            },
-            error: function(request, status, error) {
-                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         });
     }

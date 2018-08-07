@@ -58,7 +58,7 @@
 	</style>
 	<script>
 	
-	
+	var path = '${pageContext.request.contextPath}';
 	
 	var imagePath = "${pageContext.request.contextPath}/imgs/foodimgs/";
 	//새로고침 (오류나면 지우기)

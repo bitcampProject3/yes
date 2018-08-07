@@ -1,6 +1,5 @@
     // 로그인시 내 매장 정보를 눌렀을때의 modal
 	function myBranch() {
-    	console.log('myBranch...');
 		var myBranchDetail = [];
     	$.ajax({
             type: "POST",
@@ -57,9 +56,9 @@
 				}
 
             },
-			error: function(request,status,error) {
-                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            }
+			error: function () {
+					alert("일시적 서버 오류입니다.");
+			}
         });
 
     	var menuArr = [];
@@ -80,9 +79,9 @@
 					$('.modalMenuPrice'+[i]).empty().append(menuArr[i*2+1]+"명");
 				}
 	        },
-			error: function(request,status,error) {
-                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            }
+			error: function () {
+					alert("일시적 서버 오류입니다.");
+			}
         });
 		// // 리뷰게시판의 평점 평균을 불러옴
 			$.ajax({
@@ -94,8 +93,8 @@
 					if(data === '6.0') $('.modalScore').empty().append('평점 : ' + '평가없음' + ' / 5.0');
 					else $('.modalScore').empty().append('평점 : ' + data + ' / 5.0');
 				},
-				error: function (request, status, error) {
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				error: function () {
+					alert("일시적 서버 오류입니다.");
 				}
 			});
 

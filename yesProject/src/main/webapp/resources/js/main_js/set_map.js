@@ -176,7 +176,6 @@
 				'<span class="reviewScoreAvg"></span>' + ' / 5.0' +
 				'</div>' +
 				'<div class="gradeDiv3">' +
-				'<img src="./imgs/angryemoji.png"' + 'class="angryEmoji">' +
 				'</div>' +
 				'</div>' +
 				'<div class="btnDiv">' +
