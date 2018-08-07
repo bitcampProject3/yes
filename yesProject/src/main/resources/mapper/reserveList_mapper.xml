@@ -83,4 +83,9 @@
 	<select id="selectOneBranch" parameterType="string" resultType="com.bit.yes.model.entity.BranchVo">
     select * from branch_info a inner join branch_address b on a.id = b.id inner join branch_image c on a.id = c.id where a.id = #{param1}
   </select>
+  
+<delete id="deleteReview" parameterType="int">
+	delete from review where idx=#{param1}
+</delete>  
+  
 </mapper>

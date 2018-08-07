@@ -30,4 +30,5 @@ public interface ReserveListDao {
    public List<ReviewVo> writeList(String id) throws SQLException;
    public List<ReviewVo> selectAll(String id) throws SQLException; //리뷰리스트 가져오기
    List<BranchVo> selectOneBranch(String id);
+   public int deleteReview(int parseInt)throws SQLException; //작성글 삭제
 }

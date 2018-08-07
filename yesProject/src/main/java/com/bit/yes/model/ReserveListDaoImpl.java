@@ -106,4 +106,8 @@ public class ReserveListDaoImpl implements ReserveListDao {
    public List<BranchVo> selectOneBranch(String id) {
       return sqlSession.selectList("reserveList.selectOneBranch", id);
    }
+   @Override
+	public int deleteReview(int idx) throws SQLException {
+		return sqlSession.delete("reserveList.deleteReview", idx);
+	}
 }

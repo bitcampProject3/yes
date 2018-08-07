@@ -44,7 +44,7 @@
 	<script src="${pageContext.request.contextPath}/js/validate/messages_ko.min.js"></script>
 	
 	<style>
-        .quize{font-size:15pt;}
+        .quiz{font-size:15pt;}
 	</style>
 	<script>
 	
@@ -55,7 +55,7 @@
 	if(member>=0 && id!='admin'){window.setInterval("count()",10000);}
 
 	function count(){
-
+			
 	    $.ajax({
 	        url:'${pageContext.request.contextPath}/count',
 	        method:'POST',
@@ -93,10 +93,10 @@
 	var days=new Array();
 
 	jQuery(document).ready(function(){
-
-
-
-	    $('#slide').animate(
+  
+	
+		
+		$('#slide').animate(
 	            {right:-300},'slow'
 	            );
 	    $('#mypage').click(function(){
@@ -175,12 +175,12 @@
 
 
 	    });
-	     $('#close').click(function(){
+	     $('#closeMypage').click(function(){
 	        $('#slide').animate(
 	        {right:-300},'slow'
 	        );
 	        $('body').css('overflow-y','auto');
-	     });
+	     }); 
 
 	    $("#logout").click(function(){
 	       $.ajax({
@@ -215,21 +215,21 @@
 </head>
 <body>
 <div id="slide" >
-	<a id="close" style="float: right; color: black; font-size: 25px;">X</a>
+	<a id="closeMypage" style="float: right; color: black; font-size: 25px;">X</a>
 
 	<h1>마이 페이지</h1>
 
 	<div id="slide-menu">
 		<ul style="width:100%;padding-left:5px;">
 			<c:if test="${member.registNum=='0' }">
-				<li><a href="reservation.yes">예약 현황</a></li>
-				<li><a href="myWrite.yes">작성글 보기</a></li>
-				<li><a href="myInfo.yes">내정보</a></li>
+				<li><a href="${pageContext.request.contextPath}/reservation.yes">예약 현황</a></li>
+				<li><a href="${pageContext.request.contextPath}/myWrite.yes">작성글 보기</a></li>
+				<li><a href="${pageContext.request.contextPath}/myInfo.yes">내정보</a></li>
 			</c:if>
 			<c:if test="${member.registNum!='0' }">
-				<li><a href="branchReserve.yes">예약 현황</a></li>
-				<li><a href="branch_ReviewList.yes">리뷰게시판</a></li>
-				<li><a href="myInfo.yes">내정보</a></li>
+				<li><a href="${pageContext.request.contextPath}/branchReserve.yes">예약 현황</a></li>
+				<li><a href="${pageContext.request.contextPath}/branch_ReviewList.yes">리뷰게시판</a></li>
+				<li><a href="${pageContext.request.contextPath}/myInfo.yes">내정보</a></li>
 				<c:choose>
 					<c:when test="${member.acceptState=='true'}">
 						<li><a href="#modal3" rel="modal:open" onclick="javascript:myBranch();" style="width:100%;">매장정보</a></li>
@@ -293,7 +293,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                 <c:if test="${member==null}">
-                    <li><a id="modal" href="#login" rel="modal:open">로그인</a></li>
+                    <li><a id="modal2" href="#login" rel="modal:open" >로그인</a></li>
                     <li><a id="modal" href="#joinForm" rel="modal:open" >회원가입</a></li>
                 </c:if>
                 <c:if test="${member!=null }">
@@ -477,7 +477,7 @@
 		
 		</div>
 
-    <a href="#" class="close-modal" rel="modal:close">Close</a>
+    <a  href="#" class="close-modal" rel="modal:close">Close</a>
     </div>
     
 </div>

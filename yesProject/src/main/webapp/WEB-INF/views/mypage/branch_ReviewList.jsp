@@ -6,21 +6,6 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<!-- <link
-	href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
- <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>  -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <style>
@@ -201,7 +186,7 @@ nav a {
 						onClick=" location.href='review_list/${bean.idx }' ">${status.count}</td>
 					<td class="text-center" style="cursor: pointer;"
 						onClick=" location.href='review_list/${bean.idx }' "><img
-						src="review_imgs/${imageList[status.index].imageName }" id="image" /></td>
+						src="${pageContext.request.contextPath}/review_imgs/${imageList[status.index].imageName }" id="image" /></td>
 					<td class="text-center" style="cursor: pointer;"
 						onClick=" location.href='review_list/${bean.idx }' ">${bean.title}</td>
 					<td class="text-center" style="cursor: pointer;"
