@@ -64,45 +64,23 @@
 	
 	<script>
 	 
-	function del(e){
+	function del2(e){
 		 
-		 $('#del').click(function(){
+		 $('#del2').click(function(){
+			 alert(e);
 			 $.ajax({
-					url:'./delreserve',
+					url:'./delreview',
 					method:'POST',
-					data:{'time':e},
+					data:{'idx':e},
 					success:function(data){
-						location.href='.'+data;
+						alert(data);
+						location.href='/yes/myWrite.yes';
 					}
 					}); 
 		 });
 	 } 
 	 
 	 
-	function detail(e,e2)
-	{
-			$('#branchName').empty();
-			$('#branchAddr').empty();
-			$('#branchAddr2').empty();
-			$('#branchPhone').empty();
-			$('#branchDate').empty();
-			$('#branchTime').empty();
-			
-		 $.ajax({
-		url:'./branchInfo',
-		method:'POST',
-		data:{'id':e},
-		dataType:'JSON',
-		success:function(data){
-			$('#branchName').append(data.branchName);
-			$('#branchAddr').append(data.roadAddress);
-			$('#branchAddr2').append(data.jibunAddress);
-			$('#branchPhone').append(data.phoneNum);
-			$('#branchDate').append(data.opDate);
-			$('#branchTime').append(data.opTime);
-		}
-		}); 
-	}
 	
 	</script>
 	
@@ -179,12 +157,12 @@
                  
 						<c:forEach items="${rlist}" var="bean" varStatus="status">
                     	<tr>
-                    	<td>${bean.idx }</td>
+                    	<td>${status.count }</td>
                     	<td>${bean.branchID }</td>
                     	<td><a id="modal"href="#ex1" rel="modal:open" >${bean.title }</a></td>
                     	<td>${bean.calendar }</td>
                     	<td>${bean.rating }
-                    	<a id="modal" href="#deletebtn" rel="modal:open" style="margin-left:20px; font-size: 12px; color:red"   >삭제</a>
+                    	<a id="deleteModal" href="#deletebtn2" rel="modal:open" style="margin-left:20px; font-size: 12px; color:red" onclick="javascript:del2('${bean.idx}');"   >삭제</a>
                     	</td>
                     	</tr>
 						</c:forEach>
@@ -201,10 +179,7 @@
       </a>
     </li>
     <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
+
     <li>
       <a href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
@@ -213,10 +188,12 @@
   </ul>
 </nav>                  
                    
-                   	 <div id="deletebtn" class="modal2" style="display:none;">
+                   	 <div id="deletebtn2" class="modal2" style="display:none;height:150px;">
                    	 <p>예약을 취소하시겠습니까?</p>
-                   	  <a href="#" class="btn btn-default" id="del" >예</a>
+                   	 <div style="width:150px; margin:0px auto;">
+                   	  <a href="#" class="btn btn-default" id="del2" >예</a>
 			          <a href="#" class="btn btn-default" rel="modal:close">아니오</a>
+                   	 </div>
                    	 </div>
                    
                    
