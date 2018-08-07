@@ -16,7 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-	<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js?ver=1"></script>--%>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 	<!-- jQuery Modal -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainStyle.css?ver=8">
@@ -44,7 +44,18 @@
 	<script src="${pageContext.request.contextPath}/js/validate/additional-methods.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/validate/messages_ko.min.js"></script>
 	
-
+	<style>
+		.col-sm-9{
+			height: 150px;
+		}
+		#cube{
+			height: 60px;
+		}
+		#cube p{
+			margin-bottom: 0px;
+			margin-top: 15px;
+		}
+	</style>
 	<script>
 	
 	
@@ -210,6 +221,8 @@
 	});
 	
 	</script>
+	
+	
 </head>
 <body>
 <div id="slide" >
@@ -284,8 +297,22 @@
                         <ul class="dropdown-menu" id="dropdown">
                             <li><a href="${pageContext.request.contextPath}/yesnotice/">공지사항</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="${pageContext.request.contextPath}/yesC_cs/">고객 상담</a></li>
-                            <li><a href="${pageContext.request.contextPath}/yesS_cs/">사업자 상담</a></li>
+	                        <c:if test="${member != null}">
+	                        
+	                        <c:choose>
+		                        <c:when test="${member.registNum == '0'}">
+			                        <c:if test="${member.id != 'admin'}">
+			                        <li><a href="${pageContext.request.contextPath}/yesC_cs/">고객 상담</a></li>
+		                            </c:if>
+		                        </c:when>
+		                        <c:when test="${member.registNum != '0'}">
+			                        <c:if test="${member.id != 'admin'}">
+				                        <li><a href="${pageContext.request.contextPath}/yesS_cs/">사업자 상담</a></li>
+			                        </c:if>
+			                        
+		                        </c:when>
+	                        </c:choose>
+	                        </c:if>
                         </ul>
                     </li>
                 </ul>
@@ -841,9 +868,6 @@
 
 	<iframe name="kakao_iframe" src="" width="6px" height="4px" style="visibility:hidden; display: none;"></iframe>
 </body>
-<style>
-	                                                                                              .quize{font-size:15pt;}
-</style>
 
 
 
