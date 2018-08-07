@@ -28,6 +28,7 @@ import com.bit.yes.model.entity.CommentVo;
 import com.bit.yes.model.entity.ImageVo;
 import com.bit.yes.model.entity.LikeVo;
 import com.bit.yes.model.entity.ReviewVo;
+import com.bit.yes.model.entity.UserVo;
 import com.bit.yes.model.paging.Paging;
 import com.bit.yes.service.ReviewService;
 
@@ -299,16 +300,15 @@ public class ReviewListController {
 	
 	@RequestMapping(value="/review_list/addComment", method=RequestMethod.POST)
 	@ResponseBody
-	public String reviewAddComment(@ModelAttribute("commentVo") CommentVo commentVo, HttpServletRequest request) throws SQLException {
-		
-		HttpSession session = request.getSession();
+	public String reviewAddComment(@ModelAttribute("commentVo") CommentVo commentVo, HttpSession session) throws SQLException {
+		UserVo user=(UserVo) session.getAttribute("member");
 		
 		System.out.println("reviewAddComment");
 		
 		System.out.println("content : " + commentVo.getComment());
 		System.out.println("review_idx : " + commentVo.getReview_idx());
 		
-		commentVo.setWriter("jaeseon");
+		commentVo.setWriter(user.getId());
 		service.reviewAddComment(commentVo);
 		
 		return "success";
@@ -317,12 +317,12 @@ public class ReviewListController {
 	
 	@RequestMapping(value="/review_list/deleteComment", method=RequestMethod.POST)
 	@ResponseBody
-	public String reviewDeleteComment(@ModelAttribute("commentVo") CommentVo commentVo, HttpServletRequest request) throws SQLException {		
+	public String reviewDeleteComment(@ModelAttribute("commentVo") CommentVo commentVo, HttpSession session) throws SQLException {		
 		
-		HttpSession session = request.getSession();
+		UserVo user=(UserVo) session.getAttribute("member");
 		
 		
-		commentVo.setWriter("jaeseon");
+		commentVo.setWriter(user.getId());
 		
 		service.deleteComment(commentVo);
 		
@@ -429,19 +429,18 @@ public class ReviewListController {
 	
 	@RequestMapping(value="/review_list/reviewLike", produces="application/json; charset=utf-8")
 	@ResponseBody
-	public ResponseEntity<String> review_like(HttpServletRequest request) throws SQLException {
+	public ResponseEntity<String> review_like(HttpSession session) throws SQLException {
 //	public ResponseEntity<String> review_like(@ModelAttribute("likeVo") LikeVo likeVo, HttpServletRequest request) {
 		
-		HttpSession session = request.getSession();
+		UserVo user=(UserVo) session.getAttribute("member");
 		LikeVo bean = new LikeVo();
 		LikeVo checkBean = new LikeVo();
 		String id;
 		int likeCount;
 		boolean likeChecked;
 		
-		id = "jaeseon3";
+		id = user.getId();
 		
-//		id = session.getAttribute("id");  // session���� id�� �޾Ƽ� �ʱ�ȭ
 		
 		System.out.println("reviewLike(get)");
 		
@@ -479,12 +478,11 @@ public class ReviewListController {
 	
 	@RequestMapping(value="/review_list/editComment", method=RequestMethod.POST)
 	@ResponseBody
-	public String reviewEditComment(@ModelAttribute("commentVo") CommentVo commentVo, HttpServletRequest request) throws SQLException {
-
-		HttpSession session = request.getSession();
+	public String reviewEditComment(@ModelAttribute("commentVo") CommentVo commentVo, HttpSession session) throws SQLException {
 
 
-		commentVo.setWriter("jaeseon");
+
+		commentVo.setWriter(session.getId());
 
 //		service.deleteComment(commentVo);
 

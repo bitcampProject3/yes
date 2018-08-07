@@ -261,7 +261,17 @@ nav a {
 	</script>
 <body style="overflow-y:auto;">
 <jsp:include page="../layout/header.jsp"/>
-	<form method="POST">
+		  <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
+               border-bottom-color: #e04f5f; margin-top:30px;">
+                
+              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px;  ">
+                  <h1 style="padding: 5px; margin-bottom: 20px; ">
+                      <a href="#" style="color: black;">리뷰 보기</a>
+                  </h1>
+
+              </div>
+            </div>
+	<form method="POST" style="text-align:right;">
 		<a class="btn btn-default" href="javascript:history.back();" role="button">뒤로</a>
 		<button type="submit" class="btn btn-default">삭제</button>
 		<a class="btn btn-default" href="../review_edit/${bean.idx }"

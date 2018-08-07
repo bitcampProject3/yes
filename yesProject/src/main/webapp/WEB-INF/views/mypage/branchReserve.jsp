@@ -69,7 +69,7 @@
     
 	
     </head>
-    <body style="overflow:auto; z-index:0; positio:relative;">
+    <body style="overflow:auto; z-index:0; position:relative;">
     
     
        <jsp:include page="../layout/header.jsp"></jsp:include>
@@ -306,6 +306,7 @@
 	        	
 	        	
 	        });
+	        
 	        
           </script>
     </body>
