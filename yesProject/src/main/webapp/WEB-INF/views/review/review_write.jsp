@@ -4,23 +4,9 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<link
-	href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
-<script
+
+	<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
 <style>
 * {
 	font-family: 'Nanum Gothic', sans-serif;
@@ -165,9 +151,19 @@ nav a {
 
 			});
 </script>
-<body>
+<body style="overflow-y:auto;">
 
 	<jsp:include page="../layout/header.jsp"/>
+		  <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
+               border-bottom-color: #e04f5f; margin-top:30px;">
+                
+              <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px;  ">
+                  <h1 style="padding: 5px; margin-bottom: 20px; ">
+                      <a href="#" style="color: black;">리뷰 작성</a>
+                  </h1>
+
+              </div>
+            </div>
 	<!-- <div>
 		<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -270,10 +266,10 @@ nav a {
 
 			<!-- branchID, clientID는 나중에 session에서 받아와야 된다.  -->
 		</div>
-		<input type="hidden" id="branchID" name="branchID" value="branch01" />
-		<input type="hidden" id="clientID" name="clientID" value="client08" />
+		<input type="hidden" id="branchID" name="branchID" value="${branchID }" />
+		<input type="hidden" id="clientID" name="clientID" value="${member.id }" />
 		<button type="submit" class="btn btn-default">완료</button>
-		<a class="btn btn-default" href="../review_list" role="button">취소</a>
+		<a class="btn btn-default" href="javascript:history.back();" role="button">취소</a>
 	</form>
 
 	<!-- 다중 이미지 업로드 form  -->

@@ -34,7 +34,7 @@
 		margin-right: 0px;
 	}
 </style>
-<body>
+<body style="overflow-y: hidden">
 
 <jsp:include page="./layout/header.jsp"/>
 
@@ -80,13 +80,13 @@
 	<div id="map"></div>
 	<script type="text/javascript"
 	        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=630e98d8425188c04dae0728c65822bb&libraries=services,clusterer"></script>
-	<%-- 지도 생성 및 마커 생성 --%>
-	<script src="${pageContext.request.contextPath}/js/main_js/set_map.js?ver=1"></script>
-	<%-- 매장 팝업 및 디테일 모달 관리 --%>
-	<script src="${pageContext.request.contextPath}/js/main_js/branch_detail.js?ver=2"></script>
-	<%-- 매장 예약 모달 관리 --%>
-	<script src="${pageContext.request.contextPath}/js/main_js/branch_reserve.js"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<%-- 지도 생성 및 마커 생성 --%>
+	<script src="${pageContext.request.contextPath}/js/main_js/set_map.js?ver=2"></script>
+<%-- 매장 팝업 및 디테일 모달 관리 --%>
+	<script src="${pageContext.request.contextPath}/js/main_js/branch_detail.js?ver=4"></script>
+<%-- 매장 예약 모달 관리 --%>
+	<script src="${pageContext.request.contextPath}/js/main_js/branch_reserve.js?ver=1"></script>
 	<script>
         var imagePath = "./imgs/foodimgs/";
 
@@ -115,8 +115,7 @@
 
 				coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
-				console.log('${articleList.latlngx}');
-				console.log('${articleList.latlngy}');
+				
 				if (('${articleList.latlngx}' && '${articleList.latlngy}') == '') {
 					//기등록된 자료에 latlng 입력
 					var latlngY = result[0].y,
@@ -281,7 +280,7 @@
 </div>
 <div id="reserveModal" class="modal" style="height: 600px; max-height: 600px; max-width: 400px; width: 400px;">
 	<div class="detailModalTop" style="width: 400px; color: white;">
-		<span class="modalTopSpan">예약</span>
+		<span class="modalTopSpan" style=" font-size: 30px; ">예약</span>
 	</div>
 	<div id="calendar"></div>
 	<input type="hidden" name="" id="targetDate" value="">
@@ -290,7 +289,7 @@
 			<input type="number" min="1" max="10" class="reservePersonelInput" placeholder="1"/>명
 		</div>
 		<div class="reserveTimeSelect">
-			<div class="resultTimeDiv" style="height: 100%; width: 100%; font-size: 19px; line-height: 40px;">
+			<div class="resultTimeDiv" style="height: 100%; width: 100%; font-size: 13px; text-align: center; line-height: 40px;">
 			</div>
 		</div>
 	</div>
@@ -302,7 +301,7 @@
 		<a href="#" onclick="insertReserve()" class="btn-gradient red block">예약</a>
 	</div>
 	<div class="selectTimeDiv"
-	     style="position: absolute; display: none; width: 300px; height: 400px; top: 120px; right: -320px;">
+	     style="position: absolute; display: none; width: 305px; height: 400px; top: 120px; right: -320px;">
 		<div class="selectTimeTopDiv"
 		     style="text-align: center; color: white; font-weight: 500; font-size: 16pt; line-height: 70px;border-top-left-radius: 15px; border-top-right-radius: 15px; height: 70px; background-color: #e04f5f;"></div>
 		<div class="selectTimeContentDiv"

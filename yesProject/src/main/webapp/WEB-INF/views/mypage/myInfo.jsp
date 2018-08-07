@@ -73,13 +73,12 @@
 			$('#updateform').validate({
     			rules:{
     				password:{required:true,minlength:4},
-    				registNum:{required:true,number:true},
+    				registNum:{required:true},
     				nickName:{required:true,
     						  minlength:2},
     				phoneNum:{required:true,
-    					      number:true,
-    					      minlength:11,
-    					      maxlength:11},
+    					      minlength:13,
+    					      maxlength:13},
     				email:{required:true,
     						email:true}
     				
@@ -189,7 +188,7 @@
 			<td class="table-label">생년월일</td>
 			<td>${user.birthDate }</td>
 			</tr>
-			<c:if test="${user.registNum != 0 }"> 
+			<c:if test="${user.registNum != '0' }"> 
 			<tr>
 			<td class="table-label">사업자 등록 번호</td>
 			<td><input type="text" class="form-control" id="myInfo_registNum" name="registNum" value="${user.registNum }" readonly="readonly"/>

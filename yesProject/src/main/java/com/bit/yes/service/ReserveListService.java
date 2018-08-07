@@ -34,6 +34,7 @@ public class ReserveListService {
    public List<ReserveListVo> reserveAll(Model model, String id) throws SQLException {
       List<ReserveListVo> list=reserveDao.b_reserveList(id);
       model.addAttribute("alist",reserveDao.b_reserveList(id));
+      System.out.println(list);
       return list;
    }
    public BranchVo selectBranch(String id) {
@@ -79,6 +80,7 @@ public class ReserveListService {
 	public List<ReviewVo> selectAll(Model model, String id) throws SQLException {
 		List<ReviewVo>	list=reserveDao.selectAll(id);
 		model.addAttribute("page",reserveDao.selectAll(id));
+		System.out.println(list);
 		return list;
 	}
 

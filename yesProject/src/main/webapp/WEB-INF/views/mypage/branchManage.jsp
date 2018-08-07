@@ -5,15 +5,7 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/selectDesign.css">
-        <link rel="stylesheet" href="./css/mapStyle.css">
-        <link rel="stylesheet" href="./css/mainStyle.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="./js/jquery.validate.js"></script> 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 	<style>
 	
@@ -68,7 +60,7 @@
 			<script>
 			var max='${bean.maxTable}';
 			var entry=${bean.waitingNum}; //처음에 0임
-			var count;
+			var tmpCount=0;
 			var entryR;
 			$(function(){
 				
@@ -79,12 +71,17 @@
 					
 					if(state>0)
 					{
-						for(var j=0; j<state; j++)
+						for(var j=0; j<state; j++){
+							
 							$('#table'+j+'').css({'background-color':'#FFA7A7',
 							'color':'#FFA7A7'});
+							$('#table'+j+'').text("true");
+						}
 					}
 					
 					$('#table'+i).click(function(e){
+						
+						
 						var id=e.target.id;
 						result=$('#'+id).text();
 						if(result=='false'){							
@@ -94,9 +91,12 @@
 						if(state<=max)
 							{
 							state++;
-							if(state==8 && entry>0) //현재 입장번호 바뀌고 입장하기..
+							console.log("대기인원"+tmpCount);
+							console.log("entry"+entry);
+							if(state==max && tmpCount>0) //현재 입장번호 바뀌고 입장하기..
 							{
 								entryR="입장";
+								++entry;
 							}
 							}
 						}
@@ -106,14 +106,17 @@
 							$('#'+id+'').empty().append('false');
 							if(state>0)
 							{
-								if(state==max && count>0){ //대기가 있을 경우에--
-									entry++;
+								console.log("현재"+state+"명");
+								console.log("대기"+tmpCount+"명");
+								if(state==max && tmpCount>0){ //대기가 있을 경우에--
+									console.log(entry);
 								}
 								state--;
 							}
 							
 						}
-					
+						
+						
 						 $.ajax({
 								url:'./manageTable',
 								method:'POST',
@@ -123,12 +126,14 @@
 								success:function(data){
 									//대기인원을 추가해야함
 									if(data>0){ //대기 인원이 있으면...
-										count=data;
-										$('#slide-menu4 h2').empty().append("대기인원:"+data+"명");
-									
+										tmpCount=data;
+										console.log("?"+tmpCount);
+										$('#slide-menu4 h2').empty().append("대기인원:"+tmpCount+"명");
+										
 									}
 								}
 							}); 
+	
 					
 					
 					});//click end...

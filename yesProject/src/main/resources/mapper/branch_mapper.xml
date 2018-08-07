@@ -24,7 +24,7 @@
     </insert>
     <!-- -->
     <select id="selectAll" resultType="com.bit.yes.model.entity.BranchVo">
-      select * from branch_info a inner join branch_address b on a.id = b.id inner join branch_image c on a.id = c.id;
+      select * from branch_info a inner join branch_address b on a.id = b.id inner join branch_image c on a.id = c.id where a.acceptState = 'true';
     </select>
     <select id="menuLoad" parameterType="string" resultType="com.bit.yes.model.entity.BranchVo">
       select * from branch_menu where id like #{branchID} and mainMenu like 'true'
@@ -73,7 +73,7 @@
       select * from review a left join user_info b on a.clientID = b.id where a.branchID = #{param1}
     </select>
     <select id="myAllMenuLoad" parameterType="string" resultType="com.bit.yes.model.entity.BranchVo">
-      select * from branch_menu where id = #{param1}
+      select * from branch_menu where id = #{branchId}
     </select>
 
   </mapper>

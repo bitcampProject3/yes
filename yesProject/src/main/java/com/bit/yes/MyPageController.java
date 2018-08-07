@@ -110,13 +110,12 @@ public class MyPageController {
 		String id=((UserVo)session.getAttribute("member")).getId();
 		UserVo user=sqlSession.getMapper(UserDao.class).login(id);
 		List<ReserveListVo> list;
-		if(Integer.parseInt(user.getRegistNum())==0)//고객
+		if(user.getRegistNum().equals("0"))//고객
 		{
 			list=service.listPage(model, id);
-			System.out.println(list);
 			return list;
 		}
-		else {
+		else { //사업자
 			list=service.reserveAll(model,id);
 			return list;
 		}
@@ -125,10 +124,9 @@ public class MyPageController {
 
 	//----------예약한 가게의 정보 불러오기----------
 	@ResponseBody
-	@RequestMapping(value="/branchInfo",method=RequestMethod.POST)
+	@RequestMapping(value="/member_branchInfo",method=RequestMethod.POST)
 	public BranchVo reservation2(String id) throws SQLException {
 		BranchVo bean=service.selectOne(id);
-		System.out.println(bean);
 		return bean;
 	}
 	
@@ -149,7 +147,6 @@ public class MyPageController {
 	public String branchReserve(HttpSession session,Model model) throws SQLException{
 		UserVo bean=(UserVo) session.getAttribute("member");
 		String id=bean.getId();
-
 		//예약 리스트 불러오기
 		service.reserveAll(model,id);
 		return "mypage/branchReserve";
@@ -178,22 +175,24 @@ public class MyPageController {
 	// --------실시간 state전송(좌석관리)-----------
 	@ResponseBody
 	@RequestMapping(value="/manageTable",method=RequestMethod.POST)
-	public String manageTable(String state,String entry,String entryR,String end,HttpSession session) throws SQLException{
+	public int manageTable(String state,String entry,String entryR,String end,HttpSession session) throws SQLException{
 		String id=((UserVo)session.getAttribute("member")).getId();
 		BranchVo bean=service.selectBranch(id);
 		bean.setTableState(Integer.parseInt(state));
 		service.updateState(bean);
 		int count=0;
 		count=service.loadTicket(id);//대기하는 사람 몇명인지..
-		System.out.println(count);
+		System.out.println("대기번호"+count);
 		if(count>0)
 		{
-			//현재 입장 번호 저장하기--- 저장 ok
+			System.out.println("현재입장번호"+entry);
+			//현재 입장 번호 저장하기--- 저장 okƒ
 			if(Integer.parseInt(entry)>0)
 			{
 			bean.setWaitingNum(Integer.parseInt(entry));
 			service.updateWaiting(bean);
 			if(entryR!=null) {
+				System.out.println(entryR);
 				System.out.println("현재 입장번호:"+entry);
 				//ticketing에서 삭제하기---(현재입장번호)
 				service.deleteTicket(Integer.parseInt(entry)); //삭제 ok
@@ -210,7 +209,7 @@ public class MyPageController {
 			service.updateWaiting(bean);
 			service.end(id);
 		}
-		return count+"";
+		return count;
 	}
 	
 	
@@ -226,7 +225,7 @@ public class MyPageController {
 			
 			if(id!=null) {
 				int count=0;
-				if(Integer.parseInt(registNum)>0) { //사업자
+				if(!(registNum.equals("0"))) { //사업자
 					count=service.loadTicket(id);//대기하는 사람 몇명인지..
 					return "사업"+count+"명";
 				}
@@ -249,12 +248,18 @@ public class MyPageController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "insertReserve", method = RequestMethod.POST)
-	public void insertReserve(@RequestBody Map<String, Object> map, HttpSession session){
+	@RequestMapping(value = "insertReserve", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String insertReserve(@RequestBody Map<String, Object> map, HttpSession session, Model model){
 		System.out.println(map);
-		String id=((UserVo) session.getAttribute("member")).getId();
 
-		service.insertReserve(map, id);
+		if(session.getAttribute("member") == null) return "loginError";
+		else{
+			String id=((UserVo) session.getAttribute("member")).getId();
+			service.insertReserve(map, id);
+			return "success";
+//			model.addAttribute("reserveMsg","로그인이 필요합니다.");
+		}
+
 
 	}
 	
@@ -277,7 +282,7 @@ public class MyPageController {
 	@RequestMapping("/branch_ReviewList.yes")
 	public String branchReview(HttpSession session,Model model) throws SQLException{
 		String id=((UserVo) session.getAttribute("member")).getId();
-		 List<ReviewVo> list=service.selectAll(model,id);
+		List<ReviewVo> list=service.selectAll(model,id);
 		System.out.println(list);
 		
 		/*	String id=((UserVo) session.getAttribute("member")).getId();

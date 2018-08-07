@@ -7,111 +7,10 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Jua|Nanum+Gothic" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        
-        <!------------->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-
-<script>
-    $.datepicker.setDefaults({
-        dateFormat: 'yy-mm-dd',
-        prevText: '이전 달',
-        nextText: '다음 달',
-        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-        showMonthAfterYear: true,
-        yearSuffix: '년'
-
-    });
-</script>
 
 
-	<script type="text/javascript">
-	//var rangeDate = 31; // set limit day
-	var setSdate, setEdate;
-	$(function(){
-		$("#from2").datepicker({
-		    dateFormat: 'yy-mm-dd',
-		    onSelect: function(selectDate){
-		        var stxt = selectDate.split("-");
-		            stxt[1] = stxt[1] - 1;
-		        var sdate = new Date(stxt[0], stxt[1], stxt[2]);
-		        var edate = new Date(stxt[0], stxt[1], stxt[2]);
-		            /* edate.setDate(sdate.getDate() + rangeDate); 
-		            - 두번째달력에서 처음 날짜부터 끝 날짜 설정하는 것 */
-		            edate.setDate(sdate.getDate());
-		        
-		        $('#to2').datepicker('option', {
-		            minDate: selectDate,
-		            beforeShow : function () {
-		            	/* $("#to").datepicker( "option", "maxDate", edate ); 
-		            	- 두번째달력에서 처음 날짜부터 끝 날짜 설정하는 것 */             
-		                setSdate = selectDate;
-		                console.log(setSdate)
-		        }});
-		        //to 설정
-		    }
-		    //from 선택되었을 때
-			});
-		});
-	
-	
-	$(function(){
-		$("#to2").datepicker({ 
-		    dateFormat: 'yy-mm-dd',
-		    onSelect : function(selectDate){
-		        setEdate = selectDate;
-		        console.log(setEdate)
-		    }
-			});
-			$('.btn2').on('click', function(e){
-			    if($('input#from2').val() == ''){
-			        alert('시작일을 선택해주세요.');
-			        $('input#from2').focus();
-			        return false;
-			    }else if($('input#to2').val() == ''){
-			        alert('종료일을 선택해주세요.');
-			        $('input#to2').focus();
-			        return false;
-			    }
-				/*
-			    var t1 = $('input#from').val().split("-");
-			    var t2 = $('input#to').val().split("-");
-			    var t1date = new Date(t1[0], t1[1], t1[2]);
-			    var t2date = new Date(t2[0], t2[1], t2[2]);
-			    var diff = t2date - t1date;
-			    var currDay = 24 * 60 * 60 * 1000;
-			    if(parseInt(diff/currDay) > rangeDate){
-			        alert('로그 조회 기간은 ' + rangeDate + '일을 초과할 수 없습니다.');        
-			        return false;
-			    */
-			    
-			    var startDate = document.getElementById("from2").value; 
-			    var endDate = document.getElementById("to2").value;
-			    //document.write("1"+sDate);
-			    //document.write("1"+eDate);
-			    sDate=startDate;
-			    eDate=endDate;
-	    		alert("날짜 검색이 완료되었습니다.");
-			    document.location.href="./starts="+sDate+"&ends="+eDate;
-				});
-			});      
-	</script>
- 	<script type="text/javascript">
-	function visit(select){
-	        var url = select.options[select.selectedIndex].getAttribute('value');
-	        if(url) location.href = url;
-	}
-	</script>       
+
         <style>
             *{
                 font-family: 'Nanum Gothic', sans-serif;
@@ -269,6 +168,96 @@
     </head>
     <body>
         <jsp:include page="../layout/header.jsp"></jsp:include>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+        <script>
+    $.datepicker.setDefaults({
+        dateFormat: 'yy-mm-dd',
+        prevText: '이전 달',
+        nextText: '다음 달',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        showMonthAfterYear: true,
+        yearSuffix: '년'
+
+    });
+	//var rangeDate = 31; // set limit day
+	var setSdate, setEdate;
+	$(function(){
+		$("#from2").datepicker({
+		    dateFormat: 'yy-mm-dd',
+		    onSelect: function(selectDate){
+		        var stxt = selectDate.split("-");
+		            stxt[1] = stxt[1] - 1;
+		        var sdate = new Date(stxt[0], stxt[1], stxt[2]);
+		        var edate = new Date(stxt[0], stxt[1], stxt[2]);
+		            /* edate.setDate(sdate.getDate() + rangeDate);
+		            - 두번째달력에서 처음 날짜부터 끝 날짜 설정하는 것 */
+		            edate.setDate(sdate.getDate());
+		        
+		        $('#to2').datepicker('option', {
+		            minDate: selectDate,
+		            beforeShow : function () {
+		            	/* $("#to").datepicker( "option", "maxDate", edate );
+		            	- 두번째달력에서 처음 날짜부터 끝 날짜 설정하는 것 */
+		                setSdate = selectDate;
+		                console.log(setSdate)
+		        }});
+		        //to 설정
+		    }
+		    //from 선택되었을 때
+			});
+		});
+	
+	
+	$(function(){
+		$("#to2").datepicker({
+		    dateFormat: 'yy-mm-dd',
+		    onSelect : function(selectDate){
+		        setEdate = selectDate;
+		        console.log(setEdate)
+		    }
+			});
+			$('.btn2').on('click', function(e){
+			    if($('input#from2').val() == ''){
+			        alert('시작일을 선택해주세요.');
+			        $('input#from2').focus();
+			        return false;
+			    }else if($('input#to2').val() == ''){
+			        alert('종료일을 선택해주세요.');
+			        $('input#to2').focus();
+			        return false;
+			    }
+				/*
+			    var t1 = $('input#from').val().split("-");
+			    var t2 = $('input#to').val().split("-");
+			    var t1date = new Date(t1[0], t1[1], t1[2]);
+			    var t2date = new Date(t2[0], t2[1], t2[2]);
+			    var diff = t2date - t1date;
+			    var currDay = 24 * 60 * 60 * 1000;
+			    if(parseInt(diff/currDay) > rangeDate){
+			        alert('로그 조회 기간은 ' + rangeDate + '일을 초과할 수 없습니다.');
+			        return false;
+			    */
+			    
+			    var startDate = document.getElementById("from2").value;
+			    var endDate = document.getElementById("to2").value;
+			    //document.write("1"+sDate);
+			    //document.write("1"+eDate);
+			    sDate=startDate;
+			    eDate=endDate;
+	    		alert("날짜 검색이 완료되었습니다.");
+			    document.location.href="./starts="+sDate+"&ends="+eDate;
+				});
+			});
+		function visit(select){
+	        var url = select.options[select.selectedIndex].getAttribute('value');
+	        if(url) location.href = url;
+		}
+		</script>
         <div class="container" style=" border-bottom: 1px solid #CCCCCC; padding-left:0px; padding-right:0px; 
                border-bottom-color: #e04f5f">    
             <div class="col-sm-9" style="width: 100%; padding-left: 14px; padding-right:14px; ">
