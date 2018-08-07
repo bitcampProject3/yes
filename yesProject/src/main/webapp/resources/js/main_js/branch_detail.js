@@ -45,8 +45,8 @@
 						$('.modalMenuPrice' + [i]).empty().append(test[i * 2 + 1]+"원");
 					}
 				},
-				error: function (request, status, error) {
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				error: function () {
+					alert("일시적 서버 오류입니다.");
 
 				}
 			});
@@ -65,6 +65,9 @@
 							$('.bbsSub1').empty().append(val.title);
 							$('.bbsDate1').empty().append(val.calendar);
 							$('.bbsName1').empty().append(val.nickName);
+							$('.bbsSub2').empty();
+							$('.bbsDate2').empty();
+							$('.bbsName2').empty();
 						} else if (idx === 1) {
 							$('.bbsSub2').empty().append(val.title);
 							$('.bbsDate2').empty().append(val.calendar);
@@ -76,8 +79,8 @@
 
 					});
 				},
-				error: function (request, status, error) {
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				error: function () {
+					alert("일시적 서버 오류입니다.");
 
 				}
 			});
@@ -92,8 +95,8 @@
 						$('.ticketingText').empty().append(data + ' 명');
 					}
 				},
-				error: function (request, status, error) {
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				error: function () {
+					alert("일시적 서버 오류입니다.");
 				}
 			});
 			$.ajax({
@@ -117,8 +120,8 @@
 						$('.ticketingBtn').attr('href','#').attr('rel','');
 					}
 				},
-				error: function (request, status, error) {
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				error: function () {
+					alert("일시적 서버 오류입니다.");
 				}
 			});
 
@@ -144,8 +147,8 @@
 									$('.ticketingText').empty().append(data + ' 명');
 								}
 							},
-							error: function (request, status, error) {
-								alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+							error: function () {
+								alert("일시적 서버 오류입니다.");
 							}
 						});
 					},
@@ -179,8 +182,8 @@
 					if(data === '6.0') $('.modalScore').empty().append('평점 : ' + '평가없음' + ' / 5.0');
 					else $('.modalScore').empty().append('평점 : ' + data + ' / 5.0');
 				},
-				error: function (request, status, error) {
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				error: function () {
+					alert("일시적 서버 오류입니다.");
 				}
 			});
 

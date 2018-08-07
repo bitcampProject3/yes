@@ -1,6 +1,6 @@
 function markerImageList() {
     for (i = 0; i<50; i++){
-        $('.markerImageListDiv').append('<img class="foodIcon'+i+' markerIcon" src="/imgs/markerIcon/foodIcon'+i+'.png" width="57" height="57" />');
+        $('.markerImageListDiv').append('<img class="foodIcon'+i+' markerIcon" src="'+path+'/imgs/markerIcon/foodIcon'+i+'.png" width="57" height="57" />');
     }
 
 }

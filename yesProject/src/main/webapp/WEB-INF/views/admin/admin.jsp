@@ -126,7 +126,7 @@
                     clear: both;
                 }
             }
-            #cube:hover{
+            #cube2:hover{
                 background-color: #e04f5f;
                 color: white;
           
@@ -173,7 +173,7 @@
             
             <div class="container">
               <div class="row">
-            <div class="col-sm" id="cube" 
+            <div class="col-sm" id="cube2"
             style="text-align: center;padding-top: 50px;padding-bottom: 50px;cursor: pointer;" 
             onclick="location.href='./userAllList'">
             
@@ -187,17 +187,17 @@
                 <td style="padding-top:23px; padding-bottom:23px">
                     <h2>상담 요청 목록</h2>
                     <select onchange="visit(this)">
-                    <option value="" disabled selected>이동할 상담 내역을 선택해주세요</option>
-                    <option value="../counselAllc/"><b>1:1 고객 상담</b></option> <!-- 상대경로 -->
-                    <option value="../counselAlls/"><b>1:1 사업자 상담</b></option> <!-- 상대경로 -->
-                    <option><b>이동 없음</b></option>
+                        <option value="" disabled selected>이동할 상담 내역을 선택해주세요</option>
+                        <option value="../counselAllc/"><b>1:1 고객 상담</b></option> <!-- 상대경로 -->
+                        <option value="../counselAlls/"><b>1:1 사업자 상담</b></option> <!-- 상대경로 -->
+                        <option><b>이동 없음</b></option>
 			        </select>          
                 </td>
             </tr>
             </table>
             </div>   
                
-            <div class="col-sm" id="cube" 
+            <div class="col-sm" id="cube2"
             style="text-align: center;padding-top: 50px;padding-bottom: 50px;cursor: pointer;
                border-bottom: 1px solid #CCCCCC;"
             onclick="location.href='./management'">

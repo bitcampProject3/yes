@@ -1,6 +1,5 @@
     // 로그인시 내 매장 정보를 눌렀을때의 modal
 	function myBranch() {
-    	console.log('myBranch...');
 		var myBranchDetail = [];
     	$.ajax({
             type: "POST",
@@ -38,7 +37,6 @@
 
 				// 매장 detail 페이지에 db정보 추가
 				$('.detailModalTopTitle').empty().append(branchName);
-				$('.modalScore').empty().append('평점 : '+score+' / 5.0');
 				$('.modalAddress').empty().append(roadAddress);
 				$('.modalJibunAddress').empty().append('(우) '+zoneCode+' (지번) '+jibunAddress);
 				$('.modalPhoneNum').empty().append(phoneNum);
@@ -58,9 +56,9 @@
 				}
 
             },
-			error: function(request,status,error) {
-                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            }
+			error: function () {
+					alert("일시적 서버 오류입니다.");
+			}
         });
 
     	var menuArr = [];
@@ -81,10 +79,23 @@
 					$('.modalMenuPrice'+[i]).empty().append(menuArr[i*2+1]+"명");
 				}
 	        },
-			error: function(request,status,error) {
-                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            }
+			error: function () {
+					alert("일시적 서버 오류입니다.");
+			}
         });
-
+		// // 리뷰게시판의 평점 평균을 불러옴
+			$.ajax({
+				type: 'POST',
+				url: './loadReviewScoreAvg',
+				data: id,
+				dataType: 'text',
+				success: function (data) {
+					if(data === '6.0') $('.modalScore').empty().append('평점 : ' + '평가없음' + ' / 5.0');
+					else $('.modalScore').empty().append('평점 : ' + data + ' / 5.0');
+				},
+				error: function () {
+					alert("일시적 서버 오류입니다.");
+				}
+			});
 
 	}
