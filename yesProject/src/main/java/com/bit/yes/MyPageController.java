@@ -1,6 +1,8 @@
 package com.bit.yes;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +24,9 @@ import com.bit.yes.model.entity.BranchVo;
 import com.bit.yes.model.entity.ReserveListVo;
 import com.bit.yes.model.entity.ReviewVo;
 import com.bit.yes.model.entity.UserVo;
+import com.bit.yes.model.paging.Paging;
 import com.bit.yes.service.ReserveListService;
+import com.bit.yes.service.ReviewService;
 
 
 @Controller
@@ -32,6 +36,8 @@ public class MyPageController {
 	SqlSession sqlSession;
 	@Autowired
 	ReserveListService service;
+	@Autowired
+	ReviewService service2;
 	
 	
 	
@@ -141,6 +147,20 @@ public class MyPageController {
 		service.deleteOne(bean);
 		return "/reservation.yes";
 	}
+	
+	//-------------작성글 삭제하기----------------
+	@ResponseBody
+	@RequestMapping(value="/delreview",method=RequestMethod.POST)
+	public String delReview(String idx) throws SQLException {
+		System.out.println("글번호"+idx);
+		int result=service.deleteReview(idx);
+		if(result>0)
+			return "success";
+		else
+			return "error";
+	}
+	
+	
 	
 	//------------------사업자 mypage-----------------
 	@RequestMapping("/branchReserve.yes")
@@ -280,16 +300,48 @@ public class MyPageController {
 	//-------------(가맹점) 리뷰 게시판---------------
 	
 	@RequestMapping("/branch_ReviewList.yes")
-	public String branchReview(HttpSession session,Model model) throws SQLException{
-		String id=((UserVo) session.getAttribute("member")).getId();
-		List<ReviewVo> list=service.selectAll(model,id);
-		System.out.println(list);
+	public String branchReview(HttpSession session,HttpServletRequest request,Model model,Model listModel, Model imageModel) throws Exception{
+		System.out.println("branch_ReviewList(get)");
 		
-		/*	String id=((UserVo) session.getAttribute("member")).getId();
-		BranchVo bean=service.selectBranch(id);
-		model.addAttribute("bean",bean);*/
+		String id=((UserVo) session.getAttribute("member")).getId();
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		int currentPageNo = 1;
+		int maxPost = 10;
+
+		if(request.getParameter("pages") != null) {
+			System.out.println("pages is null");
+			currentPageNo = Integer.parseInt(request.getParameter("pages"));
+		}
+		
+		
+		Paging paging = new Paging(currentPageNo, maxPost);
+		
+		int offset = (paging.getCurrentPageNo() -1) * paging.getMaxPost();
+		
+		ArrayList<ReviewVo> page = new ArrayList<ReviewVo>();
+		
+		params.put("offset", offset);
+		params.put("noOfRecords", paging.getMaxPost());
+		
+		
+		
+		page = (ArrayList<ReviewVo>) service2.writeList(params);
+		
+		paging.setNumberOfRecords(service2.writeGetCount());
+		
+		paging.makePaging();
+		
+		listModel.addAttribute("page", page);
+		listModel.addAttribute("paging",paging);
+		
+		
+		service.selectAll(model,id);
+		service2.listPageImage(imageModel);
+		
 		return "mypage/branch_ReviewList";
 	}
+	
+
 	
 	
 }

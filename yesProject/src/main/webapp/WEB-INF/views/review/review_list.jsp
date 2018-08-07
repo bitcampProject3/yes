@@ -218,7 +218,7 @@ nav a {
 						onClick=" location.href='review_list/${bean.idx }' ">${bean.idx}</td>
 					<td class="text-center" style="cursor: pointer;"
 						onClick=" location.href='review_list/${bean.idx }' "><img
-						src="review_imgs/${imageList[status.index].imageName }" id="image" /></td>
+						src="${pageContext.request.contextPath}/review_imgs/${imageList[status.index].imageName }" id="image" /></td>
 					<td class="text-center" style="cursor: pointer;"
 						onClick=" location.href='review_list/${bean.idx }' ">${bean.title}</td>
 					<td class="text-center" style="cursor: pointer;"

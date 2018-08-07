@@ -89,4 +89,7 @@ public class ReserveListService {
 	public List<BranchVo> selectOneBranch(String id) {
       return reserveDao.selectOneBranch(id);
 	}
+	public int deleteReview(String idx) throws NumberFormatException, SQLException {
+		return reserveDao.deleteReview(Integer.parseInt(idx));
+	}
 }

@@ -50,7 +50,9 @@ public class S_CsController {
 			
 			String writer = null;
 
-			if((UserVo)httpSession.getAttribute("member") != null) writer = ((UserVo)httpSession.getAttribute("member")).getId();
+			if((UserVo)httpSession.getAttribute("member") != null) {
+				writer = ((UserVo)httpSession.getAttribute("member")).getId();
+			}
 			else return "redirect:/";
 			
 			HashMap<String, Object> params = new HashMap<String, Object>();
