@@ -28,7 +28,7 @@ function searchStart() {
 						'       </div>' +
 						'       <div class="searchResultContentDiv">' +
 						'           <div class="searchMainImage">' +
-						'               <img src="./imgs/foodimgs/' + val.mainImage + '" width="80" height="80" class="searchImageFile">' +
+						'               <img src="./imgs/foodimgs/' + val.image1 + '" width="80" height="80" class="searchImageFile">' +
 						'           </div>' +
 						'           <div class="searchResultContentDetail"><br/>' +
 						'               주소 : ' + val.roadAddress + '<br/>' +

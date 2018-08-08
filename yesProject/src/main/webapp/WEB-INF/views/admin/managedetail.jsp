@@ -372,7 +372,7 @@
                         <td>
                             <b>등록상태 : 
                             <span>
-                            	<c:if test="${branchinfo.acceptState eq '0' }">
+                            	<c:if test="${branchinfo.acceptState eq 'false' }">
 									미등록                            	
                             	</c:if>
                             </span>

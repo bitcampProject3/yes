@@ -1,7 +1,7 @@
 
 		var container = document.getElementById('map');
 		var options = {
-			center: new daum.maps.LatLng(37.554976260087024, 127.12879044359133),
+			center: new daum.maps.LatLng(37.55243511592138, 126.93755798396944),
 			level: 2
 		};
 
@@ -112,13 +112,13 @@
 				'</div>' +
 				'<div class="popupBody">' +
 				'<div class="img">' +
-				'<img src="./imgs/foodimgs/' + mainImage + '" width="100" height="100">' +
+				'<img src="./imgs/foodimgs/' + image1 + '" width="100" height="100">' +
 				'</div>' +
 				'<div class="desc">' +
 				'<div class="address ellipsis">' + roadAddress + ' ' + detailAddress + '</div>' +
 				'<div class="jibun ellipsis">(우) ' + zoneCode + ' (지번) ' + jibunAddress + '</div>' +
 				'<div class="phone ellipsis">' + phoneNum + '</div>' +
-				'<div class="ellipsis"><br/></div>' +
+				'<div class="ellipsis" style="margin-top: 20px;"><br/></div>' +
 				'<div class="timeDiv">' +
 				'<div class="timeDiv1">' +
 				'영업시간' +
