@@ -318,8 +318,6 @@ nav a {
 					style="width: 100%" alt="First slide" id="detail_imgs">
 				<div class="container">
 					<div class="carousel-caption">
-						<h1>Slide 1</h1>
-						<p>텍스트 1</p>
 					</div>
 				</div>
 			</div>
@@ -332,8 +330,6 @@ nav a {
 						id="detail_imgs">
 					<div class="container">
 						<div class="carousel-caption">
-							<h1>Slide 2</h1>
-							<p>텍스트 2</p>
 						</div>
 					</div>
 				</div>

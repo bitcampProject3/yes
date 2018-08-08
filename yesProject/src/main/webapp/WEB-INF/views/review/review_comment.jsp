@@ -16,7 +16,7 @@
     <br><br>
         <div>
             <div>
-                <span><strong>Comments</strong></span> <span id="cCnt"></span>
+                <span><strong>Comments</strong></span><!--  <span id="cCnt"></span> -->
             </div>
             <div>
                 <table class="table">
@@ -107,7 +107,7 @@ function getCommentList(){
                     html += "<input type='hidden' id='review_idx' name='review_idx' value='${bean.idx}' /> ";
 /*                     html += "</form>";
                     html += "<form id='commentEdit"+data[i].comment_idx+"' name='commentEdit' method='post'>"; */
-                    html += "<div id='editComment"+data[i].comment_idx+"'>" + data[i].comment+"  /   "+data[i].comment_idx + "</div><tr><td></td></tr>";
+                    html += "<div id='editComment"+data[i].comment_idx+"'>" + data[i].comment+ "</div><tr><td></td></tr>";
 /*                     html += "<button type='button' onclick='editComment("+data[i].comment_idx+")'>확인</button>";
                     html += "<button type='button' onclick='getCommentList()'>취소</button>"; */
                     html += "</table></form></div>";
@@ -163,7 +163,7 @@ function changeText(comment_idx) {
 	var comment = document.getElementById('editComment'+comment_idx).innerText;
 	var commentHtml="";
 	
-	commentHtml += "<div id='editComment'><input type='text' name='comment' id='comment' value="+comment+"/></div><tr><td></td></tr>";
+	commentHtml += "<div id='editComment'><input type='text' name='comment' id='comment' value="+comment+"></div><tr><td></td></tr>";
 	commentHtml += "<input type='hidden' id='comment_idx' name='comment_idx' value="+comment_idx+" /> ";
 	commentHtml += "<input type='hidden' id='review_idx' name='review_idx' value='${bean.idx}' /> ";
 	commentHtml += "<button type='button' onclick='editComment("+comment_idx+")'>확인</button>";

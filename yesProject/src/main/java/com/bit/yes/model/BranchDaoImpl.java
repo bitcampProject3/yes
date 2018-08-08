@@ -53,7 +53,7 @@ public class BranchDaoImpl implements BranchDao{
 //        System.out.println("src value : " + src);
 
         // 파일을 담을 서버의 경로
-        String path = "/Users/pro/yes/yesProject/src/main/webapp/resources/imgs/foodimgs/";
+        String path = "C:\\Users\\hb\\Desktop\\master\\yes\\yesProject\\src\\main\\webapp\\resources\\imgs\\foodimgs\\";
         int cnt = 0;
         for (MultipartFile mf : fileList) {
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
